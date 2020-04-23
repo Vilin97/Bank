@@ -1,3 +1,5 @@
+package Bank;
+
 import java.util.Currency;
 
 public class CheckingAccount extends Account {
