@@ -34,25 +34,36 @@ public class Credentials {
         Name name = null;
         UName uname = null;
         Password pword = null;
+        boolean gname = true;
+        boolean guname = true;
+        boolean gpword = true;
         
         try{
             name = createName(fn,ln);
         }catch(IllegalArgumentException ex){
             System.out.println(ex.getMessage());
+            gname = false;
         }
         
         try{
             uname = createUName(un);
         }catch(IllegalArgumentException ex){
             System.out.println(ex.getMessage());
+            guname = false;
         }
         
         try{
             pword = createPassword(pw);
         }catch(IllegalArgumentException ex){
             System.out.println(ex.getMessage());
+            gpword = false;
         }
-        rt = new Credentials(name,uname,pword);
+        
+        if( gname && guname && gpword){
+            rt = new Credentials(name,uname,pword);
+        }else{
+            throw new IllegalArgumentException("not correct inputs");
+        } 
         return rt;
     }
 
