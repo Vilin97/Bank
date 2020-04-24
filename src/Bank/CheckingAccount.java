@@ -7,21 +7,10 @@ public class CheckingAccount extends Account {
         super(name, transactions, balance, currency);
         this.withdrawBehavior = new CanWithdrawBehavior(this);
         this.depositBehavior = new CanDepositBehavior(this);
+        this.transferBehavior = new UncheckedTransferBehavior(this);
     }
 
     public CheckingAccount(String name, Currency currency) {
-        super(name, currency);
-        this.withdrawBehavior = new CanWithdrawBehavior(this);
-        this.depositBehavior = new CanDepositBehavior(this);
-    }
-
-    @Override
-    public String toString() {
-        return "CheckingAccount{" +
-                "name='" + name + '\'' +
-                ", transactions=" + transactions +
-                ", balance=" + balance +
-                ", currency=" + currency +
-                '}';
+        this(name,new Transactions(), 0, currency);
     }
 }

@@ -3,33 +3,60 @@ package Bank;
 import java.time.LocalDate;
 import java.util.Currency;
 import java.util.Date;
+import java.util.Objects;
 
 abstract public class Account {
+    protected int ID; // ID is the primary key for accounts
     protected String name;
     protected Transactions<Transaction> transactions;
     protected double balance;
     protected Currency currency;
     protected WithdrawBehavior withdrawBehavior;
     protected DepositBehavior depositBehavior;
+    protected TransferBehavior transferBehavior;
+    // protected EndOfMonthBehavior endOfMonthBehavior;
+    // TODO: implement interest behavior
 
-    public Account(String name, Transactions<Transaction> transactions, double balance, Currency currency, WithdrawBehavior withdrawBehavior, DepositBehavior depositBehavior) {
+    private static int nextID = 0;
+
+    public Account(int ID, String name, Transactions<Transaction> transactions,
+                   double balance, Currency currency,
+                   WithdrawBehavior withdrawBehavior, DepositBehavior depositBehavior, TransferBehavior transferBehavior) {
+        this.ID = ID;
         this.name = name;
         this.transactions = transactions;
         this.balance = balance;
         this.currency = currency;
         this.withdrawBehavior = withdrawBehavior;
         this.depositBehavior = depositBehavior;
+        this.transferBehavior = transferBehavior;
+        nextID += 1;
     }
 
     public Account(String name, Transactions transactions, double balance, Currency currency) {
+        this.ID = nextID;
         this.name = name;
         this.transactions = transactions;
         this.balance = balance;
         this.currency = currency;
+        nextID += 1;
     }
 
     public Account(String name, Currency currency) {
         this(name, new Transactions(), 0, currency);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Account account = (Account) o;
+        return ID == account.ID;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(ID);
     }
 
     public Transactions getTransactionsByTimePeriod(LocalDate begin, LocalDate end) {
@@ -44,21 +71,8 @@ abstract public class Account {
         depositBehavior.deposit(amount);
     }
 
-    public void transferToAccount(Account o, double amount) {
-        // transfer amount to o
-        double commission = amount * Constants.getTransferBetweenAccountsFeeFraction();
-        if (getBalance() < amount) {
-            System.out.println("Not enough funds");
-        } else {
-            setBalance(getBalance() - amount);
-            double exchanged = Constants.exchangeCurrency(currency,o.currency,amount-commission);
-            o.setBalance(getBalance() + exchanged);
-            getTransactions().add(new TransactionTransferOut(Bank.getCurrentDate()));
-            o.getTransactions().add(new TransactionTransferIn(Bank.getCurrentDate()));
-            System.out.println(amount+" "+getCurrency() + " was transferred. Commission: "+
-                    commission+" "+getCurrency());
-            // TODO: give the manager the commission
-        }
+    public void transfer(Account o, double amount) {
+        transferBehavior.transfer(o,amount);
     }
 
     @Override
@@ -85,6 +99,11 @@ abstract public class Account {
 
     public void setTransactions(Transactions transactions) {
         this.transactions = transactions;
+    }
+
+    public double getBalanceUSD() {
+        // get balance in USD equivalent
+        return Constants.exchangeCurrencyToUSD(currency, balance);
     }
 
     public double getBalance() {

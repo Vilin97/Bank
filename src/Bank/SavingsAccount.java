@@ -7,11 +7,10 @@ public class SavingsAccount extends Account {
         super(name, transactions, balance, currency);
         this.withdrawBehavior = new CanWithdrawBehavior(this);
         this.depositBehavior = new CanDepositBehavior(this);
+        this.transferBehavior = new UncheckedTransferBehavior(this);
     }
 
     public SavingsAccount(String name, Currency currency) {
-        super(name, currency);
-        this.withdrawBehavior = new CanWithdrawBehavior(this);
-        this.depositBehavior = new CanDepositBehavior(this);
+        this(name,new Transactions(), 0, currency);
     }
 }

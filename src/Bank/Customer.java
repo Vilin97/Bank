@@ -1,19 +1,21 @@
 package Bank;
 
 import static Bank.Credentials.createCredentials;
+
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 //A customer class must have the following functions:
-//        Create checking account
-//        Create savings account
-//        Create securities account
+//        Create checking account -- done
+//        Create savings account -- done
+//        Create securities account -- done
 //        Close an account (where does the money go?)
 //        Request loan
-//        Deposit cash to an account
-//        Withdraw money from a checking account
-//        View transactions for an account (for a time period)
-//        View balance in an account
-//        Buy stock
+//        Deposit cash to an account -- done
+//        Withdraw money from a checking account -- done
+//        View transactions for an account (for a time period) -- done
+//        View balance in an account -- done (just access the account)
+//        Buy stock --
 //        Sell stock
 //        Play on the stock market (repeatedly buy and sell stocks)
 //        See realized profit from the stock market
@@ -24,17 +26,34 @@ import java.util.ArrayList;
  * @author adamstreich
  */
 public class Customer extends User {
-    private Accounts<SavingsAccount> savingsAccounts; // not sure what the class name is fo this but needs to be changed
+    private Accounts<SavingsAccount> savingsAccounts;
     private Accounts<CheckingAccount> checkingAccounts;
     private Accounts<SecuritiesAccount> securitiesAccounts;
-    //need a loans array
+    private Accounts<CreditAccount> creditAccounts;
     
     public Customer(Credentials cd) {
         super(cd);
         this.savingsAccounts = new Accounts<SavingsAccount>();
         this.checkingAccounts = new Accounts<CheckingAccount>();
         this.securitiesAccounts = new Accounts<SecuritiesAccount>();
-        
+        this.creditAccounts = new Accounts<CreditAccount>();
+    }
+
+    private Transactions getTransactionsByTimePeriod(LocalDate begin, LocalDate end, Account account){
+        return account.getTransactionsByTimePeriod(begin,end);
+    }
+
+    private boolean isAnAccountOfCustomer(Account account){
+        return savingsAccounts.contains(account) || checkingAccounts.contains(account) ||
+                securitiesAccounts.contains(account) || creditAccounts.contains(account);
+    }
+
+    private void withdraw(double amount, Account account) {
+        account.withdraw(amount);
+    }
+
+    private void deposit(double amount, Account account) {
+        account.deposit(amount);
     }
 
     public static Customer createCustomer(String fn, String ln, String un, String pw){
@@ -50,18 +69,30 @@ public class Customer extends User {
         return rt;
     }
 
+    private void openCreditAccount(String name, String currency) {
+        // TODO: approve it?
+        creditAccounts.add(AccountFactory.getAccount("credit", name, currency));
+    }
+
     private void openCheckingAccount(String name, String currency) {
         checkingAccounts.add(AccountFactory.getAccount("checking", name, currency));
     }
 
     private void openSavingsAccount(String name, String currency) {
-        checkingAccounts.add(AccountFactory.getAccount("savings", name, currency));
+        savingsAccounts.add(AccountFactory.getAccount("savings", name, currency));
     }
 
     private void openSecuritiesAccount(String name, String currency, SavingsAccount account, double amount) {
         // open a securities account and transfer amount from account
-
-        checkingAccounts.add(AccountFactory.getAccount("savings", name, currency));
+        if (account.getBalance() < amount ||
+                Constants.exchangeCurrencyToUSD(account.getCurrency(),amount) < Constants.getFundsNeededToOpenSecuritiesAccount() ||
+                account.getBalance() - amount < Constants.getFundsToMaintainInSavingsToOpenSecurities()) {
+            System.out.println("Cannot open a securities account");
+        } else{
+            SecuritiesAccount securities = AccountFactory.getAccount("savings", name, currency);
+            account.transfer(securities, amount);
+            securitiesAccounts.add(securities);
+        }
     }
     
     @Override

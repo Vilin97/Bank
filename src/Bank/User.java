@@ -11,10 +11,14 @@ package Bank;
  * @author adamstreich
  */
 public abstract class User implements Permisions {
-    Credentials cred;
+    private Credentials cred;
+    private int ID;
+    private static int nextID = 0;
     
     public User(Credentials cd){
         this.cred = cd;
+        ID = nextID;
+        nextID += 1;
     }
     
 }
