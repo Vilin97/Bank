@@ -1,8 +1,6 @@
 package Bank;
 
 import static Bank.Credentials.createCredentials;
-
-import java.time.LocalDate;
 import java.util.ArrayList;
 
 //A customer class must have the following functions:
@@ -94,7 +92,7 @@ public class Customer extends User {
             securitiesAccounts.add(securities);
         }
     }
-    
+
     @Override
     public boolean sudoUser() {
         return false;

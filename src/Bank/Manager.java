@@ -1,6 +1,6 @@
-package Bank;
+package bank;
 
-import static Bank.Credentials.createCredentials;
+import static bank.Credentials.createCredentials;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -13,6 +13,7 @@ import static Bank.Credentials.createCredentials;
  * @author adamstreich
  */
 public class Manager extends User {
+    //should create a manager account to hold his money
     
     public Manager(Credentials cd) {
         super(cd);

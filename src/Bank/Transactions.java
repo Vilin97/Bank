@@ -1,4 +1,4 @@
-package Bank;
+package bank;
 
 import java.time.LocalDate;
 import java.util.ArrayList;

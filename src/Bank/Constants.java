@@ -1,4 +1,4 @@
-package Bank;
+package bank;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
