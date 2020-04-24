@@ -11,6 +11,8 @@ public class CheckingAccount extends Account {
 
     public CheckingAccount(String name, Currency currency) {
         super(name, currency);
+        this.withdrawBehavior = new CanWithdrawBehavior(this);
+        this.depositBehavior = new CanDepositBehavior(this);
     }
 
     @Override

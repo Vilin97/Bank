@@ -93,9 +93,7 @@ public class Transactions<T extends Transaction> implements Collection<T> {
 
     @Override
     public String toString() {
-        return "Transactions{" +
-                "transactions=" + transactions +
-                '}';
+        return transactions.toString();
     }
 
     public ArrayList<T> getTransactions() {

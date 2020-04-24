@@ -20,8 +20,8 @@ abstract public class Transaction implements Comparable<Transaction>{
 
     @Override
     public String toString() {
-        return "Transaction{" +
-                "date=" + date +
+        return this.getClass().getName() +
+                ", date=" + date +
                 '}';
     }
 

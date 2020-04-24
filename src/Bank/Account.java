@@ -12,7 +12,14 @@ abstract public class Account {
     protected WithdrawBehavior withdrawBehavior;
     protected DepositBehavior depositBehavior;
 
-
+    public Account(String name, Transactions<Transaction> transactions, double balance, Currency currency, WithdrawBehavior withdrawBehavior, DepositBehavior depositBehavior) {
+        this.name = name;
+        this.transactions = transactions;
+        this.balance = balance;
+        this.currency = currency;
+        this.withdrawBehavior = withdrawBehavior;
+        this.depositBehavior = depositBehavior;
+    }
 
     public Account(String name, Transactions transactions, double balance, Currency currency) {
         this.name = name;
@@ -39,7 +46,29 @@ abstract public class Account {
 
     public void transferToAccount(Account o, double amount) {
         // transfer amount to o
-        // TODO
+        double commission = amount * Constants.getTransferBetweenAccountsFeeFraction();
+        if (getBalance() < amount) {
+            System.out.println("Not enough funds");
+        } else {
+            setBalance(getBalance() - amount);
+            double exchanged = Constants.exchangeCurrency(currency,o.currency,amount-commission);
+            o.setBalance(getBalance() + exchanged);
+            getTransactions().add(new TransactionTransferOut(Bank.getCurrentDate()));
+            o.getTransactions().add(new TransactionTransferIn(Bank.getCurrentDate()));
+            System.out.println(amount+" "+getCurrency() + " was transferred. Commission: "+
+                    commission+" "+getCurrency());
+            // TODO: give the manager the commission
+        }
+    }
+
+    @Override
+    public String toString() {
+        return this.getClass().getName()+
+                ", name='" + name + '\'' +
+                ", transactions=" + transactions +
+                ", balance=" + balance +
+                ", currency=" + currency +
+                '}';
     }
 
     public String getName() {
