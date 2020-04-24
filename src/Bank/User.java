@@ -1,4 +1,4 @@
-package Bank;
+package bank;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -12,6 +12,7 @@ package Bank;
  */
 public abstract class User implements Permisions {
     Credentials cred;
+    //ID
     
     public User(Credentials cd){
         this.cred = cd;

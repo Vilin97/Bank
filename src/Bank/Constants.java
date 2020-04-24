@@ -1,4 +1,4 @@
-package Bank;
+package bank;
 
 public class Constants {
     // a class to hold constants to be used in the bank. E.g. how big the fees are, etc.

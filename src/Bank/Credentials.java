@@ -1,8 +1,8 @@
-package Bank;
+package bank;
 
-import static Bank.Name.createName;
-import static Bank.Password.createPassword;
-import static Bank.UName.createUName;
+import static bank.Name.createName;
+import static bank.Password.createPassword;
+import static bank.UName.createUName;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
