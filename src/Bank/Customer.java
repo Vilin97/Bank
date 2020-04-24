@@ -3,27 +3,37 @@ package Bank;
 import static Bank.Credentials.createCredentials;
 import java.util.ArrayList;
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+//A customer class must have the following functions:
+//        Create checking account
+//        Create savings account
+//        Create securities account
+//        Close an account (where does the money go?)
+//        Request loan
+//        Deposit cash to an account
+//        Withdraw money from a checking account
+//        View transactions for an account (for a time period)
+//        View balance in an account
+//        Buy stock
+//        Sell stock
+//        Play on the stock market (repeatedly buy and sell stocks)
+//        See realized profit from the stock market
+//        See unrealized profit from the stock market
 
 /**
  *
  * @author adamstreich
  */
 public class Customer extends User {
-    private ArrayList<String> savingsAcounts; // not sure what the class name is fo this but needs to be changed
-    private ArrayList<CheckingAccount> checkingAcounts;
-    private ArrayList<SecuritiesAccount> securitiesAcounts;
+    private Accounts<SavingsAccount> savingsAccounts; // not sure what the class name is fo this but needs to be changed
+    private Accounts<CheckingAccount> checkingAccounts;
+    private Accounts<SecuritiesAccount> securitiesAccounts;
     //need a loans array
     
     public Customer(Credentials cd) {
         super(cd);
-        this.savingsAcounts = new ArrayList<String>(); 
-        this.checkingAcounts = new ArrayList<CheckingAccount>();
-        this.securitiesAcounts = new ArrayList<SecuritiesAccount>();
+        this.savingsAccounts = new Accounts<SavingsAccount>();
+        this.checkingAccounts = new Accounts<CheckingAccount>();
+        this.securitiesAccounts = new Accounts<SecuritiesAccount>();
         
     }
 
@@ -38,6 +48,20 @@ public class Customer extends User {
         }
         rt = new Customer(cr);
         return rt;
+    }
+
+    private void openCheckingAccount(String name, String currency) {
+        checkingAccounts.add(AccountFactory.getAccount("checking", name, currency));
+    }
+
+    private void openSavingsAccount(String name, String currency) {
+        checkingAccounts.add(AccountFactory.getAccount("savings", name, currency));
+    }
+
+    private void openSecuritiesAccount(String name, String currency, SavingsAccount account, double amount) {
+        // open a securities account and transfer amount from account
+
+        checkingAccounts.add(AccountFactory.getAccount("savings", name, currency));
     }
     
     @Override

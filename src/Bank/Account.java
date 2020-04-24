@@ -9,6 +9,10 @@ abstract public class Account {
     protected Transactions<Transaction> transactions;
     protected double balance;
     protected Currency currency;
+    protected WithdrawBehavior withdrawBehavior;
+    protected DepositBehavior depositBehavior;
+
+
 
     public Account(String name, Transactions transactions, double balance, Currency currency) {
         this.name = name;
@@ -23,6 +27,19 @@ abstract public class Account {
 
     public Transactions getTransactionsByTimePeriod(LocalDate begin, LocalDate end) {
         return transactions.getTransactionsByTimePeriod(begin, end);
+    }
+
+    public void withdraw(double amount) {
+        withdrawBehavior.withdraw(amount);
+    }
+
+    public void deposit(double amount) {
+        depositBehavior.deposit(amount);
+    }
+
+    public void transferToAccount(Account o, double amount) {
+        // transfer amount to o
+        // TODO
     }
 
     public String getName() {

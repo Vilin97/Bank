@@ -17,6 +17,11 @@ public class SecuritiesAccount extends Account {
         this.startingAmount = startingAmount;
     }
 
+    public SecuritiesAccount(String name, Currency currency) {
+        super(name, currency);
+        this.startingAmount = 0;
+    }
+
     public double getRealizedProfit() {
         return getBalance() - startingAmount;
     }
