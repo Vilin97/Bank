@@ -1,9 +1,9 @@
 package Bank;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 public class TransactionDeposit extends Transaction {
-    public TransactionDeposit(Date date) {
+    public TransactionDeposit(LocalDate date) {
         super(date);
     }
 }

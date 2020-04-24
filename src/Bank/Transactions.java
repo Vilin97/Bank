@@ -1,5 +1,6 @@
 package Bank;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
@@ -81,13 +82,20 @@ public class Transactions<T extends Transaction> implements Collection<T> {
         transactions.clear();
     }
 
-    public Transactions<T> getTransactionsByTimePeriod(Date begin, Date end){
+    public Transactions<T> getTransactionsByTimePeriod(LocalDate begin, LocalDate end){
         // get all transactions in the time period
-        Transactions<T> res = new Transactions<>();
+        Transactions<T> res = new Transactions<T>();
         for (T transaction : transactions) {
             if (transaction.getDate().compareTo(begin) > 0 && transaction.getDate().compareTo(end) < 0) res.add(transaction);
         }
         return res;
+    }
+
+    @Override
+    public String toString() {
+        return "Transactions{" +
+                "transactions=" + transactions +
+                '}';
     }
 
     public ArrayList<T> getTransactions() {

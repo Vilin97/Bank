@@ -1,0 +1,23 @@
+package Bank;
+
+import java.time.LocalDate;
+import java.util.Currency;
+import java.util.Date;
+
+public class Main {
+    public static void main(String[] args) {
+        boolean test = true;
+        if (test){
+            Bank.setCurrentDate(LocalDate.now());
+            Currency usdCurrency = Currency.getInstance("USD");
+            CheckingAccount checking1 = new CheckingAccount("my account", usdCurrency);
+            System.out.println(checking1);
+            checking1.deposit(100);
+            System.out.println(checking1);
+            checking1.withdraw(50);
+            System.out.println(checking1);
+        } else {
+            Bank bank = new Bank();
+        }
+    }
+}

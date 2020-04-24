@@ -1,19 +1,20 @@
 package Bank;
 
+import java.time.LocalDate;
 import java.util.Date;
 
-abstract public class Transaction {
-    Date date;
+abstract public class Transaction implements Comparable<Transaction>{
+    LocalDate date;
 
-    public Transaction(Date date) {
+    public Transaction(LocalDate date) {
         this.date = date;
     }
 
-    public Date getDate() {
+    public LocalDate getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(LocalDate date) {
         this.date = date;
     }
 
@@ -22,5 +23,9 @@ abstract public class Transaction {
         return "Transaction{" +
                 "date=" + date +
                 '}';
+    }
+
+    public int compareTo(Transaction o) {
+        return date.compareTo(o.getDate());
     }
 }

@@ -1,15 +1,15 @@
 package Bank;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 public class Bank {
-    private static Date currentDate; // the current date does not depend on the specific instance of the bank
+    private static LocalDate currentDate; // the current date does not depend on the specific instance of the bank
 
-    public static Date getCurrentDate() {
+    public static LocalDate getCurrentDate() {
         return currentDate;
     }
 
-    public static void setCurrentDate(Date currentDate) {
+    public static void setCurrentDate(LocalDate currentDate) {
         Bank.currentDate = currentDate;
     }
 }

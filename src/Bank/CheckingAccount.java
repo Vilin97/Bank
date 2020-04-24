@@ -16,20 +16,34 @@ public class CheckingAccount extends Account {
         if (amount >= 0 && getBalance() >= amount + commission){
             setBalance(getBalance() - amount - commission);
             getTransactions().add(new TransactionWithdrawal(Bank.getCurrentDate()));
-            System.out.println(amount+getCurrency().getDisplayName() + " was withdrawn. Commission: "+
-                    commission+getCurrency().getDisplayName());
+            System.out.println(amount+" "+getCurrency() + " was withdrawn. Commission: "+
+                    commission+" "+getCurrency());
             // TODO: give the manager the commission
+        } else {
+            System.out.println("Cannot withdraw");
         }
     }
 
     public void deposit(double amount) {
         double commission = amount*Constants.getDepositFeeFraction();
-        if (amount >= 0 && getBalance() >= amount + commission){
+        if (amount >= 0){
             setBalance(getBalance() + amount - commission);
             getTransactions().add(new TransactionDeposit(Bank.getCurrentDate()));
-            System.out.println((amount-commission)+getCurrency().getDisplayName() + " was deposited. Commission: "+
-                    commission+getCurrency().getDisplayName());
+            System.out.println((amount-commission)+" "+getCurrency() + " was deposited. Commission: "+
+                    commission+" "+getCurrency());
             // TODO: give the manager the commission
+        } else {
+            System.out.println("Cannot deposit");
         }
+    }
+
+    @Override
+    public String toString() {
+        return "CheckingAccount{" +
+                "name='" + name + '\'' +
+                ", transactions=" + transactions +
+                ", balance=" + balance +
+                ", currency=" + currency +
+                '}';
     }
 }

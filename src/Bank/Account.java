@@ -1,13 +1,14 @@
 package Bank;
 
+import java.time.LocalDate;
 import java.util.Currency;
 import java.util.Date;
 
 abstract public class Account {
-    private String name;
-    private Transactions<Transaction> transactions;
-    private double balance;
-    private Currency currency;
+    protected String name;
+    protected Transactions<Transaction> transactions;
+    protected double balance;
+    protected Currency currency;
 
     public Account(String name, Transactions transactions, double balance, Currency currency) {
         this.name = name;
@@ -20,7 +21,7 @@ abstract public class Account {
         this(name, new Transactions(), 0, currency);
     }
 
-    public Transactions getTransactionsByTimePeriod(Date begin, Date end) {
+    public Transactions getTransactionsByTimePeriod(LocalDate begin, LocalDate end) {
         return transactions.getTransactionsByTimePeriod(begin, end);
     }
 
