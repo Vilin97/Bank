@@ -1,6 +1,6 @@
-package Bank;
+package bank;
 
-import static Bank.Credentials.createCredentials;
+import static bank.Credentials.createCredentials;
 import java.util.ArrayList;
 
 //A customer class must have the following functions:
@@ -37,10 +37,12 @@ public class Customer extends User {
         this.creditAccounts = new Accounts<CreditAccount>();
     }
 
+    /*
     private Transactions getTransactionsByTimePeriod(LocalDate begin, LocalDate end, Account account){
         return account.getTransactionsByTimePeriod(begin,end);
     }
-
+    */
+    
     private boolean isAnAccountOfCustomer(Account account){
         return savingsAccounts.contains(account) || checkingAccounts.contains(account) ||
                 securitiesAccounts.contains(account) || creditAccounts.contains(account);

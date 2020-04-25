@@ -1,4 +1,4 @@
-package Bank;
+package bank;
 
 abstract public class WithdrawBehavior {
     protected Account account;
