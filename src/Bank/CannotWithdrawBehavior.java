@@ -1,4 +1,4 @@
-package Bank;
+package bank;
 
 public class CannotWithdrawBehavior extends WithdrawBehavior {
     public CannotWithdrawBehavior(Account account) {

@@ -1,4 +1,4 @@
-package Bank;
+package bank;
 
 public class CannotDepositBehavior extends DepositBehavior {
     public CannotDepositBehavior(Account account) {

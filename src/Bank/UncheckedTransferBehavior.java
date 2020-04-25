@@ -1,4 +1,4 @@
-package Bank;
+package bank;
 
 public class UncheckedTransferBehavior extends TransferBehavior {
     // unchecked transfer

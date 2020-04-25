@@ -1,6 +1,6 @@
-package Bank;
+package bank;
 
-import static Bank.Credentials.createCredentials;
+import static bank.Credentials.createCredentials;
 import java.util.ArrayList;
 
 //A customer class must have the following functions:
