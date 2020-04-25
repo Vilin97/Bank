@@ -37,10 +37,12 @@ public class Customer extends User {
         this.creditAccounts = new Accounts<CreditAccount>();
     }
 
+    /*
     private Transactions getTransactionsByTimePeriod(LocalDate begin, LocalDate end, Account account){
         return account.getTransactionsByTimePeriod(begin,end);
     }
-
+    */
+    
     private boolean isAnAccountOfCustomer(Account account){
         return savingsAccounts.contains(account) || checkingAccounts.contains(account) ||
                 securitiesAccounts.contains(account) || creditAccounts.contains(account);
