@@ -13,7 +13,7 @@ import java.util.ArrayList;
 //        Withdraw money from a checking account -- done
 //        View transactions for an account (for a time period) -- done
 //        View balance in an account -- done (just access the account)
-//        Buy stock --
+//        Buy stock
 //        Sell stock
 //        Play on the stock market (repeatedly buy and sell stocks)
 //        See realized profit from the stock market

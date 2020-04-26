@@ -15,7 +15,7 @@ public class Main {
             Account checking1 = new CheckingAccount("my checking account", eurCurrency);
             Account savings1 = new SavingsAccount("my savings account", rubCurrency);
             checking1.deposit(100);
-            checking1.transferToAccount(savings1,50);
+            checking1.transfer(savings1,50);
             System.out.println(checking1);
             System.out.println(savings1);
 //            System.out.println(checking1);
