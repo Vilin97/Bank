@@ -7,6 +7,7 @@ import java.util.Date;
 public class Main {
     public static void main(String[] args) {
         boolean test = true;
+
         if (test){
             Bank.setCurrentDate(LocalDate.now());
             Currency usdCurrency = Currency.getInstance("USD");
