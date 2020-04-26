@@ -5,6 +5,8 @@
  */
 package bank;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.Iterator;
 
 /**
@@ -19,6 +21,7 @@ public class CustomerGUI extends javax.swing.JFrame {
     public CustomerGUI(Customer cs) {
         initComponents();
         initCustom(cs);
+        initActionListensers(cs);
     }
 
     /**
@@ -34,13 +37,98 @@ public class CustomerGUI extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         sAccList = new javax.swing.JComboBox<>();
         savAccListLabel = new javax.swing.JLabel();
+        jPanel6 = new javax.swing.JPanel();
+        savAccBalanceDisplay = new javax.swing.JTextField();
+        savAccBalanceLabel = new javax.swing.JLabel();
+        updateCurrentSavAccButton = new javax.swing.JButton();
+        jPanel7 = new javax.swing.JPanel();
+        withdrawSaAccButton = new javax.swing.JButton();
+        depositSaAccButton = new javax.swing.JButton();
+        interactionFieldSaAcc = new javax.swing.JTextField();
+        InteractSaAccLabel = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
+        jPanel5 = new javax.swing.JPanel();
+        openNewAccButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        savAccListLabel.setText("Select an account to work with:");
+        savAccListLabel.setText("Select an account to work with, then hit Bank:");
+
+        savAccBalanceDisplay.setEditable(false);
+
+        savAccBalanceLabel.setText("Account Balance");
+
+        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
+        jPanel6.setLayout(jPanel6Layout);
+        jPanel6Layout.setHorizontalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
+                .addContainerGap(21, Short.MAX_VALUE)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(savAccBalanceLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(savAccBalanceDisplay))
+                .addGap(22, 22, 22))
+        );
+        jPanel6Layout.setVerticalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addGap(14, 14, 14)
+                .addComponent(savAccBalanceLabel)
+                .addGap(18, 18, 18)
+                .addComponent(savAccBalanceDisplay, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(28, Short.MAX_VALUE))
+        );
+
+        updateCurrentSavAccButton.setText("Bank");
+
+        withdrawSaAccButton.setText("Withdraw");
+
+        depositSaAccButton.setText("Deposit");
+
+        interactionFieldSaAcc.setFont(new java.awt.Font("Apple Color Emoji", 0, 13)); // NOI18N
+        interactionFieldSaAcc.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                interactionFieldSaAccActionPerformed(evt);
+            }
+        });
+
+        InteractSaAccLabel.setText("Interact Below:");
+
+        javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
+        jPanel7.setLayout(jPanel7Layout);
+        jPanel7Layout.setHorizontalGroup(
+            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel7Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(withdrawSaAccButton)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(depositSaAccButton)
+                .addGap(12, 12, 12))
+            .addGroup(jPanel7Layout.createSequentialGroup()
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel7Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(interactionFieldSaAcc, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel7Layout.createSequentialGroup()
+                        .addGap(49, 49, 49)
+                        .addComponent(InteractSaAccLabel)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel7Layout.setVerticalGroup(
+            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
+                .addContainerGap(10, Short.MAX_VALUE)
+                .addComponent(InteractSaAccLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(interactionFieldSaAcc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(withdrawSaAccButton)
+                    .addComponent(depositSaAccButton))
+                .addContainerGap())
+        );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -48,19 +136,36 @@ public class CustomerGUI extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(savAccListLabel)
+                        .addComponent(sAccList, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(savAccListLabel)
-                    .addComponent(sAccList, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(722, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(updateCurrentSavAccButton, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(189, 189, 189)
+                        .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(268, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(savAccListLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(sAccList, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(280, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(savAccListLabel)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(sAccList, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(updateCurrentSavAccButton))
+                        .addGap(54, 54, 54)
+                        .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(126, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Savings Accounts", jPanel1);
@@ -69,7 +174,7 @@ public class CustomerGUI extends javax.swing.JFrame {
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 925, Short.MAX_VALUE)
+            .addGap(0, 936, Short.MAX_VALUE)
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -82,7 +187,7 @@ public class CustomerGUI extends javax.swing.JFrame {
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 925, Short.MAX_VALUE)
+            .addGap(0, 936, Short.MAX_VALUE)
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -95,7 +200,7 @@ public class CustomerGUI extends javax.swing.JFrame {
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 925, Short.MAX_VALUE)
+            .addGap(0, 936, Short.MAX_VALUE)
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -103,6 +208,27 @@ public class CustomerGUI extends javax.swing.JFrame {
         );
 
         jTabbedPane1.addTab("Loans", jPanel4);
+
+        openNewAccButton.setText("Open New Account");
+
+        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
+        jPanel5.setLayout(jPanel5Layout);
+        jPanel5Layout.setHorizontalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addGap(30, 30, 30)
+                .addComponent(openNewAccButton)
+                .addContainerGap(756, Short.MAX_VALUE))
+        );
+        jPanel5Layout.setVerticalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addGap(14, 14, 14)
+                .addComponent(openNewAccButton)
+                .addContainerGap(288, Short.MAX_VALUE))
+        );
+
+        jTabbedPane1.addTab("Options", jPanel5);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -118,11 +244,50 @@ public class CustomerGUI extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void interactionFieldSaAccActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_interactionFieldSaAccActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_interactionFieldSaAccActionPerformed
+    
+    //builds the gui for the user in the begining
     public void initCustom(Customer user){
         this.updateSavingsAccList(user);
+        this.updateSavingsAccBalanceDisp(user);
+        
         
     }
     
+    //builds the action listeners
+    private void initActionListensers(Customer user){
+        //update what savings account is being banked in 
+        updateCurrentSavAccButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                updateWorkingSavingsAcc(user);
+            }
+                
+        });
+        
+        //deposit to the savings account
+        depositSaAccButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                depositSaAcc(user);
+            }
+                
+        });
+        
+        //withdraw from the savings account
+        withdrawSaAccButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                withdrawSaAcc(user);
+            }
+                
+        });
+        
+    }
+    
+    //updates the savings accounts in the list
     public void updateSavingsAccList(Customer user){
         Iterator SAiter = user.getSASIter();
         while(SAiter.hasNext()){
@@ -131,11 +296,58 @@ public class CustomerGUI extends javax.swing.JFrame {
         }
     }
     
+    //updates the balance that is diplayed, but needs a action listener to call it
+    public void updateSavingsAccBalanceDisp(Customer user){
+        String selected = (String) sAccList.getSelectedItem();
+        SavingsAccount acc = user.getSavAccByName(selected);
+        String disp = acc.currency.getSymbol() + " " + acc.getBalance();
+        savAccBalanceDisplay.setText(disp);
+        
+    }
     
+    //the method called in the action listener
+    public void updateWorkingSavingsAcc(Customer user){
+        this.updateSavingsAccBalanceDisp(user);
+    }
+    
+    public void depositSaAcc(Customer user){
+        String selected = (String) sAccList.getSelectedItem();
+        SavingsAccount acc = user.getSavAccByName(selected);
+        try{
+            double inp = Double.parseDouble(interactionFieldSaAcc.getText());
+            System.out.println(inp + " will be taken from the current account.");
+            acc.deposit(inp);
+        }catch(NumberFormatException ex){
+            System.out.println(ex.getMessage());
+            System.out.println("User tried to enter not a double");
+        }
+        updateWorkingSavingsAcc(user);
+        interactionFieldSaAcc.setText(" ");
+    }
+    
+    public void withdrawSaAcc(Customer user){
+        String selected = (String) sAccList.getSelectedItem();
+        SavingsAccount acc = user.getSavAccByName(selected);
+        try{
+            double inp = Double.parseDouble(interactionFieldSaAcc.getText());
+            System.out.println(inp + " will be added to the current account.");
+            acc.withdraw(inp);
+            
+        }catch(NumberFormatException ex){
+            System.out.println(ex.getMessage());
+            System.out.println("User tried to enter not a double");
+        }
+        updateWorkingSavingsAcc(user);
+        interactionFieldSaAcc.setText(" ");
+        
+    }
+    
+    //just for testing
     public static Customer getTestC(){
         Customer tester = bank.Customer.createCustomer("Adam","Streich","astreich","12345");
         tester.createSavingsAccount("Acc1", "USD");
         tester.createSavingsAccount("Acc2", "USD");
+        
         return tester;
     }
     /**
@@ -178,12 +390,23 @@ public class CustomerGUI extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel InteractSaAccLabel;
+    private javax.swing.JButton depositSaAccButton;
+    private javax.swing.JTextField interactionFieldSaAcc;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel6;
+    private javax.swing.JPanel jPanel7;
     private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JButton openNewAccButton;
     private javax.swing.JComboBox<String> sAccList;
+    private javax.swing.JTextField savAccBalanceDisplay;
+    private javax.swing.JLabel savAccBalanceLabel;
     private javax.swing.JLabel savAccListLabel;
+    private javax.swing.JButton updateCurrentSavAccButton;
+    private javax.swing.JButton withdrawSaAccButton;
     // End of variables declaration//GEN-END:variables
 }

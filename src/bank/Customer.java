@@ -133,6 +133,19 @@ public class Customer extends User {
         return iter;
     }
     
+    public SavingsAccount getSavAccByName(String nm){
+        SavingsAccount rt = null;
+        Iterator SAiter = this.getSASIter();
+        while(SAiter.hasNext()){
+            SavingsAccount sa = (SavingsAccount) SAiter.next();
+            if(sa.name.equals(nm)){
+                rt = sa;
+            }
+        }
+        
+        return rt;
+    }
+    
     //public methods for creating accounts
     public void createSavingsAccount(String name, String currency){
         openSavingsAccount( name, currency);
