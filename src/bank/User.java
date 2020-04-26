@@ -21,4 +21,8 @@ public abstract class User implements Permisions {
         nextID += 1;
     }
     
+    public Credentials getCreds(){
+        return this.cred;
+    }
+    
 }

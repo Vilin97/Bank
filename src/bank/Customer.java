@@ -2,6 +2,7 @@ package bank;
 
 import static bank.Credentials.createCredentials;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 //A customer class must have the following functions:
 //        Create checking account -- done
@@ -65,9 +66,19 @@ public class Customer extends User {
             System.out.println(ex.getMessage());
             throw new IllegalArgumentException("Wrong credential specs");
         }
+        
         rt = new Customer(cr);
+        
+        //THIS NEEDS TO BE IMPLEMENTED ONCE THE DATA SET IS ADDED
+        /*
+        if( DataSet contains rt.getCreds().getUname() ){
+            throw new IllegalArgumentException("username already taken");
+        }
+        */
+        
         return rt;
     }
+   
 
     private void openCreditAccount(String name, String currency) {
         // TODO: approve it?
@@ -98,6 +109,41 @@ public class Customer extends User {
     @Override
     public boolean sudoUser() {
         return false;
+    }
+    
+    public int numSecAcc(){
+        return this.securitiesAccounts.size();
+    }
+    
+    public int numChecAcc(){
+        return this.checkingAccounts.size();
+    }
+    
+    public int numSavAcc(){
+        return this.savingsAccounts.size();
+    }
+    
+    public int numLoans(){
+        return this.creditAccounts.size();
+    }
+    
+    //geters for iterators for all the collection accounts
+    public Iterator getSASIter(){
+        Iterator iter = this.savingsAccounts.iterator();
+        return iter;
+    }
+    
+    //public methods for creating accounts
+    public void createSavingsAccount(String name, String currency){
+        openSavingsAccount( name, currency);
+    }
+    
+    public String toString(){
+        String rt = " ";
+        rt = "Name: " + this.getCreds().getName().toString() + " | Username: " + this.getCreds().getUname().toString() 
+                + " | # of Savings Acc: " + this.numSavAcc() + " | # of Checking Acc: " + this.numChecAcc()
+                + " | # of Securities Acc: " + this.numSecAcc() + " | # of Loans: " + this.numLoans();
+        return rt;
     }
     
 }
