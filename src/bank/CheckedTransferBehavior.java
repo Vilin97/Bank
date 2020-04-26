@@ -1,4 +1,4 @@
-package Bank;
+package bank;
 
 public class CheckedTransferBehavior extends TransferBehavior {
     public CheckedTransferBehavior(Account account) {

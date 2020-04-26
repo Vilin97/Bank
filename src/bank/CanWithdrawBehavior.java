@@ -1,4 +1,4 @@
-package Bank;
+package bank;
 
 public class CanWithdrawBehavior extends WithdrawBehavior {
     public CanWithdrawBehavior(Account account) {

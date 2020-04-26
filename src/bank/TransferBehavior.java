@@ -1,4 +1,4 @@
-package Bank;
+package bank;
 
 public abstract class TransferBehavior {
     protected Account account;
