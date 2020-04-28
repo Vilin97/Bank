@@ -16,6 +16,7 @@ class Password {
     public Password(String pw) {
         this.pword = pw;
         
+        
     }
 
     public String getPword() {

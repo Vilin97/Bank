@@ -35,4 +35,8 @@ class UName {
         }
         return rt;
     }
+    
+    public String toString(){
+        return this.uname;
+    }
 }

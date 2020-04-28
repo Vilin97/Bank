@@ -2,6 +2,7 @@ package bank;
 
 import static bank.Credentials.createCredentials;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 //A customer class must have the following functions:
 //        Create checking account -- done
@@ -76,9 +77,19 @@ public class Customer extends User {
             System.out.println(ex.getMessage());
             throw new IllegalArgumentException("Wrong credential specs");
         }
+        
         rt = new Customer(cr);
+        
+        //THIS NEEDS TO BE IMPLEMENTED ONCE THE DATA SET IS ADDED
+        /*
+        if( DataSet contains rt.getCreds().getUname() ){
+            throw new IllegalArgumentException("username already taken");
+        }
+        */
+        
         return rt;
     }
+   
 
     public void requestLoan(String name, String currency, double amountRequest, SavingsAccount savingsAccount) {
         // creates a pending loan
@@ -164,6 +175,77 @@ public class Customer extends User {
     @Override
     public boolean sudoUser() {
         return false;
+    }
+    
+    public int numSecAcc(){
+        return this.securitiesAccounts.size();
+    }
+    
+    public int numChecAcc(){
+        return this.checkingAccounts.size();
+    }
+    
+    public int numSavAcc(){
+        return this.savingsAccounts.size();
+    }
+    /*
+    public int numLoans(){
+        return this.creditAccounts.size();
+    }
+    */
+    //geters for iterators for all the collection accounts
+    public Iterator getSASIter(){
+        Iterator iter = this.savingsAccounts.iterator();
+        return iter;
+    }
+    
+    public Iterator getCEKAIter(){
+        Iterator iter = this.checkingAccounts.iterator();
+        return iter;
+    }
+    
+    public SavingsAccount getSavAccByName(String nm){
+        SavingsAccount rt = null;
+        Iterator SAiter = this.getSASIter();
+        while(SAiter.hasNext()){
+            SavingsAccount sa = (SavingsAccount) SAiter.next();
+            if(sa.name.equals(nm)){
+                rt = sa;
+            }
+        }
+        
+        return rt;
+    }
+    
+    public CheckingAccount getChekAccByName(String nm){
+        CheckingAccount rt = null;
+        Iterator SAiter = this.getCEKAIter();
+        while(SAiter.hasNext()){
+            CheckingAccount sa = (CheckingAccount) SAiter.next();
+            if(sa.name.equals(nm)){
+                rt = sa;
+            }
+        }
+        
+        return rt;
+    }
+    
+    //public methods for creating accounts
+    public void createSavingsAccount(String name, String currency){
+        openSavingsAccount( name, currency);
+    }
+    
+    //public methods for creating accounts
+    public void createCheckingAccount(String name, String currency){
+        openCheckingAccount( name, currency);
+    }
+    
+    public String toString(){
+        String rt = " ";
+        rt = "Name: " + this.getCreds().getName().toString() + " | Username: " + this.getCreds().getUname().toString() 
+                + " | # of Savings Acc: " + this.numSavAcc() + " | # of Checking Acc: " + this.numChecAcc()
+               ;
+        return rt;
     }
     
 }

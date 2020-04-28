@@ -240,7 +240,7 @@ public class GUI extends javax.swing.JFrame {
         createCustomer.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String uname = newAccountUName.getText();
+                String uname = uNameNewUser.getText();
                 String pword = passwordNewUser.getText();
                 String fname = firstNameNewUser.getText();
                 String lname = LastNameNewUser.getText();
@@ -248,7 +248,8 @@ public class GUI extends javax.swing.JFrame {
                 try{
                     Customer created = Customer.createCustomer(fname,lname,uname,pword);
                     //Add created to data set
-                    System.out.println("customer created");
+                    System.out.println("customer created!");
+                    System.out.println(created.toString());
                 }catch(IllegalArgumentException ex){
                     System.out.println(ex.getMessage());
                     System.out.println("error works");

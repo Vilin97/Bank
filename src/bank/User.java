@@ -41,4 +41,9 @@ public abstract class User implements Permisions {
     public int hashCode() {
         return Objects.hash(ID);
     }
+    
+    public Credentials getCreds(){
+        return this.cred;
+    }
+    
 }
