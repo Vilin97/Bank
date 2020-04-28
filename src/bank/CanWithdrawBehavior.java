@@ -13,7 +13,7 @@ public class CanWithdrawBehavior extends WithdrawBehavior {
             account.getTransactions().add(new TransactionWithdrawal(Bank.getCurrentDate(), amount));
             System.out.println(amount+" "+account.getCurrency() + " was withdrawn. Commission: "+
                     commission+" "+account.getCurrency());
-            Bank.getManager().receiveMoney(commission);
+            Bank.getManager().receiveMoney(account.getCurrency(), commission);
         } else {
             System.out.println("Cannot withdraw");
         }

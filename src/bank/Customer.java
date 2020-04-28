@@ -48,7 +48,7 @@ public class Customer extends User {
         this.pendingLoans = new Accounts<PendingLoan>();
     }
 
-    /*
+    /* // TODO: why is this commented out?
     private Transactions getTransactionsByTimePeriod(LocalDate begin, LocalDate end, Account account){
         return account.getTransactionsByTimePeriod(begin,end);
     }
@@ -80,11 +80,13 @@ public class Customer extends User {
         return rt;
     }
 
-    private void requestLoan(String name, String currency, double amountRequest) {
+    public void requestLoan(String name, String currency, double amountRequest, SavingsAccount savingsAccount) {
         // creates a pending loan
         // a pending loan becomes a loan if approved
+        // the money is transferred to the savings account specified if the loan is approved
         PendingLoan pendingLoan = AccountFactory.getAccount("loan", name, currency);
         pendingLoan.setBalance(-amountRequest);
+        pendingLoan.setSavingsAccount(savingsAccount);
         pendingLoans.add(pendingLoan);
     }
 

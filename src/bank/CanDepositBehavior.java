@@ -13,7 +13,7 @@ public class CanDepositBehavior extends DepositBehavior {
             account.getTransactions().add(new TransactionDeposit(Bank.getCurrentDate(), amount));
             System.out.println((amount-commission)+" "+account.getCurrency() + " was deposited. Commission: "+
                     commission+" "+account.getCurrency());
-            Bank.getManager().receiveMoney(commission);
+            Bank.getManager().receiveMoney(account.getCurrency(), commission);
         } else {
             System.out.println("Cannot deposit");
         }

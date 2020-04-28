@@ -131,4 +131,8 @@ abstract public class Account {
         // no input checking
         setBalance(getBalance() + amount);
     }
+
+    public int getID() {
+        return ID;
+    }
 }

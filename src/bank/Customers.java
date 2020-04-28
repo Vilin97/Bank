@@ -11,6 +11,10 @@ public class Customers<C extends Customer> implements Collection<C> {
         this.customers = customers;
     }
 
+    public Customers() {
+        this(new ArrayList<C>());
+    }
+
     @Override
     public int size() {
         return customers.size();

@@ -17,6 +17,12 @@ public class Loan extends Account {
 
     public Loan(PendingLoan pendingLoan){
         // get a loan from the pending loan
-        this(pendingLoan.name, pendingLoan.transactions, pendingLoan.balance, pendingLoan.currency);
+        this(pendingLoan.name, pendingLoan.transactions, 0, pendingLoan.currency);
+        forceTransfer(pendingLoan.getSavingsAccount(), -pendingLoan.getBalance());
+    }
+
+    private void forceTransfer(Account o, double amount){
+        // force transfer to account
+        transferBehavior.forceTransfer(o,amount);
     }
 }
