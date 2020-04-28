@@ -2,53 +2,37 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2dc3e741-f237-4da0-8a94-ca167ff386a7" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/bank/ReadFile.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/bank/Account.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/bank/Account.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/bank/AccountFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/bank/AccountFactory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/bank/Accounts.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/bank/Accounts.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/bank/Bank.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/bank/Bank.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/bank/CanDepositBehavior.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/bank/CanDepositBehavior.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/bank/CanWithdrawBehavior.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/bank/CanWithdrawBehavior.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/bank/CannotDepositBehavior.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/bank/CannotDepositBehavior.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/bank/CannotWithdrawBehavior.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/bank/CannotWithdrawBehavior.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/bank/CheckedTransferBehavior.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/bank/CheckedTransferBehavior.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/bank/CheckingAccount.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/bank/CheckingAccount.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/bank/Constants.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/bank/Constants.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/bank/Credentials.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/bank/Credentials.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/bank/CreditAccount.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/bank/CreditAccount.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/bank/Customer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/bank/Customer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/bank/DepositBehavior.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/bank/DepositBehavior.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/bank/GUI.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/bank/GUI.form" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/bank/GUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/bank/GUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/bank/General.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/bank/General.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/bank/IOTools.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/bank/IOTools.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/bank/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/bank/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/bank/Manager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/bank/Manager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/bank/Name.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/bank/Name.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/bank/Password.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/bank/Password.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/bank/Permisions.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/bank/Permisions.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/bank/ReadFile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/bank/ReadFileQuest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/bank/SavingsAccount.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/bank/SavingsAccount.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/bank/SecuritiesAccount.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/bank/SecuritiesAccount.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/bank/Stock.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/bank/Stock.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/bank/Stocks.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/bank/Stocks.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/bank/Transaction.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/bank/Transaction.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/bank/TransactionDeposit.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/bank/TransactionDeposit.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/bank/TransactionTransferIn.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/bank/TransactionTransferIn.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/bank/TransactionTransferOut.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/bank/TransactionTransferOut.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/bank/TransactionWithdrawal.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/bank/TransactionWithdrawal.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/bank/Transactions.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/bank/Transactions.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/bank/TransferBehavior.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/bank/TransferBehavior.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/bank/UName.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/bank/UName.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/bank/UncheckedTransferBehavior.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/bank/UncheckedTransferBehavior.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/bank/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/bank/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/bank/WithdrawBehavior.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/bank/WithdrawBehavior.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bank/Transaction.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/Bank.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Bank.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/bank/Account.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/bank/Account.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/bank/Accounts.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/bank/Accounts.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/bank/CheckingAccount.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/bank/CheckingAccount.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/bank/Credentials.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/bank/Credentials.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/bank/Customer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/bank/Customer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/bank/ReadFile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/bank/ReadFile.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/bank/SavingsAccount.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/bank/SavingsAccount.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/bank/SecuritiesAccount.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/bank/SecuritiesAccount.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/bank/Transaction.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/bank/Transaction.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/bank/TransactionTransferIn.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/bank/TransactionTransferIn.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/bank/TransactionTransferOut.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/bank/TransactionTransferOut.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/bank/TransactionWithdrawal.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/bank/TransactionWithdrawal.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/bank/Transactions.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/bank/Transactions.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/bank/UncheckedTransferBehavior.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/bank/UncheckedTransferBehavior.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/bank/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/bank/User.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ErrorTreeViewConfiguration">
+    <option name="hideInfoMessages" value="true" />
+    <option name="hideWarnings" value="true" />
+    <option name="HIDE_WARNINGS" value="true" />
+    <option name="HIDE_INFO_MESSAGES" value="true" />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -153,6 +137,10 @@
       <screen x="0" y="23" width="1440" height="877" />
     </state>
     <state x="461" y="305" key="#com.intellij.ide.actions.ChooseComponentsToExportDialog/0.23.1440.877@0.23.1440.877" timestamp="1587590323047" />
+    <state x="1039" y="439" key="#com.intellij.ide.util.MemberChooser" timestamp="1588090720422">
+      <screen x="0" y="23" width="2560" height="1417" />
+    </state>
+    <state x="1039" y="439" key="#com.intellij.ide.util.MemberChooser/0.23.2560.1417@0.23.2560.1417" timestamp="1588090720422" />
     <state x="511" y="273" key="#com.intellij.ide.util.frameworkSupport.AddFrameworkSupportDialog" timestamp="1587924222542">
       <screen x="0" y="23" width="1440" height="877" />
     </state>
@@ -171,15 +159,23 @@
       <screen x="0" y="23" width="1440" height="877" />
     </state>
     <state x="397" y="294" key="com.intellij.ide.util.TipDialog/0.23.1440.877@0.23.1440.877" timestamp="1587586607315" />
-    <state x="378" y="218" width="683" height="486" key="find.popup" timestamp="1588010736918">
-      <screen x="0" y="23" width="1440" height="877" />
+    <state x="170" y="147" width="1215" height="786" key="find.popup" timestamp="1588093085603">
+      <screen x="0" y="23" width="2560" height="1417" />
     </state>
     <state x="378" y="218" width="683" height="486" key="find.popup/0.23.1440.877@0.23.1440.877" timestamp="1588010736918" />
-    <state x="120" y="109" width="1215" height="786" key="find.popup/0.23.2560.1417@0.23.2560.1417" timestamp="1587919125867" />
+    <state x="170" y="147" width="1215" height="786" key="find.popup/0.23.2560.1417@0.23.2560.1417" timestamp="1588093085603" />
     <state x="194" y="128" key="new project wizard" timestamp="1587923954328">
       <screen x="0" y="23" width="1440" height="877" />
     </state>
     <state x="194" y="128" key="new project wizard/0.23.1440.877@0.23.1440.877" timestamp="1587923954328" />
     <state x="709" y="316" key="new project wizard/0.23.2560.1417@0.23.2560.1417" timestamp="1587748624740" />
+    <state x="1042" y="354" key="refactoring.ChangeSignatureDialog" timestamp="1588086875872">
+      <screen x="0" y="23" width="2560" height="1417" />
+    </state>
+    <state x="1042" y="354" key="refactoring.ChangeSignatureDialog/0.23.2560.1417@0.23.2560.1417" timestamp="1588086875872" />
+    <state x="-1447" y="620" key="run.anything.popup" timestamp="1588084991729">
+      <screen x="-2560" y="-517" width="2560" height="1417" />
+    </state>
+    <state x="-1447" y="620" key="run.anything.popup/0.23.1440.877/-2560.-517.2560.1417@-2560.-517.2560.1417" timestamp="1588084991729" />
   </component>
 </project>

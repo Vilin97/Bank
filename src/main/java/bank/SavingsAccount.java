@@ -14,4 +14,9 @@ public class SavingsAccount extends Account {
     public SavingsAccount(String name, Currency currency, Customer customer) {
         this(name,new Transactions(), 0, currency, customer);
     }
+
+    @Override
+    public String toString() {
+        return "Savings Account";
+    }
 }
