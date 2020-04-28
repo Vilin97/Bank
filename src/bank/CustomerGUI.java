@@ -47,6 +47,18 @@ public class CustomerGUI extends javax.swing.JFrame {
         interactionFieldSaAcc = new javax.swing.JTextField();
         InteractSaAccLabel = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
+        jPanel8 = new javax.swing.JPanel();
+        chekAccList1 = new javax.swing.JComboBox<>();
+        chekAccListLabel1 = new javax.swing.JLabel();
+        jPanel9 = new javax.swing.JPanel();
+        chekAccBalanceDisplay1 = new javax.swing.JTextField();
+        chekAccBalanceLabel1 = new javax.swing.JLabel();
+        updateCurrentChekAccButton1 = new javax.swing.JButton();
+        jPanel10 = new javax.swing.JPanel();
+        withdrawChekAccButton1 = new javax.swing.JButton();
+        depositChekAccButton1 = new javax.swing.JButton();
+        interactionFieldChekAcc1 = new javax.swing.JTextField();
+        InteractChekAccLabel1 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
@@ -170,15 +182,139 @@ public class CustomerGUI extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Savings Accounts", jPanel1);
 
+        chekAccListLabel1.setText("Select an account to work with, then hit Bank:");
+
+        chekAccBalanceDisplay1.setEditable(false);
+
+        chekAccBalanceLabel1.setText("Account Balance");
+
+        javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
+        jPanel9.setLayout(jPanel9Layout);
+        jPanel9Layout.setHorizontalGroup(
+            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel9Layout.createSequentialGroup()
+                .addContainerGap(21, Short.MAX_VALUE)
+                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(chekAccBalanceLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(chekAccBalanceDisplay1))
+                .addGap(22, 22, 22))
+        );
+        jPanel9Layout.setVerticalGroup(
+            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel9Layout.createSequentialGroup()
+                .addGap(14, 14, 14)
+                .addComponent(chekAccBalanceLabel1)
+                .addGap(18, 18, 18)
+                .addComponent(chekAccBalanceDisplay1, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(28, Short.MAX_VALUE))
+        );
+
+        updateCurrentChekAccButton1.setText("Bank");
+
+        withdrawChekAccButton1.setText("Withdraw");
+
+        depositChekAccButton1.setText("Deposit");
+
+        interactionFieldChekAcc1.setFont(new java.awt.Font("Apple Color Emoji", 0, 13)); // NOI18N
+        interactionFieldChekAcc1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                interactionFieldChekAcc1ActionPerformed(evt);
+            }
+        });
+
+        InteractChekAccLabel1.setText("Interact Below:");
+
+        javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
+        jPanel10.setLayout(jPanel10Layout);
+        jPanel10Layout.setHorizontalGroup(
+            jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel10Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(withdrawChekAccButton1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(depositChekAccButton1)
+                .addGap(12, 12, 12))
+            .addGroup(jPanel10Layout.createSequentialGroup()
+                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel10Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(interactionFieldChekAcc1, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel10Layout.createSequentialGroup()
+                        .addGap(49, 49, 49)
+                        .addComponent(InteractChekAccLabel1)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel10Layout.setVerticalGroup(
+            jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel10Layout.createSequentialGroup()
+                .addContainerGap(10, Short.MAX_VALUE)
+                .addComponent(InteractChekAccLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(interactionFieldChekAcc1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(withdrawChekAccButton1)
+                    .addComponent(depositChekAccButton1))
+                .addContainerGap())
+        );
+
+        javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
+        jPanel8.setLayout(jPanel8Layout);
+        jPanel8Layout.setHorizontalGroup(
+            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel8Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(chekAccListLabel1)
+                        .addComponent(chekAccList1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel8Layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(updateCurrentChekAccButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel8Layout.createSequentialGroup()
+                        .addGap(189, 189, 189)
+                        .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(268, Short.MAX_VALUE))
+        );
+        jPanel8Layout.setVerticalGroup(
+            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel8Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel8Layout.createSequentialGroup()
+                        .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel8Layout.createSequentialGroup()
+                                .addComponent(chekAccListLabel1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(chekAccList1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(updateCurrentChekAccButton1))
+                        .addGap(54, 54, 54)
+                        .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(126, Short.MAX_VALUE))
+        );
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 936, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel2Layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 334, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel2Layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
         );
 
         jTabbedPane1.addTab("Checking Accounts", jPanel2);
@@ -247,6 +383,10 @@ public class CustomerGUI extends javax.swing.JFrame {
     private void interactionFieldSaAccActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_interactionFieldSaAccActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_interactionFieldSaAccActionPerformed
+
+    private void interactionFieldChekAcc1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_interactionFieldChekAcc1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_interactionFieldChekAcc1ActionPerformed
     
     //builds the gui for the user in the begining
     public void initCustom(Customer user){
@@ -258,6 +398,8 @@ public class CustomerGUI extends javax.swing.JFrame {
     
     //builds the action listeners
     private void initActionListensers(Customer user){
+        //savings account action listeners
+        //
         //update what savings account is being banked in 
         updateCurrentSavAccButton.addActionListener(new ActionListener() {
             @Override
@@ -285,7 +427,43 @@ public class CustomerGUI extends javax.swing.JFrame {
                 
         });
         
+        //Checking Account action listeners
+        //
+        
+        //update what checking account is being banked in 
+        updateCurrentChekAccButton1.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                updateworkingCheckingAcc(user);
+            }
+                
+        });
+        
+        //deposit to the Checking account
+        depositChekAccButton1.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                depositChekAcc(user);
+            }
+                
+        });
+        
+        //withdraw from the Check account
+        withdrawChekAccButton1.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                withdrawChekAcc(user);
+            }
+                
+        });
+        
     }
+    
+    
+    
+    //Savings account methods
+    //
+    
     
     //updates the savings accounts in the list
     public void updateSavingsAccList(Customer user){
@@ -342,6 +520,64 @@ public class CustomerGUI extends javax.swing.JFrame {
         
     }
     
+    //Checking account methods
+    //
+    
+    //updates the Checking accounts in the list
+    public void updateCheckingAccList(Customer user){
+        Iterator SAiter = user.getSASIter();
+        while(SAiter.hasNext()){
+            SavingsAccount sa = (SavingsAccount) SAiter.next();
+            chekAccList1.addItem(sa.getName());
+        }
+    }
+    
+    //updates the balance that is diplayed, but needs a action listener to call it
+    public void updateCheckingAccBalanceDisp(Customer user){
+        String selected = (String) chekAccList1.getSelectedItem();
+        SavingsAccount acc = user.getSavAccByName(selected);
+        String disp = acc.currency.getSymbol() + " " + acc.getBalance();
+        chekAccBalanceDisplay1.setText(disp);
+        
+    }
+    
+    //the method called in the action listener
+    public void updateworkingCheckingAcc(Customer user){
+        this.updateCheckingAccBalanceDisp(user);
+    }
+    
+    public void depositChekAcc(Customer user){
+        String selected = (String) chekAccList1.getSelectedItem();
+        SavingsAccount acc = user.getSavAccByName(selected);
+        try{
+            double inp = Double.parseDouble(interactionFieldChekAcc1.getText());
+            System.out.println(inp + " will be taken from the current account.");
+            acc.deposit(inp);
+        }catch(NumberFormatException ex){
+            System.out.println(ex.getMessage());
+            System.out.println("User tried to enter not a double");
+        }
+        updateWorkingSavingsAcc(user);
+        interactionFieldChekAcc1.setText(" ");
+    }
+    
+    public void withdrawChekAcc(Customer user){
+        String selected = (String) chekAccList1.getSelectedItem();
+        SavingsAccount acc = user.getSavAccByName(selected);
+        try{
+            double inp = Double.parseDouble(interactionFieldChekAcc1.getText());
+            System.out.println(inp + " will be added to the current account.");
+            acc.withdraw(inp);
+            
+        }catch(NumberFormatException ex){
+            System.out.println(ex.getMessage());
+            System.out.println("User tried to enter not a double");
+        }
+        updateWorkingSavingsAcc(user);
+        interactionFieldChekAcc1.setText(" ");
+        
+    }
+    
     //just for testing
     public static Customer getTestC(){
         Customer tester = bank.Customer.createCustomer("Adam","Streich","astreich","12345");
@@ -390,23 +626,35 @@ public class CustomerGUI extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel InteractChekAccLabel1;
     private javax.swing.JLabel InteractSaAccLabel;
+    private javax.swing.JTextField chekAccBalanceDisplay1;
+    private javax.swing.JLabel chekAccBalanceLabel1;
+    private javax.swing.JComboBox<String> chekAccList1;
+    private javax.swing.JLabel chekAccListLabel1;
+    private javax.swing.JButton depositChekAccButton1;
     private javax.swing.JButton depositSaAccButton;
+    private javax.swing.JTextField interactionFieldChekAcc1;
     private javax.swing.JTextField interactionFieldSaAcc;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
+    private javax.swing.JPanel jPanel8;
+    private javax.swing.JPanel jPanel9;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JButton openNewAccButton;
     private javax.swing.JComboBox<String> sAccList;
     private javax.swing.JTextField savAccBalanceDisplay;
     private javax.swing.JLabel savAccBalanceLabel;
     private javax.swing.JLabel savAccListLabel;
+    private javax.swing.JButton updateCurrentChekAccButton1;
     private javax.swing.JButton updateCurrentSavAccButton;
+    private javax.swing.JButton withdrawChekAccButton1;
     private javax.swing.JButton withdrawSaAccButton;
     // End of variables declaration//GEN-END:variables
 }
