@@ -28,6 +28,8 @@ public class Main {
             customer1.getSavingsAccounts().add((SavingsAccount) savings1);
             customer1.getSecuritiesAccounts().add((SecuritiesAccount) securities1);
 
+            checking1.deposit(100);
+
             SavingsAccount savings2 = new SavingsAccount("my savings account", usdCurrency);
             customer2.getSavingsAccounts().add(savings2);
             customer2.requestLoan("my loan", "USD", 1000, savings2);

@@ -84,4 +84,11 @@ public class Accounts<A extends Account> implements Collection<A> {
         return accounts.get(i);
     }
 
+    public A getByID(int ID) throws NoSuchFieldError{
+        for (A a:accounts) {
+            if (a.getID() == ID) return a;
+        }
+        throw new NoSuchFieldError("no ID "+ID+" found");
+    }
+
 }
