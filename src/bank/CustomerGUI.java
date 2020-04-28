@@ -5,8 +5,12 @@
  */
 package bank;
 
+import static bank.TransferGUI.transferGUI;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.time.LocalDate;
+import java.time.Month;
+import java.util.ArrayList;
 import java.util.Iterator;
 
 /**
@@ -18,7 +22,7 @@ public class CustomerGUI extends javax.swing.JFrame {
     /**
      * Creates new form CustomerGUI
      */
-    public CustomerGUI(Customer cs) {
+    public CustomerGUI(Customer cs, Bank bnk) {
         initComponents();
         initCustom(cs);
         initActionListensers(cs);
@@ -53,6 +57,7 @@ public class CustomerGUI extends javax.swing.JFrame {
         depositChekAccButton1 = new javax.swing.JButton();
         interactionFieldChekAcc1 = new javax.swing.JTextField();
         InteractChekAccLabel1 = new javax.swing.JLabel();
+        chekAccTransferButton = new javax.swing.JButton();
         tHistoryCheAccPanel = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         cheAccTextBox1 = new javax.swing.JTextArea();
@@ -81,6 +86,7 @@ public class CustomerGUI extends javax.swing.JFrame {
         savAccTHInRangeButton = new javax.swing.JButton();
         savAccTHDate0Field = new javax.swing.JTextField();
         savAccTHDate1Field = new javax.swing.JTextField();
+        savAccTransferButton1 = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
@@ -230,6 +236,8 @@ public class CustomerGUI extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        chekAccTransferButton.setText("Transfer");
+
         javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
         jPanel8.setLayout(jPanel8Layout);
         jPanel8Layout.setHorizontalGroup(
@@ -247,7 +255,9 @@ public class CustomerGUI extends javax.swing.JFrame {
                         .addGap(286, 286, 286)
                         .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel8Layout.createSequentialGroup()
-                        .addGap(267, 267, 267)
+                        .addGap(80, 80, 80)
+                        .addComponent(chekAccTransferButton)
+                        .addGap(104, 104, 104)
                         .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(484, Short.MAX_VALUE))
         );
@@ -263,9 +273,15 @@ public class CustomerGUI extends javax.swing.JFrame {
                     .addComponent(updateCurrentChekAccButton1))
                 .addGap(48, 48, 48)
                 .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(24, Short.MAX_VALUE))
+                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel8Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(24, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel8Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(chekAccTransferButton)
+                        .addGap(33, 33, 33))))
         );
 
         cheAccTextBox1.setEditable(false);
@@ -279,9 +295,9 @@ public class CustomerGUI extends javax.swing.JFrame {
 
         cheAccTHInRangeButton1.setText("In Range");
 
-        cheAccTHDate0Field1.setText("mm/dd/yyyy");
+        cheAccTHDate0Field1.setText("yyyy-mm-dd");
 
-        cheAccTHDate1Field1.setText("mm/dd/yyyy");
+        cheAccTHDate1Field1.setText("yyyy-mm-dd");
 
         javax.swing.GroupLayout tHistoryCheAccPanelLayout = new javax.swing.GroupLayout(tHistoryCheAccPanel);
         tHistoryCheAccPanel.setLayout(tHistoryCheAccPanelLayout);
@@ -344,9 +360,9 @@ public class CustomerGUI extends javax.swing.JFrame {
                 .addContainerGap(53, Short.MAX_VALUE))
             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel2Layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addGap(0, 18, Short.MAX_VALUE)
                     .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
+                    .addGap(0, 19, Short.MAX_VALUE)))
         );
 
         jTabbedPane1.addTab("Checking Accounts", jPanel2);
@@ -483,6 +499,8 @@ public class CustomerGUI extends javax.swing.JFrame {
 
         savAccTHDate1Field.getAccessibleContext().setAccessibleName("");
 
+        savAccTransferButton1.setText("Transfer");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -499,7 +517,9 @@ public class CustomerGUI extends javax.swing.JFrame {
                                 .addGap(18, 18, 18)
                                 .addComponent(updateCurrentSavAccButton, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(251, 251, 251)
+                                .addGap(61, 61, 61)
+                                .addComponent(savAccTransferButton1)
+                                .addGap(108, 108, 108)
                                 .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 130, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -524,7 +544,11 @@ public class CustomerGUI extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addComponent(savAccTransferButton1)
+                                .addGap(14, 14, 14))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(39, 39, 39)
                         .addComponent(savAccTHistPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -682,6 +706,22 @@ public class CustomerGUI extends javax.swing.JFrame {
                 
         });
         
+        chekAccTransferButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                transferChekAcc(user);
+            }
+                
+        });
+        
+        savAccTransferButton1.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                transferSavAcc(user);
+            }
+                
+        });
+        
     }
     
     
@@ -690,19 +730,21 @@ public class CustomerGUI extends javax.swing.JFrame {
     //
     
     
+    
     //updates the savings accounts in the list
     public void updateSavingsAccList(Customer user){
         Iterator SAiter = user.getSASIter();
         while(SAiter.hasNext()){
             SavingsAccount sa = (SavingsAccount) SAiter.next();
             sAccList.addItem(sa.getName());
+            sAccList.getSelectedIndex();
         }
     }
     
     //updates the balance that is diplayed, but needs a action listener to call it
     public void updateSavingsAccBalanceDisp(Customer user){
-        String selected = (String) sAccList.getSelectedItem();
-        SavingsAccount acc = user.getSavAccByName(selected);
+        int indexOfAcc = sAccList.getSelectedIndex();
+        SavingsAccount acc = user.getSavingsAccounts().get(indexOfAcc);
         String disp = acc.currency.getSymbol() + " " + acc.getBalance();
         savAccBalanceDisplay.setText(disp);
         
@@ -711,11 +753,12 @@ public class CustomerGUI extends javax.swing.JFrame {
     //the method called in the action listener
     public void updateWorkingSavingsAcc(Customer user){
         this.updateSavingsAccBalanceDisp(user);
+        this.updateTHSavAcc(user);
     }
     
     public void depositSaAcc(Customer user){
-        String selected = (String) sAccList.getSelectedItem();
-        SavingsAccount acc = user.getSavAccByName(selected);
+        int indexOfAcc = sAccList.getSelectedIndex();
+        SavingsAccount acc = user.getSavingsAccounts().get(indexOfAcc);
         try{
             double inp = Double.parseDouble(interactionFieldSaAcc.getText());
             System.out.println(inp + " will be taken from the current account.");
@@ -729,8 +772,8 @@ public class CustomerGUI extends javax.swing.JFrame {
     }
     
     public void withdrawSaAcc(Customer user){
-        String selected = (String) sAccList.getSelectedItem();
-        SavingsAccount acc = user.getSavAccByName(selected);
+       int indexOfAcc = sAccList.getSelectedIndex();
+        SavingsAccount acc = user.getSavingsAccounts().get(indexOfAcc);
         try{
             double inp = Double.parseDouble(interactionFieldSaAcc.getText());
             System.out.println(inp + " will be added to the current account.");
@@ -742,6 +785,29 @@ public class CustomerGUI extends javax.swing.JFrame {
         }
         updateWorkingSavingsAcc(user);
         interactionFieldSaAcc.setText(" ");
+        
+    }
+    
+    public void updateTHSavAcc(Customer user){
+        savAccTextBox.setText(" ");
+        String th = "";
+        int indexOfAcc = sAccList.getSelectedIndex();
+        SavingsAccount acc = user.getSavingsAccounts().get(indexOfAcc);
+        
+        Iterator iter = acc.transactions.iterator();
+        while(iter.hasNext()){
+            Transaction t = (Transaction) iter.next();
+            th+= t.toString() + " \n";
+        }
+        savAccTextBox.setText(th);
+    }
+    
+    public void transferSavAcc(Customer user){
+        int indexOfAcc = chekAccList1.getSelectedIndex();
+        SavingsAccount acc = user.getSavingsAccounts().get(indexOfAcc);
+        transferGUI(acc,user,this);
+        
+        interactionFieldChekAcc1.setText(" ");
         
     }
     
@@ -765,8 +831,8 @@ public class CustomerGUI extends javax.swing.JFrame {
     
     //updates the balance that is diplayed, but needs a action listener to call it
     public void updateCheckingAccBalanceDisp(Customer user){
-        String selected = (String) chekAccList1.getSelectedItem();
-        CheckingAccount acc = user.getChekAccByName(selected);
+        int indexOfAcc = chekAccList1.getSelectedIndex();
+        CheckingAccount acc = user.getCheckingAccounts().get(indexOfAcc);
         String disp = acc.currency.getSymbol() + " " + acc.getBalance();
         chekAccBalanceDisplay1.setText(disp);
         
@@ -779,8 +845,10 @@ public class CustomerGUI extends javax.swing.JFrame {
     }
     
     public void depositChekAcc(Customer user){
-        String selected = (String) chekAccList1.getSelectedItem();
-        CheckingAccount acc = user.getChekAccByName(selected);
+        int indexOfAcc = chekAccList1.getSelectedIndex();
+        System.out.println(indexOfAcc);
+        CheckingAccount acc = user.getCheckingAccounts().get(indexOfAcc);
+        System.out.println(acc.toString());
         try{
             double inp = Double.parseDouble(interactionFieldChekAcc1.getText());
             System.out.println(inp + " will be taken from the current account.");
@@ -794,8 +862,8 @@ public class CustomerGUI extends javax.swing.JFrame {
     }
     
     public void withdrawChekAcc(Customer user){
-        String selected = (String) chekAccList1.getSelectedItem();
-        CheckingAccount acc = user.getChekAccByName(selected);
+        int indexOfAcc = chekAccList1.getSelectedIndex();
+        CheckingAccount acc = user.getCheckingAccounts().get(indexOfAcc);
         try{
             double inp = Double.parseDouble(interactionFieldChekAcc1.getText());
             System.out.println(inp + " will be added to the current account.");
@@ -810,11 +878,20 @@ public class CustomerGUI extends javax.swing.JFrame {
         
     }
     
+    public void transferChekAcc(Customer user){
+        int indexOfAcc = chekAccList1.getSelectedIndex();
+        CheckingAccount acc = user.getCheckingAccounts().get(indexOfAcc);
+        transferGUI(acc,user,this);
+        
+        interactionFieldChekAcc1.setText(" ");
+        
+    }
+    
     public void updateTHChekAcc(Customer user){
         cheAccTextBox1.setText(" ");
         String th = "";
-        String selected = (String) chekAccList1.getSelectedItem();
-        CheckingAccount acc = user.getChekAccByName(selected);
+        int indexOfAcc = chekAccList1.getSelectedIndex();
+        CheckingAccount acc = user.getCheckingAccounts().get(indexOfAcc);
         Iterator iter = acc.transactions.iterator();
         while(iter.hasNext()){
             Transaction t = (Transaction) iter.next();
@@ -823,13 +900,39 @@ public class CustomerGUI extends javax.swing.JFrame {
         cheAccTextBox1.setText(th);
     }
     
+    //general display and transaction history update method
+    public void updateAllDsipAndTH(Customer user){
+        this.updateworkingCheckingAcc(user);
+        this.updateWorkingSavingsAcc(user);
+    }
+    
     //just for testing
-    public static Customer getTestC(){
+    public static Bank getTestB(){
+        
         Customer tester = bank.Customer.createCustomer("Adam","Streich","astreich","12345");
         tester.createSavingsAccount("Acc1S", "USD");
         tester.createSavingsAccount("Acc2S", "USD");
         tester.createCheckingAccount("Acc1C", "USD");
         tester.createCheckingAccount("Acc2C", "USD");
+        
+        Manager temp = bank.Manager.createManager("Mr.", "Monopoly", "mrMono", "12345");
+        ArrayList cs = new ArrayList();
+        cs.add(tester);
+        Customers testers = new Customers(cs);
+        
+        Bank test = new Bank(testers, temp);
+        Bank.setCurrentDate(LocalDate.of(2020, 04, 28));
+        
+        return test;
+    }
+    public static Customer getTestC(){
+        
+        Customer tester = bank.Customer.createCustomer("Adam","Streich","astreich","12345");
+        tester.createSavingsAccount("Acc1S", "USD");
+        tester.createSavingsAccount("Acc2S", "USD");
+        tester.createCheckingAccount("Acc1C", "USD");
+        tester.createCheckingAccount("Acc2C", "USD");
+        
         
         return tester;
     }
@@ -863,11 +966,12 @@ public class CustomerGUI extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             //pull the customer from the data set
-            Customer tester = getTestC();
+            Bank tester = getTestB();
+            Customer test = getTestC();
             
             
             public void run() {
-                new CustomerGUI(tester).setVisible(true);
+                new CustomerGUI(test,tester).setVisible(true);
             }
         });
     }
@@ -885,6 +989,7 @@ public class CustomerGUI extends javax.swing.JFrame {
     private javax.swing.JLabel chekAccBalanceLabel1;
     private javax.swing.JComboBox<String> chekAccList1;
     private javax.swing.JLabel chekAccListLabel1;
+    private javax.swing.JButton chekAccTransferButton;
     private javax.swing.JButton depositChekAccButton1;
     private javax.swing.JButton depositSaAccButton;
     private javax.swing.JTextField interactionFieldChekAcc1;
@@ -920,6 +1025,7 @@ public class CustomerGUI extends javax.swing.JFrame {
     private javax.swing.JPanel savAccTHistPanel;
     private javax.swing.JTextArea savAccTextBox;
     private javax.swing.JLabel savAccTranHistLabel;
+    private javax.swing.JButton savAccTransferButton1;
     private javax.swing.JPanel tHistoryCheAccPanel;
     private javax.swing.JButton updateCurrentChekAccButton1;
     private javax.swing.JButton updateCurrentSavAccButton;
