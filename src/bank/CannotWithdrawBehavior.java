@@ -1,6 +1,6 @@
 package bank;
 
-public class CannotWithdrawBehavior extends WithdrawBehavior {
+public class    CannotWithdrawBehavior extends WithdrawBehavior {
     public CannotWithdrawBehavior(Account account) {
         super(account);
     }

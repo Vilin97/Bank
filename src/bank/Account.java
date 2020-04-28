@@ -14,14 +14,14 @@ abstract public class Account {
     protected WithdrawBehavior withdrawBehavior;
     protected DepositBehavior depositBehavior;
     protected TransferBehavior transferBehavior;
-    // protected EndOfMonthBehavior endOfMonthBehavior;
-    // TODO: implement interest behavior
+    protected EndOfMonthBehavior endOfMonthBehavior;
 
     private static int nextID = 0;
 
     public Account(int ID, String name, Transactions<Transaction> transactions,
                    double balance, Currency currency,
-                   WithdrawBehavior withdrawBehavior, DepositBehavior depositBehavior, TransferBehavior transferBehavior) {
+                   WithdrawBehavior withdrawBehavior, DepositBehavior depositBehavior,
+                   TransferBehavior transferBehavior, EndOfMonthBehavior endOfMonthBehavior) {
         this.ID = ID;
         this.name = name;
         this.transactions = transactions;
@@ -30,6 +30,7 @@ abstract public class Account {
         this.withdrawBehavior = withdrawBehavior;
         this.depositBehavior = depositBehavior;
         this.transferBehavior = transferBehavior;
+        this.endOfMonthBehavior = endOfMonthBehavior;
         nextID += 1;
     }
 
@@ -63,6 +64,10 @@ abstract public class Account {
         return transactions.getTransactionsByTimePeriod(begin, end);
     }
 
+    public void doEndOfMonth(){
+        endOfMonthBehavior.doEndOfMonth();
+    }
+
     public void withdraw(double amount) {
         withdrawBehavior.withdraw(amount);
     }
@@ -79,9 +84,9 @@ abstract public class Account {
     public String toString() {
         return this.getClass().getName()+
                 ", name='" + name + '\'' +
-                ", transactions=" + transactions +
                 ", balance=" + balance +
                 ", currency=" + currency +
+                ", transactions=" + transactions +
                 '}';
     }
 
@@ -120,5 +125,14 @@ abstract public class Account {
 
     public void setCurrency(Currency currency) {
         this.currency = currency;
+    }
+
+    public void changeBalanceBy(double amount){
+        // no input checking
+        setBalance(getBalance() + amount);
+    }
+
+    public int getID() {
+        return ID;
     }
 }

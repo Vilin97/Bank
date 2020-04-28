@@ -79,4 +79,9 @@ public class Accounts<A extends Account> implements Collection<A> {
     public void clear() {
         accounts.clear();
     }
+
+    public A get(int i){
+        return accounts.get(i);
+    }
+
 }

@@ -8,6 +8,7 @@ public class CheckingAccount extends Account {
         this.withdrawBehavior = new CanWithdrawBehavior(this);
         this.depositBehavior = new CanDepositBehavior(this);
         this.transferBehavior = new UncheckedTransferBehavior(this);
+        this.endOfMonthBehavior = new EndOfMonthNoBehavior(this);
     }
 
     public CheckingAccount(String name, Currency currency) {
