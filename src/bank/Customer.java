@@ -188,11 +188,11 @@ public class Customer extends User {
     public int numSavAcc(){
         return this.savingsAccounts.size();
     }
-    
+    /*
     public int numLoans(){
         return this.creditAccounts.size();
     }
-    
+    */
     //geters for iterators for all the collection accounts
     public Iterator getSASIter(){
         Iterator iter = this.savingsAccounts.iterator();
@@ -244,7 +244,7 @@ public class Customer extends User {
         String rt = " ";
         rt = "Name: " + this.getCreds().getName().toString() + " | Username: " + this.getCreds().getUname().toString() 
                 + " | # of Savings Acc: " + this.numSavAcc() + " | # of Checking Acc: " + this.numChecAcc()
-                + " | # of Securities Acc: " + this.numSecAcc() + " | # of Loans: " + this.numLoans();
+               ;
         return rt;
     }
     
