@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="2dc3e741-f237-4da0-8a94-ca167ff386a7" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/bank/ReadFile.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/bank/Account.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/bank/Account.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/bank/AccountFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/bank/AccountFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/bank/Accounts.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/bank/Accounts.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/bank/Bank.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/bank/Bank.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/bank/CanDepositBehavior.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/bank/CanDepositBehavior.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/bank/CanWithdrawBehavior.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/bank/CanWithdrawBehavior.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/bank/CannotDepositBehavior.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/bank/CannotDepositBehavior.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/bank/CannotWithdrawBehavior.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/bank/CannotWithdrawBehavior.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/bank/CheckedTransferBehavior.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/bank/CheckedTransferBehavior.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/bank/CheckingAccount.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/bank/CheckingAccount.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/bank/Constants.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/bank/Constants.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/bank/Credentials.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/bank/Credentials.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/bank/CreditAccount.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/bank/CreditAccount.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/bank/Customer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/bank/Customer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/bank/DepositBehavior.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/bank/DepositBehavior.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/bank/GUI.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/bank/GUI.form" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/bank/GUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/bank/GUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/bank/General.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/bank/General.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/bank/IOTools.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/bank/IOTools.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/bank/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/bank/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/bank/Manager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/bank/Manager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/bank/Name.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/bank/Name.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/bank/Password.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/bank/Password.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/bank/Permisions.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/bank/Permisions.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/bank/ReadFile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/bank/ReadFileQuest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/bank/SavingsAccount.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/bank/SavingsAccount.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/bank/SecuritiesAccount.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/bank/SecuritiesAccount.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/bank/Stock.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/bank/Stock.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/bank/Stocks.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/bank/Stocks.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/bank/Transaction.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/bank/Transaction.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/bank/TransactionDeposit.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/bank/TransactionDeposit.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/bank/TransactionTransferIn.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/bank/TransactionTransferIn.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/bank/TransactionTransferOut.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/bank/TransactionTransferOut.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/bank/TransactionWithdrawal.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/bank/TransactionWithdrawal.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/bank/Transactions.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/bank/Transactions.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/bank/TransferBehavior.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/bank/TransferBehavior.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/bank/UName.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/bank/UName.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/bank/UncheckedTransferBehavior.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/bank/UncheckedTransferBehavior.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/bank/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/bank/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/bank/WithdrawBehavior.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/bank/WithdrawBehavior.java" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="package-info" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="IgnoredFileRootStore">
+    <option name="generatedRoots">
+      <set>
+        <option value="$PROJECT_DIR$/.idea" />
+      </set>
+    </option>
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="importingSettings">
+      <MavenImportingSettings>
+        <option name="importAutomatically" value="true" />
+      </MavenImportingSettings>
+    </option>
+  </component>
+  <component name="ProjectId" id="1auXlCvOYebs9wMcLcSsza3QQAH" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
+    <property name="project.structure.last.edited" value="Artifacts" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.14749263" />
+    <property name="settings.editor.selected.configurable" value="editor.preferences.import" />
+  </component>
+  <component name="RunManager">
+    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="ALTERNATIVE_JRE_PATH" value="13" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
+      <option name="MAIN_CLASS_NAME" value="bank.Main" />
+      <module name="Bank" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="bank.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="Application" factoryName="Application">
+      <option name="ALTERNATIVE_JRE_PATH" value="13" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
+      <module name="Bank" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.Main" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="2dc3e741-f237-4da0-8a94-ca167ff386a7" name="Default Changelist" comment="" />
+      <created>1587586601597</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1587586601597</updated>
+      <workItem from="1587586605836" duration="23147000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="880" y="397" key="#Project_Structure" timestamp="1587749292261">
+      <screen x="0" y="23" width="2560" height="1417" />
+    </state>
+    <state x="880" y="397" key="#Project_Structure/0.23.2560.1417@0.23.2560.1417" timestamp="1587749292261" />
+    <state x="327" y="185" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1587749058519">
+      <screen x="0" y="23" width="2560" height="1417" />
+    </state>
+    <state x="184" y="123" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.23.1440.877@0.23.1440.877" timestamp="1587588436130" />
+    <state x="327" y="185" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.23.2560.1417@0.23.2560.1417" timestamp="1587749058519" />
+    <state x="461" y="305" key="#com.intellij.ide.actions.ChooseComponentsToExportDialog" timestamp="1587590323047">
+      <screen x="0" y="23" width="1440" height="877" />
+    </state>
+    <state x="461" y="305" key="#com.intellij.ide.actions.ChooseComponentsToExportDialog/0.23.1440.877@0.23.1440.877" timestamp="1587590323047" />
+    <state x="511" y="273" key="#com.intellij.ide.util.frameworkSupport.AddFrameworkSupportDialog" timestamp="1587924222542">
+      <screen x="0" y="23" width="1440" height="877" />
+    </state>
+    <state x="511" y="273" key="#com.intellij.ide.util.frameworkSupport.AddFrameworkSupportDialog/0.23.1440.877@0.23.1440.877" timestamp="1587924222542" />
+    <state x="909" y="427" key="#com.intellij.ide.util.frameworkSupport.AddFrameworkSupportDialog/0.23.2560.1417@0.23.2560.1417" timestamp="1587747691098" />
+    <state x="569" y="357" key="#com.intellij.ide.util.projectWizard.JdkChooserPanel.MyDialog" timestamp="1587586740690">
+      <screen x="0" y="23" width="1440" height="877" />
+    </state>
+    <state x="569" y="357" key="#com.intellij.ide.util.projectWizard.JdkChooserPanel.MyDialog/0.23.1440.877@0.23.1440.877" timestamp="1587586740690" />
+    <state x="221" y="63" key="SettingsEditor" timestamp="1587923583380">
+      <screen x="0" y="23" width="1440" height="877" />
+    </state>
+    <state x="221" y="63" key="SettingsEditor/0.23.1440.877@0.23.1440.877" timestamp="1587923583380" />
+    <state x="393" y="88" key="SettingsEditor/0.23.2560.1417@0.23.2560.1417" timestamp="1587748910879" />
+    <state x="397" y="294" key="com.intellij.ide.util.TipDialog" timestamp="1587586607315">
+      <screen x="0" y="23" width="1440" height="877" />
+    </state>
+    <state x="397" y="294" key="com.intellij.ide.util.TipDialog/0.23.1440.877@0.23.1440.877" timestamp="1587586607315" />
+    <state x="378" y="218" width="683" height="486" key="find.popup" timestamp="1588010736918">
+      <screen x="0" y="23" width="1440" height="877" />
+    </state>
+    <state x="378" y="218" width="683" height="486" key="find.popup/0.23.1440.877@0.23.1440.877" timestamp="1588010736918" />
+    <state x="120" y="109" width="1215" height="786" key="find.popup/0.23.2560.1417@0.23.2560.1417" timestamp="1587919125867" />
+    <state x="194" y="128" key="new project wizard" timestamp="1587923954328">
+      <screen x="0" y="23" width="1440" height="877" />
+    </state>
+    <state x="194" y="128" key="new project wizard/0.23.1440.877@0.23.1440.877" timestamp="1587923954328" />
+    <state x="709" y="316" key="new project wizard/0.23.2560.1417@0.23.2560.1417" timestamp="1587748624740" />
+  </component>
+</project>
