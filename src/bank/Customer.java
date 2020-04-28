@@ -133,6 +133,11 @@ public class Customer extends User {
         return iter;
     }
     
+    public Iterator getCEKAIter(){
+        Iterator iter = this.checkingAccounts.iterator();
+        return iter;
+    }
+    
     public SavingsAccount getSavAccByName(String nm){
         SavingsAccount rt = null;
         Iterator SAiter = this.getSASIter();
@@ -146,9 +151,27 @@ public class Customer extends User {
         return rt;
     }
     
+    public CheckingAccount getChekAccByName(String nm){
+        CheckingAccount rt = null;
+        Iterator SAiter = this.getCEKAIter();
+        while(SAiter.hasNext()){
+            CheckingAccount sa = (CheckingAccount) SAiter.next();
+            if(sa.name.equals(nm)){
+                rt = sa;
+            }
+        }
+        
+        return rt;
+    }
+    
     //public methods for creating accounts
     public void createSavingsAccount(String name, String currency){
         openSavingsAccount( name, currency);
+    }
+    
+    //public methods for creating accounts
+    public void createCheckingAccount(String name, String currency){
+        openCheckingAccount( name, currency);
     }
     
     public String toString(){

@@ -392,6 +392,8 @@ public class CustomerGUI extends javax.swing.JFrame {
     public void initCustom(Customer user){
         this.updateSavingsAccList(user);
         this.updateSavingsAccBalanceDisp(user);
+        this.updateCheckingAccList(user);
+        this.updateCheckingAccBalanceDisp(user);
         
         
     }
@@ -525,9 +527,9 @@ public class CustomerGUI extends javax.swing.JFrame {
     
     //updates the Checking accounts in the list
     public void updateCheckingAccList(Customer user){
-        Iterator SAiter = user.getSASIter();
-        while(SAiter.hasNext()){
-            SavingsAccount sa = (SavingsAccount) SAiter.next();
+        Iterator CAiter = user.getCEKAIter();
+        while(CAiter.hasNext()){
+            CheckingAccount sa = (CheckingAccount) CAiter.next();
             chekAccList1.addItem(sa.getName());
         }
     }
@@ -535,7 +537,7 @@ public class CustomerGUI extends javax.swing.JFrame {
     //updates the balance that is diplayed, but needs a action listener to call it
     public void updateCheckingAccBalanceDisp(Customer user){
         String selected = (String) chekAccList1.getSelectedItem();
-        SavingsAccount acc = user.getSavAccByName(selected);
+        CheckingAccount acc = user.getChekAccByName(selected);
         String disp = acc.currency.getSymbol() + " " + acc.getBalance();
         chekAccBalanceDisplay1.setText(disp);
         
@@ -548,7 +550,7 @@ public class CustomerGUI extends javax.swing.JFrame {
     
     public void depositChekAcc(Customer user){
         String selected = (String) chekAccList1.getSelectedItem();
-        SavingsAccount acc = user.getSavAccByName(selected);
+        CheckingAccount acc = user.getChekAccByName(selected);
         try{
             double inp = Double.parseDouble(interactionFieldChekAcc1.getText());
             System.out.println(inp + " will be taken from the current account.");
@@ -557,13 +559,13 @@ public class CustomerGUI extends javax.swing.JFrame {
             System.out.println(ex.getMessage());
             System.out.println("User tried to enter not a double");
         }
-        updateWorkingSavingsAcc(user);
+        updateworkingCheckingAcc(user);
         interactionFieldChekAcc1.setText(" ");
     }
     
     public void withdrawChekAcc(Customer user){
         String selected = (String) chekAccList1.getSelectedItem();
-        SavingsAccount acc = user.getSavAccByName(selected);
+        CheckingAccount acc = user.getChekAccByName(selected);
         try{
             double inp = Double.parseDouble(interactionFieldChekAcc1.getText());
             System.out.println(inp + " will be added to the current account.");
@@ -573,7 +575,7 @@ public class CustomerGUI extends javax.swing.JFrame {
             System.out.println(ex.getMessage());
             System.out.println("User tried to enter not a double");
         }
-        updateWorkingSavingsAcc(user);
+        updateworkingCheckingAcc(user);
         interactionFieldChekAcc1.setText(" ");
         
     }
@@ -581,8 +583,10 @@ public class CustomerGUI extends javax.swing.JFrame {
     //just for testing
     public static Customer getTestC(){
         Customer tester = bank.Customer.createCustomer("Adam","Streich","astreich","12345");
-        tester.createSavingsAccount("Acc1", "USD");
-        tester.createSavingsAccount("Acc2", "USD");
+        tester.createSavingsAccount("Acc1S", "USD");
+        tester.createSavingsAccount("Acc2S", "USD");
+        tester.createCheckingAccount("Acc1C", "USD");
+        tester.createCheckingAccount("Acc2C", "USD");
         
         return tester;
     }
