@@ -27,14 +27,25 @@ public class Customer extends User {
     private Accounts<SavingsAccount> savingsAccounts;
     private Accounts<CheckingAccount> checkingAccounts;
     private Accounts<SecuritiesAccount> securitiesAccounts;
-    private Accounts<CreditAccount> creditAccounts;
+    private Accounts<Loan> loans;
+    private Accounts<PendingLoan> pendingLoans;
     
     public Customer(Credentials cd) {
         super(cd);
         this.savingsAccounts = new Accounts<SavingsAccount>();
         this.checkingAccounts = new Accounts<CheckingAccount>();
         this.securitiesAccounts = new Accounts<SecuritiesAccount>();
-        this.creditAccounts = new Accounts<CreditAccount>();
+        this.loans = new Accounts<Loan>();
+        this.pendingLoans = new Accounts<PendingLoan>();
+    }
+
+    public Customer() {
+        // customer with no credential, for testing
+        this.savingsAccounts = new Accounts<SavingsAccount>();
+        this.checkingAccounts = new Accounts<CheckingAccount>();
+        this.securitiesAccounts = new Accounts<SecuritiesAccount>();
+        this.loans = new Accounts<Loan>();
+        this.pendingLoans = new Accounts<PendingLoan>();
     }
 
     /*
@@ -45,7 +56,7 @@ public class Customer extends User {
     
     private boolean isAnAccountOfCustomer(Account account){
         return savingsAccounts.contains(account) || checkingAccounts.contains(account) ||
-                securitiesAccounts.contains(account) || creditAccounts.contains(account);
+                securitiesAccounts.contains(account) || loans.contains(account);
     }
 
     private void withdraw(double amount, Account account) {
@@ -69,9 +80,12 @@ public class Customer extends User {
         return rt;
     }
 
-    private void openCreditAccount(String name, String currency) {
-        // TODO: approve it?
-        creditAccounts.add(AccountFactory.getAccount("credit", name, currency));
+    private void requestLoan(String name, String currency, double amountRequest) {
+        // creates a pending loan
+        // a pending loan becomes a loan if approved
+        PendingLoan pendingLoan = AccountFactory.getAccount("loan", name, currency);
+        pendingLoan.setBalance(-amountRequest);
+        pendingLoans.add(pendingLoan);
     }
 
     private void openCheckingAccount(String name, String currency) {
@@ -93,6 +107,56 @@ public class Customer extends User {
             account.transfer(securities, amount);
             securitiesAccounts.add(securities);
         }
+    }
+
+    public Accounts<Account> getAllAccounts(){
+        Accounts<Account> accounts = new Accounts<>();
+        accounts.addAll(savingsAccounts);
+        accounts.addAll(checkingAccounts);
+        accounts.addAll(securitiesAccounts);
+        accounts.addAll(loans);
+        accounts.addAll(pendingLoans);
+        return accounts;
+    }
+
+    public Accounts<SavingsAccount> getSavingsAccounts() {
+        return savingsAccounts;
+    }
+
+    public void setSavingsAccounts(Accounts<SavingsAccount> savingsAccounts) {
+        this.savingsAccounts = savingsAccounts;
+    }
+
+    public Accounts<CheckingAccount> getCheckingAccounts() {
+        return checkingAccounts;
+    }
+
+    public void setCheckingAccounts(Accounts<CheckingAccount> checkingAccounts) {
+        this.checkingAccounts = checkingAccounts;
+    }
+
+    public Accounts<SecuritiesAccount> getSecuritiesAccounts() {
+        return securitiesAccounts;
+    }
+
+    public void setSecuritiesAccounts(Accounts<SecuritiesAccount> securitiesAccounts) {
+        this.securitiesAccounts = securitiesAccounts;
+    }
+
+    public Accounts<Loan> getLoans() {
+        return loans;
+    }
+
+    public void setLoans(Accounts<Loan> loans) {
+        this.loans = loans;
+    }
+
+    public Accounts<PendingLoan> getPendingLoans() {
+        return pendingLoans;
+    }
+
+    public void setPendingLoans(Accounts<PendingLoan> pendingLoans) {
+        this.pendingLoans = pendingLoans;
     }
 
     @Override

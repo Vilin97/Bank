@@ -10,7 +10,7 @@ public class AccountFactory {
         A account;
         if (type.equals("savings")) account = (A) new SavingsAccount(name, currency);
         else if (type.equals("securities")) account = (A) new SecuritiesAccount(name, currency);
-        else if(type.equals("credit")) account = (A) new CreditAccount(name, currency);
+        else if(type.equals("loan")) account = (A) new PendingLoan(name, currency);
         else account = (A) new CheckingAccount(name, currency);
         return account;
     }

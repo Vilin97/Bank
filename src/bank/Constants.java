@@ -17,6 +17,10 @@ public class Constants {
     private static double fundsToTransferToSecuritiesAccount = 1000;
     private static double fundsToMaintainInSavingsToOpenSecurities = 2500;
 
+    private static double savingsAccountInterestThresholdInUSD = 1000;
+    private static double savingsAccountInterestRate = 0.01;
+    private static double loanInterestRate = 0.05;
+
     private static double conversionRateEUR = 1.2;
     private static double conversionRateRUB = 1/80.0;
 
@@ -84,7 +88,47 @@ public class Constants {
         Constants.fundsToMaintainInSavingsToOpenSecurities = fundsToMaintainInSavingsToOpenSecurities;
     }
 
-    public static double exchangeRateToUSD(Currency c) {
+    public static double getSavingsAccountInterestThresholdInUSD() {
+        return savingsAccountInterestThresholdInUSD;
+    }
+
+    public static void setSavingsAccountInterestThresholdInUSD(double savingsAccountInterestThresholdInUSD) {
+        Constants.savingsAccountInterestThresholdInUSD = savingsAccountInterestThresholdInUSD;
+    }
+
+    public static double getSavingsAccountInterestRate() {
+        return savingsAccountInterestRate;
+    }
+
+    public static void setSavingsAccountInterestRate(double savingsAccountInterestRate) {
+        Constants.savingsAccountInterestRate = savingsAccountInterestRate;
+    }
+
+    public static double getLoanInterestRate() {
+        return loanInterestRate;
+    }
+
+    public static void setLoanInterestRate(double loanInterestRate) {
+        Constants.loanInterestRate = loanInterestRate;
+    }
+
+    public static double getConversionRateEUR() {
+        return conversionRateEUR;
+    }
+
+    public static void setConversionRateEUR(double conversionRateEUR) {
+        Constants.conversionRateEUR = conversionRateEUR;
+    }
+
+    public static double getConversionRateRUB() {
+        return conversionRateRUB;
+    }
+
+    public static void setConversionRateRUB(double conversionRateRUB) {
+        Constants.conversionRateRUB = conversionRateRUB;
+    }
+
+    private static double exchangeRateToUSD(Currency c) {
         // returns exchange rate from c to USD (i.e. how many dollars 1 unit of c is)
         // TODO
         if (c.equals(Currency.getInstance("EUR"))) return conversionRateEUR;

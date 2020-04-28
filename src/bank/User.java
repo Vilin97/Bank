@@ -6,6 +6,8 @@ package bank;
  * and open the template in the editor.
  */
 
+import java.util.Objects;
+
 /**
  *
  * @author adamstreich
@@ -20,5 +22,23 @@ public abstract class User implements Permisions {
         ID = nextID;
         nextID += 1;
     }
-    
+
+    public User(){
+        // no credentials for testing
+        ID = nextID;
+        nextID += 1;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return ID == user.ID;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(ID);
+    }
 }

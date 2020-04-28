@@ -1,5 +1,8 @@
 package bank;
 
+import java.time.LocalDate;
+import java.util.Currency;
+
 import static bank.Credentials.createCredentials;
 
 /*
@@ -13,10 +16,15 @@ import static bank.Credentials.createCredentials;
  * @author adamstreich
  */
 public class Manager extends User {
-    //should create a manager account to hold his money
-    
-    public Manager(Credentials cd) {
+    private ManagerAccount account;
+
+    public Manager(Credentials cd, ManagerAccount managerAccount) {
         super(cd);
+        this.account = managerAccount;
+    }
+
+    public Manager(Credentials cd) {
+        this(cd, new ManagerAccount(Currency.getInstance("USD")));
     }
     
     public static Manager createManager(String fn, String ln, String un, String pw){
@@ -36,5 +44,32 @@ public class Manager extends User {
     public boolean sudoUser() {
         return true;
     }
-    
+
+    private void approveLoan(Customer customer, PendingLoan pendingLoan){
+        // approve the pending loan
+        if (account.getBalanceUSD() >= pendingLoan.getBalanceUSD()){
+            customer.getLoans().add(new Loan(pendingLoan));
+            customer.getPendingLoans().remove(pendingLoan);
+            account.changeBalanceBy(-pendingLoan.getBalance());
+        }
+    }
+
+    private void disapproveLoan(Customer customer, PendingLoan pendingLoan){
+        // disapprove the pending loan
+        customer.getPendingLoans().remove(pendingLoan);
+    }
+
+    public void receiveMoney(double amount){
+        if (amount > 0){
+            account.changeBalanceBy(amount);
+        }
+    }
+
+    public ManagerAccount getAccount() {
+        return account;
+    }
+
+    public void setAccount(ManagerAccount account) {
+        this.account = account;
+    }
 }

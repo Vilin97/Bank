@@ -11,6 +11,7 @@ public class SecuritiesAccount extends Account {
         this.withdrawBehavior = new CannotWithdrawBehavior(this);
         this.depositBehavior = new CannotDepositBehavior(this);
         this.transferBehavior = new UncheckedTransferBehavior(this);
+        this.endOfMonthBehavior = new EndOfMonthNoBehavior(this);
 
         this.startingAmount = startingAmount;
         this.stocks = stocks;

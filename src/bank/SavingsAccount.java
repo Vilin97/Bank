@@ -8,6 +8,7 @@ public class SavingsAccount extends Account {
         this.withdrawBehavior = new CanWithdrawBehavior(this);
         this.depositBehavior = new CanDepositBehavior(this);
         this.transferBehavior = new UncheckedTransferBehavior(this);
+        this.endOfMonthBehavior = new EndOfMonthInterestBehavior(this);
     }
 
     public SavingsAccount(String name, Currency currency) {
