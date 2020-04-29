@@ -140,11 +140,13 @@ public class Constants {
         return exchangeRateToUSD(from)*amount;
     }
 
-    public static double exchangeCurrency(Currency from, Currency to, double amount){
-        double dollarsEquivalent = exchangeRateToUSD(from)*amount;
-        double res = dollarsEquivalent/exchangeRateToUSD(to);
-        return res;
+    public static double exchangeUSDtoCurrency(Currency to, double amount){
+        return amount/exchangeRateToUSD(to);
     }
 
+    public static double exchangeCurrency(Currency from, Currency to, double amount){
+        double dollarsEquivalent = exchangeCurrencyToUSD(from, amount);
+        return exchangeUSDtoCurrency(to, dollarsEquivalent);
+    }
 
 }

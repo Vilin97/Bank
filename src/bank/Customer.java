@@ -9,7 +9,7 @@ import java.util.Iterator;
 //        Create savings account -- done
 //        Create securities account -- done
 //        Close an account (where does the money go?)
-//        Request loan
+//        Request loan -- done
 //        Deposit cash to an account -- done
 //        Withdraw money from a checking account -- done
 //        View transactions for an account (for a time period) -- done
@@ -17,7 +17,7 @@ import java.util.Iterator;
 //        Buy stock
 //        Sell stock
 //        Play on the stock market (repeatedly buy and sell stocks)
-//        See realized profit from the stock market
+//        See realized profit from the stock market -- done (view balance on securities account)
 //        See unrealized profit from the stock market
 
 /**

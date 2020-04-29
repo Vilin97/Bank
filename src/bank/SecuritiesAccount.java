@@ -3,7 +3,7 @@ package bank;
 import java.util.Currency;
 
 public class SecuritiesAccount extends Account {
-    private double startingAmount;
+    private final double startingAmount;
     private Stocks<Stock> stocks;
 
     public SecuritiesAccount(String name, Transactions transactions, double balance, Currency currency, double startingAmount, Stocks stocks) {
@@ -32,5 +32,33 @@ public class SecuritiesAccount extends Account {
     public double getUnrealizedProfit() {
         // TODO
         return 0;
+    }
+
+    public boolean canBuy(double price){
+        return getBalanceUSD() >= price;
+    }
+
+    public void getStock(Stock stock){
+        stocks.add(stock);
+    }
+
+    public void payUSD(double amount) {
+        setBalanceUSD(getBalanceUSD() - amount);
+    }
+
+    public void receiveUSD(double amount){
+        setBalanceUSD(getBalanceUSD() + amount);
+    }
+
+    public double getStartingAmount() {
+        return startingAmount;
+    }
+
+    public Stocks<Stock> getStocks() {
+        return stocks;
+    }
+
+    public void setStocks(Stocks<Stock> stocks) {
+        this.stocks = stocks;
     }
 }

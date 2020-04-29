@@ -71,4 +71,19 @@ public class Stocks<S extends Stock> implements Collection<S> {
     public void clear() {
         stocks.clear();
     }
+
+    public boolean hasStock(String name){
+        for (S s:stocks) {
+            if (s.getName().equals(name)) return true;
+        }
+        return false;
+    }
+
+    public S getStock(String name){
+        for (S s:stocks) {
+            if (s.getName().equals(name)) return s;
+        }
+        return (S) new Stock("");
+    }
+
 }

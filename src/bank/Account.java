@@ -98,17 +98,22 @@ abstract public class Account {
         this.name = name;
     }
 
-    public Transactions getTransactions() {
+    public Transactions<Transaction> getTransactions() {
         return transactions;
     }
 
-    public void setTransactions(Transactions transactions) {
+    public void setTransactions(Transactions<Transaction> transactions) {
         this.transactions = transactions;
     }
 
     public double getBalanceUSD() {
         // get balance in USD equivalent
         return Constants.exchangeCurrencyToUSD(currency, balance);
+    }
+
+    public void setBalanceUSD(double balance){
+        // set balance in USD equivalent
+        setBalance(Constants.exchangeUSDtoCurrency(getCurrency(), balance));
     }
 
     public double getBalance() {
