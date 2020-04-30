@@ -21,17 +21,26 @@ public class SecuritiesAccount extends Account {
         this(name,new Transactions(), 0, currency, startingAmount, new Stocks());
     }
 
-    public SecuritiesAccount(String name, Currency currency) {
-        this(name, currency, 0);
-    }
-
     public double getRealizedProfit() {
         return getBalance() - startingAmount;
     }
 
-    public double getUnrealizedProfit() {
-        // TODO
-        return 0;
+    public double getUnrealizedProfit(StockMarket stockMarket) {
+        // disregards stocks for which there is no price
+        double total = 0;
+        for (Stock stock : stocks){
+            if (stockMarket.getPrices().containsKey(stock.getName()))
+            total += stockMarket.getPrices().get(stock.getName());
+        }
+        return Constants.exchangeUSDtoCurrency(getCurrency(), total) + getBalance() - startingAmount;
+    }
+
+    @Override
+    public String toString() {
+        return super.toString() +
+                ", startingAmount=" + startingAmount +
+                ", stocks=" + stocks +
+                '}';
     }
 
     public boolean canBuy(double price){

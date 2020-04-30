@@ -1,10 +1,8 @@
 package bank;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Iterator;
+import java.util.*;
 
-public class Accounts<A extends Account> implements Collection<A> {
+public class Accounts<A extends Account> implements List<A> {
     protected ArrayList<A> accounts;
 
     public Accounts(ArrayList<A> accounts) {
@@ -80,8 +78,54 @@ public class Accounts<A extends Account> implements Collection<A> {
         accounts.clear();
     }
 
-    public A get(int i){
-        return accounts.get(i);
+    @Override
+    public boolean addAll(int index, Collection<? extends A> c) {
+        return accounts.addAll(index, c);
+    }
+
+    @Override
+    public A set(int index, A element) {
+        return accounts.set(index, element);
+    }
+
+    @Override
+    public void add(int index, A element) {
+        accounts.add(index, element);
+    }
+
+    @Override
+    public A remove(int index) {
+        return accounts.remove(index);
+    }
+
+    @Override
+    public int indexOf(Object o) {
+        return accounts.indexOf(o);
+    }
+
+    @Override
+    public int lastIndexOf(Object o) {
+        return accounts.lastIndexOf(o);
+    }
+
+    @Override
+    public ListIterator<A> listIterator() {
+        return accounts.listIterator();
+    }
+
+    @Override
+    public ListIterator<A> listIterator(int index) {
+        return accounts.listIterator(index);
+    }
+
+    @Override
+    public List<A> subList(int fromIndex, int toIndex) {
+        return accounts.subList(fromIndex, toIndex);
+    }
+
+    @Override
+    public A get(int index) {
+        return accounts.get(index);
     }
 
     public A getByID(int ID) throws NoSuchFieldError{

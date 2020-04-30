@@ -1,6 +1,7 @@
 package bank;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Currency;
 
 import static bank.Credentials.createCredentials;
@@ -17,17 +18,15 @@ import static bank.Credentials.createCredentials;
  */
 public class Manager extends User {
     private ManagerAccount account;
-    private Bank bank;
 
-    public Manager(Credentials cd, ManagerAccount managerAccount, Bank bank) {
+    public Manager(Credentials cd, ManagerAccount managerAccount) {
         super(cd);
         this.account = managerAccount;
-        this.bank = bank;
     }
 
     public Manager(Credentials cd) {
-        this(cd, new ManagerAccount(Currency.getInstance("USD")), new Bank());
-        this.bank.setManager(this);
+        this(cd, new ManagerAccount(Currency.getInstance("USD")));
+        Bank.setManager(this);
     }
     
     public static Manager createManager(String fn, String ln, String un, String pw){
@@ -43,11 +42,23 @@ public class Manager extends User {
         return rt;
     }
 
+    public void addNewStock(String name, double price, int numberOfStocks){
+        changeStockPrice(name, price);
+        Stocks<Stock> stocks = Bank.getStockMarket().getStocks();
+        for (int i = 0; i < numberOfStocks; i++) {
+            stocks.add(new Stock(name));
+        }
+    }
+
+    public void changeStockPrice(String name, double price){
+        Bank.getStockMarket().setStockPrice(name, price);
+    }
+
     public void moveTimeToDate(LocalDate date){
-        int numMonths = date.getMonthValue() - Bank.getCurrentDate().getMonthValue() + 12*(date.getYear() - bank.getCurrentDate().getYear());
+        int numMonths = date.getMonthValue() - Bank.getCurrentDate().getMonthValue() + 12*(date.getYear() - Bank.getCurrentDate().getYear());
         if (Bank.getCurrentDate().compareTo(date) < 0 && numMonths > 0){
             Bank.setCurrentDate(date);
-            for (Customer customer:bank.getCustomers()) {
+            for (Customer customer:Bank.getCustomers()) {
                 for (Account account:customer.getAllAccounts()) {
                     for (int i = 0; i < numMonths; i++) {
                         account.doEndOfMonth();
@@ -90,11 +101,4 @@ public class Manager extends User {
         this.account = account;
     }
 
-    public Bank getBank() {
-        return bank;
-    }
-
-    public void setBank(Bank bank) {
-        this.bank = bank;
-    }
 }

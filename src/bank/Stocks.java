@@ -7,6 +7,21 @@ import java.util.Iterator;
 public class Stocks<S extends Stock> implements Collection<S> {
     private ArrayList<S> stocks;
 
+    public Stocks(ArrayList<S> stocks) {
+        this.stocks = stocks;
+    }
+
+    public Stocks() {
+        this(new ArrayList<>());
+    }
+
+    @Override
+    public String toString() {
+        return "Stocks{" +
+                "stocks=" + stocks +
+                '}';
+    }
+
     @Override
     public int size() {
         return stocks.size();

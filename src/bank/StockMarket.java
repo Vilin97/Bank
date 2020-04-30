@@ -1,5 +1,6 @@
 package bank;
 
+import java.util.HashMap;
 import java.util.Map;
 
 //    Buy stock from a customer
@@ -15,6 +16,10 @@ public class StockMarket {
     public StockMarket(Stocks<Stock> stocks, Map<String, Double> prices) {
         this.stocks = stocks;
         this.prices = prices;
+    }
+
+    public StockMarket() {
+        this(new Stocks<Stock>(), new HashMap<String, Double>());
     }
 
     public void buyStock(String name, SecuritiesAccount securitiesAccount){
@@ -39,18 +44,21 @@ public class StockMarket {
         } else System.out.println("Cannot sell stock "+ name);
     }
 
-    private boolean hasStock(String name){
+    public boolean hasStock(String name){
         return stocks.hasStock(name) && prices.containsKey(name);
     }
 
-    private double getStockPrice(String name) {
+    public double getStockPrice(String name) {
         return prices.get(name);
     }
 
-    private double getStockPrice(Stock stock){
+    public double getStockPrice(Stock stock){
         return prices.get(stock.getName());
     }
 
+    public void setStockPrice(String name, double price){
+        prices.put(name, price);
+    }
 
     public Stocks<Stock> getStocks() {
         return stocks;

@@ -2,6 +2,7 @@ package bank;
 
 import static bank.Credentials.createCredentials;
 import java.util.ArrayList;
+import java.util.Currency;
 import java.util.Iterator;
 
 //A customer class must have the following functions:
@@ -14,8 +15,8 @@ import java.util.Iterator;
 //        Withdraw money from a checking account -- done
 //        View transactions for an account (for a time period) -- done
 //        View balance in an account -- done (just access the account)
-//        Buy stock
-//        Sell stock
+//        Buy stock -- done
+//        Sell stock -- done
 //        Play on the stock market (repeatedly buy and sell stocks)
 //        See realized profit from the stock market -- done (view balance on securities account)
 //        See unrealized profit from the stock market
@@ -60,6 +61,32 @@ public class Customer extends User {
                 securitiesAccounts.contains(account) || loans.contains(account);
     }
 
+    public void buyStock(String name, SecuritiesAccount securitiesAccount){
+        if (isAnAccountOfCustomer(securitiesAccount)) Bank.getStockMarket().sellStock(name, securitiesAccount);
+        else System.out.println("Not your account");
+    }
+
+    public void sellStock(String name, SecuritiesAccount securitiesAccount){
+        if (isAnAccountOfCustomer(securitiesAccount)) Bank.getStockMarket().buyStock(name, securitiesAccount);
+        else System.out.println("Not your account");
+    }
+
+    public double getRealizedProfit(){
+        double res = 0;
+        for (SecuritiesAccount securitiesAccount:getSecuritiesAccounts()) {
+            res += securitiesAccount.getRealizedProfit();
+        }
+        return res;
+    }
+
+    public double getUnrealizedProfit(){
+        double res = 0;
+        for (SecuritiesAccount securitiesAccount:getSecuritiesAccounts()) {
+            res += securitiesAccount.getUnrealizedProfit(Bank.getStockMarket());
+        }
+        return res;
+    }
+
     private void withdraw(double amount, Account account) {
         account.withdraw(amount);
     }
@@ -101,22 +128,27 @@ public class Customer extends User {
         pendingLoans.add(pendingLoan);
     }
 
-    private void openCheckingAccount(String name, String currency) {
+    public void transferToAccount(Account from, Account to, double amount){
+        if (isAnAccountOfCustomer(from)) from.transfer(to, amount);
+    }
+
+    public void openCheckingAccount(String name, String currency) {
         checkingAccounts.add(AccountFactory.getAccount("checking", name, currency));
     }
 
-    private void openSavingsAccount(String name, String currency) {
+    public void openSavingsAccount(String name, String currency) {
         savingsAccounts.add(AccountFactory.getAccount("savings", name, currency));
     }
 
-    private void openSecuritiesAccount(String name, String currency, SavingsAccount account, double amount) {
+    public void openSecuritiesAccount(String name, String currency, SavingsAccount account, double amount) {
         // open a securities account and transfer amount from account
         if (account.getBalance() < amount ||
                 Constants.exchangeCurrencyToUSD(account.getCurrency(),amount) < Constants.getFundsNeededToOpenSecuritiesAccount() ||
-                account.getBalance() - amount < Constants.getFundsToMaintainInSavingsToOpenSecurities()) {
+                account.getBalance() - amount < Constants.getFundsToMaintainInSavingsToOpenSecurities() ||
+                !isAnAccountOfCustomer(account)) {
             System.out.println("Cannot open a securities account");
         } else{
-            SecuritiesAccount securities = AccountFactory.getAccount("savings", name, currency);
+            SecuritiesAccount securities = new SecuritiesAccount(name, Currency.getInstance(currency), amount);
             account.transfer(securities, amount);
             securitiesAccounts.add(securities);
         }
@@ -243,13 +275,15 @@ public class Customer extends User {
     public void createCheckingAccount(String name, String currency){
         openCheckingAccount( name, currency);
     }
-    
-    public String toString(){
-        String rt = " ";
-        rt = "Name: " + this.getCreds().getName().toString() + " | Username: " + this.getCreds().getUname().toString() 
-                + " | # of Savings Acc: " + this.numSavAcc() + " | # of Checking Acc: " + this.numChecAcc()
-               ;
-        return rt;
+
+    @Override
+    public String toString() {
+        return "Customer{" +
+                "savingsAccounts=" + savingsAccounts +
+                ", checkingAccounts=" + checkingAccounts +
+                ", securitiesAccounts=" + securitiesAccounts +
+                ", loans=" + loans +
+                ", pendingLoans=" + pendingLoans +
+                '}';
     }
-    
 }
