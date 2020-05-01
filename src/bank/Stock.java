@@ -3,7 +3,7 @@ package bank;
 import java.util.Objects;
 
 public class Stock {
-    private int ID;
+    private final int ID;
     private String name;
     private static int nextID = 0;
 
