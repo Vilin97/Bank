@@ -40,6 +40,10 @@ public class Main {
             System.out.println(securities1);
             System.out.println(customer1.getRealizedProfit());
             System.out.println(customer1.getUnrealizedProfit());
+
+//            Stock stock2 = new Stock("Stock2");
+//            Stock stock3 = new Stock("Stock2");
+//
 //            SavingsAccount savings2 = new SavingsAccount("my savings account", usdCurrency);
 //            customer2.getSavingsAccounts().add(savings2);
 //            customer2.requestLoan("my loan", "USD", 1000, savings2);
