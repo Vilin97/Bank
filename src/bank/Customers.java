@@ -79,4 +79,9 @@ public class Customers<C extends Customer> implements Collection<C> {
     public void clear() {
         customers.clear();
     }
+
+    @Override
+    public String toString() {
+        return customers.toString();
+    }
 }

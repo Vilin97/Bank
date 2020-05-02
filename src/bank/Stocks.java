@@ -17,9 +17,7 @@ public class Stocks<S extends Stock> implements Collection<S> {
 
     @Override
     public String toString() {
-        return "Stocks{" +
-                "stocks=" + stocks +
-                '}';
+        return stocks.toString();
     }
 
     @Override
