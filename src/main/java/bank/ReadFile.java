@@ -5,12 +5,13 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Currency;
 
 public class ReadFile {
     // A class to read and write our bank related data
@@ -23,27 +24,22 @@ public class ReadFile {
         userObject.put("UName", user.getUName());
     }
 
-    // Add all of a user's account information to their object
-    public static void addAccountsToUser(String filename, Accounts<Account> accounts) {
+    // put all of the user's transactions in one object
+    public static void addTransactionToUser(String filename, Transactions<Transaction> transactions) {
         JSONObject userObject = new JSONObject();
-        JSONArray userAccounts = new JSONArray();
-        for (int i = 0; i < accounts.size(); i++) {
-            Account currentAccount = accounts.getAccount(i);
-            JSONArray individualAccount = new JSONArray();
-            // add the account name
-            individualAccount.add(currentAccount.getName());
-            // add the account ID
-            individualAccount.add(currentAccount.getID());
-            // add the account type
-            individualAccount.add(currentAccount.toString());
-            // add the account balance
-            individualAccount.add(currentAccount.getBalance());
-            // add the account currency
-            individualAccount.add(currentAccount.getCurrency());
-
-            userAccounts.add(individualAccount);
+        JSONArray userTransactions = new JSONArray();
+        for (int i = 1; i < transactions.size() + 1; i++) {
+            Transaction currentTransaction = transactions.getTransaction(i);
+            JSONArray individualTransaction = new JSONArray();
+            // add the transaction date, 0
+            individualTransaction.add(1, currentTransaction.getDate());
+            // add the transaction type, 1
+            individualTransaction.add(2, currentTransaction.getClass().getName());
+            // add the transaction amount, 2
+            individualTransaction.add(3, currentTransaction.amount);
+            userTransactions.add(individualTransaction);
         }
-        userObject.put("accounts", userAccounts);
+        userObject.put("transactions", userTransactions);
         try {
             Files.write(Paths.get(filename), userObject.toJSONString().getBytes());
         } catch (IOException e) {
@@ -51,22 +47,35 @@ public class ReadFile {
         }
     }
 
-    // loop through the user's transactions and add them to the trans
-    public static void addTransactionToUser(String filename, Transactions<Transaction> transactions) {
+    // Add all of a user's account information to their object
+    public static void addAccountsToUser(String filename, Accounts<Account> accounts) {
         JSONObject userObject = new JSONObject();
-        JSONArray userTransactions = new JSONArray();
-        for (int i = 0; i < transactions.size(); i++) {
-            Transaction currentTransaction = transactions.getTransaction(i);
-            JSONArray individualTransaction = new JSONArray();
-            // add the transaction date
-            individualTransaction.add(currentTransaction.getDate());
-            // add the transaction type
-            individualTransaction.add(currentTransaction.toString());
-            // add the transaction amount
-            individualTransaction.add(currentTransaction.amount);
-            userTransactions.add(individualTransaction);
+        JSONArray userAccounts = new JSONArray();
+        for (int i = 1; i < accounts.size() + 1; i++) {
+            Account currentAccount = accounts.getAccount(i);
+            JSONArray individualAccount = new JSONArray();
+            JSONArray accountTransactions = new JSONArray();
+            // add the account name
+            individualAccount.add(1, currentAccount.getName());
+            // add the account ID
+            individualAccount.add(2, currentAccount.getID());
+            // add the account type
+            individualAccount.add(3, currentAccount.getClass().getName());
+            // add the account balance
+            individualAccount.add(4, currentAccount.getBalance());
+            // add the account currency
+            individualAccount.add(5, currentAccount.getCurrency());
+
+            for (int j = 0; j < currentAccount.getTransactions().size(); j++) {
+                accountTransactions.add(0, currentAccount.getTransactions().getTransaction(j).getDate());
+                accountTransactions.add(1, currentAccount.getTransactions().getTransaction(j).getClass().getName());
+                accountTransactions.add(2, currentAccount.getTransactions().getTransaction(j).amount);
+                individualAccount.add(6, accountTransactions);
+            }
+            userObject.put("transactions", accountTransactions);
+            userAccounts.add(individualAccount);
         }
-        userObject.put("transactions", userTransactions);
+        userObject.put("accounts", userAccounts);
         try {
             Files.write(Paths.get(filename), userObject.toJSONString().getBytes());
         } catch (IOException e) {
@@ -90,20 +99,74 @@ public class ReadFile {
         FileReader reader = new FileReader(filename);
         JSONParser jsonParser = new JSONParser();
         JSONObject currentUserJSON = (JSONObject) jsonParser.parse(reader);
-        ArrayList<CheckingAccount> checkingAccounts = new ArrayList<>();
-        ArrayList<CreditAccount> creditAccounts = new ArrayList<>();
-        ArrayList<SavingsAccount> savingsAccounts = new ArrayList<>();
-        ArrayList<SecuritiesAccount> securitiesAccounts = new ArrayList<>();
-        JSONArray usersAccounts = (JSONArray) currentUserJSON.get("accounts");
+        Accounts<CheckingAccount> checkingAccounts = new Accounts<>();
+        Accounts<CreditAccount> creditAccounts = new Accounts<>();
+        Accounts<SavingsAccount> savingsAccounts = new Accounts<>();
+        Accounts<SecuritiesAccount> securitiesAccounts = new Accounts<>();
 
-        // loop through all of the accounts, find each account type and add it to the proper arraylist
+        // access accounts
+        JSONObject usersAccounts = (JSONObject) currentUserJSON.get("accounts");
+        // loop through all of the accounts
+
         for (int i = 0; i < usersAccounts.size(); i++) {
-            if (usersAccounts.get(i)[2] == ) {
+            JSONObject currentAccount = (JSONObject) usersAccounts.get(i);
 
+            //get the transactions of the account
+            JSONObject accountTransactions = (JSONObject) currentAccount.get("transactions");
+            Transactions transactionsToAdd = new Transactions();
+            // loop through each transaction and create a new one for each type
+            for (int j = 0; j < accountTransactions.size(); j++) {
+                JSONObject currentTransaction = (JSONObject) accountTransactions.get(j);
+                if (currentTransaction.get(1) == "TransactionTransferIn") {
+                    TransactionTransferIn newTransaction = new TransactionTransferIn((LocalDate) currentTransaction.get(0), (double) currentTransaction.get(2));
+                    transactionsToAdd.add(newTransaction);
+                }
+                if (currentTransaction.get(1) == "TransactionTransferOut") {
+                    TransactionTransferOut newTransaction = new TransactionTransferOut((LocalDate) currentTransaction.get(0), (double) currentTransaction.get(2));
+                    transactionsToAdd.add(newTransaction);
+                }
+                if (currentTransaction.get(1) == "TransactionWithdrawal") {
+                    TransactionWithdrawal newTransaction = new TransactionWithdrawal((LocalDate) currentTransaction.get(0), (double) currentTransaction.get(2));
+                    transactionsToAdd.add(newTransaction);
+                }
+
+                if (currentTransaction.get(1) == "TransactionDeposit") {
+                    TransactionDeposit newTransaction = new TransactionDeposit((LocalDate) currentTransaction.get(0), (double) currentTransaction.get(2));
+                    transactionsToAdd.add(newTransaction);
+                }
             }
+            // Checking accounts
+            if (currentAccount.get("accountName") == "CheckingAccount") {
+                // create the account
+                CheckingAccount newCheckingAccount = new CheckingAccount(currentAccount.get("accountName").toString(), transactionsToAdd,
+                        (double) currentAccount.get("balance"), (Currency) currentAccount.get("currency"));
+                checkingAccounts.add(newCheckingAccount);
+            }
+
+            if (currentAccount.get("accountName") == "SavingsAccount") {
+                // create the account
+                SavingsAccount newSavingsAccount = new SavingsAccount(currentAccount.get("accountName").toString(), transactionsToAdd,
+                        (double) currentAccount.get("balance"), (Currency) currentAccount.get("currency"));
+                savingsAccounts.add(newSavingsAccount);
+            }
+
+            if (currentAccount.get("accountName") == "CreditAccount") {
+                // create the account
+                CreditAccount newCreditAccount = new CreditAccount(currentAccount.get("accountName").toString(), transactionsToAdd,
+                        (double) currentAccount.get("balance"), (Currency) currentAccount.get("currency"));
+                creditAccounts.add(newCreditAccount);
+            }
+
+            if (currentAccount.get("accountName") == "SecuritiesAccount") {
+                // create the account
+                SecuritiesAccount newSecuritiesAccount = new SecuritiesAccount(currentAccount.get("accountName").toString(), (Currency) currentAccount.get("currency"));
+                securitiesAccounts.add(newSecuritiesAccount);
+            }
+
+            customer.setCheckingAccounts(checkingAccounts);
+            customer.setCreditAccounts(creditAccounts);
+            customer.setSavingsAccounts(savingsAccounts);
+            customer.setSecuritiesAccounts(securitiesAccounts);
         }
-
     }
-
-
 }
