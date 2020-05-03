@@ -135,4 +135,9 @@ public class Accounts<A extends Account> implements List<A> {
         throw new NoSuchFieldError("no ID "+ID+" found");
     }
 
+    @Override
+    public String toString() {
+        if (isEmpty()) return "";
+        else return accounts.toString()+"\n";
+    }
 }

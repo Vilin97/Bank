@@ -1,35 +1,24 @@
 package bank;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.time.LocalDate;
+import java.util.Currency;
 
 public class ManagerGUI {
-    private JPanel mainPanel;
-    private JButton customersButton;
-    private JButton stocksButton;
-    private JButton button2;
-    private JButton button3;
-
-    public ManagerGUI() {
-
-        customersButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-
-            }
-        });
-    }
 
     public static void main(String[] args) {
-        JFrame jFrame = new JFrame("Manager Portal");
-        jFrame.setContentPane(new ManagerGUI().mainPanel);
-        jFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        jFrame.pack();
-        jFrame.setVisible(true);
+        Currency usdCurrency = Currency.getInstance("USD");
+        Manager manager = new Manager(Credentials.createCredentials("a","b","c","d"));
+        new Bank(manager);
+        Bank.setCurrentDate(LocalDate.now());
+        manager.receiveMoney(usdCurrency, 10000);
+        Customer customer1 = new Customer(new Credentials("Vasily","Vas", "123"));
+        Customer customer2 = new Customer(new Credentials("Adam","Adam", "1234"));
+        Bank.getCustomers().add(customer1);
+        Bank.getCustomers().add(customer2);
+        manager.addNewStock("Stock1", 20, 2);
+        new MainManagerFrame();
+
     }
 
-    private void createUIComponents() {
-        // TODO: place custom component creation code here
-    }
 }

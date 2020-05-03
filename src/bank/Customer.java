@@ -278,12 +278,12 @@ public class Customer extends User {
 
     @Override
     public String toString() {
-        return "Customer{" +
-                "savingsAccounts=" + savingsAccounts +
-                ", checkingAccounts=" + checkingAccounts +
-                ", securitiesAccounts=" + securitiesAccounts +
-                ", loans=" + loans +
-                ", pendingLoans=" + pendingLoans +
+        return "Customer{" + super.toString() +
+                ""+savingsAccounts +
+                ""+checkingAccounts +
+                ""+securitiesAccounts +
+                ""+loans +
+                "" + pendingLoans +
                 '}';
     }
 }

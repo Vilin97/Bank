@@ -75,4 +75,11 @@ public class StockMarket {
     public void setPrices(Map<String, Double> prices) {
         this.prices = prices;
     }
+
+    @Override
+    public String toString() {
+        return "StockMarket:\n" +
+                "\n"+stocks +
+                "\nprices:" + prices;
+    }
 }
