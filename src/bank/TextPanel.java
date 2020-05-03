@@ -9,8 +9,10 @@ public class TextPanel extends JPanel{
 
     public TextPanel() {
         textArea = new JTextArea();
+        textArea.setEditable(false);
         setLayout(new BorderLayout());
         add(new JScrollPane(textArea), BorderLayout.CENTER);
+        setPreferredSize(new Dimension(100, 100));
     }
 
     public void appendText(String s){

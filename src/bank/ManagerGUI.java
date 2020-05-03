@@ -16,6 +16,7 @@ public class ManagerGUI {
         Customer customer2 = new Customer();
         Bank.getCustomers().add(customer1);
         Bank.getCustomers().add(customer2);
+        manager.addNewStock("Stock1", 20, 2);
         new MainManagerFrame();
 
     }
