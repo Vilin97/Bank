@@ -7,10 +7,9 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class ManagerToolbar extends JPanel implements ActionListener, hasStringListeners {
+public class ManagerToolbar extends EmitterPanel<String> implements ActionListener {
     private JButton customersButton;
     private JButton stocksButton;
-    private ArrayList<StringsListener> listeners;
 
     public ManagerToolbar() {
         this.customersButton = new JButton("Customers");
@@ -26,20 +25,13 @@ public class ManagerToolbar extends JPanel implements ActionListener, hasStringL
         setBorder(BorderFactory.createBevelBorder(10));
     }
 
-    public void addListener(StringsListener l){
-        listeners.add(l);
-    }
 
     public void actionPerformed(ActionEvent e) {
         JButton clicked = (JButton) e.getSource();
         if (clicked == customersButton) {
-            for (StringsListener l:listeners) {
-                l.receiveStrings(Collections.singletonList(Bank.getCustomers().toString()));
-            }
+            emit(Bank.getCustomers().toString());
         } else if (clicked == stocksButton){
-            for (StringsListener l:listeners) {
-                 l.receiveStrings(Collections.singletonList(Bank.getStockMarket().toString()));
-            }
+            emit(Bank.getStockMarket().toString());
         }
     }
 }

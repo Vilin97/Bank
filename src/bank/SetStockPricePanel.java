@@ -5,14 +5,11 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
 
-public class SetStockPricePanel extends JPanel implements ActionListener, hasStringListeners {
+public class SetStockPricePanel extends EmitterPanel<String> implements ActionListener {
     private JTextField priceField;
     private JComboBox<String> stocksList;
     private JButton setPriceButton;
-    private Collection<StringsListener> listeners;
 
     public SetStockPricePanel() {
         this.priceField = new JTextField(10);
@@ -72,17 +69,10 @@ public class SetStockPricePanel extends JPanel implements ActionListener, hasStr
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        ArrayList<String> emit = new ArrayList<>();
-        emit.add((String) stocksList.getSelectedItem());
-        emit.add(priceField.getText());
-        for (StringsListener l:listeners
-             ) {
-            l.receiveStrings(emit);
-        }
-    }
-
-    public void addListener(StringsListener l){
-        listeners.add(l);
+        ArrayList<String> ToEmit = new ArrayList<>();
+        ToEmit.add((String) stocksList.getSelectedItem());
+        ToEmit.add(priceField.getText());
+        emit(ToEmit);
     }
 
     public JComboBox<String> getStocksList() {

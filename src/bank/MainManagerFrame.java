@@ -18,9 +18,9 @@ public class MainManagerFrame extends JFrame {
         log.setBorder(BorderFactory.createTitledBorder("log"));
         stockPanel = new StockPanel();
 
-        toolbar.addListener(new StringsListener() {
+        toolbar.addListener(new Listener<String>() {
             @Override
-            public void receiveStrings(List<String> strings) {
+            public void receive(List<String> strings) {
                 String ss = "";
                 for (String s:strings) {
                     ss += s;
@@ -29,9 +29,9 @@ public class MainManagerFrame extends JFrame {
             }
         });
 
-        stockPanel.addListener(new StringsListener() {
+        stockPanel.addListener(new Listener<String>() {
             @Override
-            public void receiveStrings(List<String> strings) {
+            public void receive(List<String> strings) {
                 String ss = "";
                 for (String s:strings) {
                     ss += s;

@@ -3,17 +3,13 @@ package bank;
 import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
-public class StockPanel extends JPanel implements hasStringListeners {
+public class StockPanel extends EmitterPanel<String> {
     private AddStockPanel addStockPanel;
     private SetStockPricePanel setStockPricePanel;
-    private Collection<StringsListener> listeners;
     private String message;
 
     public StockPanel() {
@@ -25,9 +21,9 @@ public class StockPanel extends JPanel implements hasStringListeners {
         listeners = new ArrayList<>();
         message = "?";
 
-        addStockPanel.addListener(new StringsListener() {
+        addStockPanel.addListener(new Listener<String>(){
             @Override
-            public void receiveStrings(List<String> strings) {
+            public void receive(List<String> strings) {
                 try {
                     String name = strings.get(0);
                     double price = Double.parseDouble(strings.get(1));
@@ -38,16 +34,13 @@ public class StockPanel extends JPanel implements hasStringListeners {
                 } catch (Exception e){
                     message = "Failed to add stock";
                 }
-                for (StringsListener l:listeners
-                ) {
-                    l.receiveStrings(Collections.singletonList(message));
-                }
+                emit(message);
             }
         });
 
-        setStockPricePanel.addListener(new StringsListener() {
+        setStockPricePanel.addListener(new Listener<String>() {
             @Override
-            public void receiveStrings(List<String> strings) {
+            public void receive(List<String> strings) {
                 try {
                     String name = strings.get(0);
                     double price = Double.parseDouble(strings.get(1));
@@ -56,10 +49,7 @@ public class StockPanel extends JPanel implements hasStringListeners {
                 } catch (Exception e){
                     message = "Failed to change price of stock";
                 }
-                for (StringsListener l:listeners
-                ) {
-                    l.receiveStrings(Collections.singletonList(message));
-                }
+                emit(message);
             }
         });
 
@@ -68,10 +58,5 @@ public class StockPanel extends JPanel implements hasStringListeners {
         Border innerBorder = BorderFactory.createTitledBorder("Stock Management");
         Border outerBorder = BorderFactory.createEmptyBorder(5,5,5,5);
         setBorder(BorderFactory.createCompoundBorder(outerBorder, innerBorder));
-    }
-
-    @Override
-    public void addListener(StringsListener listener) {
-        listeners.add(listener);
     }
 }
