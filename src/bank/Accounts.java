@@ -137,6 +137,7 @@ public class Accounts<A extends Account> implements List<A> {
 
     @Override
     public String toString() {
-        return accounts.toString();
+        if (isEmpty()) return "";
+        else return accounts.toString()+"\n";
     }
 }

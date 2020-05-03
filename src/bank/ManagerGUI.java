@@ -12,8 +12,8 @@ public class ManagerGUI {
         new Bank(manager);
         Bank.setCurrentDate(LocalDate.now());
         manager.receiveMoney(usdCurrency, 10000);
-        Customer customer1 = new Customer();
-        Customer customer2 = new Customer();
+        Customer customer1 = new Customer(new Credentials("Vasily","Vas", "123"));
+        Customer customer2 = new Customer(new Credentials("Adam","Adam", "1234"));
         Bank.getCustomers().add(customer1);
         Bank.getCustomers().add(customer2);
         manager.addNewStock("Stock1", 20, 2);

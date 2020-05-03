@@ -45,5 +45,9 @@ public abstract class User implements Permisions {
     public Credentials getCreds(){
         return this.cred;
     }
-    
+
+    @Override
+    public String toString() {
+        return "cred=" + cred;
+    }
 }

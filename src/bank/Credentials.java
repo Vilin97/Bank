@@ -28,7 +28,11 @@ public class Credentials {
         this.pword = pword;
         
     }
-    
+
+    public Credentials(String name, String uname, String pword) {
+        this(new Name(name,""), new UName(uname), new Password(pword) );
+    }
+
     public static Credentials createCredentials(String fn, String ln, String un, String pw){
         Credentials rt;
         Name name = null;
@@ -78,6 +82,10 @@ public class Credentials {
     public UName getUname() {
         return uname;
     }
-    
-    
+
+    @Override
+    public String toString() {
+        return "name=" + name +
+                ", uname=" + uname;
+    }
 }
