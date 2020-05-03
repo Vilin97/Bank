@@ -1,4 +1,6 @@
 package bank;
+import java.time.LocalDate;
+import java.time.Month;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -83,5 +85,32 @@ public class IOTools
     public static int getIntInput(int[] possibleInts) {
         // get input of an int in the possible ints
         return Integer.parseInt(getValidatedInput(General.intsToString(possibleInts)));
+    }
+    
+    public static LocalDate parseToDate(String y,String m,String d){
+        LocalDate rt = null;
+        try{
+            int yy = Integer.parseInt(y.substring(0, 4));
+            int mm = Integer.parseInt(m.substring(0, 1));
+            int dd = Integer.parseInt(d.substring(0, 1));
+            rt = LocalDate.of(yy, mm, dd);
+        }catch(Exception e){
+            throw new IllegalArgumentException("wrong input format");
+        }
+        return rt;
+    }
+    
+    public static void main(String[] args) {
+        LocalDate one = LocalDate.of(2021, 03, 02);
+        LocalDate two = LocalDate.of(2020, 4, 5);
+        LocalDate three = LocalDate.of(2020, 5, 6);
+        parseToDate("2020","03","20");
+        parseToDate("2020","5","5");
+        parseToDate("202","7","6");
+
+        //System.out.println(paseToDate("2021-03-02").equals(one));
+        //System.out.println(paseToDate("2020-4-5").equals(two));
+        //System.out.println(paseToDate("2020 5 6").equals(three));
+        //paseToDate(" ");
     }
 }
