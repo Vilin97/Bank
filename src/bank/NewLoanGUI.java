@@ -9,6 +9,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.util.Iterator;
 
 /**
  *
@@ -19,10 +20,12 @@ public class NewLoanGUI extends javax.swing.JFrame {
     /**
      * Creates new form NewLoanGUI
      */
-    public NewLoanGUI(Account acc, Customer user, CustomerGUI gui) {
+    public NewLoanGUI( Customer user, CustomerGUI gui) {
         initComponents();
-        initActionListeners(acc,user,gui);
+        initActionListeners(user,gui);
+        initCustom(user,gui);
     }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -54,7 +57,7 @@ public class NewLoanGUI extends javax.swing.JFrame {
 
         nameOfLoanjLabel2.setText("Name Of Loan:");
 
-        currnecyjComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        currnecyjComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "USD", "GBP" }));
 
         currencyjLabel3.setText("Curency:");
 
@@ -137,12 +140,12 @@ public class NewLoanGUI extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void initActionListeners(Account acc, Customer user, CustomerGUI gui){
+    private void initActionListeners( Customer user, CustomerGUI gui){
         
         requestLoanjButton1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                requestLoan(acc, user, gui);
+                requestLoan( user, gui);
             }
                 
         });
@@ -161,9 +164,50 @@ public class NewLoanGUI extends javax.swing.JFrame {
         });
     }
     
+    private void initCustom(Customer user, CustomerGUI gui){
+        updateAccList(user);
+    }
     
-    public void requestLoan(Account acc, Customer user, CustomerGUI gui){
+    public void updateAccList(Customer user){
+        Iterator SAiter = user.getSASIter();
+        while(SAiter.hasNext()){
+            SavingsAccount sa = (SavingsAccount) SAiter.next();
+            depositLocjComboBox2.addItem(sa.getName());
+            depositLocjComboBox2.getSelectedIndex();
+        }
+    }
+    public void requestLoan(Customer user, CustomerGUI gui){
+        try{
+            String nol = nameOfLoanjTextField1.getText();
+            System.out.println(nol);
+            double amtr = Double.parseDouble(requestAmtjTextField2.getText());
+            System.out.println(amtr);
+            String cur = (String) currnecyjComboBox1.getSelectedItem();
+            System.out.println(cur);
+            SavingsAccount depacc = user.getSavingsAccounts().get(depositLocjComboBox2.getSelectedIndex());
+            
+            String colname =CollatNamejTextField3.getText();
+            double colworth = Double.parseDouble(collateWorthjTextField4.getText());
+            Collateral temp = new Collateral(colname,colworth);
+            
+            user.requestLoan(nol, cur, amtr, depacc);// need to add collateral here
+            
+            gui.updatePendingLoansDisp(user);
+            
+        }catch(Exception ex){
+            System.out.println(ex.getMessage());
+            System.out.println("Wrong input types");
+        }
+        this.dispose();
         
+        gui.setVisible(true);
+    }
+    
+    public static void newLoanGUI( Customer cr, CustomerGUI gui){
+        gui.setVisible(false);
+        NewLoanGUI temp;
+        temp = new NewLoanGUI(cr,gui);
+        temp.setVisible(true);
     }
     /**
      * @param args the command line arguments
