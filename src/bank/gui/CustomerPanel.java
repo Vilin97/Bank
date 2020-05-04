@@ -14,7 +14,6 @@ import java.awt.event.ActionListener;
 public class CustomerPanel  extends EmitterPanel<String>{
     private TextPanel textDisplayArea;
     private JComboBox<Customer> customerComboBox;
-    private JButton displayButton;
     private JRadioButton pendingLoansRadio;
     private JRadioButton currentLoansRadio;
     private JComboBox<Loan> loanComboBox;
@@ -22,6 +21,7 @@ public class CustomerPanel  extends EmitterPanel<String>{
     private JButton approveLoanButton;
     private JButton denyLoanButton;
     private ButtonGroup buttonGroup;
+    private JCheckBox displayCustomersWithLoansCheckBox;
 
     private Customer selectedCustomer;
     private Loan selectedLoan;
@@ -30,28 +30,33 @@ public class CustomerPanel  extends EmitterPanel<String>{
         textDisplayArea = new TextPanel();
         textDisplayArea.setBorder(BorderFactory.createTitledBorder("customer information"));
 
+        // set up check box
+        displayCustomersWithLoansCheckBox = new JCheckBox("only customers with loans");
+        displayCustomersWithLoansCheckBox.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                boolean isTicked = displayCustomersWithLoansCheckBox.isSelected();
+                DefaultComboBoxModel<Customer> model = new DefaultComboBoxModel<>();
+                if (isTicked){
+                    model.addAll(Bank.getCustomers().getCustomersWithAnyLoans());
+                } else {
+                    model.addAll(Bank.getCustomers());
+                }
+                customerComboBox.setModel(model);
+            }
+        });
+
+
         // set up customer combo box
         customerComboBox = new JComboBox<>();
         DefaultComboBoxModel<Customer> model = new DefaultComboBoxModel<>();
         model.addAll(Bank.getCustomers());
         customerComboBox.setModel(model);
-        if (customerComboBox.getItemCount() != 0) {
-            customerComboBox.setSelectedIndex(0);
-            selectedCustomer = (Customer) customerComboBox.getSelectedItem();
-        }
         customerComboBox.setRenderer(new CustomerRenderer());
         customerComboBox.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 selectedCustomer = (Customer) customerComboBox.getSelectedItem();
-            }
-        });
-
-        // set up display button
-        displayButton = new JButton("Display info!");
-        displayButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
                 if (selectedCustomer != null){
                     textDisplayArea.setText(selectedCustomer.toStringDetailed());
                     emit("Customer "+selectedCustomer.getCreds().getName()+" was looked up");
@@ -107,7 +112,7 @@ public class CustomerPanel  extends EmitterPanel<String>{
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (selectedLoan != null) {
-                    emit("Customer "+selectedCustomer.getCreds().getName()+" was sent a reminder");
+                    emit("Reminder sent to customer "+selectedCustomer.getCreds().getName());
                 }
             }
         });
@@ -144,19 +149,20 @@ public class CustomerPanel  extends EmitterPanel<String>{
     }
 
     private void setUpLayout(){
-        displayButton.setAlignmentX(Component.CENTER_ALIGNMENT);
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         add(textDisplayArea);
+        add(displayCustomersWithLoansCheckBox);
+        displayCustomersWithLoansCheckBox.setAlignmentX(Component.RIGHT_ALIGNMENT);
         add(customerComboBox);
-        add(displayButton);
-        add(pendingLoansRadio);
-        add(currentLoansRadio);
-        pendingLoansRadio.setAlignmentX(Component.LEFT_ALIGNMENT);
-        currentLoansRadio.setAlignmentX(Component.LEFT_ALIGNMENT);
-        add(loanComboBox);
-        remindButton.setAlignmentX(Component.CENTER_ALIGNMENT);
-        add(remindButton);
         JPanel panel = new JPanel();
+        panel.add(pendingLoansRadio);
+        panel.add(currentLoansRadio);
+        panel.setAlignmentX(Component.RIGHT_ALIGNMENT);
+        add(panel);
+        add(loanComboBox);
+        remindButton.setAlignmentX(Component.RIGHT_ALIGNMENT);
+        add(remindButton);
+        panel = new JPanel();
         panel.add(approveLoanButton);
         panel.add(denyLoanButton);
         panel.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -186,7 +192,7 @@ public class CustomerPanel  extends EmitterPanel<String>{
                 String text = customer.getCreds().toString();
                 if (index == -1) text = "(" + customer.getID() +") "+text;
                 setText(text);
-            } else setText("no customers");
+            } else setText("customers");
             return this;
         }
     }
@@ -201,7 +207,7 @@ public class CustomerPanel  extends EmitterPanel<String>{
                 String text = loan.getClass().getSimpleName() +" of " + -loan.getBalance()+" "+loan.getCurrency();
                 if (index == -1) text = "(" + loan.getID() +") "+ text;
                 setText(text);
-            } else setText("no loans");
+            } else setText("loans");
             return this;
         }
     }
