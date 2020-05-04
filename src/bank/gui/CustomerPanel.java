@@ -1,9 +1,6 @@
 package bank.gui;
 
-import bank.Bank;
-import bank.Customer;
-import bank.Loan;
-import bank.PendingLoan;
+import bank.*;
 
 import javax.swing.*;
 import javax.swing.plaf.basic.BasicComboBoxRenderer;
@@ -59,6 +56,7 @@ public class CustomerPanel  extends EmitterPanel<String>{
                 selectedCustomer = (Customer) customerComboBox.getSelectedItem();
                 if (selectedCustomer != null){
                     textDisplayArea.setText(selectedCustomer.toStringDetailed());
+                    doPendingLoansRadio();
                     emit("Customer "+selectedCustomer.getCreds().getName()+" was looked up");
                 }
                 else {
@@ -204,7 +202,7 @@ public class CustomerPanel  extends EmitterPanel<String>{
                     isSelected, cellHasFocus);
             if (value != null) {
                 Loan loan = (Loan) value;
-                String text = loan.getClass().getSimpleName() +" of " + -loan.getBalance()+" "+loan.getCurrency();
+                String text = loan.getClass().getSimpleName() +" of " + -Math.round(loan.getBalance())+" "+loan.getCurrency();
                 if (index == -1) text = "(" + loan.getID() +") "+ text;
                 setText(text);
             } else setText("loans");
