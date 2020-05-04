@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
+  <Properties>
+    <Property name="defaultCloseOperation" type="int" value="3"/>
+  </Properties>
+  <SyntheticProperties>
+    <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
+    <SyntheticProperty name="generateCenter" type="boolean" value="false"/>
+  </SyntheticProperties>
+  <AuxValues>
+    <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
+    <AuxValue name="FormSettings_autoSetComponentName" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_generateFQN" type="java.lang.Boolean" value="true"/>
+    <AuxValue name="FormSettings_generateMnemonicsCode" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_i18nAutoMode" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_layoutCodeTarget" type="java.lang.Integer" value="1"/>
+    <AuxValue name="FormSettings_listenerGenerationStyle" type="java.lang.Integer" value="0"/>
+    <AuxValue name="FormSettings_variablesLocal" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_variablesModifier" type="java.lang.Integer" value="2"/>
+  </AuxValues>
+
+  <Layout>
+    <DimensionLayout dim="0">
+      <Group type="103" groupAlignment="0" attributes="0">
+          <Group type="102" attributes="0">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="nameOfLoanjLabel2" min="-2" max="-2" attributes="0"/>
+                          <Component id="requestAmtjLabel1" min="-2" max="-2" attributes="0"/>
+                          <Component id="currencyjLabel3" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="collatWorthjLabel6" min="-2" max="-2" attributes="0"/>
+                          <Component id="collatNamejLabel5" min="-2" max="-2" attributes="0"/>
+                          <Component id="depositLocjLabel4" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="1" attributes="0">
+                          <Component id="depositLocjComboBox2" alignment="0" max="32767" attributes="0"/>
+                          <Component id="collateWorthjTextField4" alignment="1" max="32767" attributes="0"/>
+                          <Component id="CollatNamejTextField3" alignment="1" max="32767" attributes="0"/>
+                          <Component id="nameOfLoanjTextField1" min="-2" pref="85" max="-2" attributes="0"/>
+                          <Component id="requestAmtjTextField2" alignment="1" max="32767" attributes="0"/>
+                          <Component id="currnecyjComboBox1" alignment="1" max="32767" attributes="0"/>
+                      </Group>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="130" max="-2" attributes="0"/>
+                      <Component id="requestLoanjButton1" min="-2" max="-2" attributes="0"/>
+                  </Group>
+              </Group>
+              <EmptySpace min="-2" pref="56" max="-2" attributes="0"/>
+          </Group>
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace min="-2" pref="125" max="-2" attributes="0"/>
+              <Component id="loanAppjLabel" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
+          </Group>
+      </Group>
+    </DimensionLayout>
+    <DimensionLayout dim="1">
+      <Group type="103" groupAlignment="0" attributes="0">
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
+              <Component id="loanAppjLabel" min="-2" max="-2" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="nameOfLoanjLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="nameOfLoanjTextField1" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="requestAmtjLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="requestAmtjTextField2" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="currnecyjComboBox1" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="currencyjLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="depositLocjLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="depositLocjComboBox2" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="collatNamejLabel5" min="-2" max="-2" attributes="0"/>
+                  <Component id="CollatNamejTextField3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="collatWorthjLabel6" min="-2" max="-2" attributes="0"/>
+                  <Component id="collateWorthjTextField4" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace pref="36" max="32767" attributes="0"/>
+              <Component id="requestLoanjButton1" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
+          </Group>
+      </Group>
+    </DimensionLayout>
+  </Layout>
+  <SubComponents>
+    <Component class="javax.swing.JLabel" name="requestAmtjLabel1">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Amount You Request:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="nameOfLoanjLabel2">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Name Of Loan:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JComboBox" name="currnecyjComboBox1">
+      <Properties>
+        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+          <StringArray count="4">
+            <StringItem index="0" value="Item 1"/>
+            <StringItem index="1" value="Item 2"/>
+            <StringItem index="2" value="Item 3"/>
+            <StringItem index="3" value="Item 4"/>
+          </StringArray>
+        </Property>
+      </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+      </AuxValues>
+    </Component>
+    <Component class="javax.swing.JLabel" name="currencyjLabel3">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Curency:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="depositLocjLabel4">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Account to place money:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JComboBox" name="depositLocjComboBox2">
+      <Properties>
+        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+          <StringArray count="0"/>
+        </Property>
+      </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+      </AuxValues>
+    </Component>
+    <Component class="javax.swing.JLabel" name="collatNamejLabel5">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Collateral Name:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="collatWorthjLabel6">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Collateral Worth:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="nameOfLoanjTextField1">
+    </Component>
+    <Component class="javax.swing.JTextField" name="requestAmtjTextField2">
+    </Component>
+    <Component class="javax.swing.JTextField" name="CollatNamejTextField3">
+    </Component>
+    <Component class="javax.swing.JTextField" name="collateWorthjTextField4">
+    </Component>
+    <Component class="javax.swing.JButton" name="requestLoanjButton1">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Request!"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="loanAppjLabel">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Loan Application"/>
+      </Properties>
+    </Component>
+  </SubComponents>
+</Form>
