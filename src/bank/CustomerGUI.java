@@ -132,6 +132,33 @@ public class CustomerGUI extends javax.swing.JFrame {
         fullMarketSYMComboBox1 = new javax.swing.JComboBox<>();
         jButton1 = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
+        loanTHistPanel = new javax.swing.JPanel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        loanTextBox = new javax.swing.JTextArea();
+        loanAccTranHistLabel = new javax.swing.JLabel();
+        loanTHShowAllButton = new javax.swing.JButton();
+        laonTHInRangeButton = new javax.swing.JButton();
+        loanTHDate0Fieldy1 = new javax.swing.JTextField();
+        loanTHDate1Fieldy = new javax.swing.JTextField();
+        loanTHDate0Fieldm = new javax.swing.JTextField();
+        loanTHDate0Fieldd = new javax.swing.JTextField();
+        yearLabel4 = new javax.swing.JLabel();
+        monthLabel5 = new javax.swing.JLabel();
+        dayLabel6 = new javax.swing.JLabel();
+        loanTHDate1Fieldm = new javax.swing.JTextField();
+        loanTHDate1Fieldd = new javax.swing.JTextField();
+        loanjLabel2 = new javax.swing.JLabel();
+        loanBankjButton = new javax.swing.JButton();
+        loanListComboBox = new javax.swing.JComboBox<>();
+        jLabel2 = new javax.swing.JLabel();
+        newLoanjButton = new javax.swing.JButton();
+        loanBalancejPanel = new javax.swing.JPanel();
+        loanAmtOwedDisplay = new javax.swing.JTextField();
+        chekAccBalanceLabel2 = new javax.swing.JLabel();
+        jPanel15 = new javax.swing.JPanel();
+        depositLoanButton = new javax.swing.JButton();
+        interactionFieldLoan = new javax.swing.JTextField();
+        InteractChekAccLabel2 = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
         openNewAccButton = new javax.swing.JButton();
 
@@ -291,7 +318,7 @@ public class CustomerGUI extends javax.swing.JFrame {
                         .addComponent(chekAccTransferButton)
                         .addGap(104, 104, 104)
                         .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(484, Short.MAX_VALUE))
+                .addContainerGap(52, Short.MAX_VALUE))
         );
         jPanel8Layout.setVerticalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -302,7 +329,7 @@ public class CustomerGUI extends javax.swing.JFrame {
                     .addGroup(jPanel8Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(74, Short.MAX_VALUE))
+                        .addContainerGap(62, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel8Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(chekAccTransferButton)
@@ -414,44 +441,40 @@ public class CustomerGUI extends javax.swing.JFrame {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(chekAccListLabel1)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(6, 6, 6)
-                        .addComponent(chekAccList1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(updateCurrentChekAccButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 249, Short.MAX_VALUE)
+                        .addContainerGap()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(chekAccListLabel1)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGap(6, 6, 6)
+                                .addComponent(chekAccList1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(updateCurrentChekAccButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(34, 34, 34)
+                        .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 54, Short.MAX_VALUE)
                 .addComponent(savAccTHistPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel2Layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
+                .addGap(61, 61, 61))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(9, 9, 9)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(updateCurrentChekAccButton1)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(9, 9, 9)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(updateCurrentChekAccButton1)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(chekAccListLabel1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(chekAccList1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(24, 24, 24)
-                        .addComponent(savAccTHistPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(74, Short.MAX_VALUE))
-            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel2Layout.createSequentialGroup()
-                    .addGap(0, 43, Short.MAX_VALUE)
-                    .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 43, Short.MAX_VALUE)))
+                        .addComponent(chekAccListLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(chekAccList1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(29, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(savAccTHistPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(46, 46, 46))
         );
 
         jTabbedPane1.addTab("Checking Accounts", jPanel2);
@@ -490,11 +513,6 @@ public class CustomerGUI extends javax.swing.JFrame {
         depositSaAccButton.setText("Deposit");
 
         interactionFieldSaAcc.setFont(new java.awt.Font("Apple Color Emoji", 0, 13)); // NOI18N
-        interactionFieldSaAcc.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                interactionFieldSaAccActionPerformed(evt);
-            }
-        });
 
         InteractSaAccLabel.setText("Interact Below:");
 
@@ -940,25 +958,241 @@ public class CustomerGUI extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Securities Accounts", jPanel3);
 
+        loanTextBox.setEditable(false);
+        loanTextBox.setColumns(20);
+        loanTextBox.setRows(5);
+        jScrollPane2.setViewportView(loanTextBox);
+
+        loanAccTranHistLabel.setText("Loan Transaction Records");
+
+        loanTHShowAllButton.setText("Show All");
+
+        laonTHInRangeButton.setText("In Range");
+
+        loanTHDate0Fieldy1.setText("yyyy");
+
+        loanTHDate1Fieldy.setText("yyyy");
+
+        loanTHDate0Fieldm.setText("mm");
+
+        loanTHDate0Fieldd.setText("dd");
+
+        yearLabel4.setText("Year");
+
+        monthLabel5.setText("Month");
+
+        dayLabel6.setText("Day");
+
+        loanTHDate1Fieldm.setText("mm");
+
+        loanTHDate1Fieldd.setText("dd");
+
+        javax.swing.GroupLayout loanTHistPanelLayout = new javax.swing.GroupLayout(loanTHistPanel);
+        loanTHistPanel.setLayout(loanTHistPanelLayout);
+        loanTHistPanelLayout.setHorizontalGroup(
+            loanTHistPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, loanTHistPanelLayout.createSequentialGroup()
+                .addGroup(loanTHistPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(loanTHistPanelLayout.createSequentialGroup()
+                        .addGap(15, 15, 15)
+                        .addGroup(loanTHistPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(loanTHistPanelLayout.createSequentialGroup()
+                                .addComponent(yearLabel4)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(loanTHDate0Fieldy1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(loanTHistPanelLayout.createSequentialGroup()
+                                .addGroup(loanTHistPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(dayLabel6)
+                                    .addComponent(monthLabel5))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(loanTHistPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(loanTHDate0Fieldm, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(loanTHDate0Fieldd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(laonTHInRangeButton))
+                    .addComponent(loanTHShowAllButton, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addGap(18, 18, 18)
+                .addGroup(loanTHistPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(loanTHDate1Fieldy, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(loanTHDate1Fieldm, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(loanTHDate1Fieldd, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(loanTHistPanelLayout.createSequentialGroup()
+                .addGroup(loanTHistPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(loanTHistPanelLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 276, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(loanTHistPanelLayout.createSequentialGroup()
+                        .addGap(68, 68, 68)
+                        .addComponent(loanAccTranHistLabel)))
+                .addContainerGap(19, Short.MAX_VALUE))
+        );
+        loanTHistPanelLayout.setVerticalGroup(
+            loanTHistPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(loanTHistPanelLayout.createSequentialGroup()
+                .addGap(8, 8, 8)
+                .addComponent(loanAccTranHistLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(loanTHShowAllButton)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(loanTHistPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(loanTHDate0Fieldy1, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(yearLabel4)
+                    .addComponent(loanTHDate1Fieldy, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(loanTHistPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(loanTHDate0Fieldm, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(monthLabel5)
+                    .addComponent(laonTHInRangeButton)
+                    .addComponent(loanTHDate1Fieldm, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(loanTHistPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(loanTHDate0Fieldd, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(dayLabel6)
+                    .addComponent(loanTHDate1Fieldd, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(30, Short.MAX_VALUE))
+        );
+
+        loanjLabel2.setText("Select a loan to work with, then hit Bank:");
+
+        loanBankjButton.setText("Bank");
+
+        jLabel2.setText("Request a new loan:");
+
+        newLoanjButton.setText("New Loan");
+
+        loanAmtOwedDisplay.setEditable(false);
+
+        chekAccBalanceLabel2.setText("Amount Owed");
+
+        javax.swing.GroupLayout loanBalancejPanelLayout = new javax.swing.GroupLayout(loanBalancejPanel);
+        loanBalancejPanel.setLayout(loanBalancejPanelLayout);
+        loanBalancejPanelLayout.setHorizontalGroup(
+            loanBalancejPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, loanBalancejPanelLayout.createSequentialGroup()
+                .addContainerGap(21, Short.MAX_VALUE)
+                .addGroup(loanBalancejPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(chekAccBalanceLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(loanAmtOwedDisplay))
+                .addGap(22, 22, 22))
+        );
+        loanBalancejPanelLayout.setVerticalGroup(
+            loanBalancejPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(loanBalancejPanelLayout.createSequentialGroup()
+                .addGap(14, 14, 14)
+                .addComponent(chekAccBalanceLabel2)
+                .addGap(18, 18, 18)
+                .addComponent(loanAmtOwedDisplay, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(28, Short.MAX_VALUE))
+        );
+
+        depositLoanButton.setText("Pay");
+
+        interactionFieldLoan.setFont(new java.awt.Font("Apple Color Emoji", 0, 13)); // NOI18N
+        interactionFieldLoan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                interactionFieldLoanActionPerformed(evt);
+            }
+        });
+
+        InteractChekAccLabel2.setText("Interact Below:");
+
+        javax.swing.GroupLayout jPanel15Layout = new javax.swing.GroupLayout(jPanel15);
+        jPanel15.setLayout(jPanel15Layout);
+        jPanel15Layout.setHorizontalGroup(
+            jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel15Layout.createSequentialGroup()
+                .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel15Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(interactionFieldLoan, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel15Layout.createSequentialGroup()
+                        .addGap(49, 49, 49)
+                        .addComponent(InteractChekAccLabel2))
+                    .addGroup(jPanel15Layout.createSequentialGroup()
+                        .addGap(53, 53, 53)
+                        .addComponent(depositLoanButton, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel15Layout.setVerticalGroup(
+            jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel15Layout.createSequentialGroup()
+                .addContainerGap(10, Short.MAX_VALUE)
+                .addComponent(InteractChekAccLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(interactionFieldLoan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(depositLoanButton)
+                .addContainerGap())
+        );
+
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 949, Short.MAX_VALUE)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel4Layout.createSequentialGroup()
+                                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                                .addComponent(loanListComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                                .addComponent(loanjLabel2)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(loanBankjButton, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(jPanel4Layout.createSequentialGroup()
+                                        .addGap(0, 0, Short.MAX_VALUE)
+                                        .addComponent(loanBalancejPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(259, 259, 259))
+                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addGap(204, 204, 204)
+                                .addComponent(jPanel15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(loanTHistPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(33, 33, 33))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addGap(18, 18, 18)
+                        .addComponent(newLoanjButton)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 470, Short.MAX_VALUE)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(4, 4, 4)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel2)
+                            .addComponent(newLoanjButton))
+                        .addGap(18, 18, 18)
+                        .addComponent(loanjLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(loanListComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(loanBankjButton))
+                        .addGap(55, 55, 55)
+                        .addComponent(loanBalancejPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jPanel15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(45, 45, 45)
+                        .addComponent(loanTHistPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(53, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Loans", jPanel4);
 
         openNewAccButton.setText("Open New Account");
-        openNewAccButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                openNewAccButtonActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -993,21 +1227,17 @@ public class CustomerGUI extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void openNewAccButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_openNewAccButtonActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_openNewAccButtonActionPerformed
-
     private void interactionFieldSaAcc1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_interactionFieldSaAcc1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_interactionFieldSaAcc1ActionPerformed
 
-    private void interactionFieldSaAccActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_interactionFieldSaAccActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_interactionFieldSaAccActionPerformed
-
     private void interactionFieldChekAcc1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_interactionFieldChekAcc1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_interactionFieldChekAcc1ActionPerformed
+
+    private void interactionFieldLoanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_interactionFieldLoanActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_interactionFieldLoanActionPerformed
     
     //builds the gui for the user in the begining
     public void initCustom(Customer user){
@@ -1327,6 +1557,42 @@ public class CustomerGUI extends javax.swing.JFrame {
         chekAccTextBox2.setText(th);
     }
     
+    public void updateTHChekAccIR(Customer user){
+        chekAccTextBox2.setText(" ");
+        
+        int indexOfAcc = chekAccList1.getSelectedIndex();
+        CheckingAccount acc = user.getCheckingAccounts().get(indexOfAcc);
+        
+        
+        String date0sy = chekAccTHDate0Fieldy1.getText();
+        String date0sm = chekAccTHDate0Fieldm1.getText();
+        String date0sd = chekAccTHDate0Fieldm1.getText();
+        
+        String date1sy = chekAccTHDate1Fieldy1.getText();
+        String date1sm = chekAccTHDate1Fieldm1.getText();
+        String date1sd = chekAccTHDate1Fieldd1.getText();
+        
+        try{
+            LocalDate date0 = parseToDate(date0sy,date0sm,date0sd);
+            LocalDate date1 = parseToDate(date1sy,date1sm,date1sd);
+            
+            Transactions transactions = acc.getTransactionsByTimePeriod(date0, date1);
+            
+            String th = "";
+            Iterator iter = transactions.iterator();
+        while(iter.hasNext()){
+            Transaction t = (Transaction) iter.next();
+            th+= t.toString() + " \n";
+        }
+            chekAccTextBox2.setText(th);
+        }catch(IllegalArgumentException e){
+            System.out.println(e.getMessage());
+        }
+    }
+    
+    
+    
+    
     //general display and transaction history update method
     public void updateAllDsipAndTH(Customer user){
         this.updateworkingCheckingAcc(user);
@@ -1342,6 +1608,10 @@ public class CustomerGUI extends javax.swing.JFrame {
         tester.createCheckingAccount("Acc1C", "USD");
         tester.createCheckingAccount("Acc2C", "USD");
         
+       
+        
+        //tester.getSavingsAccounts().get(0).deposit(10.0);
+        
         Manager temp = bank.Manager.createManager("Mr.", "Monopoly", "mrMono", "12345");
         ArrayList cs = new ArrayList();
         cs.add(tester);
@@ -1349,6 +1619,8 @@ public class CustomerGUI extends javax.swing.JFrame {
         
         Bank test = new Bank(testers, temp);
         Bank.setCurrentDate(LocalDate.of(2020, 04, 28));
+        
+        
         
         return test;
     }
@@ -1405,10 +1677,12 @@ public class CustomerGUI extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel InteractChekAccLabel1;
+    private javax.swing.JLabel InteractChekAccLabel2;
     private javax.swing.JLabel InteractSaAccLabel;
     private javax.swing.JLabel InteractSaAccLabel1;
     private javax.swing.JTextField chekAccBalanceDisplay1;
     private javax.swing.JLabel chekAccBalanceLabel1;
+    private javax.swing.JLabel chekAccBalanceLabel2;
     private javax.swing.JComboBox<String> chekAccList1;
     private javax.swing.JLabel chekAccListLabel1;
     private javax.swing.JTextField chekAccTHDate0Fieldd1;
@@ -1423,12 +1697,15 @@ public class CustomerGUI extends javax.swing.JFrame {
     private javax.swing.JButton chekAccTransferButton;
     private javax.swing.JLabel dayLabel4;
     private javax.swing.JLabel dayLabel5;
+    private javax.swing.JLabel dayLabel6;
     private javax.swing.JButton depositChekAccButton1;
+    private javax.swing.JButton depositLoanButton;
     private javax.swing.JButton depositSaAccButton;
     private javax.swing.JButton depositSaAccButton1;
     private javax.swing.JComboBox<String> fullMarketSYMComboBox1;
     private javax.swing.JTextArea fullStockMarketTextArea1;
     private javax.swing.JTextField interactionFieldChekAcc1;
+    private javax.swing.JTextField interactionFieldLoan;
     private javax.swing.JTextField interactionFieldSaAcc;
     private javax.swing.JTextField interactionFieldSaAcc1;
     private javax.swing.JButton jButton1;
@@ -1439,12 +1716,14 @@ public class CustomerGUI extends javax.swing.JFrame {
     private javax.swing.JFrame jFrame4;
     private javax.swing.JFrame jFrame5;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel11;
     private javax.swing.JPanel jPanel12;
     private javax.swing.JPanel jPanel13;
     private javax.swing.JPanel jPanel14;
+    private javax.swing.JPanel jPanel15;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
@@ -1454,15 +1733,34 @@ public class CustomerGUI extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JButton laonTHInRangeButton;
+    private javax.swing.JLabel loanAccTranHistLabel;
+    private javax.swing.JTextField loanAmtOwedDisplay;
+    private javax.swing.JPanel loanBalancejPanel;
+    private javax.swing.JButton loanBankjButton;
+    private javax.swing.JComboBox<String> loanListComboBox;
+    private javax.swing.JTextField loanTHDate0Fieldd;
+    private javax.swing.JTextField loanTHDate0Fieldm;
+    private javax.swing.JTextField loanTHDate0Fieldy1;
+    private javax.swing.JTextField loanTHDate1Fieldd;
+    private javax.swing.JTextField loanTHDate1Fieldm;
+    private javax.swing.JTextField loanTHDate1Fieldy;
+    private javax.swing.JButton loanTHShowAllButton;
+    private javax.swing.JPanel loanTHistPanel;
+    private javax.swing.JTextArea loanTextBox;
+    private javax.swing.JLabel loanjLabel2;
     private javax.swing.JLabel monthLabel3;
     private javax.swing.JLabel monthLabel4;
+    private javax.swing.JLabel monthLabel5;
     private javax.swing.JLabel myPortfolioLabel;
     private javax.swing.JComboBox<String> myStockSYMSComboBox1;
+    private javax.swing.JButton newLoanjButton;
     private javax.swing.JButton openNewAccButton;
     private javax.swing.JTextArea portfolioTextField;
     private javax.swing.JComboBox<String> sAccList;
@@ -1500,5 +1798,6 @@ public class CustomerGUI extends javax.swing.JFrame {
     private javax.swing.JButton withdrawSaAccButton1;
     private javax.swing.JLabel yearLabel2;
     private javax.swing.JLabel yearLabel3;
+    private javax.swing.JLabel yearLabel4;
     // End of variables declaration//GEN-END:variables
 }
