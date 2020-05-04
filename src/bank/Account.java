@@ -84,12 +84,9 @@ abstract public class Account {
 
     @Override
     public String toString() {
-        return this.getClass().getSimpleName()+
-                ", name='" + name + '\'' +
-                ", balance=" + balance +
-                ", currency=" + currency +
-                ", transactions=" + transactions +
-                '}';
+        return this.getClass().getSimpleName()+ " '" + name + '\'' +
+                ", balance: " + balance +
+                ", currency: " + currency;
     }
 
     public String getName() {

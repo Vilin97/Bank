@@ -38,9 +38,8 @@ public class SecuritiesAccount extends Account {
     @Override
     public String toString() {
         return super.toString() +
-                ", startingAmount=" + startingAmount +
-                ", stocks=" + stocks +
-                '}';
+                ", startingAmount: " + startingAmount +
+                ", stocks: " + stocks;
     }
 
     public boolean canBuy(double price){

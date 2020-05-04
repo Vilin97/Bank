@@ -1,7 +1,6 @@
 package bank;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.Currency;
 
 import static bank.Credentials.createCredentials;
@@ -79,10 +78,10 @@ public class Manager extends User {
             customer.getLoans().add(new Loan(pendingLoan));
             customer.getPendingLoans().remove(pendingLoan);
             account.changeBalanceBy(pendingLoan.getBalance());
-        } else disapproveLoan(customer, pendingLoan);
+        } else denyLoan(customer, pendingLoan);
     }
 
-    public void disapproveLoan(Customer customer, PendingLoan pendingLoan){
+    public void denyLoan(Customer customer, PendingLoan pendingLoan){
         // disapprove the pending loan
         customer.getPendingLoans().remove(pendingLoan);
     }

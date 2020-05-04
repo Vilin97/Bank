@@ -21,13 +21,13 @@ public class MainManagerFrame extends JFrame {
         log = new TextPanel();
         log.setBorder(BorderFactory.createTitledBorder("log"));
         log.setPreferredSize(new Dimension(100, 100));
-        int panelHeight = 300;
+        int panelHeight = 350;
         stockPanel = new StockPanel();
         stockPanel.setPreferredSize(new Dimension(200, panelHeight));
         transactionPanel = new TransactionPanel();
         transactionPanel.setPreferredSize(new Dimension(200, panelHeight));
         customerPanel = new CustomerPanel();
-        customerPanel.setPreferredSize(new Dimension(200, panelHeight));
+        customerPanel.setPreferredSize(new Dimension(300, 600));
         panels = new JPanel();
         panels.setLayout(new FlowLayout());
         panels.add(stockPanel);
@@ -55,7 +55,7 @@ public class MainManagerFrame extends JFrame {
         add(panels, BorderLayout.CENTER);
         add(log, BorderLayout.SOUTH);
 
-        setSize(800,600);
+        setSize(800,800);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);
     }
