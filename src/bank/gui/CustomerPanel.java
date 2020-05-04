@@ -64,6 +64,7 @@ public class CustomerPanel  extends EmitterPanel<String>{
 
         // set up the loans combo box
         loanComboBox = new JComboBox<>();
+        loanComboBox.setRenderer(new LoanRenderer());
         loanComboBox.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -187,6 +188,23 @@ public class CustomerPanel  extends EmitterPanel<String>{
             if (index == -1) {
                 Customer customer = (Customer)value;
                 setText( "(" + customer.getID() +") "+ customer.getCreds());
+            }
+            return this;
+        }
+    }
+    static class LoanRenderer extends BasicComboBoxRenderer {
+        public Component getListCellRendererComponent(
+                JList list, Object value, int index,
+                boolean isSelected, boolean cellHasFocus) {
+            super.getListCellRendererComponent(list, value, index,
+                    isSelected, cellHasFocus);
+            if (value != null) {
+                Loan loan = (Loan) value;
+                setText( -loan.getBalance()+" "+loan.getCurrency() );
+            }
+            if (index == -1) {
+                Loan loan = (Loan) value;
+                setText( "(" + loan.getID() +") "+  -loan.getBalance()+" "+loan.getCurrency() );
             }
             return this;
         }

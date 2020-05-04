@@ -26,12 +26,4 @@ public class PendingLoan extends Loan {
         this.savingsAccount = savingsAccount;
     }
 
-    @Override
-    public String toString() {
-        return "PendingLoan{" +
-                "name='" + name + '\'' +
-                ", requested amount=" + -balance +
-                ", currency=" + currency +
-                '}';
-    }
 }
