@@ -230,7 +230,7 @@ public class GUI extends javax.swing.JFrame {
         newCustomerButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                System.out.println("new customer buttion clicked");
+                System.out.println("new user buttion clicked");
                 jPanel1.setVisible(false);
                 jPanel2.setVisible(true);
 
@@ -248,7 +248,7 @@ public class GUI extends javax.swing.JFrame {
                 try{
                     Customer created = Customer.createCustomer(fname,lname,uname,pword);
                     //Add created to data set
-                    System.out.println("customer created!");
+                    System.out.println("user created!");
                     System.out.println(created.toString());
                 }catch(IllegalArgumentException ex){
                     System.out.println(ex.getMessage());

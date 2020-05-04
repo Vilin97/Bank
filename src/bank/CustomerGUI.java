@@ -1392,7 +1392,7 @@ public class CustomerGUI extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
-            //pull the customer from the data set
+            //pull the user from the data set
             Bank tester = getTestB();
             Customer test = getTestC();
             

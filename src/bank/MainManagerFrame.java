@@ -8,15 +8,17 @@ public class MainManagerFrame extends JFrame {
     private ManagerToolbar toolbar;
     private TextPanel log;
     private StockPanel stockPanel;
+    private TransactionPanel transactionPanel;
 
     public MainManagerFrame() {
         super("Manager Portal");
-        setLayout(new BorderLayout());
 
         toolbar = new ManagerToolbar();
         log = new TextPanel();
         log.setBorder(BorderFactory.createTitledBorder("log"));
+        log.setPreferredSize(new Dimension(100, 100));
         stockPanel = new StockPanel();
+        transactionPanel = new TransactionPanel();
 
         toolbar.addListener(new Listener<String>() {
             @Override
@@ -40,7 +42,9 @@ public class MainManagerFrame extends JFrame {
             }
         });
 
+        setLayout(new BorderLayout());
         add(toolbar, BorderLayout.NORTH);
+        add(transactionPanel, BorderLayout.EAST);
         add(stockPanel, BorderLayout.WEST);
         add(log, BorderLayout.SOUTH);
 

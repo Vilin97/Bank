@@ -6,8 +6,8 @@ public class SecuritiesAccount extends Account {
     private final double startingAmount;
     private Stocks<Stock> stocks;
 
-    public SecuritiesAccount(String name, Transactions transactions, double balance, Currency currency, double startingAmount, Stocks stocks) {
-        super(name, transactions, balance, currency);
+    public SecuritiesAccount(String name, Transactions<Transaction> transactions, double balance, Currency currency, Customer customer, double startingAmount, Stocks stocks) {
+        super(name, transactions, balance, currency, customer);
         this.withdrawBehavior = new CannotWithdrawBehavior(this);
         this.depositBehavior = new CannotDepositBehavior(this);
         this.transferBehavior = new UncheckedTransferBehavior(this);
@@ -17,8 +17,8 @@ public class SecuritiesAccount extends Account {
         this.stocks = stocks;
     }
 
-    public SecuritiesAccount(String name, Currency currency, double startingAmount) {
-        this(name,new Transactions(), 0, currency, startingAmount, new Stocks());
+    public SecuritiesAccount(String name, Currency currency, double startingAmount, Customer customer) {
+        this(name,new Transactions(), 0, currency, customer, startingAmount, new Stocks());
     }
 
     public double getRealizedProfit() {

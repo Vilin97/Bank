@@ -10,7 +10,7 @@ public class CanDepositBehavior extends DepositBehavior {
         double commission = amount*Constants.getDepositFeeFraction();
         if (amount >= 0){
             account.setBalance(account.getBalance() + amount - commission);
-            account.getTransactions().add(new TransactionDeposit(Bank.getCurrentDate(), amount));
+            account.getTransactions().add(new TransactionDeposit(Bank.getCurrentDate(), amount, account.getUser(), account));
             System.out.println((amount-commission)+" "+account.getCurrency() + " was deposited. Commission: "+
                     commission+" "+account.getCurrency());
             Bank.getManager().receiveMoney(account.getCurrency(), commission);

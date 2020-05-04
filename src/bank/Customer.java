@@ -1,11 +1,13 @@
 package bank;
 
 import static bank.Credentials.createCredentials;
+
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Currency;
 import java.util.Iterator;
 
-//A customer class must have the following functions:
+//A user class must have the following functions:
 //        Create checking account -- done
 //        Create savings account -- done
 //        Create securities account -- done
@@ -42,7 +44,7 @@ public class Customer extends User {
     }
 
     public Customer() {
-        // customer with no credential, for testing
+        // user with no credential, for testing
         this.savingsAccounts = new Accounts<SavingsAccount>();
         this.checkingAccounts = new Accounts<CheckingAccount>();
         this.securitiesAccounts = new Accounts<SecuritiesAccount>();
@@ -50,12 +52,10 @@ public class Customer extends User {
         this.pendingLoans = new Accounts<PendingLoan>();
     }
 
-    /* // TODO: why is this commented out?
-    private Transactions getTransactionsByTimePeriod(LocalDate begin, LocalDate end, Account account){
+    public Transactions<Transaction> getTransactionsByTimePeriod(LocalDate begin, LocalDate end, Account account){
         return account.getTransactionsByTimePeriod(begin,end);
     }
-    */
-    
+
     private boolean isAnAccountOfCustomer(Account account){
         return savingsAccounts.contains(account) || checkingAccounts.contains(account) ||
                 securitiesAccounts.contains(account) || loans.contains(account);
@@ -122,7 +122,7 @@ public class Customer extends User {
         // creates a pending loan
         // a pending loan becomes a loan if approved
         // the money is transferred to the savings account specified if the loan is approved
-        PendingLoan pendingLoan = AccountFactory.getAccount("loan", name, currency);
+        PendingLoan pendingLoan = AccountFactory.getAccount("loan", name, currency, this);
         pendingLoan.setBalance(-amountRequest);
         pendingLoan.setSavingsAccount(savingsAccount);
         pendingLoans.add(pendingLoan);
@@ -133,11 +133,11 @@ public class Customer extends User {
     }
 
     public void openCheckingAccount(String name, String currency) {
-        checkingAccounts.add(AccountFactory.getAccount("checking", name, currency));
+        checkingAccounts.add(AccountFactory.getAccount("checking", name, currency, this));
     }
 
     public void openSavingsAccount(String name, String currency) {
-        savingsAccounts.add(AccountFactory.getAccount("savings", name, currency));
+        savingsAccounts.add(AccountFactory.getAccount("savings", name, currency, this));
     }
 
     public void openSecuritiesAccount(String name, String currency, SavingsAccount account, double amount) {
@@ -148,7 +148,7 @@ public class Customer extends User {
                 !isAnAccountOfCustomer(account)) {
             System.out.println("Cannot open a securities account");
         } else{
-            SecuritiesAccount securities = new SecuritiesAccount(name, Currency.getInstance(currency), amount);
+            SecuritiesAccount securities = new SecuritiesAccount(name, Currency.getInstance(currency), amount, this);
             account.transfer(securities, amount);
             securitiesAccounts.add(securities);
         }

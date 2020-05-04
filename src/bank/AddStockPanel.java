@@ -33,7 +33,7 @@ public class AddStockPanel extends EmitterPanel<String> implements ActionListene
         Insets noInsets = new Insets(0,0,0,0);
 
         // first row //
-        gc.gridy = 1;
+        gc.gridy = 0;
 
         gc.insets = insets;
         gc.gridx = 0;

@@ -21,10 +21,10 @@ public class Main {
             Bank.getCustomers().add(customer2);
 
 
-            Account checking1 = new CheckingAccount("my checking account 1", eurCurrency);
-            Account savings1 = new SavingsAccount("my savings account", usdCurrency);
-            customer1.getCheckingAccounts().add((CheckingAccount) checking1);
-            customer1.getSavingsAccounts().add((SavingsAccount) savings1);
+            customer1.openCheckingAccount("my checking account 1", "EUR");
+            customer1.openSavingsAccount("my savings account 1", "USD");
+            Account checking1 = customer1.getCheckingAccounts().get(0);
+            Account savings1 = customer1.getSavingsAccounts().get(0);
 
             checking1.deposit(20000);
             customer1.transferToAccount(checking1, savings1, 15000);

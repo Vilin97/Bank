@@ -1,12 +1,9 @@
 package bank;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Date;
-import java.util.Iterator;
+import java.util.*;
 
-public class Transactions<T extends Transaction> implements Collection<T> {
+public class Transactions<T extends Transaction> implements List<T> {
     private ArrayList<T> transactions;
 
     public Transactions(ArrayList<T> transactions) {
@@ -68,6 +65,11 @@ public class Transactions<T extends Transaction> implements Collection<T> {
     }
 
     @Override
+    public boolean addAll(int index, Collection<? extends T> c) {
+        return transactions.addAll(index, c);
+    }
+
+    @Override
     public boolean removeAll(Collection<?> c) {
         return transactions.removeAll(c);
     }
@@ -82,18 +84,63 @@ public class Transactions<T extends Transaction> implements Collection<T> {
         transactions.clear();
     }
 
+    @Override
+    public T get(int index) {
+        return transactions.get(index);
+    }
+
+    @Override
+    public T set(int index, T element) {
+        return transactions.set(index, element);
+    }
+
+    @Override
+    public void add(int index, T element) {
+        transactions.add(index, element);
+    }
+
+    @Override
+    public T remove(int index) {
+        return transactions.remove(index);
+    }
+
+    @Override
+    public int indexOf(Object o) {
+        return transactions.indexOf(o);
+    }
+
+    @Override
+    public int lastIndexOf(Object o) {
+        return transactions.lastIndexOf(o);
+    }
+
+    @Override
+    public ListIterator<T> listIterator() {
+        return transactions.listIterator();
+    }
+
+    @Override
+    public ListIterator<T> listIterator(int index) {
+        return transactions.listIterator(index);
+    }
+
+    @Override
+    public List<T> subList(int fromIndex, int toIndex) {
+        return transactions.subList(fromIndex, toIndex);
+    }
+
     public Transactions<T> getTransactionsByTimePeriod(LocalDate begin, LocalDate end){
         // get all transactions in the time period
         Transactions<T> res = new Transactions<T>();
         for (T transaction : transactions) {
-            if (transaction.getDate().compareTo(begin) > 0 && transaction.getDate().compareTo(end) < 0) res.add(transaction);
+            if (transaction.getDate().compareTo(begin) >= 0 && transaction.getDate().compareTo(end) <= 0) res.add(transaction);
         }
         return res;
     }
 
     @Override
     public String toString() {
-        return transactions.toString();
+        return General.myListToString(transactions);
     }
 
     public ArrayList<T> getTransactions() {

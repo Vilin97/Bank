@@ -3,8 +3,8 @@ package bank;
 import java.util.HashMap;
 import java.util.Map;
 
-//    Buy stock from a customer
-//    Sell a stock to the customer -- done
+//    Buy stock from a user
+//    Sell a stock to the user -- done
 //    Create a stock
 //    Change price of a stock
 
@@ -29,7 +29,7 @@ public class StockMarket {
             securitiesAccount.receiveUSD(getStockPrice(stock));
             securitiesAccount.getStocks().remove(stock);
             stocks.add(stock);
-            securitiesAccount.getTransactions().add(new TransactionSellStock(Bank.getCurrentDate(), getStockPrice(stock), stock));
+            securitiesAccount.getTransactions().add(new TransactionSellStock(Bank.getCurrentDate(), getStockPrice(stock), securitiesAccount.getUser(), securitiesAccount, stock));
         }
     }
 
@@ -40,7 +40,7 @@ public class StockMarket {
             securitiesAccount.payUSD(prices.get(name));
             securitiesAccount.getStock(stock);
             stocks.remove(stock);
-            securitiesAccount.getTransactions().add(new TransactionBuyStock(Bank.getCurrentDate(), getStockPrice(stock), stock));
+            securitiesAccount.getTransactions().add(new TransactionBuyStock(Bank.getCurrentDate(), getStockPrice(stock), securitiesAccount.getUser(), securitiesAccount, stock));
         } else System.out.println("Cannot sell stock "+ name);
     }
 

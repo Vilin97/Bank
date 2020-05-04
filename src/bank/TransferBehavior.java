@@ -20,7 +20,7 @@ public abstract class TransferBehavior {
         account.setBalance(account.getBalance() - amount - commission);
         double exchanged = Constants.exchangeCurrency(account.currency,o.currency,amount);
         o.setBalance(o.getBalance() + exchanged);
-        account.getTransactions().add(new TransactionTransferOut(Bank.getCurrentDate(), amount));
-        o.getTransactions().add(new TransactionTransferIn(Bank.getCurrentDate(), amount));
+        account.getTransactions().add(new TransactionTransferOut(Bank.getCurrentDate(), amount, account.getUser(), account));
+        o.getTransactions().add(new TransactionTransferIn(Bank.getCurrentDate(), amount, account.getUser(), account));
     }
 }

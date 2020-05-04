@@ -93,6 +93,20 @@ public class Manager extends User {
         }
     }
 
+    public Transactions<Transaction> getTransactionsByTimePeriod(LocalDate day){
+        return getTransactionsByTimePeriod(day, day);
+    }
+
+    public Transactions<Transaction> getTransactionsByTimePeriod(LocalDate begin, LocalDate end){
+        Transactions<Transaction> transactions = new Transactions<>();
+        for (Customer c:Bank.getCustomers()) {
+            for (Account account:c.getAllAccounts()) {
+                transactions.addAll(c.getTransactionsByTimePeriod(begin, end, account));
+            }
+        }
+        return transactions;
+    }
+
     public ManagerAccount getAccount() {
         return account;
     }

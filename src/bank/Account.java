@@ -2,7 +2,6 @@ package bank;
 
 import java.time.LocalDate;
 import java.util.Currency;
-import java.util.Date;
 import java.util.Objects;
 
 abstract public class Account {
@@ -11,6 +10,7 @@ abstract public class Account {
     protected Transactions<Transaction> transactions;
     protected double balance;
     protected Currency currency;
+    protected User user;
     protected WithdrawBehavior withdrawBehavior;
     protected DepositBehavior depositBehavior;
     protected TransferBehavior transferBehavior;
@@ -19,7 +19,7 @@ abstract public class Account {
     private static int nextID = 0;
 
     public Account(int ID, String name, Transactions<Transaction> transactions,
-                   double balance, Currency currency,
+                   double balance, Currency currency, Customer customer,
                    WithdrawBehavior withdrawBehavior, DepositBehavior depositBehavior,
                    TransferBehavior transferBehavior, EndOfMonthBehavior endOfMonthBehavior) {
         this.ID = ID;
@@ -27,6 +27,7 @@ abstract public class Account {
         this.transactions = transactions;
         this.balance = balance;
         this.currency = currency;
+        this.user = customer;
         this.withdrawBehavior = withdrawBehavior;
         this.depositBehavior = depositBehavior;
         this.transferBehavior = transferBehavior;
@@ -34,17 +35,18 @@ abstract public class Account {
         nextID += 1;
     }
 
-    public Account(String name, Transactions transactions, double balance, Currency currency) {
+    public Account(String name, Transactions transactions, double balance, Currency currency, User user) {
         this.ID = nextID;
         this.name = name;
         this.transactions = transactions;
         this.balance = balance;
         this.currency = currency;
+        this.user = user;
         nextID += 1;
     }
 
-    public Account(String name, Currency currency) {
-        this(name, new Transactions(), 0, currency);
+    public Account(String name, Currency currency, User user) {
+        this(name, new Transactions(), 0, currency, user);
     }
 
     @Override
@@ -60,7 +62,7 @@ abstract public class Account {
         return Objects.hash(ID);
     }
 
-    public Transactions getTransactionsByTimePeriod(LocalDate begin, LocalDate end) {
+    public Transactions<Transaction> getTransactionsByTimePeriod(LocalDate begin, LocalDate end) {
         return transactions.getTransactionsByTimePeriod(begin, end);
     }
 
@@ -82,7 +84,7 @@ abstract public class Account {
 
     @Override
     public String toString() {
-        return this.getClass().getName()+
+        return this.getClass().getSimpleName()+
                 ", name='" + name + '\'' +
                 ", balance=" + balance +
                 ", currency=" + currency +
@@ -139,5 +141,9 @@ abstract public class Account {
 
     public int getID() {
         return ID;
+    }
+
+    public User getUser() {
+        return user;
     }
 }

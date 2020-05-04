@@ -6,10 +6,15 @@ import java.util.Date;
 abstract public class Transaction implements Comparable<Transaction>{
     LocalDate date;
     double amount;
+    User customer;
+    Account account;
+    // TODO: refactor transaction to include user and account
 
-    public Transaction(LocalDate date, double amount) {
+    public Transaction(LocalDate date, double amount, User customer, Account account) {
         this.date = date;
         this.amount = amount;
+        this.customer = customer;
+        this.account = account;
     }
 
     public LocalDate getDate() {
@@ -22,8 +27,10 @@ abstract public class Transaction implements Comparable<Transaction>{
 
     @Override
     public String toString() {
-        return getClass().getName() +
-                "{date=" + date +
+        return getClass().getSimpleName() +
+                "{customer="+customer.getCreds().getName()+
+                ", account="+account.getClass().getSimpleName()+
+                ", date=" + date +
                 ", amount=" + amount +
                 '}';
     }
