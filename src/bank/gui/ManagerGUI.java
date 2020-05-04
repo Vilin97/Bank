@@ -21,6 +21,8 @@ public class ManagerGUI {
         Bank.getCustomers().add(customer2);
         manager.addNewStock("Stock1", 20, 2);
         customer1.openCheckingAccount("my checking account 1", "EUR");
+        customer1.openCheckingAccount("my checking account 2", "EUR");
+        customer1.openCheckingAccount("my checking account 3", "EUR");
         customer1.openSavingsAccount("my savings account 1", "USD");
         CheckingAccount checking1 = customer1.getCheckingAccounts().get(0);
         SavingsAccount savings1 = customer1.getSavingsAccounts().get(0);

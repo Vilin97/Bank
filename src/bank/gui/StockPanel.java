@@ -17,7 +17,7 @@ public class StockPanel extends EmitterPanel<String> {
     private SetStockPricePanel setStockPricePanel;
 
     public StockPanel() {
-
+        super();
         addStockPanel = new AddStockPanel();
         setStockPricePanel = new SetStockPricePanel();
         listeners = new ArrayList<>();

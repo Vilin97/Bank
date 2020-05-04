@@ -82,13 +82,6 @@ abstract public class Account {
         transferBehavior.transfer(o,amount);
     }
 
-    @Override
-    public String toString() {
-        return this.getClass().getSimpleName()+ " '" + name + '\'' +
-                ", balance: " + balance +
-                ", currency: " + currency;
-    }
-
     public String getName() {
         return name;
     }
@@ -142,5 +135,19 @@ abstract public class Account {
 
     public User getUser() {
         return user;
+    }
+
+    @Override
+    public String toString() {
+        return this.getClass().getSimpleName()+ " '" + name + '\'' +
+                ", balance: " + balance +
+                ", currency: " + currency;
+    }
+
+    public String toStringDetailed() {
+        return this.getClass().getSimpleName()+ " '" + name + '\'' +
+                ", balance: " + balance +
+                ", currency: " + currency+
+                ", transactions: " + transactions;
     }
 }

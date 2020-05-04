@@ -15,6 +15,7 @@ public class AddStockPanel extends EmitterPanel<String> implements ActionListene
     private JButton addStockButton;
 
     public AddStockPanel() {
+        super();
         this.priceField = new JTextField(10);
         this.nameField = new JTextField(10);
         this.numberOfStocksField = new JTextField(10);

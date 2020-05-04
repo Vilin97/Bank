@@ -22,6 +22,7 @@ public class TransactionPanel extends EmitterPanel<String> {
     private JButton dailyReportButton;
 
     public TransactionPanel() {
+        super();
         DateFormat df = new SimpleDateFormat("MM/dd/yyyy");
         dateField = new JFormattedTextField(df);
         dateField.setColumns(10);
@@ -38,7 +39,7 @@ public class TransactionPanel extends EmitterPanel<String> {
                 if (!((c >= '0') && (c <= '9') ||
                         (c == KeyEvent.VK_BACK_SPACE) ||
                         (c == KeyEvent.VK_DELETE) || (c == KeyEvent.VK_SLASH))) {
-                    JOptionPane.showMessageDialog(null, "Please Enter Valid");
+                    JOptionPane.showMessageDialog(null, "Must enter a valid date!");
                     e.consume();
                 }
             }

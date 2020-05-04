@@ -14,6 +14,7 @@ public class ManagerToolbar extends EmitterPanel<String> implements ActionListen
     private JButton stocksButton;
 
     public ManagerToolbar() {
+        super();
         this.customersButton = new JButton("Customers");
         this.stocksButton = new JButton("Stock Market");
         this.listeners = new ArrayList<>();

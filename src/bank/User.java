@@ -48,7 +48,7 @@ public abstract class User implements Permisions {
 
     @Override
     public String toString() {
-        return "cred=" + cred;
+        return cred.toString();
     }
 
     public int getID() {

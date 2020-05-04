@@ -15,6 +15,7 @@ public class SetStockPricePanel extends EmitterPanel<String> implements ActionLi
     private JButton setPriceButton;
 
     public SetStockPricePanel() {
+        super();
         this.priceField = new JTextField(10);
         this.setPriceButton = new JButton("Set price!");
         this.listeners = new ArrayList<>();

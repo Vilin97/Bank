@@ -12,6 +12,7 @@ public class MainManagerFrame extends JFrame {
     private StockPanel stockPanel;
     private TransactionPanel transactionPanel;
     private CustomerPanel customerPanel;
+    private TimePanel timePanel;
     private JPanel panels;
 
     public MainManagerFrame() {
@@ -21,18 +22,21 @@ public class MainManagerFrame extends JFrame {
         log = new TextPanel();
         log.setBorder(BorderFactory.createTitledBorder("log"));
         log.setPreferredSize(new Dimension(100, 100));
-        int panelHeight = 350;
+        int panelHeight = 400;
         stockPanel = new StockPanel();
         stockPanel.setPreferredSize(new Dimension(200, panelHeight));
         transactionPanel = new TransactionPanel();
         transactionPanel.setPreferredSize(new Dimension(200, panelHeight));
         customerPanel = new CustomerPanel();
-        customerPanel.setPreferredSize(new Dimension(300, 600));
+        customerPanel.setPreferredSize(new Dimension(300, panelHeight));
+        timePanel = new TimePanel();
+        timePanel.setPreferredSize(new Dimension(300, panelHeight));
         panels = new JPanel();
         panels.setLayout(new FlowLayout());
         panels.add(stockPanel);
         panels.add(transactionPanel);
         panels.add(customerPanel);
+        panels.add(timePanel);
 
         Listener<String> logListener = new Listener<String>() {
             @Override
@@ -49,13 +53,14 @@ public class MainManagerFrame extends JFrame {
         stockPanel.addListener(logListener);
         transactionPanel.addListener(logListener);
         customerPanel.addListener(logListener);
+        timePanel.addListener(logListener);
 
         setLayout(new BorderLayout());
         add(toolbar, BorderLayout.NORTH);
         add(panels, BorderLayout.CENTER);
         add(log, BorderLayout.SOUTH);
 
-        setSize(800,800);
+        setSize(1200,800);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);
     }

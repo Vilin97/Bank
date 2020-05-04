@@ -286,4 +286,14 @@ public class Customer extends User {
                 "" + pendingLoans +
                 '}';
     }
+
+    public String toStringDetailed() {
+        return "Customer{" + super.toString() +
+                ""+savingsAccounts.toStringDetailed() +
+                ""+checkingAccounts.toStringDetailed() +
+                ""+securitiesAccounts.toStringDetailed() +
+                ""+loans.toStringDetailed() +
+                "" + pendingLoans.toStringDetailed() +
+                '}';
+    }
 }

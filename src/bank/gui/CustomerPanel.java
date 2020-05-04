@@ -53,7 +53,7 @@ public class CustomerPanel  extends EmitterPanel<String>{
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (selectedCustomer != null){
-                    textDisplayArea.setText(selectedCustomer.toString());
+                    textDisplayArea.setText(selectedCustomer.toStringDetailed());
                     emit("Customer "+selectedCustomer.getCreds().getName()+" was looked up");
                 }
                 else {
@@ -183,12 +183,10 @@ public class CustomerPanel  extends EmitterPanel<String>{
                     isSelected, cellHasFocus);
             if (value != null) {
                 Customer customer = (Customer) value;
-                setText( customer.getCreds().toString() );
-            }
-            if (index == -1) {
-                Customer customer = (Customer)value;
-                setText( "(" + customer.getID() +") "+ customer.getCreds());
-            }
+                String text = customer.getCreds().toString();
+                if (index == -1) text = "(" + customer.getID() +") "+text;
+                setText(text);
+            } else setText("no customers");
             return this;
         }
     }
@@ -200,12 +198,10 @@ public class CustomerPanel  extends EmitterPanel<String>{
                     isSelected, cellHasFocus);
             if (value != null) {
                 Loan loan = (Loan) value;
-                setText( -loan.getBalance()+" "+loan.getCurrency() );
-            }
-            if (index == -1) {
-                Loan loan = (Loan) value;
-                setText( "(" + loan.getID() +") "+  -loan.getBalance()+" "+loan.getCurrency() );
-            }
+                String text = loan.getClass().getSimpleName() +" of " + -loan.getBalance()+" "+loan.getCurrency();
+                if (index == -1) text = "(" + loan.getID() +") "+ text;
+                setText(text);
+            } else setText("no loans");
             return this;
         }
     }
