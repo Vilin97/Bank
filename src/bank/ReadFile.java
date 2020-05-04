@@ -118,53 +118,53 @@ public class ReadFile {
             for (int j = 0; j < accountTransactions.size(); j++) {
                 JSONObject currentTransaction = (JSONObject) accountTransactions.get(j);
                 if (currentTransaction.get(1) == "TransactionTransferIn") {
-                    TransactionTransferIn newTransaction = new TransactionTransferIn((LocalDate) currentTransaction.get(0), (double) currentTransaction.get(2));
-                    transactionsToAdd.add(newTransaction);
+                    //TransactionTransferIn newTransaction = new TransactionTransferIn((LocalDate) currentTransaction.get(0), (double) currentTransaction.get(2), custome, );
+                    //transactionsToAdd.add(newTransaction);
                 }
                 if (currentTransaction.get(1) == "TransactionTransferOut") {
-                    TransactionTransferOut newTransaction = new TransactionTransferOut((LocalDate) currentTransaction.get(0), (double) currentTransaction.get(2));
-                    transactionsToAdd.add(newTransaction);
+                    //TransactionTransferOut newTransaction = new TransactionTransferOut((LocalDate) currentTransaction.get(0), (double) currentTransaction.get(2));
+                    //transactionsToAdd.add(newTransaction);
                 }
                 if (currentTransaction.get(1) == "TransactionWithdrawal") {
-                    TransactionWithdrawal newTransaction = new TransactionWithdrawal((LocalDate) currentTransaction.get(0), (double) currentTransaction.get(2));
-                    transactionsToAdd.add(newTransaction);
+                    //TransactionWithdrawal newTransaction = new TransactionWithdrawal((LocalDate) currentTransaction.get(0), (double) currentTransaction.get(2));
+                    //transactionsToAdd.add(newTransaction);
                 }
 
                 if (currentTransaction.get(1) == "TransactionDeposit") {
-                    TransactionDeposit newTransaction = new TransactionDeposit((LocalDate) currentTransaction.get(0), (double) currentTransaction.get(2));
-                    transactionsToAdd.add(newTransaction);
+                    //TransactionDeposit newTransaction = new TransactionDeposit((LocalDate) currentTransaction.get(0), (double) currentTransaction.get(2));
+                    //transactionsToAdd.add(newTransaction);
                 }
             }
             // Checking accounts
             if (currentAccount.get("accountName") == "CheckingAccount") {
                 // create the account
-                CheckingAccount newCheckingAccount = new CheckingAccount(currentAccount.get("accountName").toString(), transactionsToAdd,
-                        (double) currentAccount.get("balance"), (Currency) currentAccount.get("currency"));
-                checkingAccounts.add(newCheckingAccount);
+                //CheckingAccount newCheckingAccount = new CheckingAccount(currentAccount.get("accountName").toString(), transactionsToAdd,
+                        //(double) currentAccount.get("balance"), (Currency) currentAccount.get("currency"));
+                //checkingAccounts.add(newCheckingAccount);
             }
 
             if (currentAccount.get("accountName") == "SavingsAccount") {
                 // create the account
-                SavingsAccount newSavingsAccount = new SavingsAccount(currentAccount.get("accountName").toString(), transactionsToAdd,
-                        (double) currentAccount.get("balance"), (Currency) currentAccount.get("currency"));
-                savingsAccounts.add(newSavingsAccount);
+                //SavingsAccount newSavingsAccount = new SavingsAccount(currentAccount.get("accountName").toString(), transactionsToAdd,
+                        //(double) currentAccount.get("balance"), (Currency) currentAccount.get("currency"));
+                //savingsAccounts.add(newSavingsAccount);
             }
 
             if (currentAccount.get("accountName") == "CreditAccount") {
                 // create the account
-                CreditAccount newCreditAccount = new CreditAccount(currentAccount.get("accountName").toString(), transactionsToAdd,
-                        (double) currentAccount.get("balance"), (Currency) currentAccount.get("currency"));
-                creditAccounts.add(newCreditAccount);
+                //CreditAccount newCreditAccount = new CreditAccount(currentAccount.get("accountName").toString(), transactionsToAdd,
+                        //(double) currentAccount.get("balance"), (Currency) currentAccount.get("currency"));
+                //creditAccounts.add(newCreditAccount);
             }
 
             if (currentAccount.get("accountName") == "SecuritiesAccount") {
                 // create the account
-                SecuritiesAccount newSecuritiesAccount = new SecuritiesAccount(currentAccount.get("accountName").toString(), (Currency) currentAccount.get("currency"));
-                securitiesAccounts.add(newSecuritiesAccount);
+                //SecuritiesAccount newSecuritiesAccount = new SecuritiesAccount(currentAccount.get("accountName").toString(), (Currency) currentAccount.get("currency"));
+                //securitiesAccounts.add(newSecuritiesAccount);
             }
 
             customer.setCheckingAccounts(checkingAccounts);
-            customer.setCreditAccounts(creditAccounts);
+            //customer.setCreditAccounts(creditAccounts);
             customer.setSavingsAccounts(savingsAccounts);
             customer.setSecuritiesAccounts(securitiesAccounts);
         }
