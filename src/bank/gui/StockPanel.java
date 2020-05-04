@@ -32,7 +32,7 @@ public class StockPanel extends EmitterPanel<String> {
                     int number = Integer.parseInt(strings.get(2));
                     Bank.getManager().addNewStock(name, price, number);
                     setStockPricePanel.updateStockList();
-                    message = "Added stock "+name;
+                    message = "Added " + number + " stocks "+name+" at price "+price;
                 } catch (Exception e){
                     message = "Failed to add stock";
                 }
@@ -46,9 +46,10 @@ public class StockPanel extends EmitterPanel<String> {
                 String message;
                 try {
                     String name = strings.get(0);
+                    double currentPrice = Bank.getStockMarket().getStockPrice(name);
                     double price = Double.parseDouble(strings.get(1));
                     Bank.getManager().changeStockPrice(name, price);
-                    message = "Changed price of stock " + name;
+                    message = "Changed price of stock " + name +" from " + currentPrice + " to "+price;
                 } catch (Exception e){
                     message = "Failed to change price of stock";
                 }

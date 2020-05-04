@@ -1,6 +1,7 @@
 package bank.gui;
 
 import bank.Bank;
+import bank.Stock;
 import bank.gui.EmitterPanel;
 
 import javax.swing.*;
@@ -25,7 +26,11 @@ public class SetStockPricePanel extends EmitterPanel<String> implements ActionLi
         DefaultComboBoxModel<String> model = new DefaultComboBoxModel<>();
         model.addAll(Bank.getStockMarket().getPrices().keySet());
         stocksList.setModel(model);
-        stocksList.setSelectedIndex(0);
+        if (stocksList.getItemCount() > 0){
+            stocksList.setSelectedIndex(0);
+            String stockName = (String) stocksList.getSelectedItem();
+            priceField.setText(Bank.getStockMarket().getPrices().get(stockName).toString());
+        }
 
         setUpLayout();
         setBorder(BorderFactory.createTitledBorder("Set stock price"));
