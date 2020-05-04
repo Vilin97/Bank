@@ -2,13 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2dc3e741-f237-4da0-8a94-ca167ff386a7" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/bank/Account.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/bank/Account.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/bank/Credentials.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/bank/Credentials.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/bank/ReadFile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/bank/ReadFile.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/bank/SavingsAccount.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/bank/SavingsAccount.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/bank/SecuritiesAccount.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/bank/SecuritiesAccount.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/bank/TransactionDeposit.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/bank/TransactionDeposit.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/bank/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/bank/User.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -143,6 +141,10 @@
       <screen x="0" y="23" width="1440" height="877" />
     </state>
     <state x="569" y="357" key="#com.intellij.ide.util.projectWizard.JdkChooserPanel.MyDialog/0.23.1440.877@0.23.1440.877" timestamp="1587586740690" />
+    <state x="431" y="184" key="MultipleFileMergeDialog" timestamp="1588603381521">
+      <screen x="0" y="23" width="1440" height="877" />
+    </state>
+    <state x="431" y="184" key="MultipleFileMergeDialog/0.23.1440.877@0.23.1440.877" timestamp="1588603381521" />
     <state x="221" y="63" key="SettingsEditor" timestamp="1587923583380">
       <screen x="0" y="23" width="1440" height="877" />
     </state>
@@ -156,10 +158,10 @@
       <screen x="0" y="23" width="1440" height="877" />
     </state>
     <state x="397" y="294" key="com.intellij.ide.util.TipDialog/0.23.1440.877@0.23.1440.877" timestamp="1588440499541" />
-    <state x="378" y="218" width="683" height="486" key="find.popup" timestamp="1588440682712">
+    <state x="378" y="218" width="683" height="486" key="find.popup" timestamp="1588604049633">
       <screen x="0" y="23" width="1440" height="877" />
     </state>
-    <state x="378" y="218" width="683" height="486" key="find.popup/0.23.1440.877@0.23.1440.877" timestamp="1588440682712" />
+    <state x="378" y="218" width="683" height="486" key="find.popup/0.23.1440.877@0.23.1440.877" timestamp="1588604049633" />
     <state x="169" y="150" width="1215" height="786" key="find.popup/0.23.2560.1417@0.23.2560.1417" timestamp="1588096459044" />
     <state x="194" y="128" key="new project wizard" timestamp="1587923954328">
       <screen x="0" y="23" width="1440" height="877" />

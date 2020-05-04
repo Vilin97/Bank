@@ -88,4 +88,13 @@ public class Credentials {
         return "name=" + name +
                 ", uname=" + uname;
     }
+
+    public void setName(Name name) {
+        this.name = name;
+    }
+
+    public void setUname(UName uname) {
+        this.uname = uname;
+    }
+
 }

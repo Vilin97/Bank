@@ -50,4 +50,22 @@ public abstract class User implements Permisions {
     public String toString() {
         return "cred=" + cred;
     }
+
+    public String getName() {
+        return this.cred.getName().toString();
+    }
+
+    public int getID() {
+        return this.ID;
+    }
+
+    public String getUName() {
+        return String.valueOf(this.cred.getUname());
+    }
+
+    public void setCred(Name name, UName uname, int userID) {
+        this.cred.setName(name);
+        this.cred.setUname(uname);
+        this.ID = userID;
+    }
 }

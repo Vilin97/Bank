@@ -29,7 +29,7 @@ public class ReadFile {
         JSONObject userObject = new JSONObject();
         JSONArray userTransactions = new JSONArray();
         for (int i = 1; i < transactions.size() + 1; i++) {
-            Transaction currentTransaction = transactions.getTransaction(i);
+            Transaction currentTransaction = transactions.get(i);
             JSONArray individualTransaction = new JSONArray();
             // add the transaction date, 0
             individualTransaction.add(1, currentTransaction.getDate());
@@ -52,7 +52,7 @@ public class ReadFile {
         JSONObject userObject = new JSONObject();
         JSONArray userAccounts = new JSONArray();
         for (int i = 1; i < accounts.size() + 1; i++) {
-            Account currentAccount = accounts.getAccount(i);
+            Account currentAccount = accounts.get(i);
             JSONArray individualAccount = new JSONArray();
             JSONArray accountTransactions = new JSONArray();
             // add the account name
@@ -67,9 +67,9 @@ public class ReadFile {
             individualAccount.add(5, currentAccount.getCurrency());
 
             for (int j = 0; j < currentAccount.getTransactions().size(); j++) {
-                accountTransactions.add(0, currentAccount.getTransactions().getTransaction(j).getDate());
-                accountTransactions.add(1, currentAccount.getTransactions().getTransaction(j).getClass().getName());
-                accountTransactions.add(2, currentAccount.getTransactions().getTransaction(j).amount);
+                accountTransactions.add(0, currentAccount.getTransactions().get(j).getDate());
+                accountTransactions.add(1, currentAccount.getTransactions().get(j).getClass().getName());
+                accountTransactions.add(2, currentAccount.getTransactions().get(j).amount);
                 individualAccount.add(6, accountTransactions);
             }
             userObject.put("transactions", accountTransactions);
@@ -100,7 +100,7 @@ public class ReadFile {
         JSONParser jsonParser = new JSONParser();
         JSONObject currentUserJSON = (JSONObject) jsonParser.parse(reader);
         Accounts<CheckingAccount> checkingAccounts = new Accounts<>();
-        Accounts<CreditAccount> creditAccounts = new Accounts<>();
+        //Accounts<CreditAccount> creditAccounts = new Accounts<>();
         Accounts<SavingsAccount> savingsAccounts = new Accounts<>();
         Accounts<SecuritiesAccount> securitiesAccounts = new Accounts<>();
 
