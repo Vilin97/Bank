@@ -71,8 +71,4 @@ public class SecuritiesAccount extends Account {
         this.stocks = stocks;
     }
 
-    @Override
-    public String toString() {
-        return "Securities Account";
-    }
 }

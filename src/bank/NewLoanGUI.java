@@ -195,7 +195,7 @@ public class NewLoanGUI extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new NewLoanGUI().setVisible(true);
+                //new NewLoanGUI().setVisible(true);
             }
         });
     }
