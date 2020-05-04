@@ -15,18 +15,17 @@ import java.util.List;
 public class StockPanel extends EmitterPanel<String> {
     private AddStockPanel addStockPanel;
     private SetStockPricePanel setStockPricePanel;
-    private String message;
 
     public StockPanel() {
 
         addStockPanel = new AddStockPanel();
         setStockPricePanel = new SetStockPricePanel();
         listeners = new ArrayList<>();
-        message = "?";
 
         addStockPanel.addListener(new Listener<String>(){
             @Override
             public void receive(List<String> strings) {
+                String message;
                 try {
                     String name = strings.get(0);
                     double price = Double.parseDouble(strings.get(1));
@@ -44,6 +43,7 @@ public class StockPanel extends EmitterPanel<String> {
         setStockPricePanel.addListener(new Listener<String>() {
             @Override
             public void receive(List<String> strings) {
+                String message;
                 try {
                     String name = strings.get(0);
                     double price = Double.parseDouble(strings.get(1));

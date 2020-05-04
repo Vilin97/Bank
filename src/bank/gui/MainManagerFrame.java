@@ -37,11 +37,11 @@ public class MainManagerFrame extends JFrame {
         Listener<String> logListener = new Listener<String>() {
             @Override
             public void receive(List<String> strings) {
-                String ss = "";
+                StringBuilder ss = new StringBuilder();
                 for (String s:strings) {
-                    ss += s;
+                    ss.append(s);
                 }
-                log.appendText(ss);
+                log.appendText(ss.toString()+"\n");
             }
         };
 
