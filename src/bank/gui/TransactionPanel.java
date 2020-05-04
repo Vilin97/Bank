@@ -1,4 +1,8 @@
-package bank;
+package bank.gui;
+
+import bank.Bank;
+import bank.Transaction;
+import bank.Transactions;
 
 import javax.swing.*;
 import java.awt.*;
@@ -26,7 +30,6 @@ public class TransactionPanel extends EmitterPanel<String> {
 
         textDisplayArea = new TextPanel();
         textDisplayArea.setBorder(BorderFactory.createTitledBorder("transactions"));
-        textDisplayArea.setPreferredSize(new Dimension(300, 200));
         dailyReportButton = new JButton("Get daily report!");
 
         dateField.addKeyListener(new KeyAdapter() {
@@ -48,47 +51,29 @@ public class TransactionPanel extends EmitterPanel<String> {
                 LocalDate localDate = date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
                 Transactions<Transaction> transactions = Bank.getManager().getTransactionsByTimePeriod(localDate);
                 textDisplayArea.setText(transactions.toString());
+                emit("Transactions for date "+localDate+" were looked up");
             }
         });
 
         setUpLayout();
+        setBorder(BorderFactory.createTitledBorder("Transaction Panel"));
     }
 
     private void setUpLayout() {
-        setLayout(new GridBagLayout());
-        GridBagConstraints gc = new GridBagConstraints();
-
-        gc.fill = GridBagConstraints.NONE;
-        Insets insets = new Insets(0,0,0,5);
-        Insets noInsets = new Insets(0,0,0,0);
-
+        //setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+        setLayout(new BorderLayout());
         // first row //
-        gc.gridy = 0;
-        gc.weighty = 0.5;
-
-        gc.insets = insets;
-        gc.gridx = 1;
-        gc.anchor = GridBagConstraints.LINE_START;
-        add(textDisplayArea, gc);
+        add(textDisplayArea, BorderLayout.NORTH);
 
         // next row //
-        gc.gridy ++;
-        gc.weighty = 0.5;
-        gc.gridx = 0;
-        gc.anchor = GridBagConstraints.LINE_END;
-        add(new JLabel("date:"), gc);
-
-        gc.gridx = 1;
-        gc.anchor = GridBagConstraints.LINE_START;
-        add(dateField, gc);
+        JPanel panel = new JPanel();
+        panel.setLayout(new FlowLayout());
+        panel.add(new JLabel("date:"));
+        panel.add(dateField);
+        add(panel, BorderLayout.CENTER);
 
         // next row //
-        gc.gridy ++;
-
-        gc.weighty = 0.5;
-        gc.gridx = 1;
-        gc.anchor = GridBagConstraints.FIRST_LINE_START;
-        add(dailyReportButton, gc);
+        add(dailyReportButton, BorderLayout.SOUTH);
     }
 }
 

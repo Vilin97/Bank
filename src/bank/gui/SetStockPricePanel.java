@@ -1,4 +1,7 @@
-package bank;
+package bank.gui;
+
+import bank.Bank;
+import bank.gui.EmitterPanel;
 
 import javax.swing.*;
 import java.awt.*;
@@ -51,7 +54,7 @@ public class SetStockPricePanel extends EmitterPanel<String> implements ActionLi
 
         gc.gridx = 0;
         gc.anchor = GridBagConstraints.FIRST_LINE_END;
-        add(new Label("price:"), gc);
+        add(new JLabel("price:"), gc);
 
         gc.gridx = 1;
         gc.anchor = GridBagConstraints.LINE_START;

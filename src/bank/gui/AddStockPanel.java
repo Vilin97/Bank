@@ -1,4 +1,6 @@
-package bank;
+package bank.gui;
+
+import bank.gui.EmitterPanel;
 
 import javax.swing.*;
 import java.awt.*;
@@ -51,7 +53,7 @@ public class AddStockPanel extends EmitterPanel<String> implements ActionListene
         gc.insets = insets;
         gc.gridx = 0;
         gc.anchor = GridBagConstraints.LINE_END;
-        add(new Label("price:"), gc);
+        add(new JLabel("price:"), gc);
 
         gc.insets = noInsets;
         gc.gridx = 1;
@@ -64,7 +66,7 @@ public class AddStockPanel extends EmitterPanel<String> implements ActionListene
         gc.insets = insets;
         gc.gridx = 0;
         gc.anchor = GridBagConstraints.LINE_END;
-        add(new Label("number:"), gc);
+        add(new JLabel("number:"), gc);
 
         gc.insets = noInsets;
         gc.gridx = 1;

@@ -1,11 +1,13 @@
-package bank;
+package bank.gui;
+
+import bank.Bank;
+import bank.gui.EmitterPanel;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import java.util.Collections;
 
 public class ManagerToolbar extends EmitterPanel<String> implements ActionListener {
     private JButton customersButton;

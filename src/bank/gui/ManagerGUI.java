@@ -1,6 +1,7 @@
-package bank;
+package bank.gui;
 
-import javax.swing.*;
+import bank.*;
+
 import java.time.LocalDate;
 import java.util.Currency;
 

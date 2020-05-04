@@ -1,10 +1,15 @@
-package bank;
+package bank.gui;
+
+import bank.Bank;
+import bank.Listener;
+import bank.gui.AddStockPanel;
+import bank.gui.EmitterPanel;
+import bank.gui.SetStockPricePanel;
 
 import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class StockPanel extends EmitterPanel<String> {
@@ -13,8 +18,6 @@ public class StockPanel extends EmitterPanel<String> {
     private String message;
 
     public StockPanel() {
-        setLayout(new BorderLayout());
-        setPreferredSize(new Dimension(300, 100));
 
         addStockPanel = new AddStockPanel();
         setStockPricePanel = new SetStockPricePanel();
@@ -53,10 +56,9 @@ public class StockPanel extends EmitterPanel<String> {
             }
         });
 
-        add(addStockPanel, BorderLayout.NORTH);
-        add(setStockPricePanel, BorderLayout.SOUTH);
-        Border innerBorder = BorderFactory.createTitledBorder("Stock Management");
-        Border outerBorder = BorderFactory.createEmptyBorder(5,5,5,5);
-        setBorder(BorderFactory.createCompoundBorder(outerBorder, innerBorder));
+        setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+        add(addStockPanel);
+        add(setStockPricePanel);
+        setBorder(BorderFactory.createTitledBorder("Stock Panel"));
     }
 }

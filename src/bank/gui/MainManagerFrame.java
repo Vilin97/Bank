@@ -1,4 +1,6 @@
-package bank;
+package bank.gui;
+
+import bank.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -9,6 +11,8 @@ public class MainManagerFrame extends JFrame {
     private TextPanel log;
     private StockPanel stockPanel;
     private TransactionPanel transactionPanel;
+    private CustomerPanel customerPanel;
+    private JPanel panels;
 
     public MainManagerFrame() {
         super("Manager Portal");
@@ -17,10 +21,20 @@ public class MainManagerFrame extends JFrame {
         log = new TextPanel();
         log.setBorder(BorderFactory.createTitledBorder("log"));
         log.setPreferredSize(new Dimension(100, 100));
+        int panelHeight = 300;
         stockPanel = new StockPanel();
+        stockPanel.setPreferredSize(new Dimension(200, panelHeight));
         transactionPanel = new TransactionPanel();
+        transactionPanel.setPreferredSize(new Dimension(200, panelHeight));
+        customerPanel = new CustomerPanel();
+        customerPanel.setPreferredSize(new Dimension(200, panelHeight));
+        panels = new JPanel();
+        panels.setLayout(new FlowLayout());
+        panels.add(stockPanel);
+        panels.add(transactionPanel);
+        panels.add(customerPanel);
 
-        toolbar.addListener(new Listener<String>() {
+        Listener<String> logListener = new Listener<String>() {
             @Override
             public void receive(List<String> strings) {
                 String ss = "";
@@ -29,23 +43,16 @@ public class MainManagerFrame extends JFrame {
                 }
                 log.appendText(ss);
             }
-        });
+        };
 
-        stockPanel.addListener(new Listener<String>() {
-            @Override
-            public void receive(List<String> strings) {
-                String ss = "";
-                for (String s:strings) {
-                    ss += s;
-                }
-                log.appendText(ss+"\n");
-            }
-        });
+        toolbar.addListener(logListener);
+        stockPanel.addListener(logListener);
+        transactionPanel.addListener(logListener);
+        customerPanel.addListener(logListener);
 
         setLayout(new BorderLayout());
         add(toolbar, BorderLayout.NORTH);
-        add(transactionPanel, BorderLayout.EAST);
-        add(stockPanel, BorderLayout.WEST);
+        add(panels, BorderLayout.CENTER);
         add(log, BorderLayout.SOUTH);
 
         setSize(800,600);

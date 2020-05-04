@@ -50,4 +50,8 @@ public abstract class User implements Permisions {
     public String toString() {
         return "cred=" + cred;
     }
+
+    public int getID() {
+        return ID;
+    }
 }
