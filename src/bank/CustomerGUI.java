@@ -1465,6 +1465,7 @@ public class CustomerGUI extends javax.swing.JFrame {
     
     //updates the savings accounts in the list
     public void updateSavingsAccList(Customer user){
+        sAccList.removeAllItems();
         Iterator SAiter = user.getSASIter();
         while(SAiter.hasNext()){
             SavingsAccount sa = (SavingsAccount) SAiter.next();
@@ -1587,6 +1588,7 @@ public class CustomerGUI extends javax.swing.JFrame {
     
     //updates the Checking accounts in the list
     public void updateCheckingAccList(Customer user){
+        chekAccList1.removeAllItems();
         Iterator CAiter = user.getCEKAIter();
         while(CAiter.hasNext()){
             CheckingAccount sa = (CheckingAccount) CAiter.next();
@@ -1791,6 +1793,7 @@ public class CustomerGUI extends javax.swing.JFrame {
     }
     
     public void updateLoanList(Customer user){
+        loanListComboBox.removeAllItems();
         Iterator Liter = user.getLoanIter();
         while(Liter.hasNext()){
             Loan sa = (Loan) Liter.next();

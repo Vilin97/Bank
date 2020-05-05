@@ -167,6 +167,7 @@ public class NewLoanGUI extends javax.swing.JFrame {
     
     private void initCustom(Customer user, CustomerGUI gui){
         updateAccList(user);
+        fillCurrency();
     }
     
     public void updateAccList(Customer user){
