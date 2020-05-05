@@ -34,24 +34,19 @@ public class LoginGUI extends javax.swing.JFrame {
             public void actionPerformed(ActionEvent e) {
                 // take the parameters that the user has entered and create an account
                 String firstName = firstNameInput.getText();
-                System.out.println(firstName);
                 String lastname = lastNameInput.getText();
-                System.out.println(lastname);
                 String password = String.valueOf(passWordInput.getPassword());
-                System.out.println(password);
                 String username = unameInput.getText();
-                System.out.println(username);
 
-                Customer newCustomer = Customer.createCustomer(firstName, lastname, username, password);
+                Customer newCustomer = bank.Customer.createCustomer(firstName, lastname, username, password);
                 // give a new user a savings account
-                newCustomer.createSavingsAccount("Savings", "USD");
-
+                //newCustomer.createSavingsAccount("Savings", "USD");
 
                 // open the customer GUI with this user
-                ArrayList customers = new ArrayList();
-                customers.add(newCustomer);
-                Customers customersForBank = new Customers(customers);
-                Bank bank = new Bank(customersForBank, Bank.getManager());
+                Manager temp = bank.Manager.createManager("Mr.", "Monopoly", "mrMono", "12345");
+                Customers customersForBank = new Customers();
+                customersForBank.add(newCustomer);
+                Bank bank = new Bank(customersForBank, temp);
                 LocalDate currentDate = LocalDate.now();
                 Bank.setCurrentDate(currentDate);
                 CustomerGUI customerGUI = new CustomerGUI(newCustomer, bank);

@@ -24,6 +24,7 @@ public class CustomerGUI extends javax.swing.JFrame {
      * Creates new form CustomerGUI
      */
     public CustomerGUI(Customer cs, Bank bnk) {
+        //System.out.println("new bank for new user");
         initComponents();
         initCustom(cs);
         initActionListensers(cs);
@@ -1245,8 +1246,6 @@ public class CustomerGUI extends javax.swing.JFrame {
         this.updateSavingsAccBalanceDisp(user);
         this.updateCheckingAccList(user);
         this.updateCheckingAccBalanceDisp(user);
-        
-        
     }
     
     //builds the action listeners
@@ -1488,7 +1487,9 @@ public class CustomerGUI extends javax.swing.JFrame {
     
     //updates the balance that is diplayed, but needs a action listener to call it
     public void updateCheckingAccBalanceDisp(Customer user){
+        //System.out.println("update acc balance");
         int indexOfAcc = chekAccList1.getSelectedIndex();
+        System.out.println("index: "+indexOfAcc);
         CheckingAccount acc = user.getCheckingAccounts().get(indexOfAcc);
         String disp = acc.currency.getSymbol() + " " + acc.getBalance();
         chekAccBalanceDisplay1.setText(disp);
