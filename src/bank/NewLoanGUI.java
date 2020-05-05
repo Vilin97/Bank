@@ -5,6 +5,7 @@
  */
 package bank;
 
+import static bank.Constants.curencies;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
@@ -57,7 +58,7 @@ public class NewLoanGUI extends javax.swing.JFrame {
 
         nameOfLoanjLabel2.setText("Name Of Loan:");
 
-        currnecyjComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "USD", "GBP" }));
+        currnecyjComboBox1.setToolTipText("");
 
         currencyjLabel3.setText("Curency:");
 
@@ -176,6 +177,13 @@ public class NewLoanGUI extends javax.swing.JFrame {
             depositLocjComboBox2.getSelectedIndex();
         }
     }
+    
+    public void fillCurrency(){
+        for(int c = 0; c < curencies.size(); c++){
+            currnecyjComboBox1.addItem(curencies.get(c));
+        }
+    }
+    
     public void requestLoan(Customer user, CustomerGUI gui){
         try{
             String nol = nameOfLoanjTextField1.getText();

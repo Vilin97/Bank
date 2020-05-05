@@ -6,6 +6,7 @@
 package bank;
 
 import static bank.IOTools.parseToDate;
+import static bank.NewAccountGUI.newAccGUI;
 import static bank.NewLoanGUI.newLoanGUI;
 import static bank.TransferGUI.transferGUI;
 import java.awt.event.ActionEvent;
@@ -1439,10 +1440,24 @@ public class CustomerGUI extends javax.swing.JFrame {
                 
         });
         
+        
+        //options action listeners
+        openNewAccButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                newAccount(user);
+            }
+                
+        });
+        
     }
     
     
+    //options methods
     
+    public void newAccount(Customer user){
+        newAccGUI(user,this);
+    }
     //Savings account methods
     //
     
