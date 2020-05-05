@@ -1713,8 +1713,11 @@ public class CustomerGUI extends javax.swing.JFrame {
     
     public void updateWorkingLoan(Customer user){
         //this.updateLoanList(user);
-        this.updateTHLoan(user);
-        this.updateCurrentLoanBalanceDisp(user);
+        if(user.getLoans().size()>0){
+            this.updateTHLoan(user);
+            this.updateCurrentLoanBalanceDisp(user);
+        }
+        
     }
     
     public void requestNewLoan(Customer user){
