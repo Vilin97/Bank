@@ -236,6 +236,11 @@ public class Customer extends User {
         return iter;
     }
     
+    public Iterator getLoanIter(){
+        Iterator iter = this.loans.iterator();
+        return iter;
+    }
+    
     /*
     
     are being replaced

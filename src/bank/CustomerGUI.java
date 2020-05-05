@@ -138,7 +138,7 @@ public class CustomerGUI extends javax.swing.JFrame {
         loanTextBox = new javax.swing.JTextArea();
         loanAccTranHistLabel = new javax.swing.JLabel();
         loanTHShowAllButton = new javax.swing.JButton();
-        laonTHInRangeButton = new javax.swing.JButton();
+        loanTHInRangeButton = new javax.swing.JButton();
         loanTHDate0Fieldy1 = new javax.swing.JTextField();
         loanTHDate1Fieldy = new javax.swing.JTextField();
         loanTHDate0Fieldm = new javax.swing.JTextField();
@@ -974,7 +974,7 @@ public class CustomerGUI extends javax.swing.JFrame {
 
         loanTHShowAllButton.setText("Show All");
 
-        laonTHInRangeButton.setText("In Range");
+        loanTHInRangeButton.setText("In Range");
 
         loanTHDate0Fieldy1.setText("yyyy");
 
@@ -1016,7 +1016,7 @@ public class CustomerGUI extends javax.swing.JFrame {
                                     .addComponent(loanTHDate0Fieldm, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(loanTHDate0Fieldd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(laonTHInRangeButton))
+                        .addComponent(loanTHInRangeButton))
                     .addComponent(loanTHShowAllButton, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addGap(18, 18, 18)
                 .addGroup(loanTHistPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1052,7 +1052,7 @@ public class CustomerGUI extends javax.swing.JFrame {
                 .addGroup(loanTHistPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(loanTHDate0Fieldm, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(monthLabel5)
-                    .addComponent(laonTHInRangeButton)
+                    .addComponent(loanTHInRangeButton)
                     .addComponent(loanTHDate1Fieldm, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(loanTHistPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1268,9 +1268,16 @@ public class CustomerGUI extends javax.swing.JFrame {
     //builds the gui for the user in the begining
     public void initCustom(Customer user){
         this.updateSavingsAccList(user);
-        this.updateSavingsAccBalanceDisp(user);
+        //this.updateSavingsAccBalanceDisp(user);
+        this.updateWorkingSavingsAcc(user);
+        
         this.updateCheckingAccList(user);
-        this.updateCheckingAccBalanceDisp(user);
+        //this.updateCheckingAccBalanceDisp(user);
+        this.updateworkingCheckingAcc(user);
+        
+        this.updateLoanList(user);
+        this.updateWorkingLoan(user);
+        this.updatePendingLoansDisp(user);
         
         
     }
@@ -1370,6 +1377,26 @@ public class CustomerGUI extends javax.swing.JFrame {
                 
         });
         
+        chekAccTHShowAllButton2.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                updateTHChekAcc(user);
+            }
+                
+        });
+        
+        
+        chekAccTHInRangeButton2.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                updateTHChekAccIR(user);
+            }
+                
+        });
+        
+        
+        
+        
         //loan action listeners
         newLoanjButton.addActionListener(new ActionListener() {
             @Override
@@ -1379,6 +1406,38 @@ public class CustomerGUI extends javax.swing.JFrame {
                 
         });
         
+        loanTHShowAllButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                updateTHLoan(user);
+            }
+                
+        });
+        
+        
+        loanTHInRangeButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                updateTHLoanIR(user);
+            }
+                
+        });
+        
+        loanBankjButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                updateWorkingLoan(user);
+            }
+                
+        });
+        
+        depositLoanButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                depositLoan(user);
+            }
+                
+        });
         
     }
     
@@ -1478,7 +1537,7 @@ public class CustomerGUI extends javax.swing.JFrame {
         
         String date0sy = savAccTHDate0Fieldy.getText();
         String date0sm = savAccTHDate0Fieldm.getText();
-        String date0sd = savAccTHDate0Fieldm.getText();
+        String date0sd = savAccTHDate0Fieldd.getText();
         
         String date1sy = savAccTHDate1Fieldy.getText();
         String date1sm = savAccTHDate1Fieldm.getText();
@@ -1600,7 +1659,7 @@ public class CustomerGUI extends javax.swing.JFrame {
         
         String date0sy = chekAccTHDate0Fieldy1.getText();
         String date0sm = chekAccTHDate0Fieldm1.getText();
-        String date0sd = chekAccTHDate0Fieldm1.getText();
+        String date0sd = chekAccTHDate0Fieldd1.getText();
         
         String date1sy = chekAccTHDate1Fieldy1.getText();
         String date1sm = chekAccTHDate1Fieldm1.getText();
@@ -1631,15 +1690,29 @@ public class CustomerGUI extends javax.swing.JFrame {
     public void updateAllDsipAndTH(Customer user){
         this.updateworkingCheckingAcc(user);
         this.updateWorkingSavingsAcc(user);
+        this.updateWorkingLoan(user);
     }
     
     
     //loan methods
     
+    public void updateWorkingLoan(Customer user){
+        //this.updateLoanList(user);
+        this.updateTHLoan(user);
+        this.updateCurrentLoanBalanceDisp(user);
+    }
+    
     public void requestNewLoan(Customer user){
         newLoanGUI(user,this);
     }
     
+    public void updateCurrentLoanBalanceDisp(Customer user){
+        int indexOfAcc = loanListComboBox.getSelectedIndex();
+        Loan acc = user.getLoans().get(indexOfAcc);
+        String disp = acc.currency.getSymbol() + " " + acc.getBalance();
+        loanAmtOwedDisplay.setText(disp);
+        
+    }
     public void updatePendingLoansDisp(Customer user){
         String th = "";
         Accounts pndloans = user.getPendingLoans();
@@ -1650,6 +1723,78 @@ public class CustomerGUI extends javax.swing.JFrame {
         }
         pendingLoansjTextArea1.setText(th);
         
+    }
+    
+    public void updateTHLoan(Customer user){
+        loanTextBox.setText(" ");
+        String th = "";
+        int indexOfAcc = loanListComboBox.getSelectedIndex();
+        Account acc = user.getLoans().get(indexOfAcc);
+        
+        Iterator iter = acc.transactions.iterator();
+        while(iter.hasNext()){
+            Transaction t = (Transaction) iter.next();
+            th+= t.toString() + " \n";
+        }
+        loanTextBox.setText(th);
+    }
+    
+    public void updateTHLoanIR(Customer user){
+        loanTextBox.setText(" ");
+        
+        int indexOfAcc = loanListComboBox.getSelectedIndex();
+        Account acc = user.getLoans().get(indexOfAcc);
+        
+        
+        String date0sy = loanTHDate0Fieldy1.getText();
+        String date0sm = loanTHDate0Fieldm.getText();
+        String date0sd = loanTHDate0Fieldd.getText();
+        
+        String date1sy = loanTHDate1Fieldy.getText();
+        String date1sm = loanTHDate1Fieldm.getText();
+        String date1sd = loanTHDate1Fieldd.getText();
+        
+        try{
+            LocalDate date0 = parseToDate(date0sy,date0sm,date0sd);
+            LocalDate date1 = parseToDate(date1sy,date1sm,date1sd);
+            
+            Transactions transactions = acc.getTransactionsByTimePeriod(date0, date1);
+            
+            String th = "";
+            Iterator iter = transactions.iterator();
+        while(iter.hasNext()){
+            Transaction t = (Transaction) iter.next();
+            th+= t.toString() + " \n";
+        }
+            loanTextBox.setText(th);
+        }catch(IllegalArgumentException e){
+            System.out.println(e.getMessage());
+        }
+    }
+    
+    public void updateLoanList(Customer user){
+        Iterator Liter = user.getLoanIter();
+        while(Liter.hasNext()){
+            Loan sa = (Loan) Liter.next();
+            loanListComboBox.addItem(sa.getName());
+            loanListComboBox.getSelectedIndex();
+        }
+    }
+    
+    
+    public void depositLoan(Customer user){
+        int indexOfAcc = loanListComboBox.getSelectedIndex();
+        Loan acc = user.getLoans().get(indexOfAcc);
+        try{
+            double inp = Double.parseDouble(interactionFieldLoan.getText());
+            System.out.println(inp + " will be deposited to the current loan.");
+            acc.deposit(inp);
+        }catch(NumberFormatException ex){
+            System.out.println(ex.getMessage());
+            System.out.println("User tried to enter not a double");
+        }
+        updateWorkingLoan(user);
+        interactionFieldLoan.setText(" ");
     }
     
     
@@ -1795,7 +1940,6 @@ public class CustomerGUI extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JButton laonTHInRangeButton;
     private javax.swing.JLabel loanAccTranHistLabel;
     private javax.swing.JTextField loanAmtOwedDisplay;
     private javax.swing.JPanel loanBalancejPanel;
@@ -1807,6 +1951,7 @@ public class CustomerGUI extends javax.swing.JFrame {
     private javax.swing.JTextField loanTHDate1Fieldd;
     private javax.swing.JTextField loanTHDate1Fieldm;
     private javax.swing.JTextField loanTHDate1Fieldy;
+    private javax.swing.JButton loanTHInRangeButton;
     private javax.swing.JButton loanTHShowAllButton;
     private javax.swing.JPanel loanTHistPanel;
     private javax.swing.JTextArea loanTextBox;
