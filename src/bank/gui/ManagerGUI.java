@@ -38,7 +38,7 @@ public class ManagerGUI {
         customer1.buyStock("Stock1", securities1);
         manager.changeStockPrice("Stock1", 300);
         customer1.sellStock("Stock1", securities1);
-        customer1.requestLoan("loan1", "USD", 100, savings1);
+        customer1.requestLoan("loan1", "USD", 100, savings1, new Collateral("car", 10000));
         new MainManagerFrame();
 
     }

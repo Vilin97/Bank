@@ -190,7 +190,7 @@ public class NewLoanGUI extends javax.swing.JFrame {
             double colworth = Double.parseDouble(collateWorthjTextField4.getText());
             Collateral temp = new Collateral(colname,colworth);
             
-            user.requestLoan(nol, cur, amtr, depacc);// need to add collateral here
+            user.requestLoan(nol, cur, amtr, depacc, temp);
             
             gui.updatePendingLoansDisp(user);
             
