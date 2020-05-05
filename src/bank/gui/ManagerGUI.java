@@ -32,7 +32,7 @@ public class ManagerGUI {
         customer1.openSecuritiesAccount("my sec account", "USD", (SavingsAccount) savings1, 6000);
         SecuritiesAccount securities1 = customer1.getSecuritiesAccounts().get(0);
 
-        manager.addNewStock("Stock1", 100, 10);
+        manager.addNewStock("Stock2", 100, 10);
 
         customer1.buyStock("Stock1", securities1);
         customer1.buyStock("Stock1", securities1);

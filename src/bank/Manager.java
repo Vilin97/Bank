@@ -42,10 +42,12 @@ public class Manager extends User {
     }
 
     public void addNewStock(String name, double price, int numberOfStocks){
-        changeStockPrice(name, price);
-        Stocks<Stock> stocks = Bank.getStockMarket().getStocks();
-        for (int i = 0; i < numberOfStocks; i++) {
-            stocks.add(new Stock(name));
+        if (!Bank.getStockMarket().hasStock(name)) {
+            changeStockPrice(name, price);
+            Stocks<Stock> stocks = Bank.getStockMarket().getStocks();
+            for (int i = 0; i < numberOfStocks; i++) {
+                stocks.add(new Stock(name));
+            }
         }
     }
 

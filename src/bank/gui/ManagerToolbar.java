@@ -1,6 +1,7 @@
 package bank.gui;
 
 import bank.Bank;
+import bank.StockMarket;
 import bank.gui.EmitterPanel;
 
 import javax.swing.*;
@@ -34,7 +35,8 @@ public class ManagerToolbar extends EmitterPanel<String> implements ActionListen
         if (clicked == customersButton) {
             emit(Bank.getCustomers().toString());
         } else if (clicked == stocksButton){
-            emit(Bank.getStockMarket().toString());
+            StockMarket stockMarket = Bank.getStockMarket();
+            emit(stockMarket.toString());
         }
     }
 }
