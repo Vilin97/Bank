@@ -2131,7 +2131,7 @@ public class CustomerGUI extends javax.swing.JFrame {
         }
     }
     
-    public void updatePortfolio(Customer user){
+    public void updatePortfolio(Customer user, StockMarket sm){
         portfolioTextField.setText(" ");
         myStockSYMSComboBox1.removeAllItems();
         String th = "";
@@ -2147,6 +2147,7 @@ public class CustomerGUI extends javax.swing.JFrame {
                 myStockSYMSComboBox1.addItem(s.getName());
             }
             portfolioTextField.setText(th);
+            updateWorkingSecAcc(user,sm);
         }
     }
     
@@ -2169,7 +2170,7 @@ public class CustomerGUI extends javax.swing.JFrame {
         SecuritiesAccount acc = user.getSecuritiesAccounts().get(indexOfAcc);
         String nameOfStock = (String) fullMarketSYMComboBox1.getSelectedItem();
         sm.buyStock(nameOfStock, acc);
-        updatePortfolio(user);
+        updatePortfolio(user,sm);
         updateMarket(user,sm);
         
     }
@@ -2179,7 +2180,7 @@ public class CustomerGUI extends javax.swing.JFrame {
         SecuritiesAccount acc = user.getSecuritiesAccounts().get(indexOfAcc);
         String nameOfStock = (String) myStockSYMSComboBox1.getSelectedItem();
         sm.sellStock(nameOfStock, acc);
-        updatePortfolio(user);
+        updatePortfolio(user,sm);
         updateMarket(user,sm);
     }
     
