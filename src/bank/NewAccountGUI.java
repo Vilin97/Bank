@@ -154,7 +154,7 @@ public class NewAccountGUI extends javax.swing.JFrame {
        
         this.dispose();
         gui.setVisible(true);
-        gui.updateCheckingAccList(user);
+        //gui.updateCheckingAccList(user);
     }
 
     

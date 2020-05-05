@@ -28,7 +28,7 @@ public class CustomerGUI extends javax.swing.JFrame {
     public CustomerGUI(Customer cs, Bank bnk) {
         initComponents();
         initCustom(cs);
-        initActionListensers(cs);
+        initActionListensers(cs, bnk.getStockMarket());
     }
 
     /**
@@ -105,22 +105,20 @@ public class CustomerGUI extends javax.swing.JFrame {
         savAccTHDate1Fieldd = new javax.swing.JTextField();
         savAccTransferButton1 = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
-        savAccTHistPanel1 = new javax.swing.JPanel();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        savAccTextBox1 = new javax.swing.JTextArea();
-        savAccTranHistLabel1 = new javax.swing.JLabel();
-        savAccTHShowAllButton1 = new javax.swing.JButton();
-        savAccTHInRangeButton1 = new javax.swing.JButton();
-        savAccTHDate0Field1 = new javax.swing.JTextField();
-        savAccTHDate1Field1 = new javax.swing.JTextField();
         jPanel11 = new javax.swing.JPanel();
-        savAccBalanceDisplay1 = new javax.swing.JTextField();
+        secAccBalanceDisplay1 = new javax.swing.JTextField();
         savAccBalanceLabel1 = new javax.swing.JLabel();
+        secAccRealProfjTextField1 = new javax.swing.JTextField();
+        secAccUnRealProfjTextField2 = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
         jPanel12 = new javax.swing.JPanel();
-        withdrawSaAccButton1 = new javax.swing.JButton();
-        depositSaAccButton1 = new javax.swing.JButton();
-        interactionFieldSaAcc1 = new javax.swing.JTextField();
+        secAccwithdrawButton1 = new javax.swing.JButton();
+        secAccdepositButton1 = new javax.swing.JButton();
+        secAccinteractionField1 = new javax.swing.JTextField();
         InteractSaAccLabel1 = new javax.swing.JLabel();
+        secAccTransferjButton = new javax.swing.JButton();
         jPanel13 = new javax.swing.JPanel();
         jScrollPane4 = new javax.swing.JScrollPane();
         portfolioTextField = new javax.swing.JTextArea();
@@ -132,7 +130,25 @@ public class CustomerGUI extends javax.swing.JFrame {
         fullStockMarketTextArea1 = new javax.swing.JTextArea();
         jLabel1 = new javax.swing.JLabel();
         fullMarketSYMComboBox1 = new javax.swing.JComboBox<>();
-        jButton1 = new javax.swing.JButton();
+        buyStockjButton1 = new javax.swing.JButton();
+        savAccTHistPanel3 = new javax.swing.JPanel();
+        jScrollPane8 = new javax.swing.JScrollPane();
+        secAccTextBox2 = new javax.swing.JTextArea();
+        savAccTranHistLabel3 = new javax.swing.JLabel();
+        secAccTHShowAllButton2 = new javax.swing.JButton();
+        secAccTHInRangeButton2 = new javax.swing.JButton();
+        secAccTHDate0Fieldy1 = new javax.swing.JTextField();
+        secAccTHDate1Fieldy1 = new javax.swing.JTextField();
+        secAccTHDate0Fieldm1 = new javax.swing.JTextField();
+        secAccTHDate0Fieldd1 = new javax.swing.JTextField();
+        yearLabel5 = new javax.swing.JLabel();
+        monthLabel6 = new javax.swing.JLabel();
+        dayLabel7 = new javax.swing.JLabel();
+        secAccTHDate1Fieldm1 = new javax.swing.JTextField();
+        secAccTHDate1Fieldd1 = new javax.swing.JTextField();
+        jLabel6 = new javax.swing.JLabel();
+        secAccbankjButton = new javax.swing.JButton();
+        secAccList = new javax.swing.JComboBox<>();
         jPanel4 = new javax.swing.JPanel();
         loanTHistPanel = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -461,7 +477,7 @@ public class CustomerGUI extends javax.swing.JFrame {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(34, 34, 34)
                         .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 61, Short.MAX_VALUE)
                 .addComponent(savAccTHistPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(61, 61, 61))
         );
@@ -678,7 +694,7 @@ public class CustomerGUI extends javax.swing.JFrame {
                                 .addComponent(savAccTransferButton1)
                                 .addGap(108, 108, 108)
                                 .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 91, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 137, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -714,117 +730,95 @@ public class CustomerGUI extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Savings Accounts", jPanel1);
 
-        savAccTextBox1.setEditable(false);
-        savAccTextBox1.setColumns(20);
-        savAccTextBox1.setRows(5);
-        jScrollPane3.setViewportView(savAccTextBox1);
-
-        savAccTranHistLabel1.setText("Transaction History");
-
-        savAccTHShowAllButton1.setText("Show All");
-
-        savAccTHInRangeButton1.setText("In Range");
-
-        savAccTHDate0Field1.setText("mm/dd/yyyy");
-
-        savAccTHDate1Field1.setText("mm/dd/yyyy");
-
-        javax.swing.GroupLayout savAccTHistPanel1Layout = new javax.swing.GroupLayout(savAccTHistPanel1);
-        savAccTHistPanel1.setLayout(savAccTHistPanel1Layout);
-        savAccTHistPanel1Layout.setHorizontalGroup(
-            savAccTHistPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, savAccTHistPanel1Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(savAccTranHistLabel1)
-                .addGap(86, 86, 86))
-            .addGroup(savAccTHistPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(savAccTHistPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(savAccTHistPanel1Layout.createSequentialGroup()
-                        .addComponent(savAccTHDate0Field1, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(savAccTHistPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(savAccTHInRangeButton1, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(savAccTHShowAllButton1, javax.swing.GroupLayout.Alignment.TRAILING))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(savAccTHDate1Field1, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 276, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        savAccTHistPanel1Layout.setVerticalGroup(
-            savAccTHistPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(savAccTHistPanel1Layout.createSequentialGroup()
-                .addGap(8, 8, 8)
-                .addComponent(savAccTranHistLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(savAccTHShowAllButton1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(savAccTHistPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(savAccTHDate0Field1, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(savAccTHDate1Field1, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(savAccTHInRangeButton1))
-                .addContainerGap(22, Short.MAX_VALUE))
-        );
-
-        savAccBalanceDisplay1.setEditable(false);
+        secAccBalanceDisplay1.setEditable(false);
 
         savAccBalanceLabel1.setText("Account Balance");
+
+        secAccRealProfjTextField1.setEditable(false);
+
+        secAccUnRealProfjTextField2.setEditable(false);
+
+        jLabel3.setText("Cash");
+
+        jLabel4.setText("Realized Profits");
+
+        jLabel5.setText("Unrealized Profits");
 
         javax.swing.GroupLayout jPanel11Layout = new javax.swing.GroupLayout(jPanel11);
         jPanel11.setLayout(jPanel11Layout);
         jPanel11Layout.setHorizontalGroup(
             jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel11Layout.createSequentialGroup()
+                .addContainerGap(73, Short.MAX_VALUE)
+                .addComponent(savAccBalanceLabel1)
+                .addGap(56, 56, 56))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel11Layout.createSequentialGroup()
-                .addContainerGap(21, Short.MAX_VALUE)
+                .addContainerGap()
+                .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel4)
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel5))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(savAccBalanceLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(savAccBalanceDisplay1))
-                .addGap(22, 22, 22))
+                    .addComponent(secAccRealProfjTextField1, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(secAccBalanceDisplay1, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(secAccUnRealProfjTextField2, javax.swing.GroupLayout.DEFAULT_SIZE, 103, Short.MAX_VALUE))
+                .addContainerGap())
         );
         jPanel11Layout.setVerticalGroup(
             jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel11Layout.createSequentialGroup()
-                .addGap(14, 14, 14)
                 .addComponent(savAccBalanceLabel1)
-                .addGap(18, 18, 18)
-                .addComponent(savAccBalanceDisplay1, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(28, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(secAccBalanceDisplay1, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(secAccRealProfjTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(secAccUnRealProfjTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel5))
+                .addContainerGap())
         );
 
-        withdrawSaAccButton1.setText("Withdraw");
+        secAccwithdrawButton1.setText("Withdraw");
 
-        depositSaAccButton1.setText("Deposit");
+        secAccdepositButton1.setText("Deposit");
 
-        interactionFieldSaAcc1.setFont(new java.awt.Font("Apple Color Emoji", 0, 13)); // NOI18N
-        interactionFieldSaAcc1.addActionListener(new java.awt.event.ActionListener() {
+        secAccinteractionField1.setFont(new java.awt.Font("Apple Color Emoji", 0, 13)); // NOI18N
+        secAccinteractionField1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                interactionFieldSaAcc1ActionPerformed(evt);
+                secAccinteractionField1ActionPerformed(evt);
             }
         });
 
         InteractSaAccLabel1.setText("Interact Below:");
+
+        secAccTransferjButton.setText("Transfer");
 
         javax.swing.GroupLayout jPanel12Layout = new javax.swing.GroupLayout(jPanel12);
         jPanel12.setLayout(jPanel12Layout);
         jPanel12Layout.setHorizontalGroup(
             jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel12Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(withdrawSaAccButton1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(depositSaAccButton1)
-                .addGap(12, 12, 12))
-            .addGroup(jPanel12Layout.createSequentialGroup()
                 .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel12Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(interactionFieldSaAcc1, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(secAccinteractionField1, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel12Layout.createSequentialGroup()
                         .addGap(49, 49, 49)
-                        .addComponent(InteractSaAccLabel1)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(InteractSaAccLabel1))
+                    .addGroup(jPanel12Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(secAccwithdrawButton1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(secAccdepositButton1)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(secAccTransferjButton)
+                .addContainerGap())
         );
         jPanel12Layout.setVerticalGroup(
             jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -832,11 +826,13 @@ public class CustomerGUI extends javax.swing.JFrame {
                 .addContainerGap(10, Short.MAX_VALUE)
                 .addComponent(InteractSaAccLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(interactionFieldSaAcc1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(secAccinteractionField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(withdrawSaAccButton1)
-                    .addComponent(depositSaAccButton1))
+                .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(secAccwithdrawButton1)
+                        .addComponent(secAccdepositButton1))
+                    .addComponent(secAccTransferjButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -858,8 +854,8 @@ public class CustomerGUI extends javax.swing.JFrame {
                 .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel13Layout.createSequentialGroup()
-                        .addComponent(myStockSYMSComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
+                        .addComponent(myStockSYMSComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(sellMyStockButton1)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel13Layout.createSequentialGroup()
@@ -888,7 +884,7 @@ public class CustomerGUI extends javax.swing.JFrame {
 
         jLabel1.setText("The Market");
 
-        jButton1.setText("Buy Stock");
+        buyStockjButton1.setText("Buy Stock");
 
         javax.swing.GroupLayout jPanel14Layout = new javax.swing.GroupLayout(jPanel14);
         jPanel14.setLayout(jPanel14Layout);
@@ -902,10 +898,10 @@ public class CustomerGUI extends javax.swing.JFrame {
                     .addGroup(jPanel14Layout.createSequentialGroup()
                         .addGap(42, 42, 42)
                         .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(jPanel14Layout.createSequentialGroup()
-                                .addComponent(fullMarketSYMComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel14Layout.createSequentialGroup()
+                                .addComponent(fullMarketSYMComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jButton1))
+                                .addComponent(buyStockjButton1))
                             .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(45, Short.MAX_VALUE))
         );
@@ -919,9 +915,110 @@ public class CustomerGUI extends javax.swing.JFrame {
                 .addGap(27, 27, 27)
                 .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(fullMarketSYMComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1))
+                    .addComponent(buyStockjButton1))
                 .addContainerGap(38, Short.MAX_VALUE))
         );
+
+        secAccTextBox2.setEditable(false);
+        secAccTextBox2.setColumns(20);
+        secAccTextBox2.setRows(5);
+        jScrollPane8.setViewportView(secAccTextBox2);
+
+        savAccTranHistLabel3.setText("Transaction History");
+
+        secAccTHShowAllButton2.setText("Show All");
+
+        secAccTHInRangeButton2.setText("In Range");
+
+        secAccTHDate0Fieldy1.setText("yyyy");
+
+        secAccTHDate1Fieldy1.setText("yyyy");
+
+        secAccTHDate0Fieldm1.setText("mm");
+
+        secAccTHDate0Fieldd1.setText("dd");
+
+        yearLabel5.setText("Year");
+
+        monthLabel6.setText("Month");
+
+        dayLabel7.setText("Day");
+
+        secAccTHDate1Fieldm1.setText("mm");
+
+        secAccTHDate1Fieldd1.setText("dd");
+
+        javax.swing.GroupLayout savAccTHistPanel3Layout = new javax.swing.GroupLayout(savAccTHistPanel3);
+        savAccTHistPanel3.setLayout(savAccTHistPanel3Layout);
+        savAccTHistPanel3Layout.setHorizontalGroup(
+            savAccTHistPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, savAccTHistPanel3Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(savAccTranHistLabel3)
+                .addGap(86, 86, 86))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, savAccTHistPanel3Layout.createSequentialGroup()
+                .addGroup(savAccTHistPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(savAccTHistPanel3Layout.createSequentialGroup()
+                        .addGap(15, 15, 15)
+                        .addGroup(savAccTHistPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(savAccTHistPanel3Layout.createSequentialGroup()
+                                .addComponent(yearLabel5)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(secAccTHDate0Fieldy1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(savAccTHistPanel3Layout.createSequentialGroup()
+                                .addGroup(savAccTHistPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(dayLabel7)
+                                    .addComponent(monthLabel6))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(savAccTHistPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(secAccTHDate0Fieldm1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(secAccTHDate0Fieldd1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(secAccTHInRangeButton2))
+                    .addComponent(secAccTHShowAllButton2, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addGap(18, 18, 18)
+                .addGroup(savAccTHistPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(secAccTHDate1Fieldy1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(secAccTHDate1Fieldm1, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(secAccTHDate1Fieldd1, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(savAccTHistPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 276, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(19, Short.MAX_VALUE))
+        );
+        savAccTHistPanel3Layout.setVerticalGroup(
+            savAccTHistPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(savAccTHistPanel3Layout.createSequentialGroup()
+                .addGap(8, 8, 8)
+                .addComponent(savAccTranHistLabel3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(secAccTHShowAllButton2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(savAccTHistPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(secAccTHDate0Fieldy1, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(yearLabel5)
+                    .addComponent(secAccTHDate1Fieldy1, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(savAccTHistPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(secAccTHDate0Fieldm1, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(monthLabel6)
+                    .addComponent(secAccTHInRangeButton2)
+                    .addComponent(secAccTHDate1Fieldm1, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(savAccTHistPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(secAccTHDate0Fieldd1, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(savAccTHistPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(dayLabel7)
+                        .addComponent(secAccTHDate1Fieldd1, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(30, Short.MAX_VALUE))
+        );
+
+        jLabel6.setText("Chose an account then hit bank:");
+
+        secAccbankjButton.setText("Bank");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -932,36 +1029,51 @@ public class CustomerGUI extends javax.swing.JFrame {
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(jPanel12, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addGap(31, 31, 31)
-                                .addComponent(jPanel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(18, 18, 18)
-                        .addComponent(savAccTHistPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel3Layout.createSequentialGroup()
+                                        .addContainerGap()
+                                        .addComponent(jPanel13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(jPanel3Layout.createSequentialGroup()
+                                        .addGap(25, 25, 25)
+                                        .addComponent(jPanel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(29, 29, 29))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                                .addComponent(jPanel12, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)))
+                        .addComponent(savAccTHistPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jPanel14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(39, 39, 39)
-                        .addComponent(jPanel13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(76, 76, 76)
-                .addComponent(jPanel14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addContainerGap()
+                        .addComponent(jLabel6)
+                        .addGap(14, 14, 14)
+                        .addComponent(secAccList, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(secAccbankjButton, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(27, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(38, 38, 38)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(jPanel14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(62, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6)
+                    .addComponent(secAccList, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(secAccbankjButton))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(savAccTHistPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(savAccTHistPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addComponent(jPanel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jPanel12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(39, 39, 39)
-                        .addComponent(jPanel13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jPanel14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jPanel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jPanel12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jPanel13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(19, 19, 19))
         );
 
         jTabbedPane1.addTab("Securities Accounts", jPanel3);
@@ -1185,7 +1297,7 @@ public class CustomerGUI extends javax.swing.JFrame {
                                 .addGap(224, 224, 224)
                                 .addComponent(loanBankjButton, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jPanel16, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 238, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 284, Short.MAX_VALUE)
                         .addComponent(loanTHistPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18))))
         );
@@ -1228,7 +1340,7 @@ public class CustomerGUI extends javax.swing.JFrame {
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addGap(30, 30, 30)
                 .addComponent(openNewAccButton)
-                .addContainerGap(730, Short.MAX_VALUE))
+                .addContainerGap(776, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1254,9 +1366,9 @@ public class CustomerGUI extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void interactionFieldSaAcc1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_interactionFieldSaAcc1ActionPerformed
+    private void secAccinteractionField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_secAccinteractionField1ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_interactionFieldSaAcc1ActionPerformed
+    }//GEN-LAST:event_secAccinteractionField1ActionPerformed
 
     private void interactionFieldChekAcc1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_interactionFieldChekAcc1ActionPerformed
         // TODO add your handling code here:
@@ -1284,7 +1396,7 @@ public class CustomerGUI extends javax.swing.JFrame {
     }
     
     //builds the action listeners
-    private void initActionListensers(Customer user){
+    private void initActionListensers(Customer user, StockMarket sm){
         //savings account action listeners
         //
         //update what savings account is being banked in 
@@ -1440,6 +1552,76 @@ public class CustomerGUI extends javax.swing.JFrame {
                 
         });
         
+        
+        //sec acc action listeners
+        secAccbankjButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                updateWorkingSecAcc(user,sm);
+            }
+                
+        });
+        
+        //deposit to the sec account
+        secAccdepositButton1.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                depositSecAcc(user,sm);
+            }
+                
+        });
+        
+        //withdraw from the sec account
+        secAccwithdrawButton1.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                withdrawSecAcc(user,sm);
+            }
+                
+        });
+        
+        secAccTransferjButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                transferSecAcc(user);
+            }
+                
+        });
+        
+        secAccTHShowAllButton2.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                updateTHSecAcc(user);
+            }
+                
+        });
+        
+        
+        secAccTHInRangeButton2.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                updateTHSecAccIR(user);
+            }
+                
+        });
+        
+        
+        buyStockjButton1.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                buyStock(user,sm);
+            }
+                
+        });
+        
+        
+        sellMyStockButton1.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                sellStock(user,sm);
+            }
+                
+        });
         
         //options action listeners
         openNewAccButton.addActionListener(new ActionListener() {
@@ -1819,6 +2001,188 @@ public class CustomerGUI extends javax.swing.JFrame {
     }
     
     
+    
+    
+    //Sec Account methods
+    //
+    //
+    
+    
+    
+    //updates the savings accounts in the list
+    public void updateSecAccList(Customer user){
+        secAccList.removeAllItems();
+        Iterator Seciter = user.getSecIter();
+        while(Seciter.hasNext()){
+            SecuritiesAccount sa = (SecuritiesAccount) Seciter.next();
+            secAccList.addItem(sa.getName());
+            secAccList.getSelectedIndex();
+        }
+    }
+    
+    //updates the balance that is diplayed, but needs a action listener to call it
+    public void updateSecAccBalanceDisp(Customer user, StockMarket sm){
+        if(user.getSecuritiesAccounts().size()>0){
+            int indexOfAcc = secAccList.getSelectedIndex();
+            SecuritiesAccount acc = user.getSecuritiesAccounts().get(indexOfAcc);
+            String cash = acc.currency.getSymbol() + " " + acc.getBalance();
+            String real = acc.currency.getSymbol() + " " + acc.getRealizedProfit();
+            String unreal = acc.currency.getSymbol() + " " + acc.getUnrealizedProfit(sm);
+            secAccBalanceDisplay1.setText(cash);
+            secAccRealProfjTextField1.setText(real);
+            secAccUnRealProfjTextField2.setText(unreal);
+        }
+        
+    }
+    
+    //the method called in the action listener
+    public void updateWorkingSecAcc(Customer user, StockMarket sm){
+        this.updateSecAccBalanceDisp(user, sm);
+        this.updateTHSecAcc(user);
+    }
+    
+    public void depositSecAcc(Customer user, StockMarket sm){
+        int indexOfAcc = secAccList.getSelectedIndex();
+        SecuritiesAccount acc = user.getSecuritiesAccounts().get(indexOfAcc);
+        try{
+            double inp = Double.parseDouble(secAccinteractionField1.getText());
+            System.out.println(inp + " will be added to the current account.");
+            acc.deposit(inp);
+        }catch(NumberFormatException ex){
+            System.out.println(ex.getMessage());
+            System.out.println("User tried to enter not a double");
+        }
+        updateWorkingSecAcc(user,sm);
+        secAccinteractionField1.setText(" ");
+    }
+    
+    public void withdrawSecAcc(Customer user,StockMarket sm){
+       int indexOfAcc = secAccList.getSelectedIndex();
+        SecuritiesAccount acc = user.getSecuritiesAccounts().get(indexOfAcc);
+        try{
+            double inp = Double.parseDouble(secAccinteractionField1.getText());
+            System.out.println(inp + " will be taken from the current account.");
+            acc.withdraw(inp);
+            
+        }catch(NumberFormatException ex){
+            System.out.println(ex.getMessage());
+            System.out.println("User tried to enter not a double");
+        }
+        updateWorkingSecAcc(user,sm);
+        secAccinteractionField1.setText(" ");
+        
+    }
+    
+    public void updateTHSecAcc(Customer user){
+        secAccTextBox2.setText(" ");
+        String th = "";
+        if(user.getSecuritiesAccounts().size()>0){
+            int indexOfAcc = secAccList.getSelectedIndex();
+            SecuritiesAccount acc = user.getSecuritiesAccounts().get(indexOfAcc);
+        
+            Iterator iter = acc.transactions.iterator();
+            while(iter.hasNext()){
+                Transaction t = (Transaction) iter.next();
+                th+= t.toString() + " \n";
+            }
+            secAccTextBox2.setText(th);
+        }
+    }
+    
+    public void transferSecAcc(Customer user){
+        int indexOfAcc = secAccList.getSelectedIndex();
+        SecuritiesAccount acc = user.getSecuritiesAccounts().get(indexOfAcc);
+        transferGUI(acc,user,this);
+        
+        secAccinteractionField1.setText(" ");
+        
+    }
+    
+    public void updateTHSecAccIR(Customer user){
+        secAccTextBox2.setText(" ");
+        
+        int indexOfAcc = secAccList.getSelectedIndex();
+        SecuritiesAccount acc = user.getSecuritiesAccounts().get(indexOfAcc);
+        
+        
+        String date0sy = secAccTHDate0Fieldy1.getText();
+        String date0sm = secAccTHDate0Fieldm1.getText();
+        String date0sd = secAccTHDate0Fieldd1.getText();
+        
+        String date1sy = secAccTHDate1Fieldy1.getText();
+        String date1sm = secAccTHDate1Fieldm1.getText();
+        String date1sd = secAccTHDate1Fieldd1.getText();
+        
+        try{
+            LocalDate date0 = parseToDate(date0sy,date0sm,date0sd);
+            LocalDate date1 = parseToDate(date1sy,date1sm,date1sd);
+            
+            Transactions transactions = acc.getTransactionsByTimePeriod(date0, date1);
+            
+            String th = "";
+            Iterator iter = transactions.iterator();
+        while(iter.hasNext()){
+            Transaction t = (Transaction) iter.next();
+            th+= t.toString() + " \n";
+        }
+            secAccTextBox2.setText(th);
+        }catch(IllegalArgumentException e){
+            System.out.println(e.getMessage());
+        }
+    }
+    
+    public void updatePortfolio(Customer user){
+        portfolioTextField.setText(" ");
+        myStockSYMSComboBox1.removeAllItems();
+        String th = "";
+        if(user.getSecuritiesAccounts().size()>0){
+            int indexOfAcc = secAccList.getSelectedIndex();
+            SecuritiesAccount acc = user.getSecuritiesAccounts().get(indexOfAcc);
+            Iterator iter =acc.getStocks().iterator();
+        
+            
+            while(iter.hasNext()){
+                Stock s = (Stock) iter.next();
+                th+= s.toString() + " \n";
+                myStockSYMSComboBox1.addItem(s.getName());
+            }
+            portfolioTextField.setText(th);
+        }
+    }
+    
+    public void updateMarket(Customer user, StockMarket sm){
+        fullMarketSYMComboBox1.removeAllItems();
+        fullStockMarketTextArea1.setText(" ");
+        String th = "";
+        Iterator iter =sm.getStocks().iterator();
+        while(iter.hasNext()){
+            Stock s = (Stock) iter.next();
+            th+= s.toString() + " \n";
+            fullMarketSYMComboBox1.addItem(s.getName());
+        }
+        fullStockMarketTextArea1.setText(th);
+        
+    }
+    
+    public void buyStock(Customer user, StockMarket sm){
+        int indexOfAcc = secAccList.getSelectedIndex();
+        SecuritiesAccount acc = user.getSecuritiesAccounts().get(indexOfAcc);
+        String nameOfStock = (String) fullMarketSYMComboBox1.getSelectedItem();
+        sm.buyStock(nameOfStock, acc);
+        updatePortfolio(user);
+        updateMarket(user,sm);
+        
+    }
+    
+    public void sellStock(Customer user, StockMarket sm){
+        int indexOfAcc = secAccList.getSelectedIndex();
+        SecuritiesAccount acc = user.getSecuritiesAccounts().get(indexOfAcc);
+        String nameOfStock = (String) myStockSYMSComboBox1.getSelectedItem();
+        sm.sellStock(nameOfStock, acc);
+        updatePortfolio(user);
+        updateMarket(user,sm);
+    }
+    
     //just for testing
     public static Bank getTestB(){
         
@@ -1851,6 +2215,8 @@ public class CustomerGUI extends javax.swing.JFrame {
         tester.createSavingsAccount("Acc2S", "USD");
         tester.createCheckingAccount("Acc1C", "USD");
         tester.createCheckingAccount("Acc2C", "USD");
+        
+        
         
         
         return tester;
@@ -1900,6 +2266,7 @@ public class CustomerGUI extends javax.swing.JFrame {
     private javax.swing.JLabel InteractChekAccLabel2;
     private javax.swing.JLabel InteractSaAccLabel;
     private javax.swing.JLabel InteractSaAccLabel1;
+    private javax.swing.JButton buyStockjButton1;
     private javax.swing.JTextField chekAccBalanceDisplay1;
     private javax.swing.JLabel chekAccBalanceLabel1;
     private javax.swing.JLabel chekAccBalanceLabel2;
@@ -1918,17 +2285,15 @@ public class CustomerGUI extends javax.swing.JFrame {
     private javax.swing.JLabel dayLabel4;
     private javax.swing.JLabel dayLabel5;
     private javax.swing.JLabel dayLabel6;
+    private javax.swing.JLabel dayLabel7;
     private javax.swing.JButton depositChekAccButton1;
     private javax.swing.JButton depositLoanButton;
     private javax.swing.JButton depositSaAccButton;
-    private javax.swing.JButton depositSaAccButton1;
     private javax.swing.JComboBox<String> fullMarketSYMComboBox1;
     private javax.swing.JTextArea fullStockMarketTextArea1;
     private javax.swing.JTextField interactionFieldChekAcc1;
     private javax.swing.JTextField interactionFieldLoan;
     private javax.swing.JTextField interactionFieldSaAcc;
-    private javax.swing.JTextField interactionFieldSaAcc1;
-    private javax.swing.JButton jButton1;
     private javax.swing.JDialog jDialog1;
     private javax.swing.JFrame jFrame1;
     private javax.swing.JFrame jFrame2;
@@ -1937,6 +2302,10 @@ public class CustomerGUI extends javax.swing.JFrame {
     private javax.swing.JFrame jFrame5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel11;
@@ -1955,11 +2324,11 @@ public class CustomerGUI extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JScrollPane jScrollPane7;
+    private javax.swing.JScrollPane jScrollPane8;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JLabel loanAccTranHistLabel;
     private javax.swing.JTextField loanAmtOwedDisplay;
@@ -1980,6 +2349,7 @@ public class CustomerGUI extends javax.swing.JFrame {
     private javax.swing.JLabel monthLabel3;
     private javax.swing.JLabel monthLabel4;
     private javax.swing.JLabel monthLabel5;
+    private javax.swing.JLabel monthLabel6;
     private javax.swing.JLabel myPortfolioLabel;
     private javax.swing.JComboBox<String> myStockSYMSComboBox1;
     private javax.swing.JButton newLoanjButton;
@@ -1989,39 +2359,51 @@ public class CustomerGUI extends javax.swing.JFrame {
     private javax.swing.JTextArea portfolioTextField;
     private javax.swing.JComboBox<String> sAccList;
     private javax.swing.JTextField savAccBalanceDisplay;
-    private javax.swing.JTextField savAccBalanceDisplay1;
     private javax.swing.JLabel savAccBalanceLabel;
     private javax.swing.JLabel savAccBalanceLabel1;
     private javax.swing.JLabel savAccListLabel;
-    private javax.swing.JTextField savAccTHDate0Field1;
     private javax.swing.JTextField savAccTHDate0Fieldd;
     private javax.swing.JTextField savAccTHDate0Fieldm;
     private javax.swing.JTextField savAccTHDate0Fieldy;
-    private javax.swing.JTextField savAccTHDate1Field1;
     private javax.swing.JTextField savAccTHDate1Fieldd;
     private javax.swing.JTextField savAccTHDate1Fieldm;
     private javax.swing.JTextField savAccTHDate1Fieldy;
     private javax.swing.JButton savAccTHInRangeButton;
-    private javax.swing.JButton savAccTHInRangeButton1;
     private javax.swing.JButton savAccTHShowAllButton;
-    private javax.swing.JButton savAccTHShowAllButton1;
     private javax.swing.JPanel savAccTHistPanel;
-    private javax.swing.JPanel savAccTHistPanel1;
     private javax.swing.JPanel savAccTHistPanel2;
+    private javax.swing.JPanel savAccTHistPanel3;
     private javax.swing.JTextArea savAccTextBox;
-    private javax.swing.JTextArea savAccTextBox1;
     private javax.swing.JLabel savAccTranHistLabel;
-    private javax.swing.JLabel savAccTranHistLabel1;
     private javax.swing.JLabel savAccTranHistLabel2;
+    private javax.swing.JLabel savAccTranHistLabel3;
     private javax.swing.JButton savAccTransferButton1;
+    private javax.swing.JTextField secAccBalanceDisplay1;
+    private javax.swing.JComboBox<String> secAccList;
+    private javax.swing.JTextField secAccRealProfjTextField1;
+    private javax.swing.JTextField secAccTHDate0Fieldd1;
+    private javax.swing.JTextField secAccTHDate0Fieldm1;
+    private javax.swing.JTextField secAccTHDate0Fieldy1;
+    private javax.swing.JTextField secAccTHDate1Fieldd1;
+    private javax.swing.JTextField secAccTHDate1Fieldm1;
+    private javax.swing.JTextField secAccTHDate1Fieldy1;
+    private javax.swing.JButton secAccTHInRangeButton2;
+    private javax.swing.JButton secAccTHShowAllButton2;
+    private javax.swing.JTextArea secAccTextBox2;
+    private javax.swing.JButton secAccTransferjButton;
+    private javax.swing.JTextField secAccUnRealProfjTextField2;
+    private javax.swing.JButton secAccbankjButton;
+    private javax.swing.JButton secAccdepositButton1;
+    private javax.swing.JTextField secAccinteractionField1;
+    private javax.swing.JButton secAccwithdrawButton1;
     private javax.swing.JButton sellMyStockButton1;
     private javax.swing.JButton updateCurrentChekAccButton1;
     private javax.swing.JButton updateCurrentSavAccButton;
     private javax.swing.JButton withdrawChekAccButton1;
     private javax.swing.JButton withdrawSaAccButton;
-    private javax.swing.JButton withdrawSaAccButton1;
     private javax.swing.JLabel yearLabel2;
     private javax.swing.JLabel yearLabel3;
     private javax.swing.JLabel yearLabel4;
+    private javax.swing.JLabel yearLabel5;
     // End of variables declaration//GEN-END:variables
 }

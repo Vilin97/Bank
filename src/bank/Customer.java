@@ -247,6 +247,11 @@ public class Customer extends User {
         return iter;
     }
     
+    public Iterator getSecIter(){
+        Iterator iter = this.securitiesAccounts.iterator();
+        return iter;
+    }
+    
     /*
     
     are being replaced
