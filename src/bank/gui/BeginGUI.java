@@ -3,9 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package bank;
+package bank.gui;
 
 
+import bank.Bank;
+import bank.Customers;
+import bank.Manager;
+import bank.gui.GUI;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;

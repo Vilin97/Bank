@@ -3,12 +3,27 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package bank;
+package bank.gui;
 
+import bank.Account;
+import bank.Accounts;
+import bank.Bank;
+import bank.CheckingAccount;
+import bank.Customer;
+import bank.Customers;
+import bank.Loan;
+import bank.Manager;
+import bank.PendingLoan;
+import bank.SavingsAccount;
+import bank.SecuritiesAccount;
+import bank.Stock;
+import bank.StockMarket;
+import bank.Transaction;
+import bank.Transactions;
 import static bank.IOTools.parseToDate;
-import static bank.NewAccountGUI.newAccGUI;
-import static bank.NewLoanGUI.newLoanGUI;
-import static bank.TransferGUI.transferGUI;
+import static bank.gui.NewAccountGUI.newAccGUI;
+import static bank.gui.NewLoanGUI.newLoanGUI;
+import static bank.gui.TransferGUI.transferGUI;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
@@ -1676,7 +1691,7 @@ public class CustomerGUI extends javax.swing.JFrame {
     public void updateSavingsAccBalanceDisp(Customer user){
         int indexOfAcc = sAccList.getSelectedIndex();
         SavingsAccount acc = user.getSavingsAccounts().get(indexOfAcc);
-        String disp = acc.currency.getSymbol() + " " + acc.getBalance();
+        String disp = acc.getCurrency().getSymbol() + " " + acc.getBalance();
         savAccBalanceDisplay.setText(disp);
         
     }
@@ -1725,7 +1740,7 @@ public class CustomerGUI extends javax.swing.JFrame {
         int indexOfAcc = sAccList.getSelectedIndex();
         SavingsAccount acc = user.getSavingsAccounts().get(indexOfAcc);
         
-        Iterator iter = acc.transactions.iterator();
+        Iterator iter = acc.getTransactions().iterator();
         while(iter.hasNext()){
             Transaction t = (Transaction) iter.next();
             th+= t.toString() + " \n";
@@ -1798,7 +1813,7 @@ public class CustomerGUI extends javax.swing.JFrame {
     public void updateCheckingAccBalanceDisp(Customer user){
         int indexOfAcc = chekAccList1.getSelectedIndex();
         CheckingAccount acc = user.getCheckingAccounts().get(indexOfAcc);
-        String disp = acc.currency.getSymbol() + " " + acc.getBalance();
+        String disp = acc.getCurrency().getSymbol() + " " + acc.getBalance();
         chekAccBalanceDisplay1.setText(disp);
         
     }
@@ -1857,7 +1872,7 @@ public class CustomerGUI extends javax.swing.JFrame {
         String th = "";
         int indexOfAcc = chekAccList1.getSelectedIndex();
         CheckingAccount acc = user.getCheckingAccounts().get(indexOfAcc);
-        Iterator iter = acc.transactions.iterator();
+        Iterator iter = acc.getTransactions().iterator();
         while(iter.hasNext()){
             Transaction t = (Transaction) iter.next();
             th+= t.toString() + " \n";
@@ -1927,7 +1942,7 @@ public class CustomerGUI extends javax.swing.JFrame {
     public void updateCurrentLoanBalanceDisp(Customer user){
         int indexOfAcc = loanListComboBox.getSelectedIndex();
         Loan acc = user.getLoans().get(indexOfAcc);
-        String disp = acc.currency.getSymbol() + " " + acc.getBalance();
+        String disp = acc.getCurrency().getSymbol() + " " + acc.getBalance();
         loanAmtOwedDisplay.setText(disp);
         
     }
@@ -1949,7 +1964,7 @@ public class CustomerGUI extends javax.swing.JFrame {
         int indexOfAcc = loanListComboBox.getSelectedIndex();
         Account acc = user.getLoans().get(indexOfAcc);
         
-        Iterator iter = acc.transactions.iterator();
+        Iterator iter = acc.getTransactions().iterator();
         while(iter.hasNext()){
             Transaction t = (Transaction) iter.next();
             th+= t.toString() + " \n";
@@ -2040,10 +2055,11 @@ public class CustomerGUI extends javax.swing.JFrame {
     public void updateSecAccBalanceDisp(Customer user, StockMarket sm){
         if(user.getSecuritiesAccounts().size()>0){
             int indexOfAcc = secAccList.getSelectedIndex();
+           
             SecuritiesAccount acc = user.getSecuritiesAccounts().get(indexOfAcc);
-            String cash = acc.currency.getSymbol() + " " + acc.getBalance();
-            String real = acc.currency.getSymbol() + " " + acc.getRealizedProfit();
-            String unreal = acc.currency.getSymbol() + " " + acc.getUnrealizedProfit(sm);
+            String cash = acc.getCurrency().getSymbol() + " " + acc.getBalance();
+            String real = acc.getCurrency().getSymbol() + " " + acc.getRealizedProfit();
+            String unreal = acc.getCurrency().getSymbol() + " " + acc.getUnrealizedProfit(sm);
             secAccBalanceDisplay1.setText(cash);
             secAccRealProfjTextField1.setText(real);
             secAccUnRealProfjTextField2.setText(unreal);
@@ -2096,7 +2112,7 @@ public class CustomerGUI extends javax.swing.JFrame {
             int indexOfAcc = secAccList.getSelectedIndex();
             SecuritiesAccount acc = user.getSecuritiesAccounts().get(indexOfAcc);
         
-            Iterator iter = acc.transactions.iterator();
+            Iterator iter = acc.getTransactions().iterator();
             while(iter.hasNext()){
                 Transaction t = (Transaction) iter.next();
                 th+= t.toString() + " \n";

@@ -3,11 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package bank;
+package bank.gui;
 
+import bank.Bank;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import bank.Customer;
+import bank.Customer;
+import bank.Customers;
+import bank.Manager;
+import bank.User;
 import bank.gui.MainManagerFrame;
 import java.time.LocalDate;
 import java.util.ArrayList;
