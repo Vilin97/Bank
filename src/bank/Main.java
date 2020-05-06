@@ -41,9 +41,11 @@ public class Main {
             System.out.println(customer1.getRealizedProfit());
             System.out.println(customer1.getUnrealizedProfit());
 
-            JSONTools.writeStockMarketData(Bank.getStockMarket());
-            StockMarket stockMarket = JSONTools.readStockMarketData();
-            System.out.println(stockMarket);
+            JSONTools.writeBank();
+            System.out.println(Bank.getCurrentDate());
+            System.out.println(Bank.getStockMarket());
+            JSONTools.readBank();
+            System.out.println(Bank.getCurrentDate());
             System.out.println(Bank.getStockMarket());
 
 //            Stock stock2 = new Stock("Stock2");

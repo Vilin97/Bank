@@ -1,5 +1,7 @@
 package bank;
 
+import org.json.simple.JSONObject;
+
 import java.time.LocalDate;
 import java.util.Iterator;
 
@@ -98,5 +100,19 @@ public class Bank {
             }
         }
         return rt;
+    }
+
+    public static JSONObject toJSON(){
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("date", General.localDateToJSON(Bank.getCurrentDate()));
+        jsonObject.put("stockMarket", Bank.getStockMarket().toJSON());
+        return jsonObject;
+    }
+
+    public static void fromJSON(JSONObject jsonObject){
+        LocalDate date = General.localDateFromJSON((JSONObject) jsonObject.get("date"));
+        StockMarket stockMarket = StockMarket.fromJSON((JSONObject) jsonObject.get("stockMarket"));
+        Bank.setCurrentDate(date);
+        Bank.setStockMarket(stockMarket);
     }
 }

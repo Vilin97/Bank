@@ -59,7 +59,7 @@ public class JSONTools {
         return user;
     }
 
-    public static void writeStockMarketData(StockMarket stockMarket){
+    private static void writeStockMarketData(StockMarket stockMarket){
         JSONObject jsonObject = stockMarket.toJSON();
         JSONObject toWrite = new JSONObject();
         toWrite.put("StockMarket", jsonObject);
@@ -70,7 +70,7 @@ public class JSONTools {
         }
     }
 
-    public static StockMarket readStockMarketData() {
+    private static StockMarket readStockMarketData() {
         StockMarket stockMarket = null;
         try {
             JSONObject jsonObject = (JSONObject) new JSONParser().parse(new FileReader(path+"StockMarket.json"));
@@ -83,6 +83,30 @@ public class JSONTools {
             e.printStackTrace();
         }
         return stockMarket;
+    }
+
+    public static void writeBank() {
+        JSONObject jsonObject = Bank.toJSON();
+        JSONObject toWrite = new JSONObject();
+        toWrite.put("Bank", jsonObject);
+        try (FileWriter file = new FileWriter(path+"Bank.json")){
+            file.write(toWrite.toJSONString());
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    public static void readBank() {
+        try {
+            JSONObject jsonObject = (JSONObject) new JSONParser().parse(new FileReader(path+"Bank.json"));
+            Bank.fromJSON((JSONObject) jsonObject.get("Bank"));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 }
