@@ -1,5 +1,9 @@
-package bank;
+package bank.gui;
 
+import bank.Bank;
+import bank.Customer;
+import bank.Customers;
+import bank.Manager;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

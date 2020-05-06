@@ -3,8 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package bank;
+package bank.gui;
 
+import bank.Customer;
+import bank.SavingsAccount;
 import static bank.Constants.curencies;
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
