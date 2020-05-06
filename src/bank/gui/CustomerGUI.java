@@ -19,7 +19,6 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.IOException;
 import java.time.LocalDate;
-import java.time.Month;
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -1643,7 +1642,7 @@ public class CustomerGUI extends javax.swing.JFrame {
             @Override
             public void windowClosing(WindowEvent e) {
                 System.out.println("closed");
-                ReadFile.writeUserData(user);
+                JSONTools.writeUserData(user);
                 e.getWindow().dispose();
             }
         });
@@ -2271,7 +2270,7 @@ public class CustomerGUI extends javax.swing.JFrame {
             //pull the user from the data set
             Bank tester = getTestB();
             //Customer test = getTestC();
-            //Customer newCustomer = ReadFile.readUserData("astreich");
+            //Customer newCustomer = JSONTools.readUserData("astreich");
 
             public void run() {
                 //new CustomerGUI(newCustomer,tester).setVisible(true);

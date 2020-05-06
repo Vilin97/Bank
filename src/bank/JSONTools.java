@@ -8,7 +8,7 @@ import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
-public class ReadFile {
+public class JSONTools {
     // A class to read and write our bank related data
     private final static String path = "BankState/";
 
