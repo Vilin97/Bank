@@ -32,6 +32,17 @@ class Password {
         }
         return rt;
     }
+    
+    
+    public boolean equals(Object o) { 
+  
+        // If the object is compared with itself then return true   
+        if (o == this) { 
+            return true; 
+        }
+        Password ot = (Password) o;
+        return this.pword.equals(ot.pword);
+    }
 
     
     

@@ -81,6 +81,8 @@ public class Bank {
         while(cIter.hasNext() && notfound){
             Customer cs = (Customer) cIter.next();
             Credentials csCreds = cs.getCreds();
+            //System.out.println(csCreds.toString());
+            //System.out.println("Uname tried:"+uname+" pword tried "+pw);
             if(csCreds.login(uname, pw)){
                 notfound = false;
                 rt = cs;

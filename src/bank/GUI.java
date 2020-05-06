@@ -273,7 +273,7 @@ public class GUI extends javax.swing.JFrame {
     
     public void logInUser(String uname,String password, Bank bnk){
         User user = bnk.logIn(uname, password);
-        if(user.equals(null)){
+        if(user == null){
             throw new IllegalArgumentException("wrong unsername or password");
         }else if (user instanceof Customer){
             this.dispose();
@@ -288,6 +288,7 @@ public class GUI extends javax.swing.JFrame {
     public static Bank getTestB(){
         
         Customer tester = bank.Customer.createCustomer("Adam","Streich","astreich","12345");
+        //System.out.println(tester.getCreds().toString());
         tester.createSavingsAccount("Acc1S", "USD");
         tester.createSavingsAccount("Acc2S", "USD");
         tester.createCheckingAccount("Acc1C", "USD");
