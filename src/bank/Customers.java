@@ -36,5 +36,16 @@ public class Customers<C extends Customer> extends ArrayList<C> {
         return res;
     }
 
+    public Customer getCustomer(Customer cs){
+        Customer rt = null;
+        for (Customer c:this) {
+            if (c.equals(cs)){
+                rt = c;
+            }
+        }
+        return rt;
+    }
+    
+    
 
 }

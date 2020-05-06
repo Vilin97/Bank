@@ -312,4 +312,5 @@ public class Customer extends User {
                 "" + pendingLoans.toStringDetailed() +
                 '}';
     }
+    
 }

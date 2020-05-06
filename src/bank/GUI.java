@@ -7,6 +7,9 @@ package bank;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import bank.Customer;
+import java.time.LocalDate;
+import java.util.ArrayList;
 
 /**
  *
@@ -20,7 +23,8 @@ public class GUI extends javax.swing.JFrame {
     public GUI() {
         this.initComponents();
         this.initSpecialCases();
-        this.initActionListensers();
+        Bank bk = loadBank();
+        this.initActionListensers(bk);
         
         
     }
@@ -215,7 +219,7 @@ public class GUI extends javax.swing.JFrame {
         jPanel2.setVisible(false);
         
     }
-    private void initActionListensers(){
+    private void initActionListensers(Bank bnk){
         jButton1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -223,6 +227,9 @@ public class GUI extends javax.swing.JFrame {
                 String uname = jTextPane1.getText();
                 String pword = jTextPane2.getText();
                 System.out.println(uname + " " + pword);
+                System.out.println("Logging in");
+                logInUser(uname,pword,bnk);
+                
             }
                 
         });
@@ -248,8 +255,11 @@ public class GUI extends javax.swing.JFrame {
                 try{
                     Customer created = Customer.createCustomer(fname,lname,uname,pword);
                     //Add created to data set
+                    bnk.addCustomer(created);
                     System.out.println("user created!");
                     System.out.println(created.toString());
+                    System.out.println("Logging them in....");
+                    logInUser(uname,pword,bnk);
                 }catch(IllegalArgumentException ex){
                     System.out.println(ex.getMessage());
                     System.out.println("error works");
@@ -259,6 +269,49 @@ public class GUI extends javax.swing.JFrame {
             }
         });
         
+    }
+    
+    public void logInUser(String uname,String password, Bank bnk){
+        User user = bnk.logIn(uname, password);
+        if(user.equals(null)){
+            throw new IllegalArgumentException("wrong unsername or password");
+        }else if (user instanceof Customer){
+            this.dispose();
+            Customer cs = (Customer) user;
+            new CustomerGUI(cs,bnk).setVisible(true);
+        }else if (user instanceof Manager){
+            this.dispose();
+            //launch manager GUI user is an instance of manager
+        }
+    }
+    
+    public static Bank getTestB(){
+        
+        Customer tester = bank.Customer.createCustomer("Adam","Streich","astreich","12345");
+        tester.createSavingsAccount("Acc1S", "USD");
+        tester.createSavingsAccount("Acc2S", "USD");
+        tester.createCheckingAccount("Acc1C", "USD");
+        tester.createCheckingAccount("Acc2C", "USD");
+        
+       
+        
+        //tester.getSavingsAccounts().get(0).deposit(10.0);
+        
+        Manager temp = bank.Manager.createManager("Mr.", "Monopoly", "mrMono", "12345");
+        ArrayList cs = new ArrayList();
+        cs.add(tester);
+        Customers testers = new Customers(cs);
+        
+        Bank test = new Bank(testers, temp);
+        Bank.setCurrentDate(LocalDate.of(2020, 04, 28));
+        
+        
+        
+        return test;
+    }
+    
+    public static Bank loadBank(){
+        return getTestB();
     }
     /**
      * @param args the command line arguments

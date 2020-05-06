@@ -82,6 +82,14 @@ public class Credentials {
     public UName getUname() {
         return uname;
     }
+    
+    public boolean login(String uname,String pword){
+        boolean rt = false;
+        if(this.uname.equals(uname) && this.pword.equals(pword)){
+            rt = true;
+        }
+        return rt;
+    }
 
 
     @Override
