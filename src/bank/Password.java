@@ -47,9 +47,14 @@ class Password {
     }
 
 
-    public Object toJSON() {
+    public JSONObject toJSON() {
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("pword",pword);
         return jsonObject;
+    }
+
+    public static Password fromJSON(JSONObject jsonObject){
+        String pword = (String) jsonObject.get("pword");
+        return new Password(pword);
     }
 }

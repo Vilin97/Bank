@@ -11,16 +11,55 @@ import java.nio.file.Path;
 public class JSONTools {
     // A class to read and write our bank related data
     private final static String path = "BankState/";
+    private final static String usersPath = "BankState/Users/";
 
-    // A function that adds a user's general data
-    public static void writeUserData(Customer customer) {
-        JSONObject userObject = customer.toJSON();
-        try (FileWriter file = new FileWriter(path+"Customers/"+customer.getID()+".json")){
-            file.write(userObject.toJSONString());
+
+    public static void writeUserData(User user){
+        if (user instanceof Customer){
+            writeCustomerData((Customer) user);
+        } else if (user instanceof Manager){
+            writeManagerData((Manager) user);
+        }
+    }
+
+    private static void writeManagerData(Manager manager) {
+        JSONObject userObject = manager.toJSON();
+        JSONObject toWrite = new JSONObject();
+        toWrite.put("User", userObject);
+        try (FileWriter file = new FileWriter(usersPath+manager.getUName()+".json")){
+            file.write(toWrite.toJSONString());
         } catch (Exception e){
             e.printStackTrace();
         }
     }
+
+    private static void writeCustomerData(Customer customer) {
+        JSONObject userObject = customer.toJSON();
+        JSONObject toWrite = new JSONObject();
+        toWrite.put("User", userObject);
+        try (FileWriter file = new FileWriter(usersPath+customer.getUName()+".json")){
+            file.write(toWrite.toJSONString());
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    public static User readUserData(String uname) {
+        User user = null;
+        try {
+            JSONObject jsonObject = (JSONObject) new JSONParser().parse(new FileReader(usersPath+uname+".json"));
+            user = User.fromJSON((JSONObject) jsonObject.get("User"));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return user;
+    }
+
+
 
 
 //    public static Customer readUserData(String filename) {

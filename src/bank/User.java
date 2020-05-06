@@ -25,6 +25,11 @@ public abstract class User implements Permisions {
     private int ID;
     private static int nextID = 0;
 
+    public User(Credentials cred, int ID) {
+        this.cred = cred;
+        this.ID = ID;
+    }
+
     public User(Credentials cd){
         this.cred = cd;
         ID = nextID;
@@ -82,11 +87,17 @@ public abstract class User implements Permisions {
         JSONObject userObject = new JSONObject();
         userObject.put("ID", getID());
         userObject.put("cred", getCreds().toJSON());
+        String type;
+        if (this instanceof Customer) type = "Customer";
+        else type = "Manager";
+        userObject.put("type",type);
         return userObject;
     }
 
-    public User fromJSON(JSONObject jsonObject){
-        return null;//TODO
+    public static User fromJSON(JSONObject jsonObject){
+        String type = (String) jsonObject.get("type");
+        if (type.equals("Customer")) return Customer.fromJSON(jsonObject);
+        else return Manager.fromJSON(jsonObject);
     }
 
 }

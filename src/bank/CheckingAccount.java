@@ -3,7 +3,8 @@ package bank;
 import java.util.Currency;
 
 public class CheckingAccount extends Account {
-    public CheckingAccount(String name, Transactions transactions, double balance, Currency currency, Customer customer) {
+
+    public CheckingAccount(String name, Transactions<Transaction> transactions, double balance, Currency currency, Customer customer) {
         super(name, transactions, balance, currency, customer);
         this.withdrawBehavior = new CanWithdrawBehavior(this);
         this.depositBehavior = new CanDepositBehavior(this);

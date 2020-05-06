@@ -43,7 +43,7 @@ public class Loan extends Account {
     @Override
     public JSONObject toJSON() {
         JSONObject jsonObject = super.toJSON();
-        jsonObject.put("Collateral", collateral.toJSON());
+        jsonObject.put("collateral", collateral.toJSON());
         return jsonObject;
     }
 }

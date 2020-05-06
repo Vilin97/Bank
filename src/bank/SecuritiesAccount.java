@@ -80,7 +80,8 @@ public class SecuritiesAccount extends Account {
         for (Stock stock:getStocks()) {
             stocksObject.add(stock.toJSON());
         }
-        accountObject.put("Stocks", stocksObject);
+        accountObject.put("stocks", stocksObject);
+        accountObject.put("startingAmount", startingAmount);
         return accountObject;
     }
 }

@@ -27,7 +27,7 @@ class UName {
     }
     
     public static UName createUName(String nm){
-        System.out.println("Uname constructor: "+nm);
+        //System.out.println("Uname constructor: "+nm);
         UName rt;
         nm = nm.trim();
         
@@ -43,9 +43,14 @@ class UName {
         return this.uname;
     }
 
-    public Object toJSON() {
+    public JSONObject toJSON() {
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("uname", uname);
         return jsonObject;
+    }
+
+    public static UName fromJSON(JSONObject jsonObject){
+        String uname = (String) jsonObject.get("uname");
+        return new UName(uname);
     }
 }

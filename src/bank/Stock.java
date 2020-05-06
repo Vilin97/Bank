@@ -9,6 +9,11 @@ public class Stock {
     private String name;
     private static int nextID = 0;
 
+    public Stock(int ID, String name) {
+        this.ID = ID;
+        this.name = name;
+    }
+
     public Stock(String name) {
         this.ID = nextID;
         this.name = name;
@@ -47,8 +52,15 @@ public class Stock {
 
     public JSONObject toJSON(){
         JSONObject stockObject = new JSONObject();
-        stockObject.put("StockName", getName());
-        stockObject.put("StockID", getID());
+        stockObject.put("name", getName());
+        stockObject.put("ID", getID());
         return stockObject;
+    }
+
+    public static Stock fromJSON(JSONObject jsonObject){
+        String name = (String) jsonObject.get("name");
+        Long temp = (Long) jsonObject.get("ID");
+        int ID = Math.toIntExact(temp);
+        return new Stock(ID, name);
     }
 }

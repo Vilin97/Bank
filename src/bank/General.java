@@ -1,5 +1,9 @@
 package bank;
 
+import org.json.simple.JSONObject;
+
+import java.nio.file.LinkOption;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -9,6 +13,25 @@ import static java.lang.Integer.min;
 
 public class General {
     // class to hold general utility functions
+
+    public static JSONObject localDateToJSON(LocalDate date){
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("year", date.getYear());
+        jsonObject.put("month", date.getMonthValue());
+        jsonObject.put("day", date.getDayOfMonth());
+        return jsonObject;
+    }
+
+    public static LocalDate localDateFromJSON(JSONObject jsonObject){
+        Long temp = (Long) jsonObject.get("year");
+        int year = Math.toIntExact(temp);
+        temp = (Long) jsonObject.get("month");
+        int month = Math.toIntExact(temp);
+        temp = (Long) jsonObject.get("day");
+        int day = Math.toIntExact(temp);
+        return LocalDate.of(year, month, day);
+
+    }
 
     public static String[] arrayFromString(String arr){
         return arr.replaceAll("\\[", "").replaceAll("]", "").split(", ");

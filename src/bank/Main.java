@@ -42,6 +42,9 @@ public class Main {
             System.out.println(customer1.getUnrealizedProfit());
 
             JSONTools.writeUserData(customer1);
+            Customer customerFromFile = (Customer) JSONTools.readUserData("Vas");
+            System.out.println(customerFromFile);
+            System.out.println(customer1);
 
 //            Stock stock2 = new Stock("Stock2");
 //            Stock stock3 = new Stock("Stock2");

@@ -136,6 +136,10 @@ abstract public class Account {
         return ID;
     }
 
+    public void setID(int ID) {
+        this.ID = ID;
+    }
+
     public User getUser() {
         return user;
     }
@@ -162,16 +166,63 @@ abstract public class Account {
         accountObject.put("balance", balance);
         accountObject.put("currency", currency.toString());
 
-        JSONArray transactionsObject = new JSONArray();
+        JSONArray transactionsArray = new JSONArray();
         for (Transaction transaction:getTransactions()) {
-            transactionsObject.add(transaction.toJSON());
+            transactionsArray.add(transaction.toJSON());
         }
-        accountObject.put("Transactions", transactionsObject);
+        accountObject.put("transactions", transactionsArray);
         return accountObject;
     }
 
-    public Account fromJSON(JSONObject jsonObject){
+    public static Account fromJSON(JSONObject jsonObject, User customer){
         String name = (String) jsonObject.get("name");
-        return null;
+        Long temp = (Long) jsonObject.get("ID");
+        int ID = Math.toIntExact(temp);
+        double balance = (double) jsonObject.get("balance");
+        Currency currency = Currency.getInstance((String) jsonObject.get("currency"));
+        String type = (String) jsonObject.get("type");
+        Account account;
+        switch (type){
+            case "CheckingAccount":
+                account = new CheckingAccount(name, currency, (Customer) customer);
+                account.setBalance(balance);
+                break;
+            case "SavingsAccount":
+                account = new SavingsAccount(name, currency, (Customer) customer);
+                account.setBalance(balance);
+                break;
+            case "SecuritiesAccount":
+                double startingAmount = (double) jsonObject.get("startingAmount");
+                JSONArray stocksArray = (JSONArray) jsonObject.get("stocks");
+                Stocks stocks = new Stocks();
+                for (Object s:stocksArray) {
+                    stocks.add(Stock.fromJSON((JSONObject) s));
+                }
+                SecuritiesAccount securitiesAccount = new SecuritiesAccount(name, currency, startingAmount, (Customer) customer);
+                securitiesAccount.setStocks(stocks);
+                account = securitiesAccount;
+                account.setBalance(balance);
+                break;
+            case "Loan":
+                Collateral collateral = (Collateral) jsonObject.get("collateral");
+                account = new Loan(name, currency, (Customer) customer, collateral);
+                account.setBalance(balance);
+                break;
+            case "PendingLoan":
+                Collateral collateral2 = (Collateral) jsonObject.get("collateral");
+                SavingsAccount savingsAccount = (SavingsAccount) jsonObject.get("savingsAccount");
+                account = new PendingLoan(name, balance, currency, (Customer) customer, savingsAccount, collateral2);
+                break;
+            default:
+                throw new IllegalStateException("Unexpected value: " + type);
+        }
+        account.setID(ID);
+        JSONArray transactionArray = (JSONArray) jsonObject.get("transactions");
+        Transactions<Transaction> transactions = new Transactions<>();
+        for (Object t:transactionArray) {
+            transactions.add(Transaction.fromJSON((JSONObject) t, account, customer));
+        }
+        account.setTransactions(transactions);
+        return account;
     }
 }

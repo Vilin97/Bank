@@ -122,10 +122,17 @@ public class Credentials {
 
     public JSONObject toJSON(){
         JSONObject jsonObject = new JSONObject();
-        jsonObject.put("Name", name.toJSON());
-        jsonObject.put("UName", uname.toJSON());
+        jsonObject.put("name", name.toJSON());
+        jsonObject.put("uname", uname.toJSON());
         jsonObject.put("pword", pword.toJSON());
         return jsonObject;
+    }
+
+    public static Credentials fromJSON(JSONObject jsonObject){
+        Name name = Name.fromJSON((JSONObject) jsonObject.get("name"));
+        UName uname = UName.fromJSON((JSONObject) jsonObject.get("uname"));
+        Password pword = Password.fromJSON((JSONObject) jsonObject.get("pword"));
+        return new Credentials(name, uname, pword);
     }
 
 }

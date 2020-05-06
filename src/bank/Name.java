@@ -56,4 +56,10 @@ class Name {
         jsonObject.put("lname", lname);
         return jsonObject;
     }
+
+    public static Name fromJSON(JSONObject jsonObject){
+        String fname = (String) jsonObject.get("fname");
+        String lname = (String) jsonObject.get("lname");
+        return new Name(fname, lname);
+    }
 }

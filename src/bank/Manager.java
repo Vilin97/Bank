@@ -1,5 +1,8 @@
 package bank;
 
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+
 import java.time.LocalDate;
 import java.util.Currency;
 
@@ -18,9 +21,18 @@ import static bank.Credentials.createCredentials;
 public class Manager extends User {
     private ManagerAccount account;
 
+    public Manager(Credentials cred, int ID, ManagerAccount account) {
+        super(cred, ID);
+        this.account = account;
+    }
+
     public Manager(Credentials cd, ManagerAccount managerAccount) {
         super(cd);
         this.account = managerAccount;
+    }
+
+    public Manager(Credentials cred, int ID) {
+        this(cred, ID, new ManagerAccount(Currency.getInstance("USD")));
     }
 
     public Manager(Credentials cd) {
@@ -116,4 +128,19 @@ public class Manager extends User {
         this.account = account;
     }
 
+    public JSONObject toJSON(){
+        JSONObject jsonObject = super.toJSON();
+        JSONObject accountObject = account.toJSON();
+        jsonObject.put("account", accountObject);
+        return jsonObject;
+    }
+
+    public static Manager fromJSON(JSONObject jsonObject){
+        Credentials credentials = Credentials.fromJSON((JSONObject) jsonObject.get("cred"));
+        int ID = (int) jsonObject.get("ID");
+        Manager manager = new Manager(credentials, ID);
+        ManagerAccount account = ManagerAccount.fromJSON((JSONObject) jsonObject.get("account"), manager);
+        manager.setAccount(account);
+        return manager;
+    }
 }

@@ -38,6 +38,15 @@ public class Customer extends User {
     private Accounts<Loan> loans;
     private Accounts<PendingLoan> pendingLoans;
 
+    public Customer(Credentials cred, int ID, Accounts<SavingsAccount> savingsAccounts, Accounts<CheckingAccount> checkingAccounts, Accounts<SecuritiesAccount> securitiesAccounts, Accounts<Loan> loans, Accounts<PendingLoan> pendingLoans) {
+        super(cred, ID);
+        this.savingsAccounts = savingsAccounts;
+        this.checkingAccounts = checkingAccounts;
+        this.securitiesAccounts = securitiesAccounts;
+        this.loans = loans;
+        this.pendingLoans = pendingLoans;
+    }
+
     public Customer(Credentials cd,
                     Accounts<SavingsAccount> savingsAccounts, Accounts<CheckingAccount> checkingAccounts,
                     Accounts<SecuritiesAccount> securitiesAccounts, Accounts<Loan> loans,
@@ -52,6 +61,10 @@ public class Customer extends User {
 
     public Customer(Credentials cd) {
         this(cd, new Accounts<SavingsAccount>(), new Accounts<CheckingAccount>(), new Accounts<SecuritiesAccount>(), new Accounts<Loan>(), new Accounts<PendingLoan>());
+    }
+
+    public Customer(Credentials cred, int ID) {
+        this(cred, ID, new Accounts<SavingsAccount>(), new Accounts<CheckingAccount>(), new Accounts<SecuritiesAccount>(), new Accounts<Loan>(), new Accounts<PendingLoan>());
     }
 
     public Customer(String fname, String lname, String uname, String pword) {
@@ -332,6 +345,24 @@ public class Customer extends User {
         }
         jsonObject.put("accounts", accountsObject);
         return jsonObject;
+    }
+
+    public static Customer fromJSON(JSONObject jsonObject){
+        Credentials credentials = Credentials.fromJSON((JSONObject) jsonObject.get("cred"));
+        Long temp = (Long) jsonObject.get("ID");
+        int ID = Math.toIntExact(temp);
+        Customer customer = new Customer(credentials, ID);
+        JSONArray accountsArray = (JSONArray) jsonObject.get("accounts");
+        for (Object a:accountsArray) {
+            JSONObject aa = (JSONObject) a;
+            Account account = Account.fromJSON(aa, customer);
+            if (account instanceof CheckingAccount) customer.checkingAccounts.add((CheckingAccount) account);
+            else if (account instanceof SavingsAccount) customer.savingsAccounts.add((SavingsAccount) account);
+            else if (account instanceof SecuritiesAccount) customer.securitiesAccounts.add((SecuritiesAccount) account);
+            else if (account instanceof PendingLoan) customer.pendingLoans.add((PendingLoan) account);
+            else if (account instanceof Loan) customer.loans.add((Loan) account);
+        }
+        return customer;
     }
     
 }
