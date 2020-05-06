@@ -8,7 +8,12 @@ package bank;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.Objects;
 
 /**
@@ -26,10 +31,8 @@ public abstract class User implements Permisions {
         nextID += 1;
     }
 
-    public User(){
-        // no credentials for testing
-        ID = nextID;
-        nextID += 1;
+    public User(String fname, String lname, String uname, String pword){
+        this(new Credentials(fname,lname,uname,pword));
     }
 
     @Override
@@ -78,8 +81,12 @@ public abstract class User implements Permisions {
     public JSONObject toJSON(){
         JSONObject userObject = new JSONObject();
         userObject.put("ID", getID());
-        userObject.put("Credentials", getCreds().toJSON());
+        userObject.put("cred", getCreds().toJSON());
         return userObject;
+    }
+
+    public User fromJSON(JSONObject jsonObject){
+        return null;//TODO
     }
 
 }

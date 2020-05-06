@@ -47,10 +47,10 @@ abstract public class Transaction implements Comparable<Transaction>{
         transactionObject.put("Type", getClass().getSimpleName());
         transactionObject.put("Amount", amount);
         if (this instanceof TransactionSellStock) {
-            transactionObject.put("Stock", ((TransactionSellStock) this).getStock());
+            transactionObject.put("Stock", ((TransactionSellStock) this).getStock().toJSON());
         }
         if (this instanceof TransactionBuyStock) {
-            transactionObject.put("Stock", ((TransactionBuyStock) this).getStock());
+            transactionObject.put("Stock", ((TransactionBuyStock) this).getStock().toJSON());
         }
         return transactionObject;
     }

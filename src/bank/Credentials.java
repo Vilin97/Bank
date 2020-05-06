@@ -35,6 +35,10 @@ public class Credentials {
         this(new Name(name,""), new UName(uname), new Password(pword) );
     }
 
+    public Credentials (String fname, String lname, String uname, String pword) {
+        this(new Name(fname,lname), new UName(uname), new Password(pword) );
+    }
+
     public static Credentials createCredentials(String fn, String ln, String un, String pw){
         Credentials rt;
         Name name = null;

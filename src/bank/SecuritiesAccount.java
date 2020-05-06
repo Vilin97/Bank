@@ -1,5 +1,6 @@
 package bank;
 
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 import java.util.Currency;
@@ -75,13 +76,9 @@ public class SecuritiesAccount extends Account {
     @Override
     public JSONObject toJSON() {
         JSONObject accountObject = super.toJSON();
-        JSONObject stocksObject = new JSONObject();
-        JSONObject stockObject;
+        JSONArray stocksObject = new JSONArray();
         for (Stock stock:getStocks()) {
-            stockObject = new JSONObject();
-            stockObject.put("StockName", stock.getName());
-            stockObject.put("StockID", stock.getID());
-            stocksObject.put(stock.getID(), stockObject);
+            stocksObject.add(stock.toJSON());
         }
         accountObject.put("Stocks", stocksObject);
         return accountObject;

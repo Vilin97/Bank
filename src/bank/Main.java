@@ -15,8 +15,8 @@ public class Main {
             new Bank(manager);
             Bank.setCurrentDate(LocalDate.now());
             manager.receiveMoney(usdCurrency, 10000);
-            Customer customer1 = new Customer();
-            Customer customer2 = new Customer();
+            Customer customer1 = new Customer("Vasily", "Vas", "123");
+            Customer customer2 = new Customer("Adam", "Ad", "1234");
             Bank.getCustomers().add(customer1);
             Bank.getCustomers().add(customer2);
 

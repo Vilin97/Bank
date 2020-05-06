@@ -156,11 +156,11 @@ abstract public class Account {
 
     public JSONObject toJSON(){
         JSONObject accountObject = new JSONObject();
-        accountObject.put("Type", getClass().getSimpleName());
-        accountObject.put("Name", name);
+        accountObject.put("type", getClass().getSimpleName());
+        accountObject.put("name", name);
         accountObject.put("ID", ID);
-        accountObject.put("Balance", balance);
-        accountObject.put("Currency", currency.toString());
+        accountObject.put("balance", balance);
+        accountObject.put("currency", currency.toString());
 
         JSONArray transactionsObject = new JSONArray();
         for (Transaction transaction:getTransactions()) {
@@ -168,5 +168,10 @@ abstract public class Account {
         }
         accountObject.put("Transactions", transactionsObject);
         return accountObject;
+    }
+
+    public Account fromJSON(JSONObject jsonObject){
+        String name = (String) jsonObject.get("name");
+        return null;
     }
 }

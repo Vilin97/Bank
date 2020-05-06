@@ -37,23 +37,30 @@ public class Customer extends User {
     private Accounts<SecuritiesAccount> securitiesAccounts;
     private Accounts<Loan> loans;
     private Accounts<PendingLoan> pendingLoans;
-    
-    public Customer(Credentials cd) {
+
+    public Customer(Credentials cd,
+                    Accounts<SavingsAccount> savingsAccounts, Accounts<CheckingAccount> checkingAccounts,
+                    Accounts<SecuritiesAccount> securitiesAccounts, Accounts<Loan> loans,
+                    Accounts<PendingLoan> pendingLoans) {
         super(cd);
-        this.savingsAccounts = new Accounts<SavingsAccount>();
-        this.checkingAccounts = new Accounts<CheckingAccount>();
-        this.securitiesAccounts = new Accounts<SecuritiesAccount>();
-        this.loans = new Accounts<Loan>();
-        this.pendingLoans = new Accounts<PendingLoan>();
+        this.savingsAccounts = savingsAccounts;
+        this.checkingAccounts = checkingAccounts;
+        this.securitiesAccounts = securitiesAccounts;
+        this.loans = loans;
+        this.pendingLoans = pendingLoans;
     }
 
-    public Customer() {
-        // user with no credential, for testing
-        this.savingsAccounts = new Accounts<SavingsAccount>();
-        this.checkingAccounts = new Accounts<CheckingAccount>();
-        this.securitiesAccounts = new Accounts<SecuritiesAccount>();
-        this.loans = new Accounts<Loan>();
-        this.pendingLoans = new Accounts<PendingLoan>();
+    public Customer(Credentials cd) {
+        this(cd, new Accounts<SavingsAccount>(), new Accounts<CheckingAccount>(), new Accounts<SecuritiesAccount>(), new Accounts<Loan>(), new Accounts<PendingLoan>());
+    }
+
+    public Customer(String fname, String lname, String uname, String pword) {
+        this(new Credentials(fname,lname,uname,pword),
+                new Accounts<SavingsAccount>(), new Accounts<CheckingAccount>(), new Accounts<SecuritiesAccount>(), new Accounts<Loan>(), new Accounts<PendingLoan>());
+    }
+    public Customer(String fname, String uname, String pword) {
+        this(new Credentials(fname,uname,pword),
+                new Accounts<SavingsAccount>(), new Accounts<CheckingAccount>(), new Accounts<SecuritiesAccount>(), new Accounts<Loan>(), new Accounts<PendingLoan>());
     }
 
     public Transactions<Transaction> getTransactionsByTimePeriod(LocalDate begin, LocalDate end, Account account){

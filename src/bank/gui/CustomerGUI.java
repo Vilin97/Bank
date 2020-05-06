@@ -3,28 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
-package bank;
-
-import org.json.simple.parser.ParseException;
-
 package bank.gui;
 
-import bank.Account;
-import bank.Accounts;
-import bank.Bank;
-import bank.CheckingAccount;
-import bank.Customer;
-import bank.Customers;
-import bank.Loan;
-import bank.Manager;
-import bank.PendingLoan;
-import bank.SavingsAccount;
-import bank.SecuritiesAccount;
-import bank.Stock;
-import bank.StockMarket;
-import bank.Transaction;
-import bank.Transactions;
+import bank.*;
+import org.json.simple.parser.ParseException;
+
 
 import static bank.IOTools.parseToDate;
 import static bank.gui.NewAccountGUI.newAccGUI;
@@ -2288,10 +2271,10 @@ public class CustomerGUI extends javax.swing.JFrame {
             //pull the user from the data set
             Bank tester = getTestB();
             //Customer test = getTestC();
-            Customer newCustomer = ReadFile.readUserData("astreich");
+            //Customer newCustomer = ReadFile.readUserData("astreich");
 
             public void run() {
-                new CustomerGUI(newCustomer,tester).setVisible(true);
+                //new CustomerGUI(newCustomer,tester).setVisible(true);
             }
         });
     }

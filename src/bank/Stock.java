@@ -1,5 +1,7 @@
 package bank;
 
+import org.json.simple.JSONObject;
+
 import java.util.Objects;
 
 public class Stock {
@@ -41,5 +43,12 @@ public class Stock {
     @Override
     public String toString() {
         return "Stock " + name;
+    }
+
+    public JSONObject toJSON(){
+        JSONObject stockObject = new JSONObject();
+        stockObject.put("StockName", getName());
+        stockObject.put("StockID", getID());
+        return stockObject;
     }
 }
