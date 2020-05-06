@@ -17,6 +17,12 @@ public class Bank {
         Bank.stockMarket = stockMarket;
     }
 
+    public Bank(Manager manager, StockMarket stockMarket, LocalDate currentDate) {
+        Bank.manager = manager;
+        Bank.stockMarket = stockMarket;
+        Bank.currentDate = currentDate;
+    }
+
     public Bank(Manager manager) {
         this(new Customers<Customer>(), manager, new StockMarket());
     }
@@ -106,13 +112,14 @@ public class Bank {
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("date", General.localDateToJSON(Bank.getCurrentDate()));
         jsonObject.put("stockMarket", Bank.getStockMarket().toJSON());
+        jsonObject.put("manager", Bank.getManager().toJSON());
         return jsonObject;
     }
 
-    public static void fromJSON(JSONObject jsonObject){
+    public static Bank fromJSON(JSONObject jsonObject){
         LocalDate date = General.localDateFromJSON((JSONObject) jsonObject.get("date"));
         StockMarket stockMarket = StockMarket.fromJSON((JSONObject) jsonObject.get("stockMarket"));
-        Bank.setCurrentDate(date);
-        Bank.setStockMarket(stockMarket);
+        Manager manager = Manager.fromJSON((JSONObject) jsonObject.get("manager"));
+        return new Bank(manager, stockMarket, date);
     }
 }

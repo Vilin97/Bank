@@ -1,11 +1,13 @@
 package bank;
 
+import bank.gui.BeginGUI;
+
 import java.time.LocalDate;
 import java.util.*;
 
 public class Main {
     public static void main(String[] args) {
-        boolean test = true;
+        boolean test = false;
 
         if (test){
             Currency usdCurrency = Currency.getInstance("USD");
@@ -88,7 +90,7 @@ public class Main {
 //            System.out.println(checking1);
 
         } else {
-            // Bank bank = new Bank();
+            BeginGUI.main(new String[]{});
         }
     }
 }

@@ -10,8 +10,8 @@ import java.nio.file.Path;
 
 public class JSONTools {
     // A class to read and write our bank related data
-    private final static String path = "BankState/";
-    private final static String usersPath = "BankState/Users/";
+    public final static String path = "BankState/";
+    public final static String usersPath = "BankState/Users/";
 
 
     public static void writeUserData(User user){
@@ -96,10 +96,11 @@ public class JSONTools {
         }
     }
 
-    public static void readBank() {
+    public static Bank readBank() {
+        Bank bank = null;
         try {
             JSONObject jsonObject = (JSONObject) new JSONParser().parse(new FileReader(path+"Bank.json"));
-            Bank.fromJSON((JSONObject) jsonObject.get("Bank"));
+            bank = Bank.fromJSON((JSONObject) jsonObject.get("Bank"));
         } catch (ParseException e) {
             e.printStackTrace();
         } catch (FileNotFoundException e) {
@@ -107,6 +108,7 @@ public class JSONTools {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        return bank;
     }
 
 }

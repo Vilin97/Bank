@@ -280,7 +280,7 @@ public class GUI extends javax.swing.JFrame {
     public void logInUser(String uname,String password, Bank bnk){
         User user = bnk.logIn(uname, password);
         if(user == null){
-            throw new IllegalArgumentException("wrong unsername or password");
+            throw new IllegalArgumentException("wrong username or password");
         }else if (user instanceof Customer){
             this.dispose();
             Customer cs = (Customer) user;

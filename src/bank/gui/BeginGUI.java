@@ -8,10 +8,16 @@ package bank.gui;
 
 import bank.Bank;
 import bank.Customers;
+import bank.JSONTools;
 import bank.Manager;
 import bank.gui.GUI;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
+import java.nio.file.DirectoryStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
@@ -25,12 +31,18 @@ public class BeginGUI extends javax.swing.JFrame {
     
     //checks to see if the bank json file exists
     private static boolean hasBank() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        boolean hasBank = false;
+        try(DirectoryStream<Path> dirStream = Files.newDirectoryStream(Paths.get(JSONTools.path))) {
+            hasBank = dirStream.iterator().hasNext();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return hasBank;
     }
 
     //load the json file into a bank object
     private static Bank loadBank() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return JSONTools.readBank();
     }
     
 
