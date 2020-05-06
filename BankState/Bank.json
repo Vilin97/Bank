@@ -1,0 +1,1 @@
+{"Bank":{"date":{"month":4,"year":2020,"day":28},"stockMarket":{"prices":{},"stocks":[]},"manager":{"cred":{"uname":{"uname":"mrMono"},"name":{"fname":"Mr.","lname":"Monopoly"},"pword":{"pword":"12345"}},"ID":1,"type":"Manager","account":{"balance":55.0,"name":"Manager's account","currency":"USD","ID":4,"type":"ManagerAccount","transactions":[]}}}}
