@@ -137,7 +137,8 @@ public class Manager extends User {
 
     public static Manager fromJSON(JSONObject jsonObject){
         Credentials credentials = Credentials.fromJSON((JSONObject) jsonObject.get("cred"));
-        int ID = (int) jsonObject.get("ID");
+        Long temp = (Long) jsonObject.get("ID");
+        int ID = Math.toIntExact(temp);
         Manager manager = new Manager(credentials, ID);
         ManagerAccount account = ManagerAccount.fromJSON((JSONObject) jsonObject.get("account"), manager);
         manager.setAccount(account);

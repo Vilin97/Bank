@@ -290,7 +290,7 @@ public class GUI extends javax.swing.JFrame {
             //temp.getPword();
             //check password here
 
-            if(user.getCreds().getPword().equals(password)){
+            if(user.getCreds().getPword().getPword().equals(password)){
                 this.dispose();
                 Customer cs = (Customer) user;
                 new CustomerGUI(cs,bnk).setVisible(true);
@@ -298,7 +298,7 @@ public class GUI extends javax.swing.JFrame {
 
         }else if (user instanceof Manager){
             //check password here
-            if(user.getCreds().getPword().equals(password)){
+            if(user.getCreds().getPword().getPword().equals(password)){
                 this.dispose();
                 //launch manager GUI user is an instance of manager
                 new MainManagerFrame().setVisible(true);
