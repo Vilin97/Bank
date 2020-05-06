@@ -69,4 +69,5 @@ public class SecuritiesAccount extends Account {
     public void setStocks(Stocks<Stock> stocks) {
         this.stocks = stocks;
     }
+
 }

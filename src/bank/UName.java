@@ -25,6 +25,7 @@ class UName {
     }
     
     public static UName createUName(String nm){
+        System.out.println("Uname constructor: "+nm);
         UName rt;
         nm = nm.trim();
         

@@ -99,4 +99,8 @@ public class Stocks<S extends Stock> implements Collection<S> {
         return (S) new Stock("");
     }
 
+    public S getStockByIndex(int index) {
+        return stocks.get(index);
+    }
+
 }

@@ -1,727 +1,394 @@
-//package bank;
+package bank;
+
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
+
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.Reader;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Currency;
+import java.util.Iterator;
+
+public class ReadFile {
+    // A class to read and write our bank related data
+
+    // A function that adds a user's general data
+    public static void writeUserData(String username, Customer customer) throws IOException {
+        JSONObject userObject = new JSONObject();
+        userObject.put("Name", customer.getName());
+        userObject.put("UserID", customer.getID());
+        userObject.put("UName", customer.getUName());
+        userObject.put("Password", customer.getCreds().getPword().pword);
+
+        // loop through the users accounts
+        JSONObject userAccounts = new JSONObject();
+        JSONObject userAccount = new JSONObject();
+
+        for (int i = 0; i < customer.getAllAccounts().size(); i++) {
+            userAccount = new JSONObject();
+            Account currentAccount = customer.getAllAccounts().get(i);
+            userAccount.put("accountName", currentAccount.name);
+            userAccount.put("accountID", currentAccount.ID);
+            userAccount.put("accountType", currentAccount.getClass().getName());
+            userAccount.put("balance", currentAccount.balance);
+            userAccount.put("currency", currentAccount.currency.toString());
+            if (currentAccount.getClass().getName() == "SecuritiesAccount") {
+                JSONObject accountStocks = new JSONObject();
+                Stocks<Stock> stocks = customer.getSecuritiesAccounts().getByID(currentAccount.ID).getStocks();
+                for (int j = 0; j < stocks.size(); j++) {
+                    accountStocks.put("stockName", stocks.getStockByIndex(j).getName());
+                    accountStocks.put("stockID", stocks.getStockByIndex(j).getID());
+                }
+                userObject.put("stocks", accountStocks);
+            }
+
+            // loop through the transactions
+            JSONObject accountTransactions = new JSONObject();
+            Iterator transactionsIter = currentAccount.transactions.iterator();
+            while(transactionsIter.hasNext()) {
+                Transaction currentTransaction = (Transaction) transactionsIter.next();
+                JSONObject accTransaction = new JSONObject();
+                accTransaction.put("transactionDate", currentTransaction.getDate().toString());
+                accTransaction.put("transactionType", currentTransaction.getClass().getName());
+                accTransaction.put("transactionAmount", currentTransaction.amount);
+                if (currentTransaction instanceof TransactionSellStock) {
+                    accTransaction.put("stock", ((TransactionSellStock) currentTransaction).getStock());
+                }
+                accountTransactions.put("accountTransactions", accTransaction);
+            }
+            userAccount.put("transactions", accountTransactions);
+            userAccounts.put(currentAccount.getID(), userAccount);
+        }
+        userObject.put("accounts", userAccounts);
+        Files.write(Paths.get(username), userObject.toJSONString().getBytes());
+    }
+
+
+    public static Customer readUserData(String filename) throws IOException, ParseException {
+        JSONParser jsonParser = new JSONParser();
+        Customer newCustomer = new Customer();
+        try(Reader reader = new FileReader(filename)) {
+            JSONObject currentUserJSON = (JSONObject) jsonParser.parse(reader);
+            // Store each type of users accounts
+            Accounts<CheckingAccount> checkingAccounts = new Accounts<>();
+            Accounts<SavingsAccount> savingsAccounts = new Accounts<>();
+            Accounts<SecuritiesAccount> securitiesAccounts = new Accounts<>();
+
+            // Store all of the users transactions
+            Transactions<Transaction> allTransactions = new Transactions<>();
+
+            // Set user basic credentials
+            String getname = (String)currentUserJSON.get("Name");
+            String[] parsed = getname.split(" ");
+            String firstname = parsed[0];
+            String lastname = parsed[1];
+            Name name = new Name(firstname, lastname);
+            Long lon = (Long)currentUserJSON.get("UserID");
+            int userID = lon.intValue();
+            String temp = (String)currentUserJSON.get("UName");
+            UName uname = new UName(temp);
+            String password = (String)currentUserJSON.get("Password");
+            newCustomer = new Customer(new Credentials(name.toString(), uname.toString(), password));
+            newCustomer.setID(userID);
+
+            // Read Account data
+            JSONObject userAccounts = (JSONObject) currentUserJSON.get("accounts");
+            for (int i = 0; i < userAccounts.size(); i++) {
+                JSONObject currentAccount = (JSONObject) userAccounts.get(i);
+                if (currentAccount.get("accountName").toString().equalsIgnoreCase("bank.CheckingAccount")) {
+                    Transactions<Transaction> accountTransactions = new Transactions<>();
+                    CheckingAccount newCheckingAccount = new CheckingAccount((String) currentAccount.get("accountName"), (Currency) currentAccount.get("currency"), newCustomer);
+                    JSONObject currentAccountTransactions = (JSONObject) currentAccount.get("transactions");
+                    if (currentAccountTransactions.size() > 0) {
+                        for (int j = 0; j < currentAccountTransactions.size(); j++) {
+                            JSONObject currentTransaction = (JSONObject) currentAccountTransactions.get(j);
+                            if (currentTransaction.get("transactionType").equals("TransactionWithdrawal") ) {
+                                TransactionWithdrawal newTransactionWithdrawal = new TransactionWithdrawal((LocalDate) currentTransaction.get("transactionDate"), (double) currentTransaction.get("transactionAmount"), newCustomer, newCheckingAccount);
+                                allTransactions.add(newTransactionWithdrawal);
+                                accountTransactions.add(newTransactionWithdrawal);
+                            }
+                            if (currentTransaction.get("transactionType").equals("TransactionTransferIn")) {
+                                TransactionTransferIn newTransactionTransferIn = new TransactionTransferIn((LocalDate) currentTransaction.get("transactionDate"), (double) currentTransaction.get("transactionAmount"), newCustomer, newCheckingAccount);
+                                allTransactions.add(newTransactionTransferIn);
+                                accountTransactions.add(newTransactionTransferIn);
+                            }
+                            if (currentTransaction.get("transactionType").equals("TransactionTransferOut")) {
+                                TransactionTransferOut newTransactionTransferOut = new TransactionTransferOut((LocalDate) currentTransaction.get("transactionDate"), (double) currentTransaction.get("transactionAmount"), newCustomer, newCheckingAccount);
+                                allTransactions.add(newTransactionTransferOut);
+                                accountTransactions.add(newTransactionTransferOut);
+                            }
+                            if (currentTransaction.get("transactionType") == "TransactionDeposit") {
+                                TransactionDeposit newTransactionDeposit = new TransactionDeposit((LocalDate) currentTransaction.get("transactionDate"), (double) currentTransaction.get("transactionAmount"), newCustomer, newCheckingAccount);
+                                allTransactions.add(newTransactionDeposit);
+                                accountTransactions.add(newTransactionDeposit);
+                            }
+                        }
+                        newCheckingAccount.setTransactions(accountTransactions);
+                    }
+                    checkingAccounts.add(newCheckingAccount);
+                }
+
+                if (currentAccount.get("accountName").toString() == "bank.SavingsAccount") {
+                    Transactions<Transaction> accountTransactions = new Transactions<>();
+                    SavingsAccount newSavingsAccount = new SavingsAccount((String) currentAccount.get("accountName"), (Currency) currentAccount.get("currency"), newCustomer);
+                    JSONObject currentAccountTransactions = (JSONObject) currentAccount.get("transactions");
+                    if (currentAccountTransactions.size() > 0) {
+                        for (int j = 0; j < currentAccountTransactions.size(); j++) {
+                            JSONObject currentTransaction = (JSONObject) currentAccountTransactions.get(j);
+                            if (currentTransaction.get("transactionType") == "TransactionWithdrawal") {
+                                TransactionWithdrawal newTransactionWithdrawal = new TransactionWithdrawal((LocalDate) currentTransaction.get("transactionDate"), (double) currentTransaction.get("transactionAmount"), newCustomer, newSavingsAccount);
+                                accountTransactions.add(newTransactionWithdrawal);
+                            }
+                            if (currentTransaction.get("transactionType") == "TransactionTransferIn") {
+                                TransactionTransferIn newTransactionTransferIn = new TransactionTransferIn((LocalDate) currentTransaction.get("transactionDate"), (double) currentTransaction.get("transactionAmount"), newCustomer, newSavingsAccount);
+                                accountTransactions.add(newTransactionTransferIn);
+                            }
+                            if (currentTransaction.get("transactionType") == "TransactionTransferOut") {
+                                TransactionTransferOut newTransactionTransferOut = new TransactionTransferOut((LocalDate) currentTransaction.get("transactionDate"), (double) currentTransaction.get("transactionAmount"), newCustomer, newSavingsAccount);
+                                accountTransactions.add(newTransactionTransferOut);
+                            }
+                            if (currentTransaction.get("transactionType") == "TransactionDeposit") {
+                                TransactionDeposit newTransactionDeposit = new TransactionDeposit((LocalDate) currentTransaction.get("transactionDate"), (double) currentTransaction.get("transactionAmount"), newCustomer, newSavingsAccount);
+                                allTransactions.add(newTransactionDeposit);
+                                accountTransactions.add(newTransactionDeposit);
+                            }
+                        }
+                        savingsAccounts.add(newSavingsAccount);
+                        newSavingsAccount.setTransactions(accountTransactions);
+                    }
+                    savingsAccounts.add(newSavingsAccount);
+                }
+
+                if (currentAccount.get("accountName").toString() == "bank.SecuritiesAccount") {
+                    Transactions<Transaction> accountTransactions = new Transactions<>();
+                    // loop through the stocks in the securities account
+                    SecuritiesAccount newSecuritiesAccount = new SecuritiesAccount((String) currentAccount.get("accountName"), (Currency) currentAccount.get("currency"),
+                            (double) currentAccount.get("balance"), newCustomer);
+
+                    JSONObject currentAccountStocks = (JSONObject) currentAccount.get("stocks");
+                    Stocks stocksInAccount = new Stocks();
+                    if (currentAccountStocks.size() > 0) {
+                        for (int j = 0; j < currentAccountStocks.size(); j++) {
+                            Stock newStock = new Stock(currentAccountStocks.get("stockName").toString());
+                            stocksInAccount.add(newStock);
+                        }
+                        newSecuritiesAccount.setStocks(stocksInAccount);
+                    }
+
+                    // loop through the account's transactions
+                    JSONObject currentAccountTransactions = (JSONObject) currentAccount.get("transactions");
+                    Transactions<Transaction> securityAccountTransactions = new Transactions<>();
+                    if (currentAccountTransactions.size() > 0) {
+                        for (int j = 0; j < currentAccountTransactions.size(); j++) {
+                            JSONObject currentTransaction = (JSONObject) currentAccountTransactions.get(j);
+                            if (currentTransaction.get("transactionType") == "TransactionSellStock") {
+                                TransactionSellStock newTransactionSellStock = new TransactionSellStock((LocalDate) currentTransaction.get("transactionDate"),
+                                        (double) currentTransaction.get("transactionAmount"), newCustomer, newSecuritiesAccount, (Stock) currentTransaction.get("stockName"));
+                                accountTransactions.add(newTransactionSellStock);
+                                securityAccountTransactions.add(newTransactionSellStock);
+                            }
+
+                            if (currentTransaction.get("transactionType") == "TransactionBuyStock") {
+                                TransactionBuyStock newTransactionBuyStock = new TransactionBuyStock((LocalDate) currentTransaction.get("transactionDate"),
+                                        (double) currentTransaction.get("transactionAmount"), newCustomer, newSecuritiesAccount, (Stock) currentTransaction.get("stockName"));
+                                accountTransactions.add(newTransactionBuyStock);
+                                securityAccountTransactions.add(newTransactionBuyStock);
+                            }
+                        }
+                        newSecuritiesAccount.setTransactions(securityAccountTransactions);
+                    }
+                    securitiesAccounts.add(newSecuritiesAccount);
+                }
+            }
+            newCustomer.setSecuritiesAccounts(securitiesAccounts);
+            newCustomer.setSavingsAccounts(savingsAccounts);
+            newCustomer.setCheckingAccounts(checkingAccounts);
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return newCustomer;
+    }
+
+
+//    public static void writeUserData(String username, Customer customer) throws IOException {
+//        JSONObject userObject = new JSONObject();
+//        userObject.put("Name", customer.getName());
+//        userObject.put("UserID", customer.getID());
+//        userObject.put("UName", customer.getUName());
+//        userObject.put("Password", customer.getCreds().getPword().pword);
 //
-//import java.io.BufferedReader;
-//import java.io.File;  // Import the File class
-//import java.io.FileReader;
-//import java.util.*;
-//
-//public class ReadFile {
-//    // class to read and parse the files of heroes, monsters and items
-//
-//    public static Hero[] readHeroData(String filename, String type) {
-//        List<Hero> heroes = new ArrayList<>();
-//        try {
-//            File myObj = new File(filename);
-//            Scanner myReader = new Scanner(myObj);
-//            int i = 0;
-//            while (myReader.hasNextLine()) {
-//                String line = myReader.nextLine();
-//                line = line.replaceAll("\\s+", " ");
-//                if (i != 0 && line.length() > 1) {
-//                    String[] data = line.split(" ");
-//                    String name = data[0];
-//                    int MP = Integer.parseInt(data[1]);
-//                    int strength = Integer.parseInt(data[2]);
-//                    int agility = Integer.parseInt(data[3]);
-//                    int dexterity = Integer.parseInt(data[4]);
-//                    int money = Integer.parseInt(data[5]);
-//                    int experience = Integer.parseInt(data[6]);
-//                    if (type.equals("W")) { Hero hero = new Warrior(name, 1, MP, strength, agility, dexterity, money, experience); heroes.add(hero); }
-//                    else if (type.equals("S")) { Hero hero = new Sorcerer(name, 1, MP, strength, agility, dexterity, money, experience); heroes.add(hero); }
-//                    else if (type.equals("P")) { Hero hero = new Paladin(name, 1, MP, strength, agility, dexterity, money, experience); heroes.add(hero); }
-//                    else { throw new IllegalArgumentException("Wrong type (W, S, or P are supported)"); }
+//        // loop through the users accounts
+//        JSONArray userAccounts = new JSONArray();
+//        for (int i = 0; i < customer.getAllAccounts().size(); i++) {
+//            Account currentAccount = customer.getAllAccounts().get(i);
+//            userAccounts.add(0, currentAccount.name);
+//            userAccounts.add(1, currentAccount.ID);
+//            userAccounts.add(2, currentAccount.getClass().getName());
+//            userAccounts.add(3, currentAccount.balance);
+//            userAccounts.add(4, currentAccount.currency);
+//            if (currentAccount.getClass().getName() == "SecuritiesAccount") {
+//                JSONArray accountStocks = new JSONArray();
+//                Stocks<Stock> stocks = customer.getSecuritiesAccounts().getByID(currentAccount.ID).getStocks();
+//                for (int j = 0; j < stocks.size(); j++) {
+//                    accountStocks.add(0, stocks.getStockByIndex(j).getName());
+//                    accountStocks.add(1, stocks.getStockByIndex(j).getID());
 //                }
-//                i ++;
+//                userObject.put("stocks", accountStocks);
 //            }
-//            myReader.close();
-//        } catch (Exception e) {
-//            System.out.println("An error occurred at parsing file "+filename);
-//            e.printStackTrace();
-//        }
-//        Hero[] res = new Hero[heroes.size()];
-//        res = heroes.toArray(res);
-//        return res;
-//    }
-//
-//    public static Weapon[] readWeaponData(String filename) {
-//        List<Weapon> weapons = new ArrayList<Weapon>();
-//        try {
-//            File myObj = new File(filename);
-//            Scanner myReader = new Scanner(myObj);
-//            int i = 0;
-//            while (myReader.hasNextLine()) {
-//                String line = myReader.nextLine();
-//                line = line.replaceAll("\\s+", " ");
-//                if (i != 0 && line.length() > 1) {
-//                    String[] data = line.split(" ");
-//                    String name = data[0];
-//                    // Name/cost/level/damage/required hands
-//                    int cost = Integer.parseInt(data[1]);
-//                    int level = Integer.parseInt(data[2]);
-//                    int damage = Integer.parseInt(data[3]);
-//                    int hands = Integer.parseInt(data[4]);
-//                    Weapon weapon = new Weapon(name, cost, level, damage, hands);
-//                    weapons.add(weapon);
-//                }
-//                i ++;
-//            }
-//            myReader.close();
-//        } catch (Exception e) {
-//            System.out.println("An error occurred at parsing file "+filename);
-//            e.printStackTrace();
-//        }
-//        Weapon[] res = new Weapon[weapons.size()];
-//        res = weapons.toArray(res);
-//        return res;
-//    }
-//
-//    public static Armor[] readArmorData(String filename) {
-//        List<Armor> armors = new ArrayList<Armor>();
-//        try {
-//            File myObj = new File(filename);
-//            Scanner myReader = new Scanner(myObj);
-//            int i = 0;
-//            while (myReader.hasNextLine()) {
-//                String line = myReader.nextLine();
-//                line = line.replaceAll("\\s+", " ");
-//                if (i != 0 && line.length() > 1) {
-//                    String[] data = line.split(" ");
-//                    String name = data[0];
-//                    // Name/cost/required level/damage reduction
-//                    int cost = Integer.parseInt(data[1]);
-//                    int level = Integer.parseInt(data[2]);
-//                    int damageReduction = Integer.parseInt(data[3]);
-//                    Armor armor = new Armor(name, cost, damageReduction, level);
-//                    armors.add(armor);
-//                }
-//                i ++;
-//            }
-//            myReader.close();
-//        } catch (Exception e) {
-//            System.out.println("An error occurred at parsing file "+filename);
-//            e.printStackTrace();
-//        }
-//        Armor[] res = new Armor[armors.size()];
-//        res = armors.toArray(res);
-//        return res;
-//    }
-//
-//    public static Potion[] readPotionData(String filename) {
-//        List<Potion> potions = new ArrayList<Potion>();
-//        try {
-//            File myObj = new File(filename);
-//            Scanner myReader = new Scanner(myObj);
-//            int i = 0;
-//            while (myReader.hasNextLine()) {
-//                String line = myReader.nextLine();
-//                line = line.replaceAll("\\s+", " ");
-//                if (i != 0 && line.length() > 1) {
-//                    String[] data = line.split(" ");
-//                    String name = data[0];
-//                    // Name/cost/required level/attribute increase
-//                    int cost = Integer.parseInt(data[1]);
-//                    int level = Integer.parseInt(data[2]);
-//                    int attIncrease = Integer.parseInt(data[3]);
-//                    Potion potion = new Potion(name, cost, attIncrease, level);
-//                    potions.add(potion);
-//                }
-//                i ++;
-//            }
-//            myReader.close();
-//        } catch (Exception e) {
-//            System.out.println("An error occurred at parsing file "+filename);
-//            e.printStackTrace();
-//        }
-//        Potion[] res = new Potion[potions.size()];
-//        res = potions.toArray(res);
-//        return res;
-//    }
-//
-//    public static Monster[] readMonsterData(String filename, String type) {
-//        List<Monster> monsters = new ArrayList<Monster>();
-//        try {
-//            File myObj = new File(filename);
-//            Scanner myReader = new Scanner(myObj);
-//            int i = 0;
-//            while (myReader.hasNextLine()) {
-//                String line = myReader.nextLine();
-//                line = line.replaceAll("\\s+", " ");
-//                if (i != 0 && line.length() > 1) {
-//                    String[] data = line.split(" ");
-//                    String name = data[0];
-//                    // Name/level/damage/defense/dodge chance
-//                    int level = Integer.parseInt(data[1]);
-//                    int damage = Integer.parseInt(data[2]);
-//                    int defense = Integer.parseInt(data[3]);
-//                    double dodgeChance = (double)Integer.parseInt(data[4]);
-//                    dodgeChance = dodgeChance/100;
-//                    if (type.equals("D")) {Monster monster = new Dragon(name, level, damage, defense, dodgeChance);monsters.add(monster);}
-//                    else if (type.equals("S")) {Monster monster = new Spirit(name, level, damage, defense, dodgeChance);monsters.add(monster);}
-//                    else if (type.equals("E")) {Monster monster = new Exoskeleton(name, level, damage, defense, dodgeChance);monsters.add(monster);}
-//                    else { throw new IllegalArgumentException("Wrong type (D, S, or E are supported)"); }
-//                }
-//                i ++;
-//            }
-//            myReader.close();
-//        } catch (Exception e) {
-//            System.out.println("An error occurred at parsing file "+filename);
-//            e.printStackTrace();
-//        }
-//        Monster[] res = new Monster[monsters.size()];
-//        res = monsters.toArray(res);
-//        return res;
-//    }
-//
-//    public static Spell[] readSpellData(String filename, String type) {
-//        List<Spell> skills = new ArrayList<Spell>();
-//        try {
-//            File myObj = new File(filename);
-//            Scanner myReader = new Scanner(myObj);
-//            int i = 0;
-//            while (myReader.hasNextLine()) {
-//                String line = myReader.nextLine();
-//                line = line.replaceAll("\\s+", " ");
-//                if (i != 0 && line.length() > 1) {
-//                    String[] data = line.split(" ");
-//                    // Name/cost/required level/damage/mana cost
-//                    String name = data[0];
-//                    int cost = Integer.parseInt(data[1]);
-//                    int level = Integer.parseInt(data[2]);
-//                    int damage = Integer.parseInt(data[3]);
-//                    int manaCost = Integer.parseInt(data[4]);
-//                    if (type.equals("F")) {Spell skill = new FireSpell(name, cost, level, damage, manaCost);skills.add(skill);}
-//                    else if (type.equals("I")) {Spell skill = new IceSpell(name, cost, level, damage, manaCost);skills.add(skill);}
-//                    else if (type.equals("L")) {Spell skill = new LightingSpell(name, cost, level, damage, manaCost);skills.add(skill);}
-//                    else { throw new IllegalArgumentException("Wrong type (F, I, or L are supported)"); }
-//                }
-//                i ++;
-//            }
-//            myReader.close();
-//        } catch (Exception e) {
-//            System.out.println("An error occurred at parsing file "+filename);
-//            e.printStackTrace();
-//        }
-//        Spell[] res = new Spell[skills.size()];
-//        res = skills.toArray(res);
-//        return res;
-//    }
-//
-//    public Dragon getRandomDragon()
-//    {
-//
-//        String line = getRandomLineFromFile("Dragons.txt");
-//        String tokens[] = line.split("\\s");
-//        ArrayList<String> arguments = new ArrayList<>();
-//        for (int i = 0; i < tokens.length; i++)
-//        {
-//            if (!tokens[i].equals(""))
-//            {
-//                arguments.add(tokens[i]);
-//            }
-//        }
-//
-//        return new Dragon(arguments.get(0),
-//                Integer.parseInt(arguments.get(1)),
-//                Double.parseDouble(arguments.get(2)),
-//                Double.parseDouble(arguments.get(4)));
-//
-//    }
-//
-//    public ArrayList<Dragon> getAllDragons()
-//    {
-//        ArrayList<Dragon> dragons = new ArrayList<>();
-//
-//        try {
-//            File myObj = new File("Dragons.txt");
-//            Scanner myReader = new Scanner(myObj);
-//            int i = 0;
-//            while (myReader.hasNextLine()) {
-//                String line = myReader.nextLine();
-//                line = line.replaceAll("\\s+", " ");
-//                if (i != 0 && line.length() > 1) {
-//                    String[] data = line.split(" ");
-//                    String name = data[0];
-//                    int level = Integer.parseInt(data[1]);
-//                    int damage = Integer.parseInt(data[2]);
-//                    int defence = Integer.parseInt(data[3]);
-//                    int dodge = Integer.parseInt(data[4]);
-//                    Dragon dragon = new Dragon(name, level, damage, defence, dodge);
-//                    dragons.add(dragon);
-//                }
-//            }
-//            myReader.close();
-//        } catch (Exception e) {
-//            System.out.println("An error occurred at parsing file for dragons");
-//            e.printStackTrace();
-//        }
-//        return dragons;
-//    }
-//
-//    public Exoskeleton getRandomExoskeleton()
-//    {
-//
-//        String line = getRandomLineFromFile("Exoskeletons.txt");
-//        String tokens[] = line.split("\\s");
-//        ArrayList<String> arguments = new ArrayList<>();
-//        for (int i = 0; i < tokens.length; i++)
-//        {
-//            if (!tokens[i].equals(""))
-//            {
-//                arguments.add(tokens[i]);
-//            }
-//        }
-//
-//        return new Exoskeleton(arguments.get(0),
-//                Integer.parseInt(arguments.get(1)),
-//                Double.parseDouble(arguments.get(2)),
-//                Double.parseDouble(arguments.get(4)));
-//
-//    }
-//
-//    public ArrayList<Exoskeleton> getAllExoskeletons()
-//    {
-//        ArrayList<Exoskeleton> exoskeletons = new ArrayList<>();
-//
-//        try {
-//            File myObj = new File("Exoskeletons.txt");
-//            Scanner myReader = new Scanner(myObj);
-//            int i = 0;
-//            while (myReader.hasNextLine()) {
-//                String line = myReader.nextLine();
-//                line = line.replaceAll("\\s+", " ");
-//                if (i != 0 && line.length() > 1) {
-//                    String[] data = line.split(" ");
-//                    String name = data[0];
-//                    int level = Integer.parseInt(data[1]);
-//                    int damage = Integer.parseInt(data[2]);
-//                    int defence = Integer.parseInt(data[3]);
-//                    int dodge = Integer.parseInt(data[4]);
-//                    Exoskeleton exoskeleton = new Exoskeleton(name, level, damage, defence, dodge);
-//                    exoskeletons.add(exoskeleton);
+//            // loop through the account's transactions
+//            JSONArray accountTransactions = new JSONArray();
+//            for (int j = 0; j < currentAccount.getTransactions().size(); j++) {
+//                Transaction currentTransaction = currentAccount.getTransactions().get(j);
+//                accountTransactions.add(0, currentTransaction.getDate().toString());
+//                accountTransactions.add(1, currentTransaction.getClass().getName());
+//                accountTransactions.add(2, currentTransaction.amount);
+//                if (currentTransaction instanceof TransactionSellStock) {
+//                    accountTransactions.add(3, ((TransactionSellStock) currentTransaction).getStock());
 //                }
 //            }
-//            myReader.close();
-//        } catch (Exception e) {
-//            System.out.println("An error occurred at parsing file for Exoskeletons");
-//            e.printStackTrace();
+//            userObject.put("transactions", accountTransactions);
 //        }
-//        return exoskeletons;
+//        userObject.put("accounts", userAccounts);
+//        //String filename = "Bank/src/users/";
+//        Files.write(Paths.get(username), userObject.toJSONString().getBytes());
 //    }
+
+//    public static Customer readUserData(String filename) throws IOException, ParseException {
+//        FileReader reader = new FileReader(filename);
+//        JSONParser jsonParser = new JSONParser();
+//        JSONObject currentUserJSON = (JSONObject) jsonParser.parse(reader);
 //
-//    public Spirit getRandomSpirit()
-//    {
+//        // Store each type of users accounts
+//        Accounts<CheckingAccount> checkingAccounts = new Accounts<>();
+//        Accounts<SavingsAccount> savingsAccounts = new Accounts<>();
+//        Accounts<SecuritiesAccount> securitiesAccounts = new Accounts<>();
 //
-//        String line = getRandomLineFromFile("Spirits.txt");
-//        String tokens[] = line.split("\\s");
-//        ArrayList<String> arguments = new ArrayList<>();
-//        for (int i = 0; i < tokens.length; i++)
-//        {
-//            if (!tokens[i].equals(""))
-//            {
-//                arguments.add(tokens[i]);
-//            }
-//        }
-//        //System.out.println(arguments);
+//        // Store all of the users transactions
+//        Transactions<Transaction> allTransactions = new Transactions<>();
 //
+//        // Set user basic credentials
+//        Name name = (Name) currentUserJSON.get("Name");
+//        int userID = (int) currentUserJSON.get("UserID");
+//        UName uname = (UName) currentUserJSON.get("UName");
+//        String password = (String)currentUserJSON.get("Password");
+//        Customer newCustomer = new Customer(new Credentials(name.toString(), uname.toString(), password));
+//        newCustomer.setID(userID);
+//        //customer.setCred(name, uname, userID);
 //
-//        return new Spirit(arguments.get(0),
-//                Integer.parseInt(arguments.get(1)),
-//                Double.parseDouble(arguments.get(2)),
-//                Double.parseDouble(arguments.get(4)));
-//
-//    }
-//
-//    public ArrayList<Spirit> getAllSpirits()
-//    {
-//
-//        ArrayList<Spirit> spirits = new ArrayList<>();
-//
-//        try {
-//            File myObj = new File("Spirits.txt");
-//            Scanner myReader = new Scanner(myObj);
-//            int i = 0;
-//            while (myReader.hasNextLine()) {
-//                String line = myReader.nextLine();
-//                line = line.replaceAll("\\s+", " ");
-//                if (i != 0 && line.length() > 1) {
-//                    String[] data = line.split(" ");
-//                    String name = data[0];
-//                    int level = Integer.parseInt(data[1]);
-//                    int damage = Integer.parseInt(data[2]);
-//                    int defence = Integer.parseInt(data[3]);
-//                    int dodge = Integer.parseInt(data[4]);
-//                    Spirit spirit = new Spirit(name, level, damage, defence, dodge);
-//                    spirits.add(spirit);
+//        // Read Account data
+//        JSONObject userAccounts = (JSONObject) currentUserJSON.get("accounts");
+//        for (int i = 0; i < userAccounts.size(); i++) {
+//            JSONObject currentAccount = (JSONObject) userAccounts.get(i);
+//            if (currentAccount.get("accountName") == "bank.CheckingAccount") {
+//                Transactions<Transaction> accountTransactions = new Transactions<>();
+//                CheckingAccount newCheckingAccount = new CheckingAccount((String) currentAccount.get("accountName"), (Currency) currentAccount.get("currency"), newCustomer);
+//                JSONObject currentAccountTransactions = (JSONObject) currentAccount.get("transactions");
+//                for (int j = 0; j < currentAccountTransactions.size(); j++) {
+//                    JSONObject currentTransaction = (JSONObject) currentAccountTransactions.get(j);
+//                    if (currentTransaction.get(1) == "TransactionWithdrawal") {
+//                        TransactionWithdrawal newTransactionWithdrawal = new TransactionWithdrawal((LocalDate) currentTransaction.get(0), (double) currentTransaction.get(2), newCustomer, newCheckingAccount);
+//                        allTransactions.add(newTransactionWithdrawal);
+//                        accountTransactions.add(newTransactionWithdrawal);
+//                    }
+//                    if (currentTransaction.get(1) == "TransactionTransferIn") {
+//                        TransactionTransferIn newTransactionTransferIn = new TransactionTransferIn((LocalDate) currentTransaction.get(0), (double) currentTransaction.get(2), newCustomer, newCheckingAccount);
+//                        allTransactions.add(newTransactionTransferIn);
+//                        accountTransactions.add(newTransactionTransferIn);
+//                    }
+//                    if (currentTransaction.get(1) == "TransactionTransferOut") {
+//                        TransactionTransferOut newTransactionTransferOut = new TransactionTransferOut((LocalDate) currentTransaction.get(0), (double) currentTransaction.get(2), newCustomer, newCheckingAccount);
+//                        allTransactions.add(newTransactionTransferOut);
+//                        accountTransactions.add(newTransactionTransferOut);
+//                    }
+//                    if (currentTransaction.get(1) == "TransactionDeposit") {
+//                        TransactionDeposit newTransactionDeposit = new TransactionDeposit((LocalDate) currentTransaction.get(0), (double) currentTransaction.get(2), newCustomer, newCheckingAccount);
+//                        allTransactions.add(newTransactionDeposit);
+//                        accountTransactions.add(newTransactionDeposit);
+//                    }
 //                }
+//                newCheckingAccount.setTransactions(accountTransactions);
+//                checkingAccounts.add(newCheckingAccount);
 //            }
-//            myReader.close();
-//        } catch (Exception e) {
-//            System.out.println("An error occurred at parsing file for spirits");
-//            e.printStackTrace();
-//        }
-//        return spirits;
 //
-//    }
-//
-//    public Weapon getRandomWeapon()
-//    {
-//
-//        String line = getRandomLineFromFile("Weaponry.txt");
-//        String tokens[] = line.split("\\s");
-//        ArrayList<String> arguments = new ArrayList<>();
-//        for (int i = 0; i < tokens.length; i++)
-//        {
-//            if (!tokens[i].equals(""))
-//            {
-//                arguments.add(tokens[i]);
-//            }
-//        }
-//
-//        return new Weapon(
-//                arguments.get(0) + "/"+ arguments.get(1)+"$"+"/MinLevel:" + arguments.get(2),
-//                Integer.parseInt(arguments.get(2)),
-//                Integer.parseInt(arguments.get(1)),
-//                Double.parseDouble(arguments.get(3)));
-//
-//    }
-//
-//    public Armor getRandomArmor()
-//    {
-//
-//        String line = getRandomLineFromFile("Armory.txt");
-//        String tokens[] = line.split("\\s");
-//        ArrayList<String> arguments = new ArrayList<>();
-//        for (int i = 0; i < tokens.length; i++)
-//        {
-//            if (!tokens[i].equals(""))
-//            {
-//                arguments.add(tokens[i]);
-//            }
-//        }
-//
-//        return new Armor(
-//                arguments.get(0) + "/"+ arguments.get(1)+"$"+"/MinLevel:" + arguments.get(2),
-//                Integer.parseInt(arguments.get(2)),
-//                Integer.parseInt(arguments.get(1)),
-//                Double.parseDouble(arguments.get(3)));
-//
-//    }
-//
-//    public Potion getRandomPotion()
-//    {
-//
-//        String line = getRandomLineFromFile("Potions.txt");
-//        String tokens[] = line.split("\\s");
-//        ArrayList<String> arguments = new ArrayList<>();
-//        for (int i = 0; i < tokens.length; i++)
-//        {
-//            if (!tokens[i].equals(""))
-//            {
-//                arguments.add(tokens[i]);
-//            }
-//        }
-//
-//        return new Potion(
-//                arguments.get(0) + "/"+ arguments.get(1)+"$"+"/MinLevel:" + arguments.get(2),
-//                Integer.parseInt(arguments.get(2)),
-//                Integer.parseInt(arguments.get(1)),
-//                arguments.get(3),
-//                Double.parseDouble(arguments.get(4)));
-//    }
-//
-//    public IceSpell getRandomIceSpell()
-//    {
-//
-//        String line = getRandomLineFromFile("IceSpells.txt");
-//        String tokens[] = line.split("\\s");
-//        ArrayList<String> arguments = new ArrayList<>();
-//        for (int i = 0; i < tokens.length; i++)
-//        {
-//            if (!tokens[i].equals(""))
-//            {
-//                arguments.add(tokens[i]);
-//            }
-//        }
-//
-//        return new IceSpell(
-//                arguments.get(0) + "/"+ arguments.get(1)+"$"+"/MinLevel:" + arguments.get(2),
-//                Integer.parseInt(arguments.get(2)),
-//                Double.parseDouble(arguments.get(1)),
-//                Double.parseDouble(arguments.get(3)),
-//                Double.parseDouble(arguments.get(4)));
-//    }
-//
-//    public FireSpell getRandomFireSpell()
-//    {
-//
-//        String line = getRandomLineFromFile("FireSpells.txt");
-//        String tokens[] = line.split("\\s");
-//        ArrayList<String> arguments = new ArrayList<>();
-//        for (int i = 0; i < tokens.length; i++)
-//        {
-//            if (!tokens[i].equals(""))
-//            {
-//                arguments.add(tokens[i]);
-//            }
-//        }
-//
-//        return new FireSpell(
-//                arguments.get(0) + "/"+ arguments.get(1)+"$"+"/MinLevel:" + arguments.get(2),
-//                Integer.parseInt(arguments.get(2)),
-//                Double.parseDouble(arguments.get(1)),
-//                Double.parseDouble(arguments.get(3)),
-//                Double.parseDouble(arguments.get(4)));
-//    }
-//
-//    public LightingSpell getRandomLightingSpell()
-//    {
-//
-//        String line = getRandomLineFromFile("LightingSpells.txt");
-//        String tokens[] = line.split("\\s");
-//        ArrayList<String> arguments = new ArrayList<>();
-//        for (int i = 0; i < tokens.length; i++)
-//        {
-//            if (!tokens[i].equals(""))
-//            {
-//                arguments.add(tokens[i]);
-//            }
-//        }
-//
-//        return new LightingSpell(
-//                arguments.get(0) + "/"+ arguments.get(1)+"$"+"/MinLevel:" + arguments.get(2),
-//                Integer.parseInt(arguments.get(2)),
-//                Double.parseDouble(arguments.get(1)),
-//                Double.parseDouble(arguments.get(3)),
-//                Double.parseDouble(arguments.get(4)));
-//    }
-//
-//    public Warrior getRandomWarrior()
-//    {
-//
-//        String line = getRandomLineFromFile("Warriors.txt");
-//        String tokens[] = line.split("\\s");
-//        ArrayList<String> arguments = new ArrayList<>();
-//        for (int i = 0; i < tokens.length; i++)
-//        {
-//            if (!tokens[i].equals(""))
-//            {
-//                arguments.add(tokens[i]);
-//            }
-//        }
-//
-//        return new Warrior(
-//                arguments.get(0) + "/"+ arguments.get(1)+"$"+"/MinLevel:" + arguments.get(2),
-//                1,
-//                Integer.parseInt(arguments.get(1)),
-//                Double.parseDouble(arguments.get(2)),
-//                Double.parseDouble(arguments.get(4)),
-//                Double.parseDouble(arguments.get(3)),
-//                Double.parseDouble(arguments.get(5)),
-//                Double.parseDouble(arguments.get(6))
-//
-//        );
-//    }
-//
-//    public ArrayList<Warrior> getAllWarriors()
-//    {
-//        ArrayList<Warrior> warriors = new ArrayList<>();
-//
-//        try {
-//            File myObj = new File("Warriors.txt");
-//            Scanner myReader = new Scanner(myObj);
-//            int i = 0;
-//            while (myReader.hasNextLine()) {
-//                String line = myReader.nextLine();
-//                line = line.replaceAll("\\s+", " ");
-//                if (i != 0 && line.length() > 1) {
-//                    String[] data = line.split(" ");
-//                    String name = data[0];
-//                    int MP = Integer.parseInt(data[1]);
-//                    int strength = Integer.parseInt(data[2]);
-//                    int agility = Integer.parseInt(data[3]);
-//                    int dexterity = Integer.parseInt(data[4]);
-//                    int money = Integer.parseInt(data[5]);
-//                    int experience = Integer.parseInt(data[6]);
-//                    Warrior warrior = new Warrior(name, 1, MP, strength, dexterity, agility, money, experience );
-//                    warriors.add(warrior);
+//            if (currentAccount.get("accountName") == "bank.SavingsAccount") {
+//                Transactions<Transaction> accountTransactions = new Transactions<>();
+//                SavingsAccount newSavingsAccount = new SavingsAccount((String) currentAccount.get("accountName"), (Currency) currentAccount.get("currency"), newCustomer);
+//                JSONObject currentAccountTransactions = (JSONObject) currentAccount.get("transactions");
+//                for (int j = 0; j < currentAccountTransactions.size(); j++) {
+//                    JSONObject currentTransaction = (JSONObject) currentAccountTransactions.get(j);
+//                    if (currentTransaction.get(1) == "TransactionWithdrawal") {
+//                        TransactionWithdrawal newTransactionWithdrawal = new TransactionWithdrawal((LocalDate) currentTransaction.get(0), (double) currentTransaction.get(2), newCustomer, newSavingsAccount);
+//                        accountTransactions.add(newTransactionWithdrawal);
+//                    }
+//                    if (currentTransaction.get(1) == "TransactionTransferIn") {
+//                        TransactionTransferIn newTransactionTransferIn = new TransactionTransferIn((LocalDate) currentTransaction.get(0), (double) currentTransaction.get(2), newCustomer, newSavingsAccount);
+//                        accountTransactions.add(newTransactionTransferIn);
+//                    }
+//                    if (currentTransaction.get(1) == "TransactionTransferOut") {
+//                        TransactionTransferOut newTransactionTransferOut = new TransactionTransferOut((LocalDate) currentTransaction.get(0), (double) currentTransaction.get(2), newCustomer, newSavingsAccount);
+//                        accountTransactions.add(newTransactionTransferOut);
+//                    }
+//                    if (currentTransaction.get(1) == "TransactionDeposit") {
+//                        TransactionDeposit newTransactionDeposit = new TransactionDeposit((LocalDate) currentTransaction.get(0), (double) currentTransaction.get(2), newCustomer, newSavingsAccount);
+//                        allTransactions.add(newTransactionDeposit);
+//                        accountTransactions.add(newTransactionDeposit);
+//                    }
 //                }
-//                i++;
+//                newSavingsAccount.setTransactions(accountTransactions);
+//                savingsAccounts.add(newSavingsAccount);
 //            }
-//            myReader.close();
-//        } catch (Exception e) {
-//            System.out.println("An error occurred at parsing file for Exoskeletons");
-//            e.printStackTrace();
-//        }
-//        return warriors;
-//    }
 //
-//    public Sorcerer getRandomSorcerer()
-//    {
+//            if (currentAccount.get("accountName") == "bank.SecuritiesAccount") {
+//                Transactions<Transaction> accountTransactions = new Transactions<>();
+//                // loop through the stocks in the securities account
+//                SecuritiesAccount newSecuritiesAccount = new SecuritiesAccount((String) currentAccount.get("accountName"), (Currency) currentAccount.get("currency"),
+//                        (double) currentAccount.get("balance"), newCustomer);
 //
-//        String line = getRandomLineFromFile("Sorcerers.txt");
-//        String tokens[] = line.split("\\s");
-//        ArrayList<String> arguments = new ArrayList<>();
-//        for (int i = 0; i < tokens.length; i++)
-//        {
-//            if (!tokens[i].equals(""))
-//            {
-//                arguments.add(tokens[i]);
-//            }
-//        }
-//
-//        return new Sorcerer(
-//                arguments.get(0),
-//                1,
-//                Integer.parseInt(arguments.get(1)),
-//                Double.parseDouble(arguments.get(2)),
-//                Double.parseDouble(arguments.get(4)),
-//                Double.parseDouble(arguments.get(3)),
-//                Double.parseDouble(arguments.get(5)),
-//                Double.parseDouble(arguments.get(6))
-//
-//        );
-//    }
-//
-//    public ArrayList<Sorcerer> getAllSorcerers()
-//    {
-//        ArrayList<Sorcerer> sorcerers = new ArrayList<>();
-//
-//        try {
-//            File myObj = new File("Sorcerers.txt");
-//            Scanner myReader = new Scanner(myObj);
-//            int i = 0;
-//            while (myReader.hasNextLine()) {
-//                String line = myReader.nextLine();
-//                line = line.replaceAll("\\s+", " ");
-//                if (i != 0 && line.length() > 1) {
-//                    String[] data = line.split(" ");
-//                    String name = data[0];
-//                    int MP = Integer.parseInt(data[1]);
-//                    int strength = Integer.parseInt(data[2]);
-//                    int agility = Integer.parseInt(data[3]);
-//                    int dexterity = Integer.parseInt(data[4]);
-//                    int money = Integer.parseInt(data[5]);
-//                    int experience = Integer.parseInt(data[6]);
-//                    Sorcerer sorcerer = new Sorcerer(name, 1, MP, strength, dexterity, agility, money, experience );
-//                    sorcerers.add(sorcerer);
+//                JSONObject currentAccountStocks = (JSONObject) currentAccount.get("stocks");
+//                Stocks stocksInAccount = new Stocks();
+//                for (int j = 0; j < currentAccountStocks.size(); j++) {
+//                    Stock newStock = new Stock(currentAccountStocks.get(1).toString());
+//                    stocksInAccount.add(newStock);
 //                }
-//                i++;
-//            }
-//            myReader.close();
-//        } catch (Exception e) {
-//            System.out.println("An error occurred at parsing file for Exoskeletons");
-//            e.printStackTrace();
-//        }
-//        return sorcerers;
-//    }
 //
+//                newSecuritiesAccount.setStocks(stocksInAccount);
 //
-//    public Paladin getRandomPaladin()
-//    {
+//                // loop through the account's transactions
+//                JSONObject currentAccountTransactions = (JSONObject) currentAccount.get("transactions");
+//                Transactions<Transaction> securityAccountTransactions = new Transactions<>();
+//                for (int j = 0; j < currentAccountTransactions.size(); j++) {
+//                    JSONObject currentTransaction = (JSONObject) currentAccountTransactions.get(j);
+//                    if (currentTransaction.get(1) == "TransactionSellStock") {
+//                        TransactionSellStock newTransactionSellStock = new TransactionSellStock((LocalDate) currentTransaction.get(0),
+//                                (double) currentTransaction.get(2), newCustomer, newSecuritiesAccount, (Stock) currentTransaction.get(4));
+//                        accountTransactions.add(newTransactionSellStock);
+//                        securityAccountTransactions.add(newTransactionSellStock);
+//                    }
 //
-//        String line = getRandomLineFromFile("Paladins.txt");
-//        String tokens[] = line.split("\\s");
-//        ArrayList<String> arguments = new ArrayList<>();
-//        for (int i = 0; i < tokens.length; i++)
-//        {
-//            if (!tokens[i].equals(""))
-//            {
-//                arguments.add(tokens[i]);
-//            }
-//        }
+//                    if (currentTransaction.get(1) == "TransactionBuyStock") {
+//                        TransactionBuyStock newTransactionBuyStock = new TransactionBuyStock((LocalDate) currentTransaction.get(0),
+//                                (double) currentTransaction.get(2), newCustomer, newSecuritiesAccount, (Stock) currentTransaction.get(4));
+//                        accountTransactions.add(newTransactionBuyStock);
+//                        securityAccountTransactions.add(newTransactionBuyStock);
+//                    }
 //
-//        return new Paladin(
-//                arguments.get(0),
-//                1,
-//                Integer.parseInt(arguments.get(1)),
-//                Double.parseDouble(arguments.get(2)),
-//                Double.parseDouble(arguments.get(4)),
-//                Double.parseDouble(arguments.get(3)),
-//                Double.parseDouble(arguments.get(5)),
-//                Double.parseDouble(arguments.get(6))
-//
-//        );
-//    }
-//
-//    public ArrayList<Paladin> getAllPaladins()
-//    {
-//        ArrayList<Paladin> paladins = new ArrayList<>();
-//
-//        try {
-//            File myObj = new File("Paladins.txt");
-//            Scanner myReader = new Scanner(myObj);
-//            int i = 0;
-//            while (myReader.hasNextLine()) {
-//                String line = myReader.nextLine();
-//                line = line.replaceAll("\\s+", " ");
-//                if (i != 0 && line.length() > 1) {
-//                    String[] data = line.split(" ");
-//                    String name = data[0];
-//                    int MP = Integer.parseInt(data[1]);
-//                    int strength = Integer.parseInt(data[2]);
-//                    int agility = Integer.parseInt(data[3]);
-//                    int dexterity = Integer.parseInt(data[4]);
-//                    int money = Integer.parseInt(data[5]);
-//                    int experience = Integer.parseInt(data[6]);
-//                    Paladin paladin = new Paladin(name, 1, MP, strength, dexterity, agility, money, experience );
-//                    paladins.add(paladin);
 //                }
-//                i++;
+//                newSecuritiesAccount.setTransactions(securityAccountTransactions);
+//                securitiesAccounts.add(newSecuritiesAccount);
 //            }
-//            myReader.close();
-//        } catch (Exception e) {
-//            System.out.println("An error occurred at parsing file for Exoskeletons");
-//            e.printStackTrace();
 //        }
-//        return paladins;
+//        newCustomer.setSecuritiesAccounts(securitiesAccounts);
+//        newCustomer.setSavingsAccounts(savingsAccounts);
+//        newCustomer.setCheckingAccounts(checkingAccounts);
+//        return newCustomer;
 //    }
-//
-//
-//    /**
-//     * finds a random line from the requested kind of object
-//     * @param s
-//     * @return
-//     */
-//
-//    private String getRandomLineFromFile(String s)
-//    {
-//        //first find number of lines then pick a random one
-//        try{
-//            BufferedReader objReader = new BufferedReader(new FileReader(s));
-//            int numberOfLines = 0;
-//            while ((objReader.readLine()) != null) {
-//                numberOfLines++;
-//            }
-//            objReader.close();
-//
-//            BufferedReader objReader2 = new BufferedReader(new FileReader(s));
-//
-//            Random r = new Random();
-//            int randomLine = 0;
-//            while (randomLine == 0 )
-//            {
-//                randomLine = r.nextInt(numberOfLines -1);
-//            }
-//
-//            String currentLine;
-//            int i = 0;
-//            while ((currentLine = objReader2.readLine()) != null) {
-//                if(i == randomLine)
-//                {
-//                    objReader2.close();
-//                    return currentLine;
-//                }
-//                i++;
-//            }
-//            System.out.println(i + " "+ randomLine);
-//            objReader2.close();
-//
-//        }catch (Exception e)
-//        {
-//            e.printStackTrace();
-//        }
-//        return null;
-//
-//    }
-//
-//}
+}
