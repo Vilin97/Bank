@@ -100,17 +100,5 @@ public class IOTools
         return rt;
     }
     
-    public static void main(String[] args) {
-        LocalDate one = LocalDate.of(2021, 03, 02);
-        LocalDate two = LocalDate.of(2020, 4, 5);
-        LocalDate three = LocalDate.of(2020, 5, 6);
-        parseToDate("2020","03","20");
-        parseToDate("2020","5","5");
-        parseToDate("202","7","6");
-
-        //System.out.println(paseToDate("2021-03-02").equals(one));
-        //System.out.println(paseToDate("2020-4-5").equals(two));
-        //System.out.println(paseToDate("2020 5 6").equals(three));
-        //paseToDate(" ");
-    }
+    
 }

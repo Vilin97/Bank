@@ -25,7 +25,12 @@ public class Collateral {
     public double getWorth() {
         return worth;
     }
-    
-    
-  
+
+    @Override
+    public String toString() {
+        return "Collateral{" +
+                "name='" + name + '\'' +
+                ", worth=" + worth +
+                '}';
+    }
 }

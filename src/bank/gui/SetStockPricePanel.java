@@ -1,4 +1,8 @@
-package bank;
+package bank.gui;
+
+import bank.Bank;
+import bank.Stock;
+import bank.gui.EmitterPanel;
 
 import javax.swing.*;
 import java.awt.*;
@@ -12,6 +16,7 @@ public class SetStockPricePanel extends EmitterPanel<String> implements ActionLi
     private JButton setPriceButton;
 
     public SetStockPricePanel() {
+        super();
         this.priceField = new JTextField(10);
         this.setPriceButton = new JButton("Set price!");
         this.listeners = new ArrayList<>();
@@ -21,7 +26,11 @@ public class SetStockPricePanel extends EmitterPanel<String> implements ActionLi
         DefaultComboBoxModel<String> model = new DefaultComboBoxModel<>();
         //model.addAll(Bank.getStockMarket().getPrices().keySet());
         stocksList.setModel(model);
-        stocksList.setSelectedIndex(0);
+        if (stocksList.getItemCount() > 0){
+            stocksList.setSelectedIndex(0);
+            String stockName = (String) stocksList.getSelectedItem();
+            priceField.setText(Bank.getStockMarket().getPrices().get(stockName).toString());
+        }
 
         setUpLayout();
         setBorder(BorderFactory.createTitledBorder("Set stock price"));
@@ -51,7 +60,7 @@ public class SetStockPricePanel extends EmitterPanel<String> implements ActionLi
 
         gc.gridx = 0;
         gc.anchor = GridBagConstraints.FIRST_LINE_END;
-        add(new Label("price:"), gc);
+        add(new JLabel("price:"), gc);
 
         gc.gridx = 1;
         gc.anchor = GridBagConstraints.LINE_START;

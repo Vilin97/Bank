@@ -83,6 +83,23 @@ public class Credentials {
         return uname;
     }
 
+    public boolean login(String uname,String pword){
+        boolean rt = false;
+        String tempp = this.pword.getPword();
+        String tempu = this.uname.getUname();
+        System.out.println("this uname: "+ tempu+ " this pword: "+tempp);
+         System.out.println("tried uname: "+ uname+ " tried pword: "+pword);
+
+
+
+        if(tempu.equals(uname) && tempp.equals(pword)){
+            rt = true;
+            System.out.println("here");
+        }
+        return rt;
+    }
+
+
     @Override
     public String toString() {
         return "name=" + name +

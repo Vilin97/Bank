@@ -1,4 +1,6 @@
-package bank;
+package bank.gui;
+
+import bank.Listener;
 
 import javax.swing.*;
 import java.util.ArrayList;

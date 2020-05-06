@@ -76,10 +76,19 @@ public class StockMarket {
         this.prices = prices;
     }
 
+    public Map<String, Integer> getStockCounts() {
+        Map<String, Integer> counts = new HashMap<String, Integer>();
+        for (Stock s:stocks) {
+            if (counts.containsKey(s.getName())) counts.put(s.getName(), counts.get(s.getName()) + 1);
+            else counts.put(s.getName(), 1);
+        }
+        return counts;
+    }
+
     @Override
     public String toString() {
         return "StockMarket:\n" +
-                "\n"+stocks +
+                "\n"+getStockCounts() +
                 "\nprices:" + prices;
     }
 }

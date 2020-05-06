@@ -1,7 +1,6 @@
 package bank;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.Currency;
 
 import static bank.Credentials.createCredentials;
@@ -43,10 +42,12 @@ public class Manager extends User {
     }
 
     public void addNewStock(String name, double price, int numberOfStocks){
-        changeStockPrice(name, price);
-        Stocks<Stock> stocks = Bank.getStockMarket().getStocks();
-        for (int i = 0; i < numberOfStocks; i++) {
-            stocks.add(new Stock(name));
+        if (!Bank.getStockMarket().hasStock(name)) {
+            changeStockPrice(name, price);
+            Stocks<Stock> stocks = Bank.getStockMarket().getStocks();
+            for (int i = 0; i < numberOfStocks; i++) {
+                stocks.add(new Stock(name));
+            }
         }
     }
 
@@ -79,10 +80,10 @@ public class Manager extends User {
             customer.getLoans().add(new Loan(pendingLoan));
             customer.getPendingLoans().remove(pendingLoan);
             account.changeBalanceBy(pendingLoan.getBalance());
-        } else disapproveLoan(customer, pendingLoan);
+        } else denyLoan(customer, pendingLoan);
     }
 
-    public void disapproveLoan(Customer customer, PendingLoan pendingLoan){
+    public void denyLoan(Customer customer, PendingLoan pendingLoan){
         // disapprove the pending loan
         customer.getPendingLoans().remove(pendingLoan);
     }

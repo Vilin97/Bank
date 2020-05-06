@@ -1,6 +1,7 @@
 package bank;
 
 import java.time.LocalDate;
+import java.util.Iterator;
 
 public class Bank {
     private static Customers<Customer> customers;
@@ -52,5 +53,50 @@ public class Bank {
 
     public static void setStockMarket(StockMarket stockMarket) {
         Bank.stockMarket = stockMarket;
+    }
+    
+    public boolean containsCustomer(Customer cs){
+        return Bank.customers.contains(cs);
+    }
+    
+    public Customer returnCustomer(Customer cs){
+        Customer rt = null;
+        if(containsCustomer(cs)){
+            rt = Bank.customers.getCustomer(cs);
+        }else{
+            throw new IllegalArgumentException("customer doesnt exisit");
+        }
+        return rt;
+    }
+    
+    public void addCustomer(Customer cs){
+        Bank.customers.add(cs);
+    }
+    
+    public User logIn(String uname,String pw){
+        Iterator cIter = Bank.customers.iterator();
+        boolean notfound = true;
+        User rt = null;
+        
+        while(cIter.hasNext() && notfound){
+            Customer cs = (Customer) cIter.next();
+            Credentials csCreds = cs.getCreds();
+            //System.out.println(csCreds.toString());
+            //System.out.println("Uname tried:"+uname+" pword tried "+pw);
+            if(csCreds.login(uname, pw)){
+                notfound = false;
+                rt = cs;
+                
+            }
+        }
+        if(notfound){
+            Credentials mCreds = manager.getCreds();
+            if(mCreds.login(uname, pw)){
+                notfound = false;
+                rt = manager;
+                
+            }
+        }
+        return rt;
     }
 }

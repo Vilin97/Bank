@@ -3,6 +3,8 @@ package bank;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Currency;
 
 public class Constants {
@@ -23,6 +25,8 @@ public class Constants {
 
     private static double conversionRateEUR = 1.2;
     private static double conversionRateRUB = 1/80.0;
+    
+    public static final ArrayList<String> curencies = new ArrayList<String>(Arrays.asList("USD","EUR","RUB"));
 
     public static double getTransferBetweenAccountsFeeFraction() {
         return transferBetweenAccountsFeeFraction;

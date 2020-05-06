@@ -1,4 +1,4 @@
-package bank;
+package bank.gui;
 
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -12,6 +12,7 @@ public class TextPanel extends JPanel{
         textArea.setEditable(false);
         setLayout(new BorderLayout());
         add(new JScrollPane(textArea), BorderLayout.CENTER);
+        setPreferredSize(new Dimension(200, 200));
     }
 
     public void appendText(String s){

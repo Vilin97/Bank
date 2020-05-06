@@ -7,9 +7,16 @@ import java.util.stream.Stream;
 
 import static java.lang.Integer.min;
 
-public class General
-{
+public class General {
     // class to hold general utility functions
+    public static <T> String listToStringColumn(List<T> ar){
+        StringBuilder s = new StringBuilder();
+        for (T t : ar) {
+            s.append(t.toString()).append("\n");
+        }
+        return s.toString();
+    }
+
     public static <T> String myArrayToString (T[] ar) {
         // converts [a,b,c] to "
         // 1. a

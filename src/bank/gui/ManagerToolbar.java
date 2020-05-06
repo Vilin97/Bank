@@ -1,17 +1,21 @@
-package bank;
+package bank.gui;
+
+import bank.Bank;
+import bank.StockMarket;
+import bank.gui.EmitterPanel;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import java.util.Collections;
 
 public class ManagerToolbar extends EmitterPanel<String> implements ActionListener {
     private JButton customersButton;
     private JButton stocksButton;
 
     public ManagerToolbar() {
+        super();
         this.customersButton = new JButton("Customers");
         this.stocksButton = new JButton("Stock Market");
         this.listeners = new ArrayList<>();
@@ -31,7 +35,8 @@ public class ManagerToolbar extends EmitterPanel<String> implements ActionListen
         if (clicked == customersButton) {
             emit(Bank.getCustomers().toString());
         } else if (clicked == stocksButton){
-            emit(Bank.getStockMarket().toString());
+            StockMarket stockMarket = Bank.getStockMarket();
+            emit(stockMarket.toString());
         }
     }
 }

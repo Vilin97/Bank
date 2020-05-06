@@ -118,13 +118,11 @@ public class Customer extends User {
     }
    
 
-    public void requestLoan(String name, String currency, double amountRequest, SavingsAccount savingsAccount) {
+    public void requestLoan(String name, String currency, double amountRequest, SavingsAccount savingsAccount, Collateral collateral) {
         // creates a pending loan
         // a pending loan becomes a loan if approved
         // the money is transferred to the savings account specified if the loan is approved
-        PendingLoan pendingLoan = AccountFactory.getAccount("loan", name, currency, this);
-        pendingLoan.setBalance(-amountRequest);
-        pendingLoan.setSavingsAccount(savingsAccount);
+        PendingLoan pendingLoan = new PendingLoan(name, -amountRequest, Currency.getInstance(currency), this,  savingsAccount, collateral);
         pendingLoans.add(pendingLoan);
     }
 
@@ -133,11 +131,19 @@ public class Customer extends User {
     }
 
     public void openCheckingAccount(String name, String currency) {
-        checkingAccounts.add(AccountFactory.getAccount("checking", name, currency, this));
+        checkingAccounts.add(new CheckingAccount(name, Currency.getInstance(currency), this));
+    }
+
+    public void openCheckingAccount(String name, Currency currency) {
+        checkingAccounts.add(new CheckingAccount(name, currency, this));
     }
 
     public void openSavingsAccount(String name, String currency) {
-        savingsAccounts.add(AccountFactory.getAccount("savings", name, currency, this));
+        savingsAccounts.add(new SavingsAccount(name, Currency.getInstance(currency), this));
+    }
+
+    public void openSavingsAccount(String name, Currency currency) {
+        savingsAccounts.add(new SavingsAccount(name, currency, this));
     }
 
     public void openSecuritiesAccount(String name, String currency, SavingsAccount account, double amount) {
@@ -236,6 +242,16 @@ public class Customer extends User {
         return iter;
     }
     
+    public Iterator getLoanIter(){
+        Iterator iter = this.loans.iterator();
+        return iter;
+    }
+    
+    public Iterator getSecIter(){
+        Iterator iter = this.securitiesAccounts.iterator();
+        return iter;
+    }
+    
     /*
     
     are being replaced
@@ -279,11 +295,22 @@ public class Customer extends User {
     @Override
     public String toString() {
         return "Customer{" + super.toString() +
-                ""+savingsAccounts +
+                "\n"+savingsAccounts +
                 ""+checkingAccounts +
                 ""+securitiesAccounts +
                 ""+loans +
                 "" + pendingLoans +
                 '}';
     }
+
+    public String toStringDetailed() {
+        return "Customer{" + super.toString() +
+                ""+savingsAccounts.toStringDetailed() +
+                ""+checkingAccounts.toStringDetailed() +
+                ""+securitiesAccounts.toStringDetailed() +
+                ""+loans.toStringDetailed() +
+                "" + pendingLoans.toStringDetailed() +
+                '}';
+    }
+    
 }

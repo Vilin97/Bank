@@ -4,84 +4,48 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 
-public class Customers<C extends Customer> implements Collection<C> {
-    protected ArrayList<C> customers;
+public class Customers<C extends Customer> extends ArrayList<C> {
 
     public Customers(ArrayList<C> customers) {
-        this.customers = customers;
+        super(customers);
     }
 
     public Customers() {
         this(new ArrayList<C>());
     }
 
-    @Override
-    public int size() {
-        return customers.size();
+    public Customers<Customer> getCustomersWithPendingLoans() {
+        Customers<Customer> customers = new Customers<>();
+        for (Customer c:this) {
+            if (!c.getPendingLoans().isEmpty()) customers.add(c);
+        }
+        return customers;
     }
 
-    @Override
-    public boolean isEmpty() {
-        return customers.isEmpty();
+    public Customers<Customer> getCustomersWithCurrentLoans() {
+        Customers<Customer> customers = new Customers<>();
+        for (Customer c:this) {
+            if (!c.getLoans().isEmpty()) customers.add(c);
+        }
+        return customers;
     }
 
-    @Override
-    public boolean contains(Object o) {
-        return customers.contains(o);
+    public Customers<Customer> getCustomersWithAnyLoans() {
+        Customers<Customer> res = getCustomersWithCurrentLoans();
+        res.addAll(getCustomersWithPendingLoans());
+        return res;
     }
 
-    @Override
-    public Iterator<C> iterator() {
-        return customers.iterator();
+    public Customer getCustomer(Customer cs){
+        Customer rt = null;
+        for (Customer c:this) {
+            if (c.equals(cs)){
+                rt = c;
+            }
+        }
+        return rt;
     }
+    
+    
 
-    @Override
-    public Object[] toArray() {
-        return customers.toArray();
-    }
-
-    @Override
-    public <T> T[] toArray(T[] a) {
-        return customers.toArray(a);
-    }
-
-    @Override
-    public boolean add(C c) {
-        return customers.add(c);
-    }
-
-    @Override
-    public boolean remove(Object o) {
-        return customers.remove(o);
-    }
-
-    @Override
-    public boolean containsAll(Collection<?> c) {
-        return customers.containsAll(c);
-    }
-
-    @Override
-    public boolean addAll(Collection<? extends C> c) {
-        return customers.addAll(c);
-    }
-
-    @Override
-    public boolean removeAll(Collection<?> c) {
-        return customers.remove(c);
-    }
-
-    @Override
-    public boolean retainAll(Collection<?> c) {
-        return customers.retainAll(c);
-    }
-
-    @Override
-    public void clear() {
-        customers.clear();
-    }
-
-    @Override
-    public String toString() {
-        return customers.toString();
-    }
 }

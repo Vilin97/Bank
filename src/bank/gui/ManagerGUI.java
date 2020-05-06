@@ -1,6 +1,7 @@
-package bank;
+package bank.gui;
 
-import javax.swing.*;
+import bank.*;
+
 import java.time.LocalDate;
 import java.util.Currency;
 
@@ -20,22 +21,24 @@ public class ManagerGUI {
         Bank.getCustomers().add(customer2);
         manager.addNewStock("Stock1", 20, 2);
         customer1.openCheckingAccount("my checking account 1", "EUR");
+        customer1.openCheckingAccount("my checking account 2", "EUR");
+        customer1.openCheckingAccount("my checking account 3", "EUR");
         customer1.openSavingsAccount("my savings account 1", "USD");
-        Account checking1 = customer1.getCheckingAccounts().get(0);
-        Account savings1 = customer1.getSavingsAccounts().get(0);
+        CheckingAccount checking1 = customer1.getCheckingAccounts().get(0);
+        SavingsAccount savings1 = customer1.getSavingsAccounts().get(0);
 
         checking1.deposit(20000);
         customer1.transferToAccount(checking1, savings1, 15000);
         customer1.openSecuritiesAccount("my sec account", "USD", (SavingsAccount) savings1, 6000);
         SecuritiesAccount securities1 = customer1.getSecuritiesAccounts().get(0);
 
-        manager.addNewStock("Stock1", 100, 10);
+        manager.addNewStock("Stock2", 100, 10);
 
         customer1.buyStock("Stock1", securities1);
         customer1.buyStock("Stock1", securities1);
         manager.changeStockPrice("Stock1", 300);
         customer1.sellStock("Stock1", securities1);
-        // TODO: display transactions in the order they were put in the list.
+        customer1.requestLoan("loan1", "USD", 100, savings1, new Collateral("car", 10000));
         new MainManagerFrame();
 
     }
