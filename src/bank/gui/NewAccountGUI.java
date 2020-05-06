@@ -34,6 +34,7 @@ public class NewAccountGUI extends javax.swing.JFrame {
     private void initCustom(){
         chekjPanel3.setVisible(false);
         secjPanel4.setVisible(false);
+        savjPanel5.setVisible(false);
         fillCurrency();
     }
     private void initActionListeners(Customer user, CustomerGUI maingui){
@@ -117,7 +118,7 @@ public class NewAccountGUI extends javax.swing.JFrame {
         
     public void selectSavAcc(Customer user, CustomerGUI gui){
         jPanel1.setVisible(false);
-        secjPanel4.setVisible(true);
+        savjPanel5.setVisible(true);
         
     }
     public void selectChekAcc(Customer user, CustomerGUI gui){
