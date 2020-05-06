@@ -8,6 +8,7 @@ package bank;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import bank.Customer;
+import bank.gui.MainManagerFrame;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
@@ -282,6 +283,7 @@ public class GUI extends javax.swing.JFrame {
         }else if (user instanceof Manager){
             this.dispose();
             //launch manager GUI user is an instance of manager
+             new MainManagerFrame().setVisible(true);
         }
     }
     
