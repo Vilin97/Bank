@@ -7,7 +7,7 @@ import java.util.Currency;
 
 public class ManagerGUI {
 
-    public static void main(String[] args) {
+    public static void main() {
         new MainManagerFrame();
     }
 
