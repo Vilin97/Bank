@@ -29,13 +29,16 @@ public class ReadFile {
 
         // loop through the users accounts
         JSONObject userAccounts = new JSONObject();
+        JSONObject userAccount = new JSONObject();
+
         for (int i = 0; i < customer.getAllAccounts().size(); i++) {
+            userAccount = new JSONObject();
             Account currentAccount = customer.getAllAccounts().get(i);
-            userAccounts.put("accountName", currentAccount.name);
-            userAccounts.put("accountID", currentAccount.ID);
-            userAccounts.put("accountType", currentAccount.getClass().getName());
-            userAccounts.put("balance", currentAccount.balance);
-            userAccounts.put("currency", currentAccount.currency);
+            userAccount.put("accountName", currentAccount.name);
+            userAccount.put("accountID", currentAccount.ID);
+            userAccount.put("accountType", currentAccount.getClass().getName());
+            userAccount.put("balance", currentAccount.balance);
+            userAccount.put("currency", currentAccount.currency.toString());
             if (currentAccount.getClass().getName() == "SecuritiesAccount") {
                 JSONObject accountStocks = new JSONObject();
                 Stocks<Stock> stocks = customer.getSecuritiesAccounts().getByID(currentAccount.ID).getStocks();
@@ -50,18 +53,18 @@ public class ReadFile {
             JSONObject accountTransactions = new JSONObject();
             Iterator transactionsIter = currentAccount.transactions.iterator();
             while(transactionsIter.hasNext()) {
-                System.out.println("test");
                 Transaction currentTransaction = (Transaction) transactionsIter.next();
-                System.out.println(currentTransaction.getDate().toString());
-                accountTransactions.put("transactionDate", currentTransaction.getDate().toString());
-                accountTransactions.put("transactionType", currentTransaction.getClass().getName());
-                accountTransactions.put("transactionAmount", currentTransaction.amount);
+                JSONObject accTransaction = new JSONObject();
+                accTransaction.put("transactionDate", currentTransaction.getDate().toString());
+                accTransaction.put("transactionType", currentTransaction.getClass().getName());
+                accTransaction.put("transactionAmount", currentTransaction.amount);
                 if (currentTransaction instanceof TransactionSellStock) {
-                    accountTransactions.put("stock", ((TransactionSellStock) currentTransaction).getStock());
+                    accTransaction.put("stock", ((TransactionSellStock) currentTransaction).getStock());
                 }
+                accountTransactions.put("accountTransactions", accTransaction);
             }
-            System.out.println("size:"+ accountTransactions.size());
-            userObject.put("transactions", accountTransactions);
+            userAccount.put("transactions", accountTransactions);
+            userAccounts.put(currentAccount.getID(), userAccount);
         }
         userObject.put("accounts", userAccounts);
         Files.write(Paths.get(username), userObject.toJSONString().getBytes());
@@ -82,9 +85,15 @@ public class ReadFile {
             Transactions<Transaction> allTransactions = new Transactions<>();
 
             // Set user basic credentials
-            Name name = (Name) currentUserJSON.get("Name");
-            int userID = (int) currentUserJSON.get("UserID");
-            UName uname = (UName) currentUserJSON.get("UName");
+            String getname = (String)currentUserJSON.get("Name");
+            String[] parsed = getname.split(" ");
+            String firstname = parsed[0];
+            String lastname = parsed[1];
+            Name name = new Name(firstname, lastname);
+            Long lon = (Long)currentUserJSON.get("UserID");
+            int userID = lon.intValue();
+            String temp = (String)currentUserJSON.get("UName");
+            UName uname = new UName(temp);
             String password = (String)currentUserJSON.get("Password");
             newCustomer = new Customer(new Credentials(name.toString(), uname.toString(), password));
             newCustomer.setID(userID);
@@ -93,24 +102,24 @@ public class ReadFile {
             JSONObject userAccounts = (JSONObject) currentUserJSON.get("accounts");
             for (int i = 0; i < userAccounts.size(); i++) {
                 JSONObject currentAccount = (JSONObject) userAccounts.get(i);
-                if (currentAccount.get("accountName").toString() == "bank.CheckingAccount") {
+                if (currentAccount.get("accountName").toString().equalsIgnoreCase("bank.CheckingAccount")) {
                     Transactions<Transaction> accountTransactions = new Transactions<>();
                     CheckingAccount newCheckingAccount = new CheckingAccount((String) currentAccount.get("accountName"), (Currency) currentAccount.get("currency"), newCustomer);
                     JSONObject currentAccountTransactions = (JSONObject) currentAccount.get("transactions");
                     if (currentAccountTransactions.size() > 0) {
                         for (int j = 0; j < currentAccountTransactions.size(); j++) {
                             JSONObject currentTransaction = (JSONObject) currentAccountTransactions.get(j);
-                            if (currentTransaction.get("transactionType") == "TransactionWithdrawal") {
+                            if (currentTransaction.get("transactionType").equals("TransactionWithdrawal") ) {
                                 TransactionWithdrawal newTransactionWithdrawal = new TransactionWithdrawal((LocalDate) currentTransaction.get("transactionDate"), (double) currentTransaction.get("transactionAmount"), newCustomer, newCheckingAccount);
                                 allTransactions.add(newTransactionWithdrawal);
                                 accountTransactions.add(newTransactionWithdrawal);
                             }
-                            if (currentTransaction.get("transactionType") == "TransactionTransferIn") {
+                            if (currentTransaction.get("transactionType").equals("TransactionTransferIn")) {
                                 TransactionTransferIn newTransactionTransferIn = new TransactionTransferIn((LocalDate) currentTransaction.get("transactionDate"), (double) currentTransaction.get("transactionAmount"), newCustomer, newCheckingAccount);
                                 allTransactions.add(newTransactionTransferIn);
                                 accountTransactions.add(newTransactionTransferIn);
                             }
-                            if (currentTransaction.get("transactionType") == "TransactionTransferOut") {
+                            if (currentTransaction.get("transactionType").equals("TransactionTransferOut")) {
                                 TransactionTransferOut newTransactionTransferOut = new TransactionTransferOut((LocalDate) currentTransaction.get("transactionDate"), (double) currentTransaction.get("transactionAmount"), newCustomer, newCheckingAccount);
                                 allTransactions.add(newTransactionTransferOut);
                                 accountTransactions.add(newTransactionTransferOut);

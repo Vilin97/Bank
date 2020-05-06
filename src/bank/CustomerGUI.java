@@ -1670,11 +1670,11 @@ public class CustomerGUI extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             //pull the user from the data set
             Bank tester = getTestB();
-            Customer test = getTestC();
-            //Customer newCustomer = ReadFile.readUserData("astreich");
+            //Customer test = getTestC();
+            Customer newCustomer = ReadFile.readUserData("astreich");
 
             public void run() {
-                new CustomerGUI(test,tester).setVisible(true);
+                new CustomerGUI(newCustomer,tester).setVisible(true);
             }
         });
     }
