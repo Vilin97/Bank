@@ -5,6 +5,8 @@
  */
 package bank;
 
+import org.json.simple.parser.ParseException;
+
 import static bank.IOTools.parseToDate;
 import static bank.NewAccountGUI.newAccGUI;
 import static bank.NewLoanGUI.newLoanGUI;
@@ -2241,7 +2243,7 @@ public class CustomerGUI extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
+    public static void main(String args[]) throws IOException, ParseException {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -2269,11 +2271,11 @@ public class CustomerGUI extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             //pull the user from the data set
             Bank tester = getTestB();
-            Customer test = getTestC();
-            //Customer newCustomer = ReadFile.readUserData("astreich");
+            //Customer test = getTestC();
+            Customer newCustomer = ReadFile.readUserData("astreich");
             
             public void run() {
-                new CustomerGUI(test,tester).setVisible(true);
+                new CustomerGUI(newCustomer,tester).setVisible(true);
             }
         });
     }
