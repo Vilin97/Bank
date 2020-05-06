@@ -6,10 +6,7 @@
 package bank.gui;
 
 
-import bank.Bank;
-import bank.Customers;
-import bank.JSONTools;
-import bank.Manager;
+import bank.*;
 import bank.gui.GUI;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -226,6 +223,8 @@ public class BeginGUI extends javax.swing.JFrame {
         Customers testers = new Customers(cs);
         Bank bnk = new Bank(testers, mn);
         Bank.setCurrentDate(LocalDate.now());
+        Bank.setCustomers(new Customers<>());
+        Bank.setStockMarket(new StockMarket());
         return bnk;
     }
     

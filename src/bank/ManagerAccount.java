@@ -23,7 +23,8 @@ public class ManagerAccount extends Account {
 
     public static ManagerAccount fromJSON(JSONObject jsonObject, User manager){
         String name = (String) jsonObject.get("name");
-        int ID = (int) jsonObject.get("ID");
+        Long temp = (Long) jsonObject.get("ID");
+        int ID = Math.toIntExact(temp);
         double balance = (double) jsonObject.get("balance");
         Currency currency = Currency.getInstance((String) jsonObject.get("currency"));
         ManagerAccount account = new ManagerAccount(name, currency);
