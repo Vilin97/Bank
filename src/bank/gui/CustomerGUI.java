@@ -1643,7 +1643,7 @@ public class CustomerGUI extends javax.swing.JFrame {
         addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
-                System.out.println("closed");
+                //System.out.println("closed");
                 //JSONTools.writeUserData(user);
                 writeBank();
                 writeUserData(user);

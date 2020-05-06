@@ -21,6 +21,9 @@ import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
+import static bank.JSONTools.writeBank;
+import static bank.JSONTools.writeUserData;
+
 
 /**
  *
@@ -71,6 +74,8 @@ public class BeginGUI extends javax.swing.JFrame {
                     System.out.println("manager created!");
                     System.out.println("Starting the bank");
                     Bank bnk = createBank(newman);
+                    writeBank();
+                    writeUserData(newman);
                     openBank(gui,bnk);
                 }catch(IllegalArgumentException ex){
                     System.out.println(ex.getMessage());

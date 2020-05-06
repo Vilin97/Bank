@@ -85,6 +85,10 @@ public class Credentials {
         return pword;
     }
 
+    public Password getPassword() {
+        return pword;
+    }
+
     public UName getUname() {
         return uname;
     }

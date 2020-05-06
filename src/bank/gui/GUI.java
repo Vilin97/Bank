@@ -5,19 +5,18 @@
  */
 package bank.gui;
 
-import bank.Bank;
+import bank.*;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
 import bank.Customer;
-import bank.Customer;
-import bank.Customers;
-import bank.Manager;
-import bank.User;
+import bank.Password;
 import bank.gui.MainManagerFrame;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
-import static bank.JSONTools.readUserData;
+import static bank.JSONTools.*;
 
 /**
  *
@@ -264,6 +263,8 @@ public class GUI extends javax.swing.JFrame {
                     Customer created = Customer.createCustomer(fname,lname,uname,pword);
                     //Add created to data set
                     bnk.addCustomer(created);
+                    writeBank();
+                    writeUserData(created);
                     System.out.println("user created!");
                     System.out.println(created.toString());
                     System.out.println("Logging them in....");
@@ -285,15 +286,24 @@ public class GUI extends javax.swing.JFrame {
         if(user == null){
             throw new IllegalArgumentException("wrong username or password");
         }else if (user instanceof Customer){
+            String temp = user.getCreds().getPassword().getPword();
+            //temp.getPword();
             //check password here
-            this.dispose();
-            Customer cs = (Customer) user;
-            new CustomerGUI(cs,bnk).setVisible(true);
+
+            if(user.getCreds().getPword().equals(password)){
+                this.dispose();
+                Customer cs = (Customer) user;
+                new CustomerGUI(cs,bnk).setVisible(true);
+            }
+
         }else if (user instanceof Manager){
             //check password here
-            this.dispose();
-            //launch manager GUI user is an instance of manager
-             new MainManagerFrame().setVisible(true);
+            if(user.getCreds().getPword().equals(password)){
+                this.dispose();
+                //launch manager GUI user is an instance of manager
+                new MainManagerFrame().setVisible(true);
+            }
+            
         }
     }
     

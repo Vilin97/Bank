@@ -12,7 +12,7 @@ import org.json.simple.JSONObject;
  *
  * @author adamstreich
  */
-class Password {
+public class Password {
     String pword;
 
     public Password(String pw) {
@@ -22,7 +22,7 @@ class Password {
     }
 
     public String getPword() {
-        return pword;
+        return this.pword;
     }
     
     public static Password createPassword(String pw){
