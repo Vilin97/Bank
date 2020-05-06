@@ -43,7 +43,6 @@ public class CustomerPanel  extends EmitterPanel<String>{
             }
         });
 
-
         // set up customer combo box
         customerComboBox = new JComboBox<>();
         DefaultComboBoxModel<Customer> model = new DefaultComboBoxModel<>();
