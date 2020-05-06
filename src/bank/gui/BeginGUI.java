@@ -267,7 +267,7 @@ public class BeginGUI extends javax.swing.JFrame {
         //</editor-fold>
         
         
-        if(false){
+        if(hasBank()){
             Bank bnk = loadBank();
             openBank(bnk);
         }else{

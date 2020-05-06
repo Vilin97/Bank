@@ -10,6 +10,7 @@ import org.json.simple.parser.ParseException;
 
 
 import static bank.IOTools.parseToDate;
+import static bank.JSONTools.writeBank;
 import static bank.gui.NewAccountGUI.newAccGUI;
 import static bank.gui.NewLoanGUI.newLoanGUI;
 import static bank.gui.TransferGUI.transferGUI;
@@ -1642,7 +1643,8 @@ public class CustomerGUI extends javax.swing.JFrame {
             @Override
             public void windowClosing(WindowEvent e) {
                 System.out.println("closed");
-                JSONTools.writeUserData(user);
+                //JSONTools.writeUserData(user);
+                writeBank();
                 e.getWindow().dispose();
             }
         });
