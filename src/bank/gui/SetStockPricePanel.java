@@ -94,7 +94,7 @@ public class SetStockPricePanel extends EmitterPanel<String> implements ActionLi
 
     public void updateStockList(){
         DefaultComboBoxModel<String> model = new DefaultComboBoxModel<>();
-        //model.addAll(Bank.getStockMarket().getPrices().keySet());
+        model.addAll(Bank.getStockMarket().getPrices().keySet());
         stocksList.setModel(model);
         stocksList.setSelectedIndex(0);
     }

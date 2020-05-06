@@ -101,6 +101,7 @@ public class JSONTools {
         try {
             JSONObject jsonObject = (JSONObject) new JSONParser().parse(new FileReader(path+"Bank.json"));
             bank = Bank.fromJSON((JSONObject) jsonObject.get("Bank"));
+            Bank.setCustomers(new Customers<>());
         } catch (ParseException e) {
             e.printStackTrace();
         } catch (FileNotFoundException e) {

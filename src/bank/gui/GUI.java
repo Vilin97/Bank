@@ -301,7 +301,7 @@ public class GUI extends javax.swing.JFrame {
             if(user.getCreds().getPword().getPword().equals(password)){
                 this.dispose();
                 //launch manager GUI user is an instance of manager
-                ManagerGUI.main();
+                ManagerGUI.main(new String[]{});
             }
 
         }

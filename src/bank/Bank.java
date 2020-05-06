@@ -1,5 +1,6 @@
 package bank;
 
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 import java.time.LocalDate;
@@ -113,6 +114,11 @@ public class Bank {
         jsonObject.put("date", General.localDateToJSON(Bank.getCurrentDate()));
         jsonObject.put("stockMarket", Bank.getStockMarket().toJSON());
         jsonObject.put("manager", Bank.getManager().toJSON());
+        JSONArray jsonArray = new JSONArray();
+        for (Customer c:Bank.getCustomers()) {
+            jsonArray.add(c.toJSON());
+        }
+        jsonObject.put("customers", jsonArray);
         return jsonObject;
     }
 
@@ -120,6 +126,13 @@ public class Bank {
         LocalDate date = General.localDateFromJSON((JSONObject) jsonObject.get("date"));
         StockMarket stockMarket = StockMarket.fromJSON((JSONObject) jsonObject.get("stockMarket"));
         Manager manager = Manager.fromJSON((JSONObject) jsonObject.get("manager"));
+        Customers<Customer> customers = new Customers<>();
+        JSONArray jsonArray = (JSONArray) jsonObject.get("customers");
+        for (Object o:jsonArray) {
+            Customer c = Customer.fromJSON((JSONObject) o);
+            customers.add(c);
+        }
+        Bank.setCustomers(customers);
         return new Bank(manager, stockMarket, date);
     }
 }

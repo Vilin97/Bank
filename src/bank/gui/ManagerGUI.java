@@ -7,7 +7,8 @@ import java.util.Currency;
 
 public class ManagerGUI {
 
-    public static void main() {
+    public static void main(String[] args) {
+        JSONTools.readBank();
         new MainManagerFrame();
     }
 
