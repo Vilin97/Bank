@@ -1674,9 +1674,12 @@ public class CustomerGUI extends javax.swing.JFrame {
     //updates the balance that is diplayed, but needs a action listener to call it
     public void updateSavingsAccBalanceDisp(Customer user){
         int indexOfAcc = sAccList.getSelectedIndex();
-        SavingsAccount acc = user.getSavingsAccounts().get(indexOfAcc);
-        String disp = acc.getCurrency().getSymbol() + " " + acc.getBalance();
-        savAccBalanceDisplay.setText(disp);
+        if(indexOfAcc != -1){
+            SavingsAccount acc = user.getSavingsAccounts().get(indexOfAcc);
+            String disp = acc.getCurrency().getSymbol() + " " + acc.getBalance();
+            savAccBalanceDisplay.setText(disp);
+        }
+
 
     }
 
@@ -1721,14 +1724,18 @@ public class CustomerGUI extends javax.swing.JFrame {
     public void updateTHSavAcc(Customer user){
         savAccTextBox.setText(" ");
         String th = "";
-        int indexOfAcc = sAccList.getSelectedIndex();
-        SavingsAccount acc = user.getSavingsAccounts().get(indexOfAcc);
 
-        Iterator iter = acc.getTransactions().iterator();
-        while(iter.hasNext()){
-            Transaction t = (Transaction) iter.next();
-            th+= t.toString() + " \n";
+        int indexOfAcc = sAccList.getSelectedIndex();
+        if(indexOfAcc != -1){
+            SavingsAccount acc = user.getSavingsAccounts().get(indexOfAcc);
+
+            Iterator iter = acc.getTransactions().iterator();
+            while(iter.hasNext()){
+                Transaction t = (Transaction) iter.next();
+                th+= t.toString() + " \n";
+            }
         }
+
         savAccTextBox.setText(th);
     }
 
@@ -1796,9 +1803,12 @@ public class CustomerGUI extends javax.swing.JFrame {
     //updates the balance that is diplayed, but needs a action listener to call it
     public void updateCheckingAccBalanceDisp(Customer user){
         int indexOfAcc = chekAccList1.getSelectedIndex();
-        CheckingAccount acc = user.getCheckingAccounts().get(indexOfAcc);
-        String disp = acc.getCurrency().getSymbol() + " " + acc.getBalance();
-        chekAccBalanceDisplay1.setText(disp);
+        if(indexOfAcc != -1){
+            CheckingAccount acc = user.getCheckingAccounts().get(indexOfAcc);
+            String disp = acc.getCurrency().getSymbol() + " " + acc.getBalance();
+            chekAccBalanceDisplay1.setText(disp);
+        }
+
 
     }
 
@@ -1855,12 +1865,15 @@ public class CustomerGUI extends javax.swing.JFrame {
         chekAccTextBox2.setText(" ");
         String th = "";
         int indexOfAcc = chekAccList1.getSelectedIndex();
-        CheckingAccount acc = user.getCheckingAccounts().get(indexOfAcc);
-        Iterator iter = acc.getTransactions().iterator();
-        while(iter.hasNext()){
-            Transaction t = (Transaction) iter.next();
-            th+= t.toString() + " \n";
+        if(indexOfAcc != -1){
+            CheckingAccount acc = user.getCheckingAccounts().get(indexOfAcc);
+            Iterator iter = acc.getTransactions().iterator();
+            while(iter.hasNext()){
+                Transaction t = (Transaction) iter.next();
+                th+= t.toString() + " \n";
+            }
         }
+
         chekAccTextBox2.setText(th);
     }
 
@@ -2228,10 +2241,10 @@ public class CustomerGUI extends javax.swing.JFrame {
     public static Customer getTestC(){
 
         Customer tester = bank.Customer.createCustomer("Adam","Streich","astreich","12345");
-        tester.createSavingsAccount("Acc1S", "USD");
-        tester.createSavingsAccount("Acc2S", "USD");
-        tester.createCheckingAccount("Acc1C", "USD");
-        tester.createCheckingAccount("Acc2C", "USD");
+        //tester.createSavingsAccount("Acc1S", "USD");
+        //tester.createSavingsAccount("Acc2S", "USD");
+        //tester.createCheckingAccount("Acc1C", "USD");
+        //tester.createCheckingAccount("Acc2C", "USD");
 
 
 
@@ -2269,11 +2282,11 @@ public class CustomerGUI extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             //pull the user from the data set
             Bank tester = getTestB();
-            //Customer test = getTestC();
+            Customer test = getTestC();
             //Customer newCustomer = JSONTools.readUserData("astreich");
 
             public void run() {
-                //new CustomerGUI(newCustomer,tester).setVisible(true);
+                new CustomerGUI(test,tester).setVisible(true);
             }
         });
     }

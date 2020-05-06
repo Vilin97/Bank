@@ -12,6 +12,7 @@ import bank.Manager;
 import bank.gui.GUI;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 
@@ -210,6 +211,7 @@ public class BeginGUI extends javax.swing.JFrame {
         ArrayList cs = new ArrayList();
         Customers testers = new Customers(cs);
         Bank bnk = new Bank(testers, mn);
+        Bank.setCurrentDate(LocalDate.now());
         return bnk;
     }
     
@@ -253,7 +255,7 @@ public class BeginGUI extends javax.swing.JFrame {
         //</editor-fold>
         
         
-        if(hasBank()){
+        if(false){
             Bank bnk = loadBank();
             openBank(bnk);
         }else{
