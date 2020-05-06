@@ -1,5 +1,8 @@
 package bank;
 
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -90,5 +93,26 @@ public class StockMarket {
         return "StockMarket:\n" +
                 "\n"+getStockCounts() +
                 "\nprices:" + prices;
+    }
+
+    public JSONObject toJSON() {
+        JSONObject jsonObject = new JSONObject();
+        JSONArray stocksObject = new JSONArray();
+        for (Stock stock:getStocks()) {
+            stocksObject.add(stock.toJSON());
+        }
+        jsonObject.put("stocks", stocksObject);
+        jsonObject.put("prices", new JSONObject(prices));
+        return jsonObject;
+    }
+
+    public static StockMarket fromJSON(JSONObject jsonObject) {
+        JSONArray stocksArray = (JSONArray) jsonObject.get("stocks");
+        Stocks<Stock> stocks = new Stocks();
+        for (Object s:stocksArray) {
+            stocks.add(Stock.fromJSON((JSONObject) s));
+        }
+        Map<String, Double> prices = (Map<String, Double>) jsonObject.get("prices");
+        return new StockMarket(stocks,prices);
     }
 }
