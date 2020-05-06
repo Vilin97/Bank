@@ -17,6 +17,8 @@ import bank.gui.MainManagerFrame;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
+import static bank.JSONTools.readUserData;
+
 /**
  *
  * @author adamstreich
@@ -278,14 +280,17 @@ public class GUI extends javax.swing.JFrame {
     }
     
     public void logInUser(String uname,String password, Bank bnk){
-        User user = bnk.logIn(uname, password);
+        User user = readUserData(uname);
+        //User user = bnk.logIn(uname, password);
         if(user == null){
             throw new IllegalArgumentException("wrong username or password");
         }else if (user instanceof Customer){
+            //check password here
             this.dispose();
             Customer cs = (Customer) user;
             new CustomerGUI(cs,bnk).setVisible(true);
         }else if (user instanceof Manager){
+            //check password here
             this.dispose();
             //launch manager GUI user is an instance of manager
              new MainManagerFrame().setVisible(true);
