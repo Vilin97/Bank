@@ -6,6 +6,8 @@ package bank;
  * and open the template in the editor.
  */
 
+import org.json.simple.JSONObject;
+
 /**
  *
  * @author adamstreich
@@ -46,6 +48,12 @@ class Name {
     public String toString() {
         return this.fname + " " + this.lname;
     }
-    
- 
+
+
+    public JSONObject toJSON() {
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("fname", fname);
+        jsonObject.put("lname", lname);
+        return jsonObject;
+    }
 }

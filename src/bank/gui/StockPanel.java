@@ -1,14 +1,8 @@
 package bank.gui;
 
 import bank.Bank;
-import bank.Listener;
-import bank.gui.AddStockPanel;
-import bank.gui.EmitterPanel;
-import bank.gui.SetStockPricePanel;
 
 import javax.swing.*;
-import javax.swing.border.Border;
-import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 

@@ -6,6 +6,9 @@ package bank;
  * and open the template in the editor.
  */
 
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+
 import java.util.Objects;
 
 /**
@@ -16,7 +19,7 @@ public abstract class User implements Permisions {
     private Credentials cred;
     private int ID;
     private static int nextID = 0;
-    
+
     public User(Credentials cd){
         this.cred = cd;
         ID = nextID;
@@ -71,4 +74,12 @@ public abstract class User implements Permisions {
     public void setID(int ID) {
         this.ID = ID;
     }
+
+    public JSONObject toJSON(){
+        JSONObject userObject = new JSONObject();
+        userObject.put("ID", getID());
+        userObject.put("Credentials", getCreds().toJSON());
+        return userObject;
+    }
+
 }

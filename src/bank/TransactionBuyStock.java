@@ -9,4 +9,8 @@ public class TransactionBuyStock extends Transaction {
         super(date, amount, customer, account);
         this.stock = stock;
     }
+
+    public Stock getStock() {
+        return stock;
+    }
 }

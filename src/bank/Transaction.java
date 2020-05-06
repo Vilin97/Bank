@@ -1,5 +1,7 @@
 package bank;
 
+import org.json.simple.JSONObject;
+
 import java.time.LocalDate;
 import java.util.Date;
 
@@ -37,5 +39,19 @@ abstract public class Transaction implements Comparable<Transaction>{
 
     public int compareTo(Transaction o) {
         return date.compareTo(o.getDate());
+    }
+
+    public JSONObject toJSON(){
+        JSONObject transactionObject = new JSONObject();
+        transactionObject.put("Date", getDate().toString());
+        transactionObject.put("Type", getClass().getSimpleName());
+        transactionObject.put("Amount", amount);
+        if (this instanceof TransactionSellStock) {
+            transactionObject.put("Stock", ((TransactionSellStock) this).getStock());
+        }
+        if (this instanceof TransactionBuyStock) {
+            transactionObject.put("Stock", ((TransactionBuyStock) this).getStock());
+        }
+        return transactionObject;
     }
 }

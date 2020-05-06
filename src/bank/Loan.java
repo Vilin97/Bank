@@ -1,5 +1,7 @@
 package bank;
 
+import org.json.simple.JSONObject;
+
 import java.util.Currency;
 
 public class Loan extends Account {
@@ -36,5 +38,12 @@ public class Loan extends Account {
     public String toString() {
         return super.toString() +
                 ", collateral: "+collateral;
+    }
+
+    @Override
+    public JSONObject toJSON() {
+        JSONObject jsonObject = super.toJSON();
+        jsonObject.put("Collateral", collateral.toJSON());
+        return jsonObject;
     }
 }

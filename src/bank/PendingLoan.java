@@ -1,5 +1,7 @@
 package bank;
 
+import org.json.simple.JSONObject;
+
 import java.time.temporal.ChronoUnit;
 import java.util.Currency;
 
@@ -27,4 +29,10 @@ public class PendingLoan extends Loan {
         this.savingsAccount = savingsAccount;
     }
 
+    @Override
+    public JSONObject toJSON() {
+        JSONObject jsonObject = super.toJSON();
+        jsonObject.put("savingsAccount", savingsAccount.toJSON());
+        return jsonObject;
+    }
 }

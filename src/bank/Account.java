@@ -1,5 +1,8 @@
 package bank;
 
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+
 import java.time.LocalDate;
 import java.util.Currency;
 import java.util.Objects;
@@ -149,5 +152,21 @@ abstract public class Account {
                 ", balance: " + balance +
                 ", currency: " + currency+
                 ", transactions: " + transactions;
+    }
+
+    public JSONObject toJSON(){
+        JSONObject accountObject = new JSONObject();
+        accountObject.put("Type", getClass().getSimpleName());
+        accountObject.put("Name", name);
+        accountObject.put("ID", ID);
+        accountObject.put("Balance", balance);
+        accountObject.put("Currency", currency.toString());
+
+        JSONArray transactionsObject = new JSONArray();
+        for (Transaction transaction:getTransactions()) {
+            transactionsObject.add(transaction.toJSON());
+        }
+        accountObject.put("Transactions", transactionsObject);
+        return accountObject;
     }
 }

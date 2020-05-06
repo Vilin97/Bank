@@ -9,6 +9,11 @@ import static java.lang.Integer.min;
 
 public class General {
     // class to hold general utility functions
+
+    public static String[] arrayFromString(String arr){
+        return arr.replaceAll("\\[", "").replaceAll("]", "").split(", ");
+    }
+
     public static <T> String listToStringColumn(List<T> ar){
         StringBuilder s = new StringBuilder();
         for (T t : ar) {

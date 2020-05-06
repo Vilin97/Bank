@@ -1401,287 +1401,283 @@ public class CustomerGUI extends javax.swing.JFrame {
     private void interactionFieldLoanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_interactionFieldLoanActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_interactionFieldLoanActionPerformed
-    
+
     //builds the gui for the user in the begining
     public void initCustom(Customer user){
         this.updateSavingsAccList(user);
         //this.updateSavingsAccBalanceDisp(user);
         this.updateWorkingSavingsAcc(user);
-        
+
         this.updateCheckingAccList(user);
         //this.updateCheckingAccBalanceDisp(user);
         this.updateworkingCheckingAcc(user);
-        
+
         this.updateLoanList(user);
         this.updateWorkingLoan(user);
         this.updatePendingLoansDisp(user);
-        
-        
+
+
     }
-    
+
     //builds the action listeners
     private void initActionListensers(Customer user, StockMarket sm){
         //savings account action listeners
         //
-        //update what savings account is being banked in 
+        //update what savings account is being banked in
         updateCurrentSavAccButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 updateWorkingSavingsAcc(user);
             }
-                
+
         });
-        
+
         //deposit to the savings account
         depositSaAccButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 depositSaAcc(user);
             }
-                
+
         });
-        
+
         //withdraw from the savings account
         withdrawSaAccButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 withdrawSaAcc(user);
             }
-                
+
         });
-        
+
         savAccTransferButton1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 transferSavAcc(user);
             }
-                
+
         });
-        
+
         savAccTHShowAllButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 updateTHSavAcc(user);
             }
-                
+
         });
-        
-        
+
+
         savAccTHInRangeButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 updateTHSavAccIR(user);
             }
-                
+
         });
-        
-        
+
+
         //Checking Account action listeners
         //
-        
-        //update what checking account is being banked in 
+
+        //update what checking account is being banked in
         updateCurrentChekAccButton1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 updateworkingCheckingAcc(user);
             }
-                
+
         });
-        
+
         //deposit to the Checking account
         depositChekAccButton1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 depositChekAcc(user);
             }
-                
+
         });
-        
+
         //withdraw from the Check account
         withdrawChekAccButton1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 withdrawChekAcc(user);
             }
-                
+
         });
-        
+
         chekAccTransferButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 transferChekAcc(user);
             }
-                
+
         });
-        
+
         chekAccTHShowAllButton2.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 updateTHChekAcc(user);
             }
-                
+
         });
-        
-        
+
+
         chekAccTHInRangeButton2.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 updateTHChekAccIR(user);
             }
-                
+
         });
-        
-        
-        
-        
+
+
+
+
         //loan action listeners
         newLoanjButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 requestNewLoan(user);
             }
-                
+
         });
-        
+
         loanTHShowAllButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 updateTHLoan(user);
             }
-                
+
         });
-        
-        
+
+
         loanTHInRangeButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 updateTHLoanIR(user);
             }
-                
+
         });
-        
+
         loanBankjButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 updateWorkingLoan(user);
             }
-                
+
         });
-        
+
         depositLoanButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 depositLoan(user);
             }
-                
+
         });
-        
-        
+
+
         //sec acc action listeners
         secAccbankjButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 updateWorkingSecAcc(user,sm);
             }
-                
+
         });
-        
+
         //deposit to the sec account
         secAccdepositButton1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 depositSecAcc(user,sm);
             }
-                
+
         });
-        
+
         //withdraw from the sec account
         secAccwithdrawButton1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 withdrawSecAcc(user,sm);
             }
-                
+
         });
-        
+
         secAccTransferjButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 transferSecAcc(user);
             }
-                
+
         });
-        
+
         secAccTHShowAllButton2.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 updateTHSecAcc(user);
             }
-                
+
         });
-        
-        
+
+
         secAccTHInRangeButton2.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 updateTHSecAccIR(user);
             }
-                
+
         });
-        
-        
+
+
         buyStockjButton1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 buyStock(user,sm);
             }
-                
+
         });
-        
-        
+
+
         sellMyStockButton1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 sellStock(user,sm);
             }
-                
+
         });
-        
+
         //options action listeners
         openNewAccButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 newAccount(user);
             }
-                
+
         });
 
         addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
                 System.out.println("closed");
-                try {
-                    ReadFile.writeUserData(user.getUName(), user);
-                } catch (IOException ex) {
-                    ex.printStackTrace();
-                }
+                ReadFile.writeUserData(user);
                 e.getWindow().dispose();
             }
         });
-        
+
     }
-    
-    
+
+
     //options methods
-    
+
     public void newAccount(Customer user){
         newAccGUI(user,this);
     }
     //Savings account methods
     //
-    
-    
-    
+
+
+
     //updates the savings accounts in the list
     public void updateSavingsAccList(Customer user){
         sAccList.removeAllItems();
@@ -1692,22 +1688,22 @@ public class CustomerGUI extends javax.swing.JFrame {
             sAccList.getSelectedIndex();
         }
     }
-    
+
     //updates the balance that is diplayed, but needs a action listener to call it
     public void updateSavingsAccBalanceDisp(Customer user){
         int indexOfAcc = sAccList.getSelectedIndex();
         SavingsAccount acc = user.getSavingsAccounts().get(indexOfAcc);
         String disp = acc.getCurrency().getSymbol() + " " + acc.getBalance();
         savAccBalanceDisplay.setText(disp);
-        
+
     }
-    
+
     //the method called in the action listener
     public void updateWorkingSavingsAcc(Customer user){
         this.updateSavingsAccBalanceDisp(user);
         this.updateTHSavAcc(user);
     }
-    
+
     public void depositSaAcc(Customer user){
         int indexOfAcc = sAccList.getSelectedIndex();
         SavingsAccount acc = user.getSavingsAccounts().get(indexOfAcc);
@@ -1722,7 +1718,7 @@ public class CustomerGUI extends javax.swing.JFrame {
         updateWorkingSavingsAcc(user);
         interactionFieldSaAcc.setText(" ");
     }
-    
+
     public void withdrawSaAcc(Customer user){
        int indexOfAcc = sAccList.getSelectedIndex();
         SavingsAccount acc = user.getSavingsAccounts().get(indexOfAcc);
@@ -1730,22 +1726,22 @@ public class CustomerGUI extends javax.swing.JFrame {
             double inp = Double.parseDouble(interactionFieldSaAcc.getText());
             System.out.println(inp + " will be added to the current account.");
             acc.withdraw(inp);
-            
+
         }catch(NumberFormatException ex){
             System.out.println(ex.getMessage());
             System.out.println("User tried to enter not a double");
         }
         updateWorkingSavingsAcc(user);
         interactionFieldSaAcc.setText(" ");
-        
+
     }
-    
+
     public void updateTHSavAcc(Customer user){
         savAccTextBox.setText(" ");
         String th = "";
         int indexOfAcc = sAccList.getSelectedIndex();
         SavingsAccount acc = user.getSavingsAccounts().get(indexOfAcc);
-        
+
         Iterator iter = acc.getTransactions().iterator();
         while(iter.hasNext()){
             Transaction t = (Transaction) iter.next();
@@ -1753,37 +1749,37 @@ public class CustomerGUI extends javax.swing.JFrame {
         }
         savAccTextBox.setText(th);
     }
-    
+
     public void transferSavAcc(Customer user){
         int indexOfAcc = chekAccList1.getSelectedIndex();
         SavingsAccount acc = user.getSavingsAccounts().get(indexOfAcc);
         transferGUI(acc,user,this);
-        
+
         interactionFieldChekAcc1.setText(" ");
-        
+
     }
-    
+
     public void updateTHSavAccIR(Customer user){
         savAccTextBox.setText(" ");
-        
+
         int indexOfAcc = sAccList.getSelectedIndex();
         SavingsAccount acc = user.getSavingsAccounts().get(indexOfAcc);
-        
-        
+
+
         String date0sy = savAccTHDate0Fieldy.getText();
         String date0sm = savAccTHDate0Fieldm.getText();
         String date0sd = savAccTHDate0Fieldd.getText();
-        
+
         String date1sy = savAccTHDate1Fieldy.getText();
         String date1sm = savAccTHDate1Fieldm.getText();
         String date1sd = savAccTHDate1Fieldd.getText();
-        
+
         try{
             LocalDate date0 = parseToDate(date0sy,date0sm,date0sd);
             LocalDate date1 = parseToDate(date1sy,date1sm,date1sd);
-            
+
             Transactions transactions = acc.getTransactionsByTimePeriod(date0, date1);
-            
+
             String th = "";
             Iterator iter = transactions.iterator();
         while(iter.hasNext()){
@@ -1795,16 +1791,16 @@ public class CustomerGUI extends javax.swing.JFrame {
             System.out.println(e.getMessage());
         }
     }
-    
-  
-    
-    
-    
-    
-    
+
+
+
+
+
+
+
     //Checking account methods
     //
-    
+
     //updates the Checking accounts in the list
     public void updateCheckingAccList(Customer user){
         chekAccList1.removeAllItems();
@@ -1814,22 +1810,22 @@ public class CustomerGUI extends javax.swing.JFrame {
             chekAccList1.addItem(sa.getName());
         }
     }
-    
+
     //updates the balance that is diplayed, but needs a action listener to call it
     public void updateCheckingAccBalanceDisp(Customer user){
         int indexOfAcc = chekAccList1.getSelectedIndex();
         CheckingAccount acc = user.getCheckingAccounts().get(indexOfAcc);
         String disp = acc.getCurrency().getSymbol() + " " + acc.getBalance();
         chekAccBalanceDisplay1.setText(disp);
-        
+
     }
-    
+
     //the method called in the action listener
     public void updateworkingCheckingAcc(Customer user){
         this.updateCheckingAccBalanceDisp(user);
         this.updateTHChekAcc(user);
     }
-    
+
     public void depositChekAcc(Customer user){
         int indexOfAcc = chekAccList1.getSelectedIndex();
         System.out.println(indexOfAcc);
@@ -1846,7 +1842,7 @@ public class CustomerGUI extends javax.swing.JFrame {
         updateworkingCheckingAcc(user);
         interactionFieldChekAcc1.setText(" ");
     }
-    
+
     public void withdrawChekAcc(Customer user){
         int indexOfAcc = chekAccList1.getSelectedIndex();
         CheckingAccount acc = user.getCheckingAccounts().get(indexOfAcc);
@@ -1854,25 +1850,25 @@ public class CustomerGUI extends javax.swing.JFrame {
             double inp = Double.parseDouble(interactionFieldChekAcc1.getText());
             System.out.println(inp + " will be added to the current account.");
             acc.withdraw(inp);
-            
+
         }catch(NumberFormatException ex){
             System.out.println(ex.getMessage());
             System.out.println("User tried to enter not a double");
         }
         updateworkingCheckingAcc(user);
         interactionFieldChekAcc1.setText(" ");
-        
+
     }
-    
+
     public void transferChekAcc(Customer user){
         int indexOfAcc = chekAccList1.getSelectedIndex();
         CheckingAccount acc = user.getCheckingAccounts().get(indexOfAcc);
         transferGUI(acc,user,this);
-        
+
         interactionFieldChekAcc1.setText(" ");
-        
+
     }
-    
+
     public void updateTHChekAcc(Customer user){
         chekAccTextBox2.setText(" ");
         String th = "";
@@ -1885,28 +1881,28 @@ public class CustomerGUI extends javax.swing.JFrame {
         }
         chekAccTextBox2.setText(th);
     }
-    
+
     public void updateTHChekAccIR(Customer user){
         chekAccTextBox2.setText(" ");
-        
+
         int indexOfAcc = chekAccList1.getSelectedIndex();
         CheckingAccount acc = user.getCheckingAccounts().get(indexOfAcc);
-        
-        
+
+
         String date0sy = chekAccTHDate0Fieldy1.getText();
         String date0sm = chekAccTHDate0Fieldm1.getText();
         String date0sd = chekAccTHDate0Fieldd1.getText();
-        
+
         String date1sy = chekAccTHDate1Fieldy1.getText();
         String date1sm = chekAccTHDate1Fieldm1.getText();
         String date1sd = chekAccTHDate1Fieldd1.getText();
-        
+
         try{
             LocalDate date0 = parseToDate(date0sy,date0sm,date0sd);
             LocalDate date1 = parseToDate(date1sy,date1sm,date1sd);
-            
+
             Transactions transactions = acc.getTransactionsByTimePeriod(date0, date1);
-            
+
             String th = "";
             Iterator iter = transactions.iterator();
         while(iter.hasNext()){
@@ -1918,39 +1914,39 @@ public class CustomerGUI extends javax.swing.JFrame {
             System.out.println(e.getMessage());
         }
     }
-    
-    
-    
-    
+
+
+
+
     //general display and transaction history update method
     public void updateAllDsipAndTH(Customer user){
         this.updateworkingCheckingAcc(user);
         this.updateWorkingSavingsAcc(user);
         this.updateWorkingLoan(user);
     }
-    
-    
+
+
     //loan methods
-    
+
     public void updateWorkingLoan(Customer user){
         //this.updateLoanList(user);
         if(user.getLoans().size()>0){
             this.updateTHLoan(user);
             this.updateCurrentLoanBalanceDisp(user);
         }
-        
+
     }
-    
+
     public void requestNewLoan(Customer user){
         newLoanGUI(user,this);
     }
-    
+
     public void updateCurrentLoanBalanceDisp(Customer user){
         int indexOfAcc = loanListComboBox.getSelectedIndex();
         Loan acc = user.getLoans().get(indexOfAcc);
         String disp = acc.getCurrency().getSymbol() + " " + acc.getBalance();
         loanAmtOwedDisplay.setText(disp);
-        
+
     }
     public void updatePendingLoansDisp(Customer user){
         String th = "";
@@ -1961,15 +1957,15 @@ public class CustomerGUI extends javax.swing.JFrame {
             th+= p.toString() + " \n";
         }
         pendingLoansjTextArea1.setText(th);
-        
+
     }
-    
+
     public void updateTHLoan(Customer user){
         loanTextBox.setText(" ");
         String th = "";
         int indexOfAcc = loanListComboBox.getSelectedIndex();
         Account acc = user.getLoans().get(indexOfAcc);
-        
+
         Iterator iter = acc.getTransactions().iterator();
         while(iter.hasNext()){
             Transaction t = (Transaction) iter.next();
@@ -1977,28 +1973,28 @@ public class CustomerGUI extends javax.swing.JFrame {
         }
         loanTextBox.setText(th);
     }
-    
+
     public void updateTHLoanIR(Customer user){
         loanTextBox.setText(" ");
-        
+
         int indexOfAcc = loanListComboBox.getSelectedIndex();
         Account acc = user.getLoans().get(indexOfAcc);
-        
-        
+
+
         String date0sy = loanTHDate0Fieldy1.getText();
         String date0sm = loanTHDate0Fieldm.getText();
         String date0sd = loanTHDate0Fieldd.getText();
-        
+
         String date1sy = loanTHDate1Fieldy.getText();
         String date1sm = loanTHDate1Fieldm.getText();
         String date1sd = loanTHDate1Fieldd.getText();
-        
+
         try{
             LocalDate date0 = parseToDate(date0sy,date0sm,date0sd);
             LocalDate date1 = parseToDate(date1sy,date1sm,date1sd);
-            
+
             Transactions transactions = acc.getTransactionsByTimePeriod(date0, date1);
-            
+
             String th = "";
             Iterator iter = transactions.iterator();
         while(iter.hasNext()){
@@ -2010,7 +2006,7 @@ public class CustomerGUI extends javax.swing.JFrame {
             System.out.println(e.getMessage());
         }
     }
-    
+
     public void updateLoanList(Customer user){
         loanListComboBox.removeAllItems();
         Iterator Liter = user.getLoanIter();
@@ -2020,8 +2016,8 @@ public class CustomerGUI extends javax.swing.JFrame {
             loanListComboBox.getSelectedIndex();
         }
     }
-    
-    
+
+
     public void depositLoan(Customer user){
         int indexOfAcc = loanListComboBox.getSelectedIndex();
         Loan acc = user.getLoans().get(indexOfAcc);
@@ -2036,16 +2032,16 @@ public class CustomerGUI extends javax.swing.JFrame {
         updateWorkingLoan(user);
         interactionFieldLoan.setText(" ");
     }
-    
-    
-    
-    
+
+
+
+
     //Sec Account methods
     //
     //
-    
-    
-    
+
+
+
     //updates the savings accounts in the list
     public void updateSecAccList(Customer user){
         secAccList.removeAllItems();
@@ -2056,12 +2052,12 @@ public class CustomerGUI extends javax.swing.JFrame {
             secAccList.getSelectedIndex();
         }
     }
-    
+
     //updates the balance that is diplayed, but needs a action listener to call it
     public void updateSecAccBalanceDisp(Customer user, StockMarket sm){
         if(user.getSecuritiesAccounts().size()>0){
             int indexOfAcc = secAccList.getSelectedIndex();
-           
+
             SecuritiesAccount acc = user.getSecuritiesAccounts().get(indexOfAcc);
             String cash = acc.getCurrency().getSymbol() + " " + acc.getBalance();
             String real = acc.getCurrency().getSymbol() + " " + acc.getRealizedProfit();
@@ -2070,15 +2066,15 @@ public class CustomerGUI extends javax.swing.JFrame {
             secAccRealProfjTextField1.setText(real);
             secAccUnRealProfjTextField2.setText(unreal);
         }
-        
+
     }
-    
+
     //the method called in the action listener
     public void updateWorkingSecAcc(Customer user, StockMarket sm){
         this.updateSecAccBalanceDisp(user, sm);
         this.updateTHSecAcc(user);
     }
-    
+
     public void depositSecAcc(Customer user, StockMarket sm){
         int indexOfAcc = secAccList.getSelectedIndex();
         SecuritiesAccount acc = user.getSecuritiesAccounts().get(indexOfAcc);
@@ -2093,7 +2089,7 @@ public class CustomerGUI extends javax.swing.JFrame {
         updateWorkingSecAcc(user,sm);
         secAccinteractionField1.setText(" ");
     }
-    
+
     public void withdrawSecAcc(Customer user,StockMarket sm){
        int indexOfAcc = secAccList.getSelectedIndex();
         SecuritiesAccount acc = user.getSecuritiesAccounts().get(indexOfAcc);
@@ -2101,23 +2097,23 @@ public class CustomerGUI extends javax.swing.JFrame {
             double inp = Double.parseDouble(secAccinteractionField1.getText());
             System.out.println(inp + " will be taken from the current account.");
             acc.withdraw(inp);
-            
+
         }catch(NumberFormatException ex){
             System.out.println(ex.getMessage());
             System.out.println("User tried to enter not a double");
         }
         updateWorkingSecAcc(user,sm);
         secAccinteractionField1.setText(" ");
-        
+
     }
-    
+
     public void updateTHSecAcc(Customer user){
         secAccTextBox2.setText(" ");
         String th = "";
         if(user.getSecuritiesAccounts().size()>0){
             int indexOfAcc = secAccList.getSelectedIndex();
             SecuritiesAccount acc = user.getSecuritiesAccounts().get(indexOfAcc);
-        
+
             Iterator iter = acc.getTransactions().iterator();
             while(iter.hasNext()){
                 Transaction t = (Transaction) iter.next();
@@ -2126,37 +2122,37 @@ public class CustomerGUI extends javax.swing.JFrame {
             secAccTextBox2.setText(th);
         }
     }
-    
+
     public void transferSecAcc(Customer user){
         int indexOfAcc = secAccList.getSelectedIndex();
         SecuritiesAccount acc = user.getSecuritiesAccounts().get(indexOfAcc);
         transferGUI(acc,user,this);
-        
+
         secAccinteractionField1.setText(" ");
-        
+
     }
-    
+
     public void updateTHSecAccIR(Customer user){
         secAccTextBox2.setText(" ");
-        
+
         int indexOfAcc = secAccList.getSelectedIndex();
         SecuritiesAccount acc = user.getSecuritiesAccounts().get(indexOfAcc);
-        
-        
+
+
         String date0sy = secAccTHDate0Fieldy1.getText();
         String date0sm = secAccTHDate0Fieldm1.getText();
         String date0sd = secAccTHDate0Fieldd1.getText();
-        
+
         String date1sy = secAccTHDate1Fieldy1.getText();
         String date1sm = secAccTHDate1Fieldm1.getText();
         String date1sd = secAccTHDate1Fieldd1.getText();
-        
+
         try{
             LocalDate date0 = parseToDate(date0sy,date0sm,date0sd);
             LocalDate date1 = parseToDate(date1sy,date1sm,date1sd);
-            
+
             Transactions transactions = acc.getTransactionsByTimePeriod(date0, date1);
-            
+
             String th = "";
             Iterator iter = transactions.iterator();
         while(iter.hasNext()){
@@ -2168,7 +2164,7 @@ public class CustomerGUI extends javax.swing.JFrame {
             System.out.println(e.getMessage());
         }
     }
-    
+
     public void updatePortfolio(Customer user, StockMarket sm){
         portfolioTextField.setText(" ");
         myStockSYMSComboBox1.removeAllItems();
@@ -2177,8 +2173,8 @@ public class CustomerGUI extends javax.swing.JFrame {
             int indexOfAcc = secAccList.getSelectedIndex();
             SecuritiesAccount acc = user.getSecuritiesAccounts().get(indexOfAcc);
             Iterator iter =acc.getStocks().iterator();
-        
-            
+
+
             while(iter.hasNext()){
                 Stock s = (Stock) iter.next();
                 th+= s.toString() + " \n";
@@ -2188,7 +2184,7 @@ public class CustomerGUI extends javax.swing.JFrame {
             updateWorkingSecAcc(user,sm);
         }
     }
-    
+
     public void updateMarket(Customer user, StockMarket sm){
         fullMarketSYMComboBox1.removeAllItems();
         fullStockMarketTextArea1.setText(" ");
@@ -2200,9 +2196,9 @@ public class CustomerGUI extends javax.swing.JFrame {
             fullMarketSYMComboBox1.addItem(s.getName());
         }
         fullStockMarketTextArea1.setText(th);
-        
+
     }
-    
+
     public void buyStock(Customer user, StockMarket sm){
         int indexOfAcc = secAccList.getSelectedIndex();
         SecuritiesAccount acc = user.getSecuritiesAccounts().get(indexOfAcc);
@@ -2210,9 +2206,9 @@ public class CustomerGUI extends javax.swing.JFrame {
         sm.buyStock(nameOfStock, acc);
         updatePortfolio(user,sm);
         updateMarket(user,sm);
-        
+
     }
-    
+
     public void sellStock(Customer user, StockMarket sm){
         int indexOfAcc = secAccList.getSelectedIndex();
         SecuritiesAccount acc = user.getSecuritiesAccounts().get(indexOfAcc);
@@ -2221,43 +2217,43 @@ public class CustomerGUI extends javax.swing.JFrame {
         updatePortfolio(user,sm);
         updateMarket(user,sm);
     }
-    
+
     //just for testing
     public static Bank getTestB(){
-        
+
         Customer tester = bank.Customer.createCustomer("Adam","Streich","astreich","12345");
         tester.createSavingsAccount("Acc1S", "USD");
         tester.createSavingsAccount("Acc2S", "USD");
         tester.createCheckingAccount("Acc1C", "USD");
         tester.createCheckingAccount("Acc2C", "USD");
-        
-       
-        
+
+
+
         //tester.getSavingsAccounts().get(0).deposit(10.0);
-        
+
         Manager temp = bank.Manager.createManager("Mr.", "Monopoly", "mrMono", "12345");
         ArrayList cs = new ArrayList();
         cs.add(tester);
         Customers testers = new Customers(cs);
-        
+
         Bank test = new Bank(testers, temp);
         Bank.setCurrentDate(LocalDate.of(2020, 04, 28));
-        
-        
-        
+
+
+
         return test;
     }
     public static Customer getTestC(){
-        
+
         Customer tester = bank.Customer.createCustomer("Adam","Streich","astreich","12345");
         tester.createSavingsAccount("Acc1S", "USD");
         tester.createSavingsAccount("Acc2S", "USD");
         tester.createCheckingAccount("Acc1C", "USD");
         tester.createCheckingAccount("Acc2C", "USD");
-        
-        
-        
-        
+
+
+
+
         return tester;
     }
     /**
@@ -2267,7 +2263,7 @@ public class CustomerGUI extends javax.swing.JFrame {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
@@ -2293,7 +2289,7 @@ public class CustomerGUI extends javax.swing.JFrame {
             Bank tester = getTestB();
             //Customer test = getTestC();
             Customer newCustomer = ReadFile.readUserData("astreich");
-            
+
             public void run() {
                 new CustomerGUI(newCustomer,tester).setVisible(true);
             }

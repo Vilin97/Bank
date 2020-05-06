@@ -1,9 +1,13 @@
 package bank;
 
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+
 import static bank.Credentials.createCredentials;
 
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.Currency;
 import java.util.Iterator;
 
@@ -311,6 +315,16 @@ public class Customer extends User {
                 ""+loans.toStringDetailed() +
                 "" + pendingLoans.toStringDetailed() +
                 '}';
+    }
+
+    public JSONObject toJSON(){
+        JSONObject jsonObject = super.toJSON();
+        JSONArray accountsObject = new JSONArray();
+        for (Account account :getAllAccounts()) {
+            accountsObject.add(account.toJSON());
+        }
+        jsonObject.put("accounts", accountsObject);
+        return jsonObject;
     }
     
 }

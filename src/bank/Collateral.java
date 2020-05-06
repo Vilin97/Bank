@@ -5,6 +5,10 @@
  */
 package bank;
 
+import org.json.simple.JSONObject;
+
+import javax.swing.*;
+
 /**
  *
  * @author adamstreich
@@ -32,5 +36,12 @@ public class Collateral {
                 "name='" + name + '\'' +
                 ", worth=" + worth +
                 '}';
+    }
+
+    public JSONObject toJSON(){
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("name", name);
+        jsonObject.put("worth", worth);
+        return jsonObject;
     }
 }

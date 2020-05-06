@@ -6,6 +6,8 @@ package bank;
  * and open the template in the editor.
  */
 
+import org.json.simple.JSONObject;
+
 /**
  *
  * @author adamstreich
@@ -44,7 +46,10 @@ class Password {
         return this.pword.equals(ot.pword);
     }
 
-    
-    
-    
+
+    public Object toJSON() {
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("pword",pword);
+        return jsonObject;
+    }
 }

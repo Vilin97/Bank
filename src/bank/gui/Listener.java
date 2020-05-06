@@ -1,4 +1,4 @@
-package bank;
+package bank.gui;
 
 import java.util.Collections;
 import java.util.List;

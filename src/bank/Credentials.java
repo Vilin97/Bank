@@ -1,5 +1,7 @@
 package bank;
 
+import org.json.simple.JSONObject;
+
 import static bank.Name.createName;
 import static bank.Password.createPassword;
 import static bank.UName.createUName;
@@ -112,6 +114,14 @@ public class Credentials {
 
     public void setUname(UName uname) {
         this.uname = uname;
+    }
+
+    public JSONObject toJSON(){
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("Name", name.toJSON());
+        jsonObject.put("UName", uname.toJSON());
+        jsonObject.put("pword", pword.toJSON());
+        return jsonObject;
     }
 
 }

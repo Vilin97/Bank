@@ -41,6 +41,8 @@ public class Main {
             System.out.println(customer1.getRealizedProfit());
             System.out.println(customer1.getUnrealizedProfit());
 
+            ReadFile.writeUserData(customer1);
+
 //            Stock stock2 = new Stock("Stock2");
 //            Stock stock3 = new Stock("Stock2");
 //

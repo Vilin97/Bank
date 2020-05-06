@@ -10,6 +10,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.Reader;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -17,58 +18,17 @@ import java.util.Currency;
 import java.util.Iterator;
 
 public class ReadFile {
+    private final static String path = "BankState/Customers";
     // A class to read and write our bank related data
 
     // A function that adds a user's general data
-    public static void writeUserData(String username, Customer customer) throws IOException {
-        JSONObject userObject = new JSONObject();
-        userObject.put("Name", customer.getName());
-        userObject.put("UserID", customer.getID());
-        userObject.put("UName", customer.getUName());
-        userObject.put("Password", customer.getCreds().getPword().pword);
-
-        // loop through the users accounts
-        JSONObject userAccounts = new JSONObject();
-        JSONObject userAccount = new JSONObject();
-
-        for (int i = 0; i < customer.getAllAccounts().size(); i++) {
-            userAccount = new JSONObject();
-            Account currentAccount = customer.getAllAccounts().get(i);
-            userAccount.put("accountName", currentAccount.name);
-            userAccount.put("accountID", currentAccount.ID);
-            userAccount.put("accountType", currentAccount.getClass().getName());
-            userAccount.put("balance", currentAccount.balance);
-            userAccount.put("currency", currentAccount.currency.toString());
-//            if (currentAccount.getClass().getName().equals("SecuritiesAccount")) {
-//                JSONObject accountStocks = new JSONObject();
-//                Stocks<Stock> stocks = customer.getSecuritiesAccounts().
-//                //Stocks<Stock> stocks = customer.getSecuritiesAccounts().getByID(currentAccount.ID).getStocks();
-//                for (int j = 0; j < stocks.size(); j++) {
-//                    accountStocks.put("stockName", stocks.getStockByIndex(j).getName());
-//                    accountStocks.put("stockID", stocks.getStockByIndex(j).getID());
-//                }
-//                userObject.put("stocks", accountStocks);
-//            }
-
-            // loop through the transactions
-            JSONObject accountTransactions = new JSONObject();
-            Iterator transactionsIter = currentAccount.transactions.iterator();
-            while(transactionsIter.hasNext()) {
-                Transaction currentTransaction = (Transaction) transactionsIter.next();
-                JSONObject accTransaction = new JSONObject();
-                accTransaction.put("transactionDate", currentTransaction.getDate().toString());
-                accTransaction.put("transactionType", currentTransaction.getClass().getName());
-                accTransaction.put("transactionAmount", currentTransaction.amount);
-                if (currentTransaction instanceof TransactionSellStock) {
-                    accTransaction.put("stock", ((TransactionSellStock) currentTransaction).getStock());
-                }
-                accountTransactions.put("accountTransactions", accTransaction);
-            }
-            userAccount.put("transactions", accountTransactions);
-            userAccounts.put(currentAccount.getID(), userAccount);
+    public static void writeUserData(Customer customer) {
+        JSONObject userObject = customer.toJSON();
+        try {
+            Files.write(Path.of(path+customer.getID()), userObject.toJSONString().getBytes());
+        } catch (Exception e){
+            System.out.println(e);
         }
-        userObject.put("accounts", userAccounts);
-        Files.write(Paths.get(username), userObject.toJSONString().getBytes());
     }
 
 
