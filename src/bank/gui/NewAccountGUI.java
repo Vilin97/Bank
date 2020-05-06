@@ -13,6 +13,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.util.Iterator;
 import javax.swing.JPanel;
 
 /**
@@ -149,6 +150,7 @@ public class NewAccountGUI extends javax.swing.JFrame {
         gui.updateCheckingAccList(user);
     }
     public void createSecAcc(Customer user, CustomerGUI gui){
+
         double amtr = Double.parseDouble(ammountToTransferjTextField1.getText());
         int indexOfAcc = accToTransferFromjComboBox1.getSelectedIndex();
         if(indexOfAcc != -1){
@@ -159,6 +161,17 @@ public class NewAccountGUI extends javax.swing.JFrame {
         this.dispose();
         gui.setVisible(true);
         //gui.updateCheckingAccList(user);
+    }
+
+    public void popBox(Customer user){
+        accToTransferFromjComboBox1.removeAllItems();
+        Iterator SAiter = user.getSASIter();
+        while(SAiter.hasNext()){
+            SavingsAccount sa = (SavingsAccount) SAiter.next();
+            accToTransferFromjComboBox1.addItem(sa.getName());
+            accToTransferFromjComboBox1.getSelectedIndex();
+        }
+
     }
 
     
