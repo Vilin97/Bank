@@ -11,6 +11,9 @@ import static bank.NewLoanGUI.newLoanGUI;
 import static bank.TransferGUI.transferGUI;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.io.IOException;
 import java.time.LocalDate;
 import java.time.Month;
 import java.util.ArrayList;
@@ -1631,6 +1634,19 @@ public class CustomerGUI extends javax.swing.JFrame {
             }
                 
         });
+
+        addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                System.out.println("closed");
+                try {
+                    ReadFile.writeUserData(user.getUName(), user);
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
+                e.getWindow().dispose();
+            }
+        });
         
     }
     
@@ -2254,7 +2270,7 @@ public class CustomerGUI extends javax.swing.JFrame {
             //pull the user from the data set
             Bank tester = getTestB();
             Customer test = getTestC();
-            
+            //Customer newCustomer = ReadFile.readUserData("astreich");
             
             public void run() {
                 new CustomerGUI(test,tester).setVisible(true);
