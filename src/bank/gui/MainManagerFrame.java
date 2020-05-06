@@ -1,8 +1,15 @@
 package bank.gui;
 
+import bank.Bank;
+
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.util.List;
+
+import static bank.JSONTools.writeBank;
+import static bank.JSONTools.writeUserData;
 
 public class MainManagerFrame extends JFrame {
     private ManagerToolbar toolbar;
@@ -52,6 +59,16 @@ public class MainManagerFrame extends JFrame {
         transactionPanel.addListener(logListener);
         customerPanel.addListener(logListener);
         timePanel.addListener(logListener);
+
+        addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                System.out.println("closed");
+                writeBank();
+                writeUserData(Bank.getManager());
+                e.getWindow().dispose();
+            }
+        });
 
         setLayout(new BorderLayout());
         add(toolbar, BorderLayout.NORTH);
