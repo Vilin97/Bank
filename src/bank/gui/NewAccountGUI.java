@@ -106,6 +106,7 @@ public class NewAccountGUI extends javax.swing.JFrame {
             System.out.println(curencies.get(c));
             secCurrencyjComboBox.addItem(curencies.get(c));
             chekcurrencyjComboBox1.addItem(curencies.get(c));
+            savCurrencyjComboBox3.addItem(curencies.get(c));
         }
     }
     public static void newAccGUI(Customer cr, CustomerGUI gui){
