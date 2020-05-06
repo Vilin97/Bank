@@ -5,10 +5,15 @@
  */
 package bank;
 
+import org.json.simple.parser.ParseException;
+
 import static bank.IOTools.parseToDate;
 import static bank.TransferGUI.transferGUI;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.io.IOException;
 import java.time.LocalDate;
 import java.time.Month;
 import java.util.ArrayList;
@@ -1342,13 +1347,20 @@ public class CustomerGUI extends javax.swing.JFrame {
             }
                 
         });
-        
-        
-        
+
+        addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                System.out.println("closed");
+                try {
+                    ReadFile.writeUserData(user.getUName(), user);
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
+                e.getWindow().dispose();
+            }
+        });
     }
-    
-    
-    
     //Savings account methods
     //
     
@@ -1608,11 +1620,8 @@ public class CustomerGUI extends javax.swing.JFrame {
         tester.createSavingsAccount("Acc2S", "USD");
         tester.createCheckingAccount("Acc1C", "USD");
         tester.createCheckingAccount("Acc2C", "USD");
-        
-       
-        
+
         //tester.getSavingsAccounts().get(0).deposit(10.0);
-        
         Manager temp = bank.Manager.createManager("Mr.", "Monopoly", "mrMono", "12345");
         ArrayList cs = new ArrayList();
         cs.add(tester);
@@ -1620,26 +1629,20 @@ public class CustomerGUI extends javax.swing.JFrame {
         
         Bank test = new Bank(testers, temp);
         Bank.setCurrentDate(LocalDate.of(2020, 04, 28));
-        
-        
-        
         return test;
     }
     public static Customer getTestC(){
-        
         Customer tester = bank.Customer.createCustomer("Adam","Streich","astreich","12345");
         tester.createSavingsAccount("Acc1S", "USD");
         tester.createSavingsAccount("Acc2S", "USD");
         tester.createCheckingAccount("Acc1C", "USD");
         tester.createCheckingAccount("Acc2C", "USD");
-        
-        
         return tester;
     }
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
+    public static void main(String args[]) throws IOException, ParseException {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -1668,8 +1671,8 @@ public class CustomerGUI extends javax.swing.JFrame {
             //pull the user from the data set
             Bank tester = getTestB();
             Customer test = getTestC();
-            
-            
+            //Customer newCustomer = ReadFile.readUserData("astreich");
+
             public void run() {
                 new CustomerGUI(test,tester).setVisible(true);
             }

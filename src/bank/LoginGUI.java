@@ -21,12 +21,15 @@ public class LoginGUI extends javax.swing.JFrame {
     private JTextField lastNameInput;
     private JPasswordField passWordInput;
     private JTextField unameInput;
+    private JPasswordField newPasswordInput;
 
     public LoginGUI() {
         loginButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //
+                String username = usernameInput.getText();
+                String password = String.valueOf(newPasswordInput.getPassword());
+
             }
         });
         signUpButton.addActionListener(new ActionListener() {

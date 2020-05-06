@@ -68,4 +68,7 @@ public abstract class User implements Permisions {
         this.cred.setUname(uname);
         this.ID = userID;
     }
+    public void setID(int ID) {
+        this.ID = ID;
+    }
 }

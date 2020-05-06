@@ -5,168 +5,381 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.Reader;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Currency;
+import java.util.Iterator;
 
 public class ReadFile {
     // A class to read and write our bank related data
 
     // A function that adds a user's general data
-    public static void addUserInfo(String filename, User user) {
+    public static void writeUserData(String username, Customer customer) throws IOException {
         JSONObject userObject = new JSONObject();
-        userObject.put("Name", user.getName());
-        userObject.put("UserID", user.getID());
-        userObject.put("UName", user.getUName());
-    }
+        userObject.put("Name", customer.getName());
+        userObject.put("UserID", customer.getID());
+        userObject.put("UName", customer.getUName());
+        userObject.put("Password", customer.getCreds().getPword().pword);
 
-    // put all of the user's transactions in one object
-    public static void addTransactionToUser(String filename, Transactions<Transaction> transactions) {
-        JSONObject userObject = new JSONObject();
-        JSONArray userTransactions = new JSONArray();
-        for (int i = 1; i < transactions.size() + 1; i++) {
-            Transaction currentTransaction = transactions.get(i);
-            JSONArray individualTransaction = new JSONArray();
-            // add the transaction date, 0
-            individualTransaction.add(1, currentTransaction.getDate());
-            // add the transaction type, 1
-            individualTransaction.add(2, currentTransaction.getClass().getName());
-            // add the transaction amount, 2
-            individualTransaction.add(3, currentTransaction.amount);
-            userTransactions.add(individualTransaction);
-        }
-        userObject.put("transactions", userTransactions);
-        try {
-            Files.write(Paths.get(filename), userObject.toJSONString().getBytes());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    // Add all of a user's account information to their object
-    public static void addAccountsToUser(String filename, Accounts<Account> accounts) {
-        JSONObject userObject = new JSONObject();
-        JSONArray userAccounts = new JSONArray();
-        for (int i = 1; i < accounts.size() + 1; i++) {
-            Account currentAccount = accounts.get(i);
-            JSONArray individualAccount = new JSONArray();
-            JSONArray accountTransactions = new JSONArray();
-            // add the account name
-            individualAccount.add(1, currentAccount.getName());
-            // add the account ID
-            individualAccount.add(2, currentAccount.getID());
-            // add the account type
-            individualAccount.add(3, currentAccount.getClass().getName());
-            // add the account balance
-            individualAccount.add(4, currentAccount.getBalance());
-            // add the account currency
-            individualAccount.add(5, currentAccount.getCurrency());
-
-            for (int j = 0; j < currentAccount.getTransactions().size(); j++) {
-                accountTransactions.add(0, currentAccount.getTransactions().get(j).getDate());
-                accountTransactions.add(1, currentAccount.getTransactions().get(j).getClass().getName());
-                accountTransactions.add(2, currentAccount.getTransactions().get(j).amount);
-                individualAccount.add(6, accountTransactions);
+        // loop through the users accounts
+        JSONObject userAccounts = new JSONObject();
+        for (int i = 0; i < customer.getAllAccounts().size(); i++) {
+            Account currentAccount = customer.getAllAccounts().get(i);
+            userAccounts.put("accountName", currentAccount.name);
+            userAccounts.put("accountID", currentAccount.ID);
+            userAccounts.put("accountType", currentAccount.getClass().getName());
+            userAccounts.put("balance", currentAccount.balance);
+            userAccounts.put("currency", currentAccount.currency);
+            if (currentAccount.getClass().getName() == "SecuritiesAccount") {
+                JSONObject accountStocks = new JSONObject();
+                Stocks<Stock> stocks = customer.getSecuritiesAccounts().getByID(currentAccount.ID).getStocks();
+                for (int j = 0; j < stocks.size(); j++) {
+                    accountStocks.put("stockName", stocks.getStockByIndex(j).getName());
+                    accountStocks.put("stockID", stocks.getStockByIndex(j).getID());
+                }
+                userObject.put("stocks", accountStocks);
             }
+
+            // loop through the transactions
+            JSONObject accountTransactions = new JSONObject();
+            Iterator transactionsIter = currentAccount.transactions.iterator();
+            while(transactionsIter.hasNext()) {
+                System.out.println("test");
+                Transaction currentTransaction = (Transaction) transactionsIter.next();
+                System.out.println(currentTransaction.getDate().toString());
+                accountTransactions.put("transactionDate", currentTransaction.getDate().toString());
+                accountTransactions.put("transactionType", currentTransaction.getClass().getName());
+                accountTransactions.put("transactionAmount", currentTransaction.amount);
+                if (currentTransaction instanceof TransactionSellStock) {
+                    accountTransactions.put("stock", ((TransactionSellStock) currentTransaction).getStock());
+                }
+            }
+            System.out.println("size:"+ accountTransactions.size());
             userObject.put("transactions", accountTransactions);
-            userAccounts.add(individualAccount);
         }
         userObject.put("accounts", userAccounts);
-        try {
-            Files.write(Paths.get(filename), userObject.toJSONString().getBytes());
+        Files.write(Paths.get(username), userObject.toJSONString().getBytes());
+    }
+
+
+    public static Customer readUserData(String filename) throws IOException, ParseException {
+        JSONParser jsonParser = new JSONParser();
+        Customer newCustomer = new Customer();
+        try(Reader reader = new FileReader(filename)) {
+            JSONObject currentUserJSON = (JSONObject) jsonParser.parse(reader);
+            // Store each type of users accounts
+            Accounts<CheckingAccount> checkingAccounts = new Accounts<>();
+            Accounts<SavingsAccount> savingsAccounts = new Accounts<>();
+            Accounts<SecuritiesAccount> securitiesAccounts = new Accounts<>();
+
+            // Store all of the users transactions
+            Transactions<Transaction> allTransactions = new Transactions<>();
+
+            // Set user basic credentials
+            Name name = (Name) currentUserJSON.get("Name");
+            int userID = (int) currentUserJSON.get("UserID");
+            UName uname = (UName) currentUserJSON.get("UName");
+            String password = (String)currentUserJSON.get("Password");
+            newCustomer = new Customer(new Credentials(name.toString(), uname.toString(), password));
+            newCustomer.setID(userID);
+
+            // Read Account data
+            JSONObject userAccounts = (JSONObject) currentUserJSON.get("accounts");
+            for (int i = 0; i < userAccounts.size(); i++) {
+                JSONObject currentAccount = (JSONObject) userAccounts.get(i);
+                if (currentAccount.get("accountName").toString() == "bank.CheckingAccount") {
+                    Transactions<Transaction> accountTransactions = new Transactions<>();
+                    CheckingAccount newCheckingAccount = new CheckingAccount((String) currentAccount.get("accountName"), (Currency) currentAccount.get("currency"), newCustomer);
+                    JSONObject currentAccountTransactions = (JSONObject) currentAccount.get("transactions");
+                    if (currentAccountTransactions.size() > 0) {
+                        for (int j = 0; j < currentAccountTransactions.size(); j++) {
+                            JSONObject currentTransaction = (JSONObject) currentAccountTransactions.get(j);
+                            if (currentTransaction.get("transactionType") == "TransactionWithdrawal") {
+                                TransactionWithdrawal newTransactionWithdrawal = new TransactionWithdrawal((LocalDate) currentTransaction.get("transactionDate"), (double) currentTransaction.get("transactionAmount"), newCustomer, newCheckingAccount);
+                                allTransactions.add(newTransactionWithdrawal);
+                                accountTransactions.add(newTransactionWithdrawal);
+                            }
+                            if (currentTransaction.get("transactionType") == "TransactionTransferIn") {
+                                TransactionTransferIn newTransactionTransferIn = new TransactionTransferIn((LocalDate) currentTransaction.get("transactionDate"), (double) currentTransaction.get("transactionAmount"), newCustomer, newCheckingAccount);
+                                allTransactions.add(newTransactionTransferIn);
+                                accountTransactions.add(newTransactionTransferIn);
+                            }
+                            if (currentTransaction.get("transactionType") == "TransactionTransferOut") {
+                                TransactionTransferOut newTransactionTransferOut = new TransactionTransferOut((LocalDate) currentTransaction.get("transactionDate"), (double) currentTransaction.get("transactionAmount"), newCustomer, newCheckingAccount);
+                                allTransactions.add(newTransactionTransferOut);
+                                accountTransactions.add(newTransactionTransferOut);
+                            }
+                            if (currentTransaction.get("transactionType") == "TransactionDeposit") {
+                                TransactionDeposit newTransactionDeposit = new TransactionDeposit((LocalDate) currentTransaction.get("transactionDate"), (double) currentTransaction.get("transactionAmount"), newCustomer, newCheckingAccount);
+                                allTransactions.add(newTransactionDeposit);
+                                accountTransactions.add(newTransactionDeposit);
+                            }
+                        }
+                        newCheckingAccount.setTransactions(accountTransactions);
+                    }
+                    checkingAccounts.add(newCheckingAccount);
+                }
+
+                if (currentAccount.get("accountName").toString() == "bank.SavingsAccount") {
+                    Transactions<Transaction> accountTransactions = new Transactions<>();
+                    SavingsAccount newSavingsAccount = new SavingsAccount((String) currentAccount.get("accountName"), (Currency) currentAccount.get("currency"), newCustomer);
+                    JSONObject currentAccountTransactions = (JSONObject) currentAccount.get("transactions");
+                    if (currentAccountTransactions.size() > 0) {
+                        for (int j = 0; j < currentAccountTransactions.size(); j++) {
+                            JSONObject currentTransaction = (JSONObject) currentAccountTransactions.get(j);
+                            if (currentTransaction.get("transactionType") == "TransactionWithdrawal") {
+                                TransactionWithdrawal newTransactionWithdrawal = new TransactionWithdrawal((LocalDate) currentTransaction.get("transactionDate"), (double) currentTransaction.get("transactionAmount"), newCustomer, newSavingsAccount);
+                                accountTransactions.add(newTransactionWithdrawal);
+                            }
+                            if (currentTransaction.get("transactionType") == "TransactionTransferIn") {
+                                TransactionTransferIn newTransactionTransferIn = new TransactionTransferIn((LocalDate) currentTransaction.get("transactionDate"), (double) currentTransaction.get("transactionAmount"), newCustomer, newSavingsAccount);
+                                accountTransactions.add(newTransactionTransferIn);
+                            }
+                            if (currentTransaction.get("transactionType") == "TransactionTransferOut") {
+                                TransactionTransferOut newTransactionTransferOut = new TransactionTransferOut((LocalDate) currentTransaction.get("transactionDate"), (double) currentTransaction.get("transactionAmount"), newCustomer, newSavingsAccount);
+                                accountTransactions.add(newTransactionTransferOut);
+                            }
+                            if (currentTransaction.get("transactionType") == "TransactionDeposit") {
+                                TransactionDeposit newTransactionDeposit = new TransactionDeposit((LocalDate) currentTransaction.get("transactionDate"), (double) currentTransaction.get("transactionAmount"), newCustomer, newSavingsAccount);
+                                allTransactions.add(newTransactionDeposit);
+                                accountTransactions.add(newTransactionDeposit);
+                            }
+                        }
+                        savingsAccounts.add(newSavingsAccount);
+                        newSavingsAccount.setTransactions(accountTransactions);
+                    }
+                    savingsAccounts.add(newSavingsAccount);
+                }
+
+                if (currentAccount.get("accountName").toString() == "bank.SecuritiesAccount") {
+                    Transactions<Transaction> accountTransactions = new Transactions<>();
+                    // loop through the stocks in the securities account
+                    SecuritiesAccount newSecuritiesAccount = new SecuritiesAccount((String) currentAccount.get("accountName"), (Currency) currentAccount.get("currency"),
+                            (double) currentAccount.get("balance"), newCustomer);
+
+                    JSONObject currentAccountStocks = (JSONObject) currentAccount.get("stocks");
+                    Stocks stocksInAccount = new Stocks();
+                    if (currentAccountStocks.size() > 0) {
+                        for (int j = 0; j < currentAccountStocks.size(); j++) {
+                            Stock newStock = new Stock(currentAccountStocks.get("stockName").toString());
+                            stocksInAccount.add(newStock);
+                        }
+                        newSecuritiesAccount.setStocks(stocksInAccount);
+                    }
+
+                    // loop through the account's transactions
+                    JSONObject currentAccountTransactions = (JSONObject) currentAccount.get("transactions");
+                    Transactions<Transaction> securityAccountTransactions = new Transactions<>();
+                    if (currentAccountTransactions.size() > 0) {
+                        for (int j = 0; j < currentAccountTransactions.size(); j++) {
+                            JSONObject currentTransaction = (JSONObject) currentAccountTransactions.get(j);
+                            if (currentTransaction.get("transactionType") == "TransactionSellStock") {
+                                TransactionSellStock newTransactionSellStock = new TransactionSellStock((LocalDate) currentTransaction.get("transactionDate"),
+                                        (double) currentTransaction.get("transactionAmount"), newCustomer, newSecuritiesAccount, (Stock) currentTransaction.get("stockName"));
+                                accountTransactions.add(newTransactionSellStock);
+                                securityAccountTransactions.add(newTransactionSellStock);
+                            }
+
+                            if (currentTransaction.get("transactionType") == "TransactionBuyStock") {
+                                TransactionBuyStock newTransactionBuyStock = new TransactionBuyStock((LocalDate) currentTransaction.get("transactionDate"),
+                                        (double) currentTransaction.get("transactionAmount"), newCustomer, newSecuritiesAccount, (Stock) currentTransaction.get("stockName"));
+                                accountTransactions.add(newTransactionBuyStock);
+                                securityAccountTransactions.add(newTransactionBuyStock);
+                            }
+                        }
+                        newSecuritiesAccount.setTransactions(securityAccountTransactions);
+                    }
+                    securitiesAccounts.add(newSecuritiesAccount);
+                }
+            }
+            newCustomer.setSecuritiesAccounts(securitiesAccounts);
+            newCustomer.setSavingsAccounts(savingsAccounts);
+            newCustomer.setCheckingAccounts(checkingAccounts);
         } catch (IOException e) {
             e.printStackTrace();
+        } catch (ParseException e) {
+            e.printStackTrace();
         }
+        return newCustomer;
     }
 
-    // Read & set user's general data
-    public static void readUserData(String filename, User user) throws IOException, ParseException {
-        FileReader reader = new FileReader(filename);
-        JSONParser jsonParser = new JSONParser();
-        JSONObject currentUserJSON = (JSONObject) jsonParser.parse(reader);
-        Name username = (Name) currentUserJSON.get("Name");
-        int userID = (int) currentUserJSON.get("UserID");
-        UName uname = (UName) currentUserJSON.get("UName");
-        user.setCred(username, uname, userID);
-    }
 
-    // Read & set user's account data
-    public static void readUserAccountData(String filename, Customer customer) throws IOException, ParseException {
-        FileReader reader = new FileReader(filename);
-        JSONParser jsonParser = new JSONParser();
-        JSONObject currentUserJSON = (JSONObject) jsonParser.parse(reader);
-        Accounts<CheckingAccount> checkingAccounts = new Accounts<>();
-        //Accounts<CreditAccount> creditAccounts = new Accounts<>();
-        Accounts<SavingsAccount> savingsAccounts = new Accounts<>();
-        Accounts<SecuritiesAccount> securitiesAccounts = new Accounts<>();
+//    public static void writeUserData(String username, Customer customer) throws IOException {
+//        JSONObject userObject = new JSONObject();
+//        userObject.put("Name", customer.getName());
+//        userObject.put("UserID", customer.getID());
+//        userObject.put("UName", customer.getUName());
+//        userObject.put("Password", customer.getCreds().getPword().pword);
+//
+//        // loop through the users accounts
+//        JSONArray userAccounts = new JSONArray();
+//        for (int i = 0; i < customer.getAllAccounts().size(); i++) {
+//            Account currentAccount = customer.getAllAccounts().get(i);
+//            userAccounts.add(0, currentAccount.name);
+//            userAccounts.add(1, currentAccount.ID);
+//            userAccounts.add(2, currentAccount.getClass().getName());
+//            userAccounts.add(3, currentAccount.balance);
+//            userAccounts.add(4, currentAccount.currency);
+//            if (currentAccount.getClass().getName() == "SecuritiesAccount") {
+//                JSONArray accountStocks = new JSONArray();
+//                Stocks<Stock> stocks = customer.getSecuritiesAccounts().getByID(currentAccount.ID).getStocks();
+//                for (int j = 0; j < stocks.size(); j++) {
+//                    accountStocks.add(0, stocks.getStockByIndex(j).getName());
+//                    accountStocks.add(1, stocks.getStockByIndex(j).getID());
+//                }
+//                userObject.put("stocks", accountStocks);
+//            }
+//            // loop through the account's transactions
+//            JSONArray accountTransactions = new JSONArray();
+//            for (int j = 0; j < currentAccount.getTransactions().size(); j++) {
+//                Transaction currentTransaction = currentAccount.getTransactions().get(j);
+//                accountTransactions.add(0, currentTransaction.getDate().toString());
+//                accountTransactions.add(1, currentTransaction.getClass().getName());
+//                accountTransactions.add(2, currentTransaction.amount);
+//                if (currentTransaction instanceof TransactionSellStock) {
+//                    accountTransactions.add(3, ((TransactionSellStock) currentTransaction).getStock());
+//                }
+//            }
+//            userObject.put("transactions", accountTransactions);
+//        }
+//        userObject.put("accounts", userAccounts);
+//        //String filename = "Bank/src/users/";
+//        Files.write(Paths.get(username), userObject.toJSONString().getBytes());
+//    }
 
-        // access accounts
-        JSONObject usersAccounts = (JSONObject) currentUserJSON.get("accounts");
-        // loop through all of the accounts
-
-        for (int i = 0; i < usersAccounts.size(); i++) {
-            JSONObject currentAccount = (JSONObject) usersAccounts.get(i);
-
-            //get the transactions of the account
-            JSONObject accountTransactions = (JSONObject) currentAccount.get("transactions");
-            Transactions transactionsToAdd = new Transactions();
-            // loop through each transaction and create a new one for each type
-            for (int j = 0; j < accountTransactions.size(); j++) {
-                JSONObject currentTransaction = (JSONObject) accountTransactions.get(j);
-                if (currentTransaction.get(1) == "TransactionTransferIn") {
-                    //TransactionTransferIn newTransaction = new TransactionTransferIn((LocalDate) currentTransaction.get(0), (double) currentTransaction.get(2), custome, );
-                    //transactionsToAdd.add(newTransaction);
-                }
-                if (currentTransaction.get(1) == "TransactionTransferOut") {
-                    //TransactionTransferOut newTransaction = new TransactionTransferOut((LocalDate) currentTransaction.get(0), (double) currentTransaction.get(2));
-                    //transactionsToAdd.add(newTransaction);
-                }
-                if (currentTransaction.get(1) == "TransactionWithdrawal") {
-                    //TransactionWithdrawal newTransaction = new TransactionWithdrawal((LocalDate) currentTransaction.get(0), (double) currentTransaction.get(2));
-                    //transactionsToAdd.add(newTransaction);
-                }
-
-                if (currentTransaction.get(1) == "TransactionDeposit") {
-                    //TransactionDeposit newTransaction = new TransactionDeposit((LocalDate) currentTransaction.get(0), (double) currentTransaction.get(2));
-                    //transactionsToAdd.add(newTransaction);
-                }
-            }
-            // Checking accounts
-            if (currentAccount.get("accountName") == "CheckingAccount") {
-                // create the account
-                //CheckingAccount newCheckingAccount = new CheckingAccount(currentAccount.get("accountName").toString(), transactionsToAdd,
-                        //(double) currentAccount.get("balance"), (Currency) currentAccount.get("currency"));
-                //checkingAccounts.add(newCheckingAccount);
-            }
-
-            if (currentAccount.get("accountName") == "SavingsAccount") {
-                // create the account
-                //SavingsAccount newSavingsAccount = new SavingsAccount(currentAccount.get("accountName").toString(), transactionsToAdd,
-                        //(double) currentAccount.get("balance"), (Currency) currentAccount.get("currency"));
-                //savingsAccounts.add(newSavingsAccount);
-            }
-
-            if (currentAccount.get("accountName") == "CreditAccount") {
-                // create the account
-                //CreditAccount newCreditAccount = new CreditAccount(currentAccount.get("accountName").toString(), transactionsToAdd,
-                        //(double) currentAccount.get("balance"), (Currency) currentAccount.get("currency"));
-                //creditAccounts.add(newCreditAccount);
-            }
-
-            if (currentAccount.get("accountName") == "SecuritiesAccount") {
-                // create the account
-                //SecuritiesAccount newSecuritiesAccount = new SecuritiesAccount(currentAccount.get("accountName").toString(), (Currency) currentAccount.get("currency"));
-                //securitiesAccounts.add(newSecuritiesAccount);
-            }
-
-            customer.setCheckingAccounts(checkingAccounts);
-            //customer.setCreditAccounts(creditAccounts);
-            customer.setSavingsAccounts(savingsAccounts);
-            customer.setSecuritiesAccounts(securitiesAccounts);
-        }
-    }
+//    public static Customer readUserData(String filename) throws IOException, ParseException {
+//        FileReader reader = new FileReader(filename);
+//        JSONParser jsonParser = new JSONParser();
+//        JSONObject currentUserJSON = (JSONObject) jsonParser.parse(reader);
+//
+//        // Store each type of users accounts
+//        Accounts<CheckingAccount> checkingAccounts = new Accounts<>();
+//        Accounts<SavingsAccount> savingsAccounts = new Accounts<>();
+//        Accounts<SecuritiesAccount> securitiesAccounts = new Accounts<>();
+//
+//        // Store all of the users transactions
+//        Transactions<Transaction> allTransactions = new Transactions<>();
+//
+//        // Set user basic credentials
+//        Name name = (Name) currentUserJSON.get("Name");
+//        int userID = (int) currentUserJSON.get("UserID");
+//        UName uname = (UName) currentUserJSON.get("UName");
+//        String password = (String)currentUserJSON.get("Password");
+//        Customer newCustomer = new Customer(new Credentials(name.toString(), uname.toString(), password));
+//        newCustomer.setID(userID);
+//        //customer.setCred(name, uname, userID);
+//
+//        // Read Account data
+//        JSONObject userAccounts = (JSONObject) currentUserJSON.get("accounts");
+//        for (int i = 0; i < userAccounts.size(); i++) {
+//            JSONObject currentAccount = (JSONObject) userAccounts.get(i);
+//            if (currentAccount.get("accountName") == "bank.CheckingAccount") {
+//                Transactions<Transaction> accountTransactions = new Transactions<>();
+//                CheckingAccount newCheckingAccount = new CheckingAccount((String) currentAccount.get("accountName"), (Currency) currentAccount.get("currency"), newCustomer);
+//                JSONObject currentAccountTransactions = (JSONObject) currentAccount.get("transactions");
+//                for (int j = 0; j < currentAccountTransactions.size(); j++) {
+//                    JSONObject currentTransaction = (JSONObject) currentAccountTransactions.get(j);
+//                    if (currentTransaction.get(1) == "TransactionWithdrawal") {
+//                        TransactionWithdrawal newTransactionWithdrawal = new TransactionWithdrawal((LocalDate) currentTransaction.get(0), (double) currentTransaction.get(2), newCustomer, newCheckingAccount);
+//                        allTransactions.add(newTransactionWithdrawal);
+//                        accountTransactions.add(newTransactionWithdrawal);
+//                    }
+//                    if (currentTransaction.get(1) == "TransactionTransferIn") {
+//                        TransactionTransferIn newTransactionTransferIn = new TransactionTransferIn((LocalDate) currentTransaction.get(0), (double) currentTransaction.get(2), newCustomer, newCheckingAccount);
+//                        allTransactions.add(newTransactionTransferIn);
+//                        accountTransactions.add(newTransactionTransferIn);
+//                    }
+//                    if (currentTransaction.get(1) == "TransactionTransferOut") {
+//                        TransactionTransferOut newTransactionTransferOut = new TransactionTransferOut((LocalDate) currentTransaction.get(0), (double) currentTransaction.get(2), newCustomer, newCheckingAccount);
+//                        allTransactions.add(newTransactionTransferOut);
+//                        accountTransactions.add(newTransactionTransferOut);
+//                    }
+//                    if (currentTransaction.get(1) == "TransactionDeposit") {
+//                        TransactionDeposit newTransactionDeposit = new TransactionDeposit((LocalDate) currentTransaction.get(0), (double) currentTransaction.get(2), newCustomer, newCheckingAccount);
+//                        allTransactions.add(newTransactionDeposit);
+//                        accountTransactions.add(newTransactionDeposit);
+//                    }
+//                }
+//                newCheckingAccount.setTransactions(accountTransactions);
+//                checkingAccounts.add(newCheckingAccount);
+//            }
+//
+//            if (currentAccount.get("accountName") == "bank.SavingsAccount") {
+//                Transactions<Transaction> accountTransactions = new Transactions<>();
+//                SavingsAccount newSavingsAccount = new SavingsAccount((String) currentAccount.get("accountName"), (Currency) currentAccount.get("currency"), newCustomer);
+//                JSONObject currentAccountTransactions = (JSONObject) currentAccount.get("transactions");
+//                for (int j = 0; j < currentAccountTransactions.size(); j++) {
+//                    JSONObject currentTransaction = (JSONObject) currentAccountTransactions.get(j);
+//                    if (currentTransaction.get(1) == "TransactionWithdrawal") {
+//                        TransactionWithdrawal newTransactionWithdrawal = new TransactionWithdrawal((LocalDate) currentTransaction.get(0), (double) currentTransaction.get(2), newCustomer, newSavingsAccount);
+//                        accountTransactions.add(newTransactionWithdrawal);
+//                    }
+//                    if (currentTransaction.get(1) == "TransactionTransferIn") {
+//                        TransactionTransferIn newTransactionTransferIn = new TransactionTransferIn((LocalDate) currentTransaction.get(0), (double) currentTransaction.get(2), newCustomer, newSavingsAccount);
+//                        accountTransactions.add(newTransactionTransferIn);
+//                    }
+//                    if (currentTransaction.get(1) == "TransactionTransferOut") {
+//                        TransactionTransferOut newTransactionTransferOut = new TransactionTransferOut((LocalDate) currentTransaction.get(0), (double) currentTransaction.get(2), newCustomer, newSavingsAccount);
+//                        accountTransactions.add(newTransactionTransferOut);
+//                    }
+//                    if (currentTransaction.get(1) == "TransactionDeposit") {
+//                        TransactionDeposit newTransactionDeposit = new TransactionDeposit((LocalDate) currentTransaction.get(0), (double) currentTransaction.get(2), newCustomer, newSavingsAccount);
+//                        allTransactions.add(newTransactionDeposit);
+//                        accountTransactions.add(newTransactionDeposit);
+//                    }
+//                }
+//                newSavingsAccount.setTransactions(accountTransactions);
+//                savingsAccounts.add(newSavingsAccount);
+//            }
+//
+//            if (currentAccount.get("accountName") == "bank.SecuritiesAccount") {
+//                Transactions<Transaction> accountTransactions = new Transactions<>();
+//                // loop through the stocks in the securities account
+//                SecuritiesAccount newSecuritiesAccount = new SecuritiesAccount((String) currentAccount.get("accountName"), (Currency) currentAccount.get("currency"),
+//                        (double) currentAccount.get("balance"), newCustomer);
+//
+//                JSONObject currentAccountStocks = (JSONObject) currentAccount.get("stocks");
+//                Stocks stocksInAccount = new Stocks();
+//                for (int j = 0; j < currentAccountStocks.size(); j++) {
+//                    Stock newStock = new Stock(currentAccountStocks.get(1).toString());
+//                    stocksInAccount.add(newStock);
+//                }
+//
+//                newSecuritiesAccount.setStocks(stocksInAccount);
+//
+//                // loop through the account's transactions
+//                JSONObject currentAccountTransactions = (JSONObject) currentAccount.get("transactions");
+//                Transactions<Transaction> securityAccountTransactions = new Transactions<>();
+//                for (int j = 0; j < currentAccountTransactions.size(); j++) {
+//                    JSONObject currentTransaction = (JSONObject) currentAccountTransactions.get(j);
+//                    if (currentTransaction.get(1) == "TransactionSellStock") {
+//                        TransactionSellStock newTransactionSellStock = new TransactionSellStock((LocalDate) currentTransaction.get(0),
+//                                (double) currentTransaction.get(2), newCustomer, newSecuritiesAccount, (Stock) currentTransaction.get(4));
+//                        accountTransactions.add(newTransactionSellStock);
+//                        securityAccountTransactions.add(newTransactionSellStock);
+//                    }
+//
+//                    if (currentTransaction.get(1) == "TransactionBuyStock") {
+//                        TransactionBuyStock newTransactionBuyStock = new TransactionBuyStock((LocalDate) currentTransaction.get(0),
+//                                (double) currentTransaction.get(2), newCustomer, newSecuritiesAccount, (Stock) currentTransaction.get(4));
+//                        accountTransactions.add(newTransactionBuyStock);
+//                        securityAccountTransactions.add(newTransactionBuyStock);
+//                    }
+//
+//                }
+//                newSecuritiesAccount.setTransactions(securityAccountTransactions);
+//                securitiesAccounts.add(newSecuritiesAccount);
+//            }
+//        }
+//        newCustomer.setSecuritiesAccounts(securitiesAccounts);
+//        newCustomer.setSavingsAccounts(savingsAccounts);
+//        newCustomer.setCheckingAccounts(checkingAccounts);
+//        return newCustomer;
+//    }
 }
