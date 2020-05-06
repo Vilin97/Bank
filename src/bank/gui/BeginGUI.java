@@ -13,6 +13,7 @@ import bank.Manager;
 import bank.gui.GUI;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.DirectoryStream;
 import java.nio.file.Files;
@@ -34,13 +35,9 @@ public class BeginGUI extends javax.swing.JFrame {
     
     //checks to see if the bank json file exists
     private static boolean hasBank() {
-        boolean hasBank = false;
-        try(DirectoryStream<Path> dirStream = Files.newDirectoryStream(Paths.get(JSONTools.path))) {
-            hasBank = dirStream.iterator().hasNext();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return hasBank;
+        File tmpDir = new File(JSONTools.path+"Bank.json");
+        boolean exists = tmpDir.exists();
+        return exists;
     }
 
     //load the json file into a bank object
