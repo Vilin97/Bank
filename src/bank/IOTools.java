@@ -91,8 +91,9 @@ public class IOTools
         LocalDate rt = null;
         try{
             int yy = Integer.parseInt(y.substring(0, 4));
-            int mm = Integer.parseInt(m.substring(0, 1));
-            int dd = Integer.parseInt(d.substring(0, 1));
+            int mm = Integer.parseInt(m.substring(0, 2));
+            int dd = Integer.parseInt(d.substring(0, 2));
+            System.out.println(yy+" "+mm+" "+dd);
             rt = LocalDate.of(yy, mm, dd);
         }catch(Exception e){
             throw new IllegalArgumentException("wrong input format");
