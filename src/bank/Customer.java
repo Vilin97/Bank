@@ -111,11 +111,11 @@ public class Customer extends User {
         return res;
     }
 
-    private void withdraw(double amount, Account account) {
+    public void withdraw(double amount, Account account) {
         account.withdraw(amount);
     }
 
-    private void deposit(double amount, Account account) {
+    public void deposit(double amount, Account account) {
         account.deposit(amount);
     }
 
