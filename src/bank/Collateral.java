@@ -5,6 +5,7 @@
  */
 package bank;
 
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 import javax.swing.*;
@@ -43,5 +44,11 @@ public class Collateral {
         jsonObject.put("name", name);
         jsonObject.put("worth", worth);
         return jsonObject;
+    }
+
+    public static Collateral fromJSON(JSONObject jsonObject){
+        String name = (String) jsonObject.get("name");
+        double worth = (double) jsonObject.get("worth");
+        return new Collateral(name, worth);
     }
 }

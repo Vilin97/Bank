@@ -204,7 +204,7 @@ abstract public class Account {
                 account.setBalance(balance);
                 break;
             case "Loan":
-                Collateral collateral = (Collateral) jsonObject.get("collateral");
+                Collateral collateral = Collateral.fromJSON((JSONObject) jsonObject.get("collateral"));
                 account = new Loan(name, currency, (Customer) customer, collateral);
                 account.setBalance(balance);
                 break;
