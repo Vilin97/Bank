@@ -14,7 +14,7 @@ public class JSONTools {
     public final static String usersPath = "BankState/Users/";
 
 
-    public static void writeUserData(User user){
+    private static void writeUserData(User user){
         if (user instanceof Customer){
             writeCustomerData((Customer) user);
         } else if (user instanceof Manager){
@@ -44,7 +44,7 @@ public class JSONTools {
         }
     }
 
-    public static User readUserData(String uname) {
+    private static User readUserData(String uname) {
         User user = null;
         try {
             JSONObject jsonObject = (JSONObject) new JSONParser().parse(new FileReader(usersPath+uname+".json"));
@@ -101,7 +101,6 @@ public class JSONTools {
         try {
             JSONObject jsonObject = (JSONObject) new JSONParser().parse(new FileReader(path+"Bank.json"));
             bank = Bank.fromJSON((JSONObject) jsonObject.get("Bank"));
-            Bank.setCustomers(new Customers<>());
         } catch (ParseException e) {
             e.printStackTrace();
         } catch (FileNotFoundException e) {

@@ -135,4 +135,12 @@ public class Bank {
         Bank.setCustomers(customers);
         return new Bank(manager, stockMarket, date);
     }
+
+    public static User getUserByUserName(UName uName){
+        if (uName.equals(getManager().getUName())) return getManager();
+        else {
+            return getCustomers().getByUserName(uName);
+        }
+
+    }
 }

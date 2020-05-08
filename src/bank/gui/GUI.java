@@ -281,11 +281,11 @@ public class GUI extends javax.swing.JFrame {
     }
     public void temp(Customer user){
         writeBank();
-        writeUserData(user);
+        //writeUserData(user);
     }
     public void logInUser(String uname,String password, Bank bnk){
-        System.out.println("This is the error 1");
-        User user = readUserData(uname);
+        //System.out.println("This is the error 1");
+        User user = Bank.getUserByUserName(new UName(uname));
         //User user = bnk.logIn(uname, password);
         if(user == null){
             throw new IllegalArgumentException("wrong username or password");

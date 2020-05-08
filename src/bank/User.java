@@ -70,8 +70,8 @@ public abstract class User implements Permisions {
         return this.ID;
     }
 
-    public String getUName() {
-        return String.valueOf(this.cred.getUname());
+    public UName getUName() {
+        return this.cred.getUname();
     }
 
     public void setCred(Name name, UName uname, int userID) {

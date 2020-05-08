@@ -45,7 +45,13 @@ public class Customers<C extends Customer> extends ArrayList<C> {
         }
         return rt;
     }
-    
+
+    public Customer getByUserName(UName uName){
+        for (C c:this) {
+            if (c.getUName().equals(uName)) return c;
+        }
+        return null;
+    }
     
 
 }

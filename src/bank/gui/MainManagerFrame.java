@@ -9,7 +9,7 @@ import java.awt.event.WindowEvent;
 import java.util.List;
 
 import static bank.JSONTools.writeBank;
-import static bank.JSONTools.writeUserData;
+//import static bank.JSONTools.writeUserData;
 
 public class MainManagerFrame extends JFrame {
     private ManagerToolbar toolbar;
@@ -65,7 +65,7 @@ public class MainManagerFrame extends JFrame {
             public void windowClosing(WindowEvent e) {
                 System.out.println("closed");
                 writeBank();
-                writeUserData(Bank.getManager());
+                //writeUserData(Bank.getManager());
                 e.getWindow().dispose();
             }
         });

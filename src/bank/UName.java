@@ -12,7 +12,7 @@ import org.json.simple.JSONObject;
  *
  * @author adamstreich
  */
-class UName {
+public class UName {
     String uname;
 
 
