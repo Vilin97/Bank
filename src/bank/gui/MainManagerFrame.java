@@ -26,7 +26,7 @@ public class MainManagerFrame extends JFrame {
         toolbar = new ManagerToolbar();
         log = new TextPanel();
         log.setBorder(BorderFactory.createTitledBorder("log"));
-        log.setPreferredSize(new Dimension(100, 100));
+        log.setPreferredSize(new Dimension(100, 200));
         int panelHeight = 400;
         stockPanel = new StockPanel();
         stockPanel.setPreferredSize(new Dimension(200, panelHeight));

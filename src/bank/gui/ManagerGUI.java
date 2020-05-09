@@ -28,6 +28,7 @@ public class ManagerGUI {
 //        customer1.buyStock("stock1", customer1.getSecuritiesAccounts().get(0));
 //        Bank.getManager().changeStockPrice("stock1", 2000);
 //        customer1.sellStock("stock1", customer1.getSecuritiesAccounts().get(0));
+        JSONTools.readBank();
         new MainManagerFrame();
     }
 

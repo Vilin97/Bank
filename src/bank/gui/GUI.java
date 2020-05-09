@@ -287,7 +287,7 @@ public class GUI extends javax.swing.JFrame {
         //System.out.println("This is the error 1");
         User user = Bank.getUserByUserName(new UName(uname));
         //User user = bnk.logIn(uname, password);
-        if(user == null){
+        if(user == null || !password.equals(user.getCreds().getPassword().getPword())){
             throw new IllegalArgumentException("wrong username or password");
         }else if (user instanceof Customer){
             this.dispose();
@@ -297,8 +297,8 @@ public class GUI extends javax.swing.JFrame {
         }else if (user instanceof Manager){
             this.dispose();
             //launch manager GUI user is an instance of manager
-            ManagerGUI.main(new String[]{});
-
+//            ManagerGUI.main(new String[]{});
+            new MainManagerFrame();
         }
     }
     

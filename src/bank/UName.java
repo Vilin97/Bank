@@ -8,6 +8,8 @@ package bank;
 
 import org.json.simple.JSONObject;
 
+import java.util.Objects;
+
 /**
  *
  * @author adamstreich
@@ -52,5 +54,18 @@ public class UName {
     public static UName fromJSON(JSONObject jsonObject){
         String uname = (String) jsonObject.get("uname");
         return new UName(uname);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        UName uName = (UName) o;
+        return getUname().equals(uName.getUname());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getUname());
     }
 }
