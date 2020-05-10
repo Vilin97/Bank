@@ -209,8 +209,8 @@ abstract public class Account {
                 account.setBalance(balance);
                 break;
             case "PendingLoan":
-                Collateral collateral2 = (Collateral) jsonObject.get("collateral");
-                SavingsAccount savingsAccount = (SavingsAccount) jsonObject.get("savingsAccount");
+                Collateral collateral2 = Collateral.fromJSON((JSONObject) jsonObject.get("collateral"));
+                SavingsAccount savingsAccount = (SavingsAccount) SavingsAccount.fromJSON((JSONObject) jsonObject.get("savingsAccount"), customer);
                 account = new PendingLoan(name, balance, currency, (Customer) customer, savingsAccount, collateral2);
                 break;
             default:
