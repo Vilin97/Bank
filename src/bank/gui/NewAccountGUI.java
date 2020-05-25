@@ -132,6 +132,7 @@ public class NewAccountGUI extends javax.swing.JFrame {
     public void selectSecAcc(Customer user, CustomerGUI gui){
         jPanel1.setVisible(false);
         secjPanel4.setVisible(true);
+        popBox(user);
         
     }
     
