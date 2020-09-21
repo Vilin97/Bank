@@ -1,5 +1,4 @@
-This repo is an Object-Oriented implementation of an online bank done by Vasily Ilin and Adam Streich as part of the Spring 2020 iteration of CS591, Object-Oriented Design, at Boston University.
-
+This repo is an Object-Oriented implementation of an online bank done by Vasily Ilin and Adam Streich as part of the Spring 2020 iteration of CS591, Object-Oriented Design, at Boston University. Go to Bank Design Document.pdf for a detailed description of the project.
 
 Below is the complete list of classes used in the Bank. We give brief comments about some of them, and indicate inheritance structure with tabs.
 Core classes:
